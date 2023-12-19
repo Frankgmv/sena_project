@@ -1,7 +1,7 @@
 -- Configuración de formato de fecha
 SET datestyle = 'ISO, YMD';
 
--- Tabla "pqrs"
+-- Tabla "pqrs" Informacion
 CREATE TABLE pqrs (
     ide SERIAL PRIMARY KEY,
     nombres VARCHAR(30),
@@ -14,7 +14,7 @@ CREATE TABLE pqrs (
     estado BOOLEAN NOT NULL
 );
 
--- Tabla "notificaciones"
+-- Tabla "notificaciones" Informacion
 CREATE TABLE notificaciones (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(100),
@@ -23,7 +23,7 @@ CREATE TABLE notificaciones (
     estado BOOLEAN NOT NULL
 );
 
--- Tabla "vistas"
+-- Tabla "vistas" Informacion
 CREATE TABLE vistas (
     id SERIAL PRIMARY KEY,
     vistas_totales INT,
@@ -127,7 +127,7 @@ CREATE TABLE tokens (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "archivos"
+-- Tabla "archivos" MULTIMEDIA
 CREATE TABLE archivos (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(100),
@@ -144,7 +144,7 @@ CREATE TABLE eventos (
     fecha_evento DATE
 );
 
--- Tabla "galeria"
+-- Tabla "galeria" MULTIMEDIA
 CREATE TABLE galeria (
     id SERIAL PRIMARY KEY,
     fecha TIMESTAMP,
@@ -154,7 +154,7 @@ CREATE TABLE galeria (
     id_evento INT REFERENCES eventos(id)
 );
 
--- Tabla "videos"
+-- Tabla "videos" MULTIMEDIA
 CREATE TABLE videos (
     id SERIAL PRIMARY KEY,
     link_video VARCHAR(255),
@@ -164,7 +164,7 @@ CREATE TABLE videos (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "slider"
+-- Tabla "slider" MULTIMEDIA
 CREATE TABLE slider (
     id SERIAL PRIMARY KEY,
     id_imagen INT REFERENCES galeria(id) ON DELETE CASCADE

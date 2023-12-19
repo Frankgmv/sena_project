@@ -1,7 +1,6 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
-const Items = Sequelize.define('Items',{
+const Item = Sequelize.define('Item',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
@@ -32,3 +31,6 @@ const Items = Sequelize.define('Items',{
         allowNulls: false
     }
 })
+
+
+export default Item

@@ -1,5 +1,4 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
 const Token = Sequelize.define('Token',{
     id: {
@@ -27,3 +26,5 @@ const Token = Sequelize.define('Token',{
         }
     },
 })
+
+export default Token

@@ -1,4 +1,14 @@
+
+/informacion
+
+historial
+vistas
+notificaciones
+pqrs
+
+
 /data
+
 
 anuncios
 archivos
@@ -11,13 +21,6 @@ roles
 sessiones
 tokens
 usuarios
-
-/informacion
-
-historial
-vistas
-notificaciones
-pqrs
 
 
 /multimedia
@@ -33,4 +36,3 @@ login
 registro
 logout
 varificacion
-

@@ -1,5 +1,4 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
 const Link = Sequelize.define('Link',{
     id: {
@@ -45,3 +44,5 @@ const Link = Sequelize.define('Link',{
         defaultValue:true
     }
 })  
+
+export default Link

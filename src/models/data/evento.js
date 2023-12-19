@@ -1,7 +1,7 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
-const Eventos = Sequelize.define('Eventos',{
+
+const Evento = Sequelize.define('Evento',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
@@ -16,3 +16,5 @@ const Eventos = Sequelize.define('Eventos',{
         allowNulls: false,
     },
 })  
+
+export default Evento

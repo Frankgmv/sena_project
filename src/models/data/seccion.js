@@ -1,14 +1,15 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
-const Categoria = Sequelize.define('Categoria',{
+const Seccion = Sequelize.define('Seccion',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
         autoIncrement: true,
     },
-    categoria:{
+    seccion:{
         type: DataTypes.STRING,
         allowNulls: false,
     },
 })  
+
+export default Seccion

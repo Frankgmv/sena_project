@@ -1,5 +1,4 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
 const Permiso = Sequelize.define('Permiso',{
     id: {
@@ -12,3 +11,5 @@ const Permiso = Sequelize.define('Permiso',{
         allowNulls: false,
     },
 })
+
+export default Permiso

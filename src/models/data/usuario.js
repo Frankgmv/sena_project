@@ -1,7 +1,6 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
-const User = Sequelize.define('User',{
+const Usuario = Sequelize.define('Usuario',{
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -50,3 +49,6 @@ const User = Sequelize.define('User',{
         allowNull: false,
     }
 })
+
+
+export default Usuario

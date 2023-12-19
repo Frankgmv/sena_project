@@ -1,5 +1,4 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
 const Rol = Sequelize.define('Rol',{
     id: {
@@ -16,3 +15,5 @@ const Rol = Sequelize.define('Rol',{
         allowNulls: false
     }
 })
+
+export default Rol

@@ -12,4 +12,8 @@ const Permiso = Sequelize.define('Permiso',{
     },
 })
 
+Permiso.createTable({
+    tableName:"Permisos"
+})
+
 export default Permiso

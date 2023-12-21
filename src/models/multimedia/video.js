@@ -1,7 +1,6 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
-const Video = Sequelize.define('Video   ',{
+const Video = Sequelize.define('Video',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
@@ -19,9 +18,9 @@ const Video = Sequelize.define('Video   ',{
         type:DataTypes.STRING,
         allowNulls: false,
     },
-    video:{
-        type:DataTypes.BLOB,
-        allowNulls: false,
+    imgPath:{
+        type:DataTypes.STRING,
+        allowNulls: false
     },
     idUsuaio:{
         type: DataTypes.INTEGER,
@@ -38,3 +37,9 @@ const Video = Sequelize.define('Video   ',{
         }
     },
 })  
+
+Video.createTable({
+    tableName:"Videos"
+})
+
+export default Video

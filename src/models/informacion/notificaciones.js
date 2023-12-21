@@ -1,7 +1,6 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
-const Notificaciones = Sequelize.define('Notificaciones',{
+const Notificacion = Sequelize.define('Notificacion',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
@@ -24,3 +23,9 @@ const Notificaciones = Sequelize.define('Notificaciones',{
         allowNulls: false
     }
 })
+
+Notificacion.createTable({
+    tableName:"Notificaciones"
+})
+
+export default Notificacion

@@ -1,5 +1,4 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
 const Vistas = Sequelize.define('Vistas',{
     id: {
@@ -20,3 +19,7 @@ const Vistas = Sequelize.define('Vistas',{
         allowNulls: false,
     },
 })
+
+Vistas.sync({ force:true })
+
+export default Vistas

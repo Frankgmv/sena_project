@@ -27,4 +27,6 @@ const Token = Sequelize.define('Token',{
     },
 })
 
+Token.sync({ force:true })
+
 export default Token

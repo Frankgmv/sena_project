@@ -1,5 +1,4 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
 const Pqrs = Sequelize.define('Pqrs',{
     id: {
@@ -40,3 +39,7 @@ const Pqrs = Sequelize.define('Pqrs',{
         allowNulls: false
     }
 })
+
+Pqrs.sync({ force:true });
+
+export default Pqrs

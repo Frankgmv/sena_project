@@ -14,9 +14,9 @@ const Anuncio = Sequelize.define('Anuncio',{
         type:DataTypes.STRING,
         allowNulls: false,
     },
-    imagen:{
-        type:DataTypes.BLOB,
-        allowNulls: false,
+    imgPath:{
+        type:DataTypes.STRING,
+        allowNulls: true
     },
     fecha:{
         type:DataTypes.DATE,

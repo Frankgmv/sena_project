@@ -18,6 +18,10 @@ const Noticia = Sequelize.define('Noticia',{
         type:DataTypes.STRING,
         allowNulls: false
     },
+    imgPath:{
+        type:DataTypes.STRING,
+        allowNulls: true
+    },
     descipcion:{
         type:DataTypes.STRING,
         allowNulls: false
@@ -38,6 +42,10 @@ const Noticia = Sequelize.define('Noticia',{
         type:DataTypes.BOOLEAN,
         allowNulls: false
     }
+})
+
+Noticia.createTable({
+    tableName:"Noticias"
 })
 
 export default Noticia

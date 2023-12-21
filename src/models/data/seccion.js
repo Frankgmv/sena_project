@@ -12,4 +12,8 @@ const Seccion = Sequelize.define('Seccion',{
     },
 })  
 
+Seccion.createTable({
+    tableName:"Secciones"
+})
+
 export default Seccion

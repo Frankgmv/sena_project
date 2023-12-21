@@ -16,4 +16,8 @@ const Rol = Sequelize.define('Rol',{
     }
 })
 
+Rol.createTable({
+    tableName:"Roles"
+})
+
 export default Rol

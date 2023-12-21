@@ -12,4 +12,8 @@ const Categoria = Sequelize.define('Categoria',{
     },
 })  
 
+Categoria.createTable({
+    tableName:"Categorias"
+})
+
 export default Categoria

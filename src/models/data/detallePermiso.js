@@ -22,5 +22,7 @@ const DetallePermiso = Sequelize.define('DetallePermiso',{
     },
 })
 
+DetallePermiso.sync({ force:true })
+
 
 export default DetallePermiso

@@ -1,7 +1,6 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
-const Link = Sequelize.define('Link',{
+const Archivo = Sequelize.define('Archivo',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
@@ -27,3 +26,9 @@ const Link = Sequelize.define('Link',{
         }
     },
 })  
+
+Archivo.createTable({
+    tableName:"Archivos"
+})
+
+export default Archivo

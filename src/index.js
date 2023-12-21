@@ -6,7 +6,7 @@ import connect from "./conection.js";
 config();
 
 // ? conectar la base de datos 
-// connect();
+connect();
 
 // ? Asignar un puerto
 const PORT =  process.env.PORT || 6000;

@@ -1,5 +1,4 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize' 
 
 const Slider = Sequelize.define('Slider   ',{
     id: {
@@ -16,3 +15,9 @@ const Slider = Sequelize.define('Slider   ',{
         }
     },
 })  
+
+Slider.createTable({
+    tableName:"Slider"
+})
+
+export default Slider

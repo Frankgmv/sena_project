@@ -44,5 +44,8 @@ const Link = Sequelize.define('Link',{
         defaultValue:true
     }
 })  
+Link.createTable({
+    tableName:"Links"
+})
 
 export default Link

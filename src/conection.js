@@ -1,5 +1,9 @@
-import { Sequelize } from "sequelize";
-import { config } from "dotenv";
+import {
+    Sequelize
+} from "sequelize";
+import {
+    config
+} from "dotenv";
 
 config()
 
@@ -14,15 +18,20 @@ const sequelize = new Sequelize({
     username: process.env.DB_USER
 });
 
+// * Conexión para la db cuando se despliegue en remoto
+// const sequelize = new Sequelize(process.env.DB_STRING_CONNECT_CLOUD, {
+//     dialect: 'postgres',
+//     ssl:true
+// });
 
 // ? función para verifica la conexión
 
-const connect = async ()=>{
+const connect = async () => {
     try {
         await sequelize.authenticate()
         console.log(` Conexión exitosa a la base de datos `);
-    } catch (error) {
-        console.error('Error de conexión a la base de datos: ', err.message)
+    } catch (err) {
+        console.error('Error de db: ', err.message)
         // TODO asignar el throw error
         // throw new Error(`Error de conexión a la base de datos: ${err.message}` )
     }

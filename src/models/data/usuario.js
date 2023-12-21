@@ -50,5 +50,8 @@ const Usuario = Sequelize.define('Usuario',{
     }
 })
 
+Usuario.createTable({
+    tableName:"Usuarios"
+})
 
 export default Usuario

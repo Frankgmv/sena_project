@@ -17,4 +17,9 @@ const Evento = Sequelize.define('Evento',{
     },
 })  
 
+Evento.createTable({
+    tableName:"Eventos"
+})
+
+
 export default Evento

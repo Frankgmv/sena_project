@@ -5,6 +5,7 @@ import routesGeneral from './routes/general/router.js';
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 app.use(morgan("dev"));
 //? Add cors finally app.use(cors({options}))
 
@@ -17,7 +18,7 @@ app.use((err, req, res, next) => {
 
 
 // ! Rutas madres
-app.use("/v1",routesGeneral);
+app.use("/api/v1",routesGeneral);
 
 
 app.get("/", (req, res) => {

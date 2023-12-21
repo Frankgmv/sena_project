@@ -1,36 +1,42 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import {
+    Sequelize,
+    DataTypes
+} from 'sequelize'
 
-const Galeria = Sequelize.define('Galeria   ',{
+const Galeria = Sequelize.define('Galeria', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
         autoIncrement: true,
     },
-    fecha:{
-        type:DataTypes.DATE,
+    fecha: {
+        type: DataTypes.DATE,
         allowNulls: false,
     },
-    nombreEvento:{
+    nombreEvento: {
         type: DataTypes.STRING,
         allowNulls: false,
     },
-    foto:{
-        type:DataTypes.BLOB,
-        allowNulls: false,
+    imgPath: {
+        type: DataTypes.STRING,
+        allowNulls: false
     },
-    idUsuaio:{
+    idUsuaio: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
             model: 'user',
             key: 'id',
         }
     },
-    idEvento:{
+    idEvento: {
         type: DataTypes.INTEGER,
-        references:{
+        references: {
             model: 'evento',
             key: 'id',
         }
     },
-})  
+})
+
+Galeria.sync({ force: true })
+
+export default Galeria

@@ -32,5 +32,8 @@ const Item = Sequelize.define('Item',{
     }
 })
 
+Item.createTable({
+    tableName:"Items"
+})
 
 export default Item

@@ -1,5 +1,4 @@
-import { Sequalize, DataTypes } from 'sequelize'
-import sequelize from '../conection'
+import { Sequelize, DataTypes } from 'sequelize'
 
 const Historial = Sequelize.define('Historial',{
     id: {
@@ -27,3 +26,7 @@ const Historial = Sequelize.define('Historial',{
         }
     },
 })
+
+Historial.sync({ force:true })
+
+export default Historial

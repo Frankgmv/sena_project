@@ -27,6 +27,5 @@ const Historial = Sequelize.define('Historial',{
     },
 })
 
-Historial.sync({ force:true })
 
 export default Historial

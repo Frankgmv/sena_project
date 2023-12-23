@@ -37,6 +37,5 @@ const Galeria = Sequelize.define('Galeria', {
     },
 })
 
-Galeria.sync({ force: true })
 
 export default Galeria

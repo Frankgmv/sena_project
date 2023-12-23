@@ -1,45 +1,48 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import {
+    DataTypes
+} from 'sequelize'
+import {
+    sequelize
+} from '../../conection.js'
 
-const Pqrs = Sequelize.define('Pqrs',{
-    id: {
-        type: DataTypes.INTEGER,
-        allowNulls: false,
-        autoIncrement: true,
-    },
-    nombre:{
+const Pqrs = sequelize.define('Pqrs', {
+    nombre: {
         type: DataTypes.STRING,
         allowNulls: false,
     },
-    apellido:{
-        type:DataTypes.STRING,
+    apellido: {
+        type: DataTypes.STRING,
         allowNulls: false
     },
-    tipo:{
-        type:DataTypes.STRING,
+    tipo: {
+        type: DataTypes.STRING,
         allowNulls: false
     },
-    reminente:{
-        type:DataTypes.STRING,
+    reminente: {
+        type: DataTypes.STRING,
         allowNulls: false
     },
-    correo:{
-        type:DataTypes.STRING,
+    correo: {
+        type: DataTypes.STRING,
         allowNulls: false
     },
-    numeroContacto:{
-        type:DataTypes.STRING,
+    numeroContacto: {
+        type: DataTypes.STRING,
         allowNulls: false
     },
-    mensaje:{
-        type:DataTypes.STRING,
+    mensaje: {
+        type: DataTypes.STRING,
         allowNulls: false
     },
-    estado:{
-        type:DataTypes.BOOLEAN,
-        allowNulls: false
+    estado: {
+        type: DataTypes.BOOLEAN,
+        allowNulls: false,
+        defaultValue: false
     }
+}, {
+    freezeTableName: true,
+    timestamps: true
 })
 
-Pqrs.sync({ force:true });
 
 export default Pqrs

@@ -20,6 +20,4 @@ const Vistas = Sequelize.define('Vistas',{
     },
 })
 
-Vistas.sync({ force:true })
-
 export default Vistas

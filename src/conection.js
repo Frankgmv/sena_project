@@ -4,12 +4,15 @@ import {
 import {
     config
 } from "dotenv";
+import "colors";
+import { ErrorConexion } from "./middlewares/fabricaErrores.js";
 
 config()
 
+
 // ? conección a la base de datos Postgres
 
-const sequelize = new Sequelize({
+export const sequelize = new Sequelize({
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     dialect: 'postgres',
@@ -26,15 +29,14 @@ const sequelize = new Sequelize({
 
 // ? función para verifica la conexión
 
-const connect = async () => {
+export const connect = async () => {
     try {
         await sequelize.authenticate()
-        console.log(` Conexión exitosa a la base de datos `);
+        await sequelize.sync()
+        console.log(`  <<  Conexión exitosa a la base de datos >> `.blue);
     } catch (err) {
-        console.error('Error de db: ', err.message)
-        // TODO asignar el throw error
-        // throw new Error(`Error de conexión a la base de datos: ${err.message}` )
+        throw new ErrorConexion("Error de conexión");
     }
 }
 
-export default connect
+connect();

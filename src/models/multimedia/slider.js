@@ -14,10 +14,8 @@ const Slider = Sequelize.define('Slider   ',{
             key: 'id',
         }
     },
-})  
-
-Slider.createTable({
-    tableName:"Slider"
+},{
+    freezeTableName: true
 })
 
 export default Slider

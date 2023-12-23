@@ -1,12 +1,12 @@
 import { config} from "dotenv"
 import app from "./app.js";
 import "colors";
-import connect from "./conection.js";
+
+// ? conectar la base de datos 
+import "./conection.js";
 
 config();
 
-// ? conectar la base de datos 
-connect();
 
 // ? Asignar un puerto
 const PORT =  process.env.PORT || 6000;

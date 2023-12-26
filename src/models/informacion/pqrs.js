@@ -1,9 +1,9 @@
 import {
     DataTypes
-} from 'sequelize'
+} from 'sequelize';
 import {
     sequelize
-} from '../../conection.js'
+} from '../../conection.js';
 
 const Pqrs = sequelize.define('Pqrs', {
     nombre: {

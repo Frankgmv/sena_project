@@ -24,12 +24,24 @@ export const pqrsSchema = z.object({
     }),
     numeroContacto: z.string({
             required_error: "EL número de contacto es requerido",
-            invalid_type_error:""
-    })
+            invalid_type_error: "tipo de dato inválido"
+        })
         .min(7, "EL número de contacto debe ser de minímo 7 caracteres")
         .max(10, "EL número de contacto debe ser de máximo 10 caracteres"),
     mensaje: z.string({
         required_error: "EL Mensaje es requerido",
-        invalid_type_error:"deber ser un texto"
+        invalid_type_error: "deber ser un texto"
     }).min(20, "El Mensaje debe tener más contenido.")
+})
+
+
+export const notificacionSchema = z.object({
+    titulo: z.string({
+        required_error: 'El Título es obligatorio',
+        invalid_type_error:'tipo de dato inválido'
+    }),
+    descripcion: z.string({
+        required_error: 'La Descripción es obligatorio',
+        invalid_type_error:'tipo de dato inválido'
+    })
 })

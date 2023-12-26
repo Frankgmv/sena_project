@@ -1,11 +1,7 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import {DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
 
-const Notificacion = Sequelize.define('Notificacion',{
-    id: {
-        type: DataTypes.INTEGER,
-        allowNulls: false,
-        autoIncrement: true,
-    },
+const Notificacion = sequelize.define('Notificaciones',{
     titulo:{
         type: DataTypes.STRING,
         allowNulls: false,
@@ -14,18 +10,14 @@ const Notificacion = Sequelize.define('Notificacion',{
         type:DataTypes.STRING,
         allowNulls: false
     },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNulls: false
-    },
     estado:{
-        type:DataTypes.BOOLEAN,
-        allowNulls: false
+        type: DataTypes.BOOLEAN,
+        allowNulls: false,
+        defaultValue: false
     }
+},{
+    timestamps: true
 })
 
-Notificacion.createTable({
-    tableName:"Notificaciones"
-})
 
 export default Notificacion

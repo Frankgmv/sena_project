@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }))
+
 app.use(morgan("dev"));
 // TODO cors
 //? Add cors finally app.use(cors({options}))
@@ -17,7 +18,7 @@ app.use((err, req, res, next) => {
     res.status(400).json({
         message: err
     })
-    next()
+    next(err)
 })
 
 
@@ -26,7 +27,17 @@ app.use("/api/v1", routesGeneral);
 
 
 app.get("/", (req, res) => {
-    res.send("hola");
+
+    const rutas = {
+        ejemplo: "http://localhost:9000/api/v1/informacion/pqrs",
+        raiz: "/api/v1",
+        rutasMadre: {
+            info: "/informacion",
+            multimedia: "/multimedia",
+            data: "/data"
+        }
+    }
+    res.json(rutas);
 })
 
 export default app;

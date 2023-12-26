@@ -5,7 +5,7 @@ import {
     getPqrsService,
     postPqrsService,
     putPqrsService
-} from "../../services/informacion/pqrsServices.js"
+} from "../../services/informacion/pqrs.services.js"
 
 
 export const postPqrs = async (req, res, next) => {
@@ -41,9 +41,8 @@ export const getAllPqrs = async (req, res, next) => {
 }
 
 export const putPqrs = async (req, res, next) => {
-    const { params:{id}, body } = req;
     try {
-        const allPqrsResponse = await putPqrsService(id, body);
+        const allPqrsResponse = await putPqrsService(req.params.id);
         if (!allPqrsResponse) {
             return res.status(400).json({
                 message: "No se encontró ningun dato para actualizar"
@@ -69,7 +68,7 @@ export const deleteAllPqrs = async (req, res, next) => {
     try {
         const deleteAllPqrs = await deleteAllPqrsService();
         if (deleteAllPqrs) res.status(200).json({
-            message: "Los Pqrs's leídos Elimindos exitosamente"
+            message: "Pqrs's leídos Elimindos exitosamente"
         })
         else res.status(200).json({
             message: "no hay pqrs leídos"

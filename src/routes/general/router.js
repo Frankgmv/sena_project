@@ -1,12 +1,14 @@
 import { Router } from 'express';
 
 // * Rutas de informacion
+
 import historialRouter from '../informacion/historial.routes.js';
 import notificacionRouter from '../informacion/notificacion.routes.js';
 import pqrsRouter from '../informacion/pqrs.routes.js';
 import vistasRouter from '../informacion/vistas.routes.js';
 
 // * Rutas de multimedia
+
 import archivoRouter from '../multimedia/archivo.routes.js';
 import galeriaRouter from '../multimedia/galeria.routes.js';
 import sliderRouter from '../multimedia/slider.routes.js';
@@ -32,7 +34,7 @@ import logoutRouter from '../validacion/logout.routes.js';
 import registroRouter from '../validacion/registro.routes.js';
 import verificacionRouter from '../validacion/verificacion.routes.js';
 
-
+// Enrutador general de todo
 const router = Router();
 
 // Une todas las rutas de la carpeta multimedia

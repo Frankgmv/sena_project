@@ -12,18 +12,21 @@ export function postPqrsService(pqrsData) {
     })
 }
 
-export function putPqrsService(idPqrs, data) {
+export function putPqrsService(idPqrs) {
     return new Promise(async (resolve, reject) => {
         try {
             const getPqrsAndUpdate = await Pqrs.findByPk(idPqrs);
             if (!getPqrsAndUpdate) resolve(0);
-            const updated = await getPqrsAndUpdate.update(data);
+            const updated = await getPqrsAndUpdate.update({
+                estado: true
+            });
             resolve(updated);
         } catch (err) {
             reject(err)
         }
     })
 }
+
 export function getAllPqrsService() {
     return new Promise(async (resolve, reject) => {
         try {
@@ -45,7 +48,6 @@ export function getPqrsService(idPqrs) {
         }
     })
 }
-
 
 export function deletePqrsService(idPqrs) {
     return new Promise(async (resolve, reject) => {

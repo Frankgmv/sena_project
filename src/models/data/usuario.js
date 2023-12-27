@@ -4,13 +4,13 @@ const Usuario = Sequelize.define('Usuario',{
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: false,
     }, 
     nombre:{
         type: DataTypes.STRING,
         allowNull: false,
     }, 
-    apelldio:{
+    apellidio:{
         type: DataTypes.STRING,
         allowNull: false,
     }, 

@@ -1,12 +1,10 @@
 import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { deleteVistas, getVistas, postVistas } from '../../controllers/informacion/vistas.controller.js';
 
 const vistasRouter = Router();
 
-vistasRouter.get('/vista', test);
-vistasRouter.get('/vista/:id', test);
-vistasRouter.post('/vista', test);
-vistasRouter.put('/vista/:id', test);
-vistasRouter.delete('/vista/:id', test);
+vistasRouter.get('/vista', getVistas);
+vistasRouter.post('/vista', postVistas);
+vistasRouter.delete('/vista', deleteVistas);
 
 export default vistasRouter;

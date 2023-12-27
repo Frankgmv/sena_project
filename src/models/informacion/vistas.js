@@ -1,23 +1,25 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import {
+    DataTypes
+} from 'sequelize'
+import {
+    sequelize
+} from "../../conection.js"
 
-const Vistas = Sequelize.define('Vistas',{
-    id: {
-        type: DataTypes.INTEGER,
-        allowNulls: false,
-        autoIncrement: true,
-    },
-    vistasTotales:{
+const Vistas = sequelize.define('Vistas', {
+    vistasTotales: {
         type: DataTypes.INTEGER,
         allowNulls: false,
     },
-    vistasMes:{
+    vistasMes: {
         type: DataTypes.INTEGER,
         allowNulls: false,
     },
-    vistasDia:{
+    vistasDia: {
         type: DataTypes.INTEGER,
         allowNulls: false,
     },
+},{
+    timestamps:false
 })
 
 export default Vistas

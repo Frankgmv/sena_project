@@ -22,7 +22,7 @@ app.use((err, req, res, next) => {
 })
 
 
-// ! Rutas madres
+// ? Rutas madres
 app.use("/api/v1", routesGeneral);
 
 

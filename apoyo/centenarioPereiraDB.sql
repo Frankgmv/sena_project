@@ -1,7 +1,7 @@
 -- Configuración de formato de fecha
 SET datestyle = 'ISO, YMD';
 
--- Tabla "pqrs" Informacion
+-- * Tabla "pqrs" Informacion 
 CREATE TABLE pqrs (
     ide SERIAL PRIMARY KEY,
     nombres VARCHAR(30),
@@ -14,7 +14,7 @@ CREATE TABLE pqrs (
     estado BOOLEAN NOT NULL
 );
 
--- Tabla "notificaciones" Informacion
+-- * Tabla "notificaciones" Informacion
 CREATE TABLE notificaciones (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(100),
@@ -23,7 +23,7 @@ CREATE TABLE notificaciones (
     estado BOOLEAN NOT NULL
 );
 
--- Tabla "vistas" Informacion
+-- * Tabla "vistas" Informacion
 CREATE TABLE vistas (
     id SERIAL PRIMARY KEY,
     vistas_totales INT,
@@ -31,32 +31,32 @@ CREATE TABLE vistas (
     vistas_dia INT
 );
 
--- Tabla "permisos" DATA
+-- ! Tabla "permisos" DATA
 CREATE TABLE permisos (
     id SERIAL PRIMARY KEY,
     permiso VARCHAR(50)
 );
 
--- Tabla "secciones" DATA
+-- ! Tabla "secciones" DATA
 CREATE TABLE secciones (
     id SERIAL PRIMARY KEY,
     seccion VARCHAR(30)
 );
 
--- Tabla "categorias" DATA
+-- ! Tabla "categorias" DATA
 CREATE TABLE categorias (
     id SERIAL PRIMARY KEY,
     categoria VARCHAR(30)
 );
 
--- Tabla "roles" DATA
+-- ! Tabla "roles" DATA
 CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
     rol VARCHAR(40),
     estado BOOLEAN
 );
 
--- Tabla "usuarios" DATA
+-- ! Tabla "usuarios" DATA
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(30),
@@ -68,14 +68,14 @@ CREATE TABLE usuarios (
     id_rol INT REFERENCES roles(id) ON DELETE CASCADE
 );
 
--- Tabla "detalle_permiso"
+-- ! Tabla "detalle_permiso"
 CREATE TABLE detalle_permiso (
     id SERIAL PRIMARY KEY,
     id_permiso INT REFERENCES permisos(id) ON DELETE CASCADE,
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "noticias"
+-- ! Tabla "noticias"
 CREATE TABLE noticias (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(70),
@@ -86,7 +86,7 @@ CREATE TABLE noticias (
     estado BOOLEAN
 );
 
--- Tabla "links"
+-- ! Tabla "links"
 CREATE TABLE links (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(70),
@@ -98,7 +98,7 @@ CREATE TABLE links (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "anuncios"
+-- ! Tabla "anuncios"
 CREATE TABLE anuncios (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(70),
@@ -109,7 +109,7 @@ CREATE TABLE anuncios (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "historial"
+-- ! Tabla "historial"
 CREATE TABLE historial (
     id SERIAL PRIMARY KEY,
     fecha TIMESTAMP,
@@ -118,7 +118,7 @@ CREATE TABLE historial (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "tokens"
+-- ! Tabla "tokens"
 CREATE TABLE tokens (
     id SERIAL PRIMARY KEY,
     token VARCHAR(255),
@@ -127,7 +127,7 @@ CREATE TABLE tokens (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "archivos" MULTIMEDIA
+-- ! Tabla "archivos" MULTIMEDIA
 CREATE TABLE archivos (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(100),
@@ -136,7 +136,7 @@ CREATE TABLE archivos (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "eventos"
+-- ! Tabla "eventos"
 CREATE TABLE eventos (
     id SERIAL PRIMARY KEY,
     nombre_evento VARCHAR(30),
@@ -144,7 +144,7 @@ CREATE TABLE eventos (
     fecha_evento DATE
 );
 
--- Tabla "galeria" MULTIMEDIA
+-- ! Tabla "galeria" MULTIMEDIA
 CREATE TABLE galeria (
     id SERIAL PRIMARY KEY,
     fecha TIMESTAMP,
@@ -154,7 +154,7 @@ CREATE TABLE galeria (
     id_evento INT REFERENCES eventos(id)
 );
 
--- Tabla "videos" MULTIMEDIA
+-- ! Tabla "videos" MULTIMEDIA
 CREATE TABLE videos (
     id SERIAL PRIMARY KEY,
     link_video VARCHAR(255),
@@ -164,13 +164,13 @@ CREATE TABLE videos (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- Tabla "slider" MULTIMEDIA
+-- ! Tabla "slider" MULTIMEDIA
 CREATE TABLE slider (
     id SERIAL PRIMARY KEY,
     id_imagen INT REFERENCES galeria(id) ON DELETE CASCADE
 );
 
--- Consultas de relleno 
+-- ?Consultas de relleno 
 
 INSERT INTO roles (rol, estado) VALUES ('estudiante', true),
 ('personal-administrativo', true),

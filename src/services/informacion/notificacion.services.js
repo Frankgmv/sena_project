@@ -12,12 +12,19 @@ export const postNotificacionService = (notificacionData) => {
 
             if (existe) {
                 resolve({
-                    message_status: `${notificacionData.titulo} ya existe`
+                    ok: false,
+                    estadoNotificacion: "existente",
+                    message: `${notificacionData.titulo} ya existe`,
+                    notificacion: existe
                 })
             } else {
                 const notiCreada = await Notificaciones.create(notificacionData)
                 const notiGuardada = await notiCreada.save();
-                resolve(notiGuardada)
+                resolve({
+                    ok: true,
+                    message: "Notificación creada",
+                    notificacion: notiGuardada
+                })
             }
         } catch (err) {
             reject(err)
@@ -31,10 +38,15 @@ export const getNotificionesService = (idNoti) => {
             const findNoti = await Notificaciones.findByPk(idNoti)
 
             if (!findNoti) return resolve({
-                message: "No se encontró"
+                ok: false,
+                message: "No se encontró ningún dato"
             })
 
-            resolve(findNoti)
+            resolve({
+                ok: true,
+                message: "Notificación encontrada",
+                notificacion: findNoti
+            })
         } catch (err) {
             reject(err)
         }
@@ -44,10 +56,18 @@ export const getAllNotificionesService = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const notis = await Notificaciones.findAll({
-                orderBy:["id"]
+                orderBy: ["id"]
             });
-            if (notis.length === 0) resolve({message:"No hay notificaciones"})
-            resolve(notis)
+            if (notis.length === 0) return resolve({
+                ok: false,
+                message: "No hay notificaciones"
+            })
+            resolve({
+                ok: true,
+                message: "Lista de notificaciones",
+                notificaciones: notis
+            })
+
         } catch (err) {
             reject(err)
         }
@@ -58,12 +78,19 @@ export const putNotificacionService = (idNoti) => {
     return new Promise(async (resolve, reject) => {
         try {
             const findNoti = await Notificaciones.findByPk(idNoti)
-            if (!findNoti) resolve(0);
+            if (!findNoti) resolve({
+                ok: false,
+                message: "Notificación no encontrada"
+            });
 
             const updated = await findNoti.update({
                 estado: true
             });
-            resolve(updated)
+            resolve({
+                ok: true,
+                message: "Actualizado correctamente",
+                notificacion: updated
+            })
         } catch (err) {
             reject(err)
         }
@@ -75,13 +102,15 @@ export const deleteNotificacionService = (idNoti) => {
         try {
             const findNotificaciones = await Notificaciones.findByPk(idNoti)
             if (!findNotificaciones) resolve({
-                message: "Registro no encontrado"
+                ok: false,
+                message: "Notificación no encontrada"
             })
 
             await findNotificaciones.destroy();
             resolve({
-                status: "eliminado",
-                ...findNotificaciones
+                ok: true,
+                message: "Notificación Eliminado correctamente",
+                notificacion: findNotificaciones
             })
         } catch (err) {
             reject(err)
@@ -99,12 +128,18 @@ export function deleteAllNotificacionesService() {
                 }
             });
 
-            if (EliminarNotificacionesSinLeer.length < 1) resolve(0);
+            if (EliminarNotificacionesSinLeer.length == 0) return resolve({
+                ok: false,
+                message: "No hay notificaciones leídas"
+            });
 
             for (const notif of EliminarNotificacionesSinLeer) {
                 await notif.destroy();
             }
-            resolve(1);
+            resolve({
+                ok: true,
+                message: "Notificaciones leídas eliminadas correctamente"
+            });
         } catch (err) {
             reject(err)
         }

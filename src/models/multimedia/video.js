@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Video = Sequelize.define('Video',{
+const Video = Sequelize.define('Videos',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,

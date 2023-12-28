@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Token = Sequelize.define('Token',{
+const Token = Sequelize.define('Tokens',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,

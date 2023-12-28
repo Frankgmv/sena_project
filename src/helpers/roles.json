@@ -1,0 +1,24 @@
+{
+    "roles":[
+        {
+            "rol":"Estudiante Especial",
+            "rolKey":"EP"
+        },
+        {
+            "rol":"Docente",
+            "rolKey":"D"
+        },
+        {
+            "rol":"Personal Administrativo",
+            "rolKey":"PA"
+        },
+        {
+            "rol":"Coordinador",
+            "rolKey":"C"
+        },
+        {
+            "rol":"Rector - Web Master",
+            "rolKey":"R-WM"
+        }
+    ]
+}

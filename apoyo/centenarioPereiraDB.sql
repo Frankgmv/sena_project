@@ -31,25 +31,27 @@ CREATE TABLE vistas (
     vistas_dia INT
 );
 
--- ! Tabla "permisos" DATA
+-- * Tabla "permisos" DATA
 CREATE TABLE permisos (
     id SERIAL PRIMARY KEY,
     permiso VARCHAR(50)
 );
 
--- ! Tabla "secciones" DATA
+-- * Tabla "secciones" DATA
 CREATE TABLE secciones (
     id SERIAL PRIMARY KEY,
     seccion VARCHAR(30)
+    seccionKey VARCHAR(30)
 );
 
--- ! Tabla "categorias" DATA
+-- * Tabla "categorias" DATA
 CREATE TABLE categorias (
     id SERIAL PRIMARY KEY,
-    categoria VARCHAR(30)
+    categoria VARCHAR(30),
+    categoriaKey VARCHAR(30)
 );
 
--- ! Tabla "roles" DATA
+-- * Tabla "roles" DATA
 CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
     rol VARCHAR(40),

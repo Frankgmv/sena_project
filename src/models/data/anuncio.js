@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Anuncio = Sequelize.define('Anuncio',{
+const Anuncio = Sequelize.define('Anuncios',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,

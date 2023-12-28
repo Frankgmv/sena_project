@@ -1,4 +1,5 @@
-import { deleteVistasService, getVistasService, postVistasService, putVistasService } from "../../services/informacion/vistas.services.js";
+import { deleteVistasService, getVistasService, postVistasService, putVistasService 
+} from "../../services/informacion/vistas.services.js";
 
 export const postVistas = async (req, res, next) => {
     try {
@@ -9,12 +10,14 @@ export const postVistas = async (req, res, next) => {
         }
         const crearVista = await postVistasService(defaultVistas);
 
-        if(crearVista){
+        if(crearVista.ok){
             res.status(201).json(crearVista)
         }else{
-
             const updateVista = await putVistasService();
-            res.status(200).json(updateVista)
+
+            res.json(updateVista);
+            if(!updateVista.ok) return res.status(500);
+            res.status(200);
         }
 
     } catch (err) {
@@ -22,20 +25,23 @@ export const postVistas = async (req, res, next) => {
     }
 }
 
-
-
 export const getVistas = async (req, res, next) => {
     try {
         const obtenerVista = await getVistasService();
-        res.status(201).json(obtenerVista)
+        res.json(obtenerVista);
+        if(!obtenerVista.ok) return res.status(404)
+        res.status(200)
     } catch (err) {
         next(err);
     }
 }
+
 export const deleteVistas = async (req, res, next) => {
     try {
         const eliminar = await deleteVistasService();
-        res.status(201).json(eliminar)
+        res.json(eliminar)
+        if(!eliminar.ok) return res.status(404)
+        res.status(200)
     } catch (err) {
         next(err);
     }

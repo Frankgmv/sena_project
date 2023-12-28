@@ -1,23 +1,47 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import {
+    DataTypes
+} from 'sequelize'
 
-const Rol = Sequelize.define('Rol',{
-    id: {
-        type: DataTypes.INTEGER,
-        allowNulls: false,
-        autoIncrement: true,
-    },
-    rol:{
+import {
+    sequelize
+} from '../../conection.js';
+
+import dataRol from "../../helpers/roles.json" assert {type : "json"};
+import { ErrorRol } from '../../middlewares/fabricaErrores.js';
+
+const Rol = sequelize.define('Roles', {
+    rol: {
         type: DataTypes.STRING,
         allowNulls: false,
     },
-    estado:{
-        type:DataTypes.BOOLEAN,
-        allowNulls: false
+    rolKey: {
+        type: DataTypes.STRING,
+        allowNulls: false,
+        unique: true
+    },
+    estado: {
+        type: DataTypes.BOOLEAN,
+        allowNulls: false,
+        defaultValue: true
     }
 })
 
-Rol.createTable({
-    tableName:"Roles"
-})
+async function insertDefaultData(Roles) {
+    await Rol.sync({
+        tableName: "Roles"
+    });
+    const hayRoles = await Rol.findAll();
+    if (hayRoles.length === 0) {
+        try {
+            for (let rol of Roles) {
+                await Rol.create(rol);
+            }
+        } catch (error) {
+            throw new ErrorRol(error.message)
+        }
+    }
+}
+ 
+insertDefaultData(dataRol.roles);
 
 export default Rol

@@ -16,9 +16,10 @@ app.use(morgan("dev"));
 // TODO verificar que los errores se recogan bien cuando viene de zod y otras partes más ya que traen mucha más estructura
 app.use((err, req, res, next) => {
     res.status(400).json({
+        error:true,
+        status: 400,
         message: err
     })
-    next(err)
 })
 
 

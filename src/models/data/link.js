@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Link = Sequelize.define('Link',{
+const Link = Sequelize.define('Links',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,

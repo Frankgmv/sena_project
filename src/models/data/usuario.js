@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Usuario = Sequelize.define('Usuario',{
+const Usuario = Sequelize.define('Usuarios',{
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,

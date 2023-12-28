@@ -8,3 +8,7 @@ const fabricaErrores = function (errorName) {
 }
 
 export const ErrorConexion = fabricaErrores("Error de conexión")
+export const ErrorPermiso = fabricaErrores("Fail Permiso Model")
+export const ErrorRol = fabricaErrores("Fail Rol Model")
+export const ErrorSeccion = fabricaErrores("Fail Seccion Model")
+export const ErrorCategoria = fabricaErrores("Fail Categoria Model")

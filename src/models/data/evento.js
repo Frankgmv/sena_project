@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
 
-const Evento = Sequelize.define('Evento',{
+const Evento = Sequelize.define('Eventos',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,

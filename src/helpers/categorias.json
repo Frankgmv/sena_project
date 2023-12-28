@@ -1,0 +1,12 @@
+{
+    "categorias":[
+        {
+            "categoria":"Categoria Prueba",
+            "categoriaKey":"C_PRUEBA"
+        },
+        {
+            "categoria":"Categoria Prueba 2",
+            "categoriaKey":"C_PRUEBA2"
+        }
+    ]
+}

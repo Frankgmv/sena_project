@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Item = Sequelize.define('Item',{
+const Item = Sequelize.define('Items',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,

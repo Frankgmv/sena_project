@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import validateSchema from '../../middlewares/validarSchemas.js';
+import { rolSchema } from '../../schemas/dataSchemas.js';
+import { getRol, getRoles, putRol } from '../../controllers/data/rol.controller.js';
 
 const rolRouter = Router();
 
-rolRouter.get('/roles', test);
-rolRouter.get('/rol/:id', test);
-rolRouter.post('/rol', test);
-rolRouter.put('/rol/:id', test);
-rolRouter.delete('/rol/:id', test);
+rolRouter.get('/roles', getRoles);
+rolRouter.get('/rol/:id', getRol);
+rolRouter.put('/rol/:id', validateSchema(rolSchema), putRol);
 
 export default rolRouter;

@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Noticia = Sequelize.define('Noticia',{
+const Noticia = Sequelize.define('Noticias',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
@@ -34,7 +34,7 @@ const Noticia = Sequelize.define('Noticia',{
         type:DataTypes.INTEGER,
         allowNulls: false,
         references: {
-            model:'User',
+            model:'Usuario',
             key: 'id',
         }
     },

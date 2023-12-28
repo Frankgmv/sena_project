@@ -1,16 +1,22 @@
 import Vistas from "../../models/informacion/vistas.js";
-import "colors"
+
 export const postVistasService = (Vistadata) => {
     return new Promise(async (resolve, reject) => {
         try {
             const obtenerVisualizacion = await Vistas.findAll();
 
             if (obtenerVisualizacion.length !== 0) {
-                resolve(0)
+                resolve({
+                    ok: false
+                })
             } else {
                 const createVistas = await Vistas.create(Vistadata);
                 await createVistas.save();
-                resolve(createVistas);
+                resolve({
+                    ok: true,
+                    message: "Visualización registrada",
+                    vistas: createVistas
+                });
             }
         } catch (err) {
             reject(err)
@@ -23,8 +29,19 @@ export const getVistasService = () => {
         try {
             const obtenerVisualizacion = await Vistas.findAll({
                 order: ["id"]
+            }); 
+            if (obtenerVisualizacion.length === 0) return resolve({
+                ok:false,
+                message: "No se encontró ningún dato",
+                vistas:obtenerVisualizacion
             });
-            resolve(obtenerVisualizacion);
+
+            resolve({
+                ok: true,
+                message: "Visualizaciones encontradas",
+                vistas: obtenerVisualizacion
+            });
+
         } catch (err) {
             reject(err)
         }
@@ -42,6 +59,12 @@ export const putVistasService = () => {
         try {
             let obtenerVisualizacion = await Vistas.findAll();
 
+            if(obtenerVisualizacion.length === 0) return resolve({
+                ok:false,
+                message: "No se encontró ningún dato para actualizar",
+                vistas:obtenerVisualizacion
+            })
+
             obtenerVisualizacion = obtenerVisualizacion[0].dataValues;
             const dataVisual = await Vistas.findByPk(obtenerVisualizacion.id);
 
@@ -53,7 +76,12 @@ export const putVistasService = () => {
 
             await dataVisual.update(dataUpdate);
 
-            resolve(dataVisual)
+            resolve({
+                ok:true,
+                message: "visualización existe, fue actualizada",
+                vistas: dataVisual
+            });
+
         } catch (error) {
             reject(error)
         }
@@ -69,7 +97,10 @@ export const deleteVistasService = () => {
                 await vista.destroy();
             }
             resolve({
-                message: "Vistas eliminadas"
+                ok:true,
+                estadoVistas: "eliminadas",
+                message: "Vistas eliminadas",
+                vistas: obtenerVisualizacion
             })
         } catch (error) {
             reject(error)

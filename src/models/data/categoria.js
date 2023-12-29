@@ -3,7 +3,7 @@ import { sequelize } from '../../conection.js';
 import categoriasPorDefecto from '../../helpers/categorias.json' assert { type: "json" };
 import { ErrorCategoria } from '../../middlewares/fabricaErrores.js';
 
-const Categoria = sequelize.define('Categorias',{
+const Categoria = sequelize.define('Categoria',{
     categoria:{
         type: DataTypes.STRING,
         allowNulls: false,
@@ -13,6 +13,8 @@ const Categoria = sequelize.define('Categorias',{
         allowNulls: false,
         unique:true
     },
+},{
+    tableName:"Categorias"
 })  
 
 // funcion para insertar los datos de los categorias por defecto.

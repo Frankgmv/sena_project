@@ -1,48 +1,41 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import {
+    DataTypes
+} from 'sequelize'
+import {
+    sequelize
+} from '../../conection.js'
+import Rol from './rol.js'
 
-const Usuario = Sequelize.define('Usuarios',{
-    id:{
+const Usuario = sequelize.define('Usuarios', {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: false,
-    }, 
-    nombre:{
+    },
+    nombre: {
         type: DataTypes.STRING,
         allowNull: false,
-    }, 
-    apellidio:{
+    },
+    apellido: {
         type: DataTypes.STRING,
         allowNull: false,
-    }, 
-    fechaNacimiento:{
+    },
+    fechaNacimiento: {
         type: DataTypes.DATE,
         allowNull: false,
-    }, 
-    correo:{
+    },
+    correo: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-    }, 
-    celular:{
+        allowNull: false
+        
+    },
+    celular: {
         type: DataTypes.STRING,
         allowNull: false,
-    }, 
-    password:{
+    },
+    password: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    },
-    id_rol:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'rol',
-            key: 'id',
-        }
-    },
-    id_permiso:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'detallePermiso',
-            key: 'id',
-        }
     },
     estado: {
         type: DataTypes.BOOLEAN,
@@ -50,8 +43,11 @@ const Usuario = Sequelize.define('Usuarios',{
     }
 })
 
-Usuario.createTable({
-    tableName:"Usuarios"
-})
+// Rol.hasMany(Usuario, {
+//     foreignKey: "id_rol"
+// })
+// Usuario.belongsTo(Rol);
+
+
 
 export default Usuario

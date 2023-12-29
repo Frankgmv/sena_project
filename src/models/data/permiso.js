@@ -1,11 +1,17 @@
-import { DataTypes } from "sequelize"
-import { sequelize } from "../../conection.js"
+import {
+    DataTypes
+} from "sequelize"
+import {
+    sequelize
+} from "../../conection.js"
 
 // fabrica de error personalizado 
-import { ErrorPermiso } from "../../middlewares/fabricaErrores.js";
+import {
+    ErrorPermiso
+} from "../../middlewares/fabricaErrores.js";
 
 // Datos de los permisos
-import permisosPorDefecto from "./../../helpers/permisos.json" assert { type: "json" };
+import permisosPorDefecto from "./../../helpers/permisos.json" assert { type: "json"};
 
 const Permiso = sequelize.define("Permiso", {
     permiso: {
@@ -22,16 +28,16 @@ const Permiso = sequelize.define("Permiso", {
 
 // funcion para insertar los datos de los permisos por defecto.
 async function insertDefaultData(Permisos) {
-    await Permiso.sync();
-    const hayPermisos = await Permiso.findAll();
-    if (hayPermisos.length === 0) {
-        try {
+    try {
+        // await Permiso.sync();
+        const hayPermisos = await Permiso.findAll();
+        if (hayPermisos.length === 0) {
             for (let permiso of Permisos) {
                 await Permiso.create(permiso);
             }
-        } catch (error) {
-            throw new ErrorPermiso(error.message)
         }
+    } catch (error) {
+        throw new ErrorPermiso(error.message)
     }
 }
 

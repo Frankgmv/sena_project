@@ -1,3 +1,3 @@
-export const test = (req, rep) => {
-    rep.send("Runta funcionando");
+export const test = (req, res) => {
+    res.send("Runta funcionando");
 }

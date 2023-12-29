@@ -12,10 +12,10 @@ export const pqrsSchema = z.object({
     }).min(3, "EL Apellido debe ser de minímo 3 caracteres"),
     tipo: z.string({
         required_error: "El Tipo es obligatorio"
-    }).nonempty("Rellene el tipo de PQRS"),
+    }),
     reminente: z.string({
         required_error: "El Remitente es obligatorio"
-    }).nonempty("Rellene el Remitente"),
+    }),
     correo: z.string({
         required_error: "El Correo es obligatorio",
         invalid_type_error: "El Correo debe ser un texto"

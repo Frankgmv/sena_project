@@ -1,35 +1,41 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../../conection.js';
+import {
+    DataTypes
+} from 'sequelize';
+import {
+    sequelize
+} from '../../conection.js';
 import categoriasPorDefecto from '../../helpers/categorias.json' assert { type: "json" };
-import { ErrorCategoria } from '../../middlewares/fabricaErrores.js';
+import {
+    ErrorCategoria
+} from '../../middlewares/fabricaErrores.js'; 
 
-const Categoria = sequelize.define('Categoria',{
-    categoria:{
+const Categoria = sequelize.define('Categoria', {
+    categoria: {
         type: DataTypes.STRING,
         allowNulls: false,
     },
-    categoriaKey:{
+    categoriaKey: {
         type: DataTypes.STRING,
         allowNulls: false,
-        unique:true
+        unique: true
     },
-},{
-    tableName:"Categorias"
-})  
+}, {
+    tableName: "Categorias"
+})
 
 // funcion para insertar los datos de los categorias por defecto.
 async function insertDefaultData(categorias) {
-    await Categoria.sync();
 
-    const haycategorias = await Categoria.findAll();
-    if (haycategorias.length === 0) {
-        try {
+    try {
+        // await Categoria.sync();
+        const haycategorias = await Categoria.findAll();
+        if (haycategorias.length === 0) {
             for (let categoria of categorias) {
                 await Categoria.create(categoria);
             }
-        } catch (error) {
-            throw new ErrorCategoria(error.message)
         }
+    } catch (error) {
+        throw new ErrorCategoria(error.message)
     }
 }
 

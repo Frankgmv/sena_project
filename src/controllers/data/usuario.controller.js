@@ -1,11 +1,16 @@
-// import User from '../../models/data/user.js';
+import { postUsuarioService } from "../../services/data/usuario.services"
 
-// export const newUser = async (req, res) => {
-//     const {}
-// }
+export const postUsuario = async (req, res, next) => {
+    try {
+        const crearUsuario = await postUsuarioService(req.body);
+        res.json(crearUsuario)
+        if(!crearUsuario.ok) return res.status(400);
+        res.status(200);
+    } catch (error) {
+        next(error)
+    }
+}
 
 
-// // id, nombre, apellido, fechaNacimiento, correo, celular, password, 
-// export const getUser = async () =>{
 
-// }
+

@@ -6,7 +6,7 @@ import {
 } from '../../conection.js'
 import Rol from './rol.js'
 
-const Usuario = sequelize.define('Usuarios', {
+const Usuario = sequelize.define('Usuario', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -25,28 +25,29 @@ const Usuario = sequelize.define('Usuarios', {
         allowNull: false,
     },
     correo: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-        
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique:true
     },
     celular: {
         type: DataTypes.STRING,
         allowNull: false,
     },
     password: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     estado: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue:false
     }
+},{
+    tableName:"Usuarios"
 })
 
-// Rol.hasMany(Usuario, {
-//     foreignKey: "id_rol"
-// })
-// Usuario.belongsTo(Rol);
+Rol.hasMany(Usuario)
+Usuario.belongsTo(Rol);
 
 
 

@@ -1,7 +1,7 @@
 import {DataTypes } from 'sequelize'
 import { sequelize } from '../../conection.js'
 
-const Notificacion = sequelize.define('Notificaciones',{
+const Notificacion = sequelize.define('Notificacion',{
     titulo:{
         type: DataTypes.STRING,
         allowNulls: false,
@@ -16,7 +16,8 @@ const Notificacion = sequelize.define('Notificaciones',{
         defaultValue: false
     }
 },{
-    timestamps: true
+    timestamps: true,
+    tableName:"Notificaciones"
 })
 
 

@@ -2,16 +2,14 @@ import z from "zod"
 
 export const permisoSchema = z.object({
     permiso: z.string({
-        required_error: "El permiso es requerido",
-        invalid_type_error: "El permiso debe ser un texto"
-    }).min(10, "EL permiso debe tener mínimo 10 carácteres")
-    .max(50, "El rol debe tener máximo 50 carácteres")
-    .nonempty("El permiso no puede estar vacío"),
+            required_error: "El permiso es requerido",
+            invalid_type_error: "El permiso debe ser un texto"
+        }).min(10, "EL permiso debe tener mínimo 10 carácteres")
+        .max(50, "El permiso debe tener máximo 50 carácteres"),
     permisoKey: z.string({
         required_error: "El permisoKey es requerido",
         invalid_type_error: "El permisoKey debe ser un texto"
     }).min(5, "permisoKey debe tener mínimo 5 carácteres")
-    .nonempty("El permisoKey no puede estar vacío")
 })
 
 export const rolSchema = z.object({
@@ -20,3 +18,44 @@ export const rolSchema = z.object({
         invalid_type_error: "El estado debe ser un booleano"
     })
 })
+
+export const usuarioSchema = z.object({
+    id: z.number({
+            required_error: "El documento es requerido",
+            invalid_type_error: "El documento es un número",
+        }).min(1000000, "El documento debe contener 8 carácteres mínimo")
+        .max(10000000000, "El documento debe contener 10 carácteres máximo"),
+    nombre: z.string({
+            required_error: "El Nombre es requerido",
+            invalid_type_error: "El Nombre debe ser un texto"
+        }).min(3, "EL Nombre debe tener mínimo 3 carácteres")
+        .max(50, "El Nombre debe tener máximo 50 carácteres"),
+    apellido: z.string({
+            required_error: "El Apellido es requerido",
+            invalid_type_error: "El Apellido debe ser un texto"
+        }).min(3, "EL Apellido debe tener mínimo 3 carácteres")
+        .max(50, "El Apellido debe tener máximo 50 carácteres"),
+    fechaNacimiento: z.string({
+        required_error: "La fecha de nacimiento es obligatoria"
+    }),
+    correo: z.string({
+            required_error: "El Correo es requerido",
+            invalid_type_error: "El Correo debe ser un texto"
+        }).email({
+            message: "email inválido"
+        })
+        .max(100, "El Correo debe tener máximo 50 carácteres"),
+    celular: z.string({
+            required_error: "El Celular es requerido",
+        }).min(7, "El Celular debe contener 7 carácteres mínimo")
+        .max(15, "El Celular debe contener 15 carácteres máximo"),
+    password: z.string({
+            required_error: "La contraseña es requerida",
+            invalid_type_error: "La contraseña debe ser un texto"
+        }).min(8, "La contraseña debe tener mínimo 8 carácteres")
+        .max(50, "La contraseña debe tener máximo 50 carácteres"),
+    id_rol:z.number({
+        required_error: "El id_rol es requerido",
+        invalid_type_error: "El id_rol es un número",
+    })
+});

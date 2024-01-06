@@ -1,5 +1,7 @@
 import z from "zod"
-import { validarFormatoFecha } from "../middlewares/validarAcciones.js";
+import {
+    validarFormatoFecha
+} from "../middlewares/validarAcciones.js";
 
 
 export const permisoSchema = z.object({
@@ -56,13 +58,13 @@ export const usuarioSchema = z.object({
             invalid_type_error: "La contraseña debe ser un texto"
         }).min(8, "La contraseña debe tener mínimo 8 carácteres")
         .max(50, "La contraseña debe tener máximo 50 carácteres"),
-    RolId:z.number({
+    RolId: z.number({
         required_error: "El id_rol es requerido",
         invalid_type_error: "El id_rol es un número",
     })
 });
 
-export const usuarioPutSchema =  z.object({
+export const usuarioPutSchema = z.object({
     id: z.number({
             required_error: "El documento es requerido",
             invalid_type_error: "El documento es un número",
@@ -97,8 +99,20 @@ export const usuarioPutSchema =  z.object({
             invalid_type_error: "La contraseña debe ser un texto"
         }).min(8, "La contraseña debe tener mínimo 8 carácteres")
         .max(50, "La contraseña debe tener máximo 50 carácteres").optional(),
-    RolId:z.number({
+    RolId: z.number({
         required_error: "El id_rol es requerido",
         invalid_type_error: "El id_rol es un número",
     }).optional()
 }).nullable();
+
+
+export const detallePermisoSchema = z.object({
+    UsuarioId: z.number({
+        required_error: " El UsuarioId es requerido",
+        invalid_type_error: "El UsuarioId debe ser un número"
+    }),
+    PermisoId: z.number({
+        required_error: " El PermisoId es requerido",
+        invalid_type_error: "El PermisoId debe ser un número"
+    })
+})

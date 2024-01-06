@@ -1,4 +1,6 @@
-import { Router } from 'express';
+import {
+    Router
+} from 'express';
 
 // * Rutas de informacion
 
@@ -26,6 +28,7 @@ import rolRouter from '../data/rol.routes.js';
 import seccionRouter from '../data/seccion.routes.js';
 import tokenRouter from '../data/token.routes.js';
 import usuarioRouter from '../data/usuario.routes.js';
+import detallePermisoRouter from '../data/detallePermiso.routes.js';
 
 // * Rutas de validacion
 
@@ -38,34 +41,39 @@ import verificacionRouter from '../validacion/verificacion.routes.js';
 const router = Router();
 
 // Une todas las rutas de la carpeta multimedia
-router.use("/multimedia", archivoRouter)
-router.use("/multimedia", galeriaRouter)
-router.use("/multimedia", sliderRouter)
-router.use("/multimedia", videoRouter)
+router.use("/multimedia", archivoRouter,
+    galeriaRouter,
+    sliderRouter,
+    videoRouter,
+);
 
 // Une todas las rutas de la carpeta data
-router.use("/data", anuncioRouter)
-router.use("/data", categoriaRouter)
-router.use("/data", itemRouter)
-router.use("/data", linkRouter)
-router.use("/data", noticiaRouter)
-router.use("/data", permisoRouter)
-router.use("/data", rolRouter)
-router.use("/data", seccionRouter)
-router.use("/data", tokenRouter)
-router.use("/data", usuarioRouter)
+router.use("/data", anuncioRouter,
+    categoriaRouter,
+    itemRouter,
+    linkRouter,
+    noticiaRouter,
+    permisoRouter,
+    rolRouter,
+    seccionRouter,
+    tokenRouter,
+    usuarioRouter,
+    detallePermisoRouter
+);
 
 
 // Une todas las rutas de la carpeta informacion
-router.use("/informacion", historialRouter)
-router.use("/informacion", notificacionRouter)
-router.use("/informacion", pqrsRouter)
-router.use("/informacion", vistasRouter)
+router.use("/informacion",
+    historialRouter,
+    notificacionRouter,
+    pqrsRouter,
+    vistasRouter);
 
 // Une todas las rutas de la carpeta validacion
-router.use("/validacion", loginRouter)
-router.use("/validacion", registroRouter)
-router.use("/validacion", logoutRouter)
-router.use("/validacion", verificacionRouter)
+router.use("/validacion", loginRouter,
+    registroRouter,
+    logoutRouter,
+    verificacionRouter
+);
 
 export default router;

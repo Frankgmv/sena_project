@@ -90,7 +90,7 @@ export const postUsuarioService = (data) => {
     })
 }
 
-export const getAllUsuariosService = (estado, pagina, num_usuarios = 10) => {
+export const getAllUsuariosService = (estado, pagina, num_usuarios = 12) => {
 
     var consulta = {
         offset: (pagina - 1) * num_usuarios,

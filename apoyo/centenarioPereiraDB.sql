@@ -58,7 +58,7 @@ CREATE TABLE roles (
     estado BOOLEAN
 );
 
--- ! Tabla "usuarios" DATA
+-- * Tabla "usuarios" DATA
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(30),
@@ -70,7 +70,7 @@ CREATE TABLE usuarios (
     id_rol INT REFERENCES roles(id) ON DELETE CASCADE
 );
 
--- ! Tabla "detalle_permiso"
+-- ? Tabla "detalle_permiso"
 CREATE TABLE detalle_permiso (
     id SERIAL PRIMARY KEY,
     id_permiso INT REFERENCES permisos(id) ON DELETE CASCADE,

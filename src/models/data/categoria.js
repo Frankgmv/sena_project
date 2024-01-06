@@ -27,7 +27,7 @@ const Categoria = sequelize.define('Categoria', {
 async function insertDefaultData(categorias) {
 
     try {
-        // await Categoria.sync({force:true});
+        // await Categoria.sync();
         const haycategorias = await Categoria.findAll();
         if (haycategorias.length === 0) {
             for (let categoria of categorias) {

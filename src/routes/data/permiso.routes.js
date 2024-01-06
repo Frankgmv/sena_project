@@ -12,6 +12,7 @@ permisoRouter.get('/permisos', getAllPermiso);
 // Obtener un permiso
 permisoRouter.get('/permisos/:id', getPermiso);
 
+
 // Crear un permiso 
 permisoRouter.post('/permisos',validateSchema(permisoSchema), postPermiso);
 

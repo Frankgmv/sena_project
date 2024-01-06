@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { test } from "../../controllers/test.js";
 import validarSchema from "../../middlewares/validarSchemas.js"
 import { usuarioPutSchema, usuarioSchema } from '../../schemas/dataSchemas.js';
 import { deleteUsuario, getAllUsuarios, getUsuario, postUsuario, putUsuario } from '../../controllers/data/usuario.controller.js';

@@ -4,9 +4,9 @@ import { test } from "../../controllers/test.js";
 const noticiaRouter = Router();
 
 noticiaRouter.get('/noticias', test);
-noticiaRouter.get('/noticia/:id', test);
-noticiaRouter.post('/noticia', test);
-noticiaRouter.put('/noticia/:id', test);
-noticiaRouter.delete('/noticia/:id', test);
+noticiaRouter.get('/noticias/:id', test);
+noticiaRouter.post('/noticias', test);
+noticiaRouter.put('/noticias/:id', test);
+noticiaRouter.delete('/noticias/:id', test);
 
 export default noticiaRouter;

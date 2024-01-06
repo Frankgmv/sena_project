@@ -1,0 +1,52 @@
+{
+    "URL": "http://localhost:9000/api/v1/",
+    "raiz": "/api/v1 + path + ruta",
+    "URLRoutes": {
+        "info": {
+            "URL": "http://localhost:9000/api/v1/informacion/vistas",
+            "path":"/informacion",
+            "rutas":[
+                "/historial",
+                "/notificaciones",
+                "/pqrs",
+                "/vistas"
+            ]
+        },
+        "multimedia": {
+            "URL": "http://localhost:9000/api/v1/multimedia/archivos",
+            "path": "/multimedia",
+            "rutas":[
+                "/archivos",
+                "/galeria",
+                "/slider",
+                "/videos"
+            ]
+        },
+        "data": {
+            "URL": "http://localhost:9000/api/v1/data/permisos",
+            "path": "/data",
+            "rutas":[
+                "/anuncios",
+                "/categorias",
+                "/items",
+                "/links",
+                "/noticias",
+                "/permisos",
+                "/roles",
+                "/secciones",
+                "/tokens",
+                "/usuarios"
+            ]
+        },
+        "validacion": {
+            "URL": "http://localhost:9000/api/v1/validacion/verificacion",
+            "path": "/validacion",
+            "rutas":[
+                "/login",
+                "/logout",
+                "/verificacion",
+                "/registro"
+            ]
+        }
+    }
+}

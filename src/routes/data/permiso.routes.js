@@ -10,15 +10,15 @@ const permisoRouter = Router();
 permisoRouter.get('/permisos', getAllPermiso);
 
 // Obtener un permiso
-permisoRouter.get('/permiso/:id', getPermiso);
+permisoRouter.get('/permisos/:id', getPermiso);
 
 // Crear un permiso 
-permisoRouter.post('/permiso',validateSchema(permisoSchema), postPermiso);
+permisoRouter.post('/permisos',validateSchema(permisoSchema), postPermiso);
 
 // Actualizar un permiso que no sea por defecto
-permisoRouter.put('/permiso/:id', validateSchema(permisoSchema), validarPermisos, putPermiso);
+permisoRouter.put('/permisos/:id', validateSchema(permisoSchema), validarPermisos, putPermiso);
 
 // Eliminar un permiso que no sea por defecto
-permisoRouter.delete('/permiso/:id', validarPermisos, deletePermiso);
+permisoRouter.delete('/permisos/:id', validarPermisos, deletePermiso);
 
 export default permisoRouter;

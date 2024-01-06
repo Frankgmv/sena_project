@@ -3,10 +3,10 @@ import { test } from "../../controllers/test.js";
 
 const videoRouter = Router();
 
-videoRouter.get('/video', test);
-videoRouter.get('/video/:id', test);
-videoRouter.post('/video', test);
-videoRouter.put('/video/:id', test);
-videoRouter.delete('/video/:id', test);
+videoRouter.get('/videos', test);
+videoRouter.get('/videos/:id', test);
+videoRouter.post('/videos', test);
+videoRouter.put('/videos/:id', test);
+videoRouter.delete('/videos/:id', test);
 
 export default videoRouter;

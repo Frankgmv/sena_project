@@ -15,6 +15,8 @@ const { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER
 
 // ? conección a la base de datos Postgres
 
+Sequelize.DEBUG = true;
+
 export const sequelize = new Sequelize({
     host: DB_HOST,
     database: DB_NAME,

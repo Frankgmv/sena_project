@@ -4,6 +4,6 @@ import { getAllCategorias, getCategoria } from '../../controllers/data/categoria
 const categoriaRouter = Router();
 
 categoriaRouter.get('/categorias', getAllCategorias);
-categoriaRouter.get('/categoria/:id', getCategoria);
+categoriaRouter.get('/categorias/:id', getCategoria);
 
 export default categoriaRouter;

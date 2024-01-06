@@ -1,14 +1,15 @@
 import { Router } from 'express';
 import { test } from "../../controllers/test.js";
 import validarSchema from "../../middlewares/validarSchemas.js"
-import { usuarioSchema } from '../../schemas/dataSchemas.js';
+import { usuarioPutSchema, usuarioSchema } from '../../schemas/dataSchemas.js';
+import { deleteUsuario, getAllUsuarios, getUsuario, postUsuario, putUsuario } from '../../controllers/data/usuario.controller.js';
 
 const usuarioRouter = Router();
 
-usuarioRouter.get('/usuarios', test);
-usuarioRouter.get('/usuario/:id', test);
-usuarioRouter.post('/usuario', validarSchema(usuarioSchema), test);
-usuarioRouter.put('/usuario/:id', test);
-usuarioRouter.delete('/usuario/:id', test);
+usuarioRouter.get('/usuarios', getAllUsuarios);
+usuarioRouter.get('/usuarios/:id', getUsuario);
+usuarioRouter.post('/usuarios', validarSchema(usuarioSchema), postUsuario);
+usuarioRouter.put('/usuarios/:id',validarSchema(usuarioPutSchema), putUsuario);
+usuarioRouter.delete('/usuarios/:id', deleteUsuario);
 
 export default usuarioRouter;

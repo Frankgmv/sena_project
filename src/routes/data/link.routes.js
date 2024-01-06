@@ -4,9 +4,9 @@ import { test } from "../../controllers/test.js";
 const linkRouter = Router();
 
 linkRouter.get('/links', test);
-linkRouter.get('/link/:id', test);
-linkRouter.post('/link', test);
-linkRouter.put('/link/:id', test);
-linkRouter.delete('/link/:id', test);
+linkRouter.get('/links/:id', test);
+linkRouter.post('/links', test);
+linkRouter.put('/links/:id', test);
+linkRouter.delete('/links/:id', test);
 
 export default linkRouter;

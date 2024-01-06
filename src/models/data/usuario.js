@@ -10,7 +10,7 @@ const Usuario = sequelize.define('Usuario', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: false,
+        autoIncrement: false
     },
     nombre: {
         type: DataTypes.STRING,
@@ -25,7 +25,7 @@ const Usuario = sequelize.define('Usuario', {
         allowNull: false,
     },
     correo: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
         unique:true
     },

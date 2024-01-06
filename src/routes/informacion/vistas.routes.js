@@ -3,8 +3,8 @@ import { deleteVistas, getVistas, postVistas } from '../../controllers/informaci
 
 const vistasRouter = Router();
 
-vistasRouter.get('/vista', getVistas);
-vistasRouter.post('/vista', postVistas);
-vistasRouter.delete('/vista', deleteVistas);
+vistasRouter.get('/vistas', getVistas);
+vistasRouter.post('/vistas', postVistas);
+vistasRouter.delete('/vistas', deleteVistas);
 
 export default vistasRouter;

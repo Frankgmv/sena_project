@@ -3,10 +3,10 @@ import { test } from "../../controllers/test.js";
 
 const archivoRouter = Router();
 
-archivoRouter.get('/archivo', test);
-archivoRouter.get('/archivo/:id', test);
-archivoRouter.post('/archivo', test);
-archivoRouter.put('/archivo/:id', test);
-archivoRouter.delete('/archivo/:id', test);
+archivoRouter.get('/archivos', test);
+archivoRouter.get('/archivos/:id', test);
+archivoRouter.post('/archivos', test);
+archivoRouter.put('/archivos/:id', test);
+archivoRouter.delete('/archivos/:id', test);
 
 export default archivoRouter;

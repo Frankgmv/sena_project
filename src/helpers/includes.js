@@ -4,18 +4,19 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?])[a-zA-Z0-
 
 export const validarPassword = (password) => {
 
-    return passwordRegex.test(data);
+    return passwordRegex.test(password);
 }
 
 export const validarEmail = (email) => {
 
-    return emailRegex.test(data);
+    return emailRegex.test(email);
 }
 
 export const esMayorDe15 = (fechaNacimiento) => {
     const fechaActual = new Date();
+    const fechaUsuario = new Date(fechaNacimiento)
 
-    const edad = (fechaActual.getFullYear() - fechaNacimiento.getFullYear());
+    const edad = (fechaActual.getFullYear() - fechaUsuario.getFullYear());
 
     return edad >= 15;
 }

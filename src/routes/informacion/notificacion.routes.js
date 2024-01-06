@@ -21,18 +21,18 @@ const notificacionRouter = Router();
 notificacionRouter.get('/notificaciones', getAllNotificaciones);
 
 //? Obtener notificaciones
-notificacionRouter.get('/notificacion/:id', getNotificaciones);
+notificacionRouter.get('/notificaciones/:id', getNotificaciones);
 
 //? Publicar y validar notificaciones
-notificacionRouter.post('/notificacion', validateSchema(notificacionSchema), postNotificacion);
+notificacionRouter.post('/notificaciones', validateSchema(notificacionSchema), postNotificacion);
 
 //? Actualizar notificaciones
-notificacionRouter.put('/notificacion/:id', putNotificacion);
+notificacionRouter.put('/notificaciones/:id', putNotificacion);
 
 //? Eliminar notificaciones
-notificacionRouter.delete('/notificacion/:id', deleteNotificacion);
+notificacionRouter.delete('/notificaciones/:id', deleteNotificacion);
 
 //? Eliminar todas las notificaciones leídas
-notificacionRouter.delete('/notificaciones', deleteAllNotificaciones);
+notificacionRouter.delete('/notificaciones-delete-all', deleteAllNotificaciones);
 
 export default notificacionRouter;

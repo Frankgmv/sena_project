@@ -4,9 +4,9 @@ import { test } from "../../controllers/test.js";
 const anuncioRouter = Router();
 
 anuncioRouter.get('/anuncios', test);
-anuncioRouter.get('/anuncio/:id', test);
-anuncioRouter.post('/anuncio', test);
-anuncioRouter.put('/anuncio/:id', test);
-anuncioRouter.delete('/anuncio/:id', test);
+anuncioRouter.get('/anuncios/:id', test);
+anuncioRouter.post('/anuncios', test);
+anuncioRouter.put('/anuncios/:id', test);
+anuncioRouter.delete('/anuncios/:id', test);
 
 export default anuncioRouter;

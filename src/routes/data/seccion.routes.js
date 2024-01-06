@@ -6,7 +6,7 @@ const seccionRouter = Router();
 // TODO Agregar todas las secciones en el json de los helpers  
 
 seccionRouter.get('/secciones', getAllSecciones);
-seccionRouter.get('/seccion/:id', getSeccion);
+seccionRouter.get('/secciones/:id', getSeccion);
 
 
 export default seccionRouter;

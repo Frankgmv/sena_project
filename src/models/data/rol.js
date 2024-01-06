@@ -11,7 +11,7 @@ import {
     ErrorRol
 } from '../../middlewares/fabricaErrores.js';
 
-const Rol = sequelize.define('Roles', {
+const Rol = sequelize.define('Rol', {
     rol: {
         type: DataTypes.STRING,
         allowNulls: false,
@@ -32,7 +32,7 @@ const Rol = sequelize.define('Roles', {
 
 async function insertDefaultData(Roles) {
     try {
-        // await Rol.sync();
+        // await Rol.sync({force:true});
         const hayRoles = await Rol.findAll();
         if (hayRoles.length === 0) {
             for (let rol of Roles) {

@@ -6,7 +6,7 @@ import { getRol, getRoles, putRol } from '../../controllers/data/rol.controller.
 const rolRouter = Router();
 
 rolRouter.get('/roles', getRoles);
-rolRouter.get('/rol/:id', getRol);
-rolRouter.put('/rol/:id', validateSchema(rolSchema), putRol);
+rolRouter.get('/roles/:id', getRol);
+rolRouter.put('/roles/:id', validateSchema(rolSchema), putRol);
 
 export default rolRouter;

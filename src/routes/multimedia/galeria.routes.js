@@ -3,9 +3,9 @@ import { test } from "../../controllers/test.js";
 
 const galeriaRouter = Router();
 
-galeriaRouter.get('/historial', test);
-galeriaRouter.get('/historial/:id', test);
-galeriaRouter.post('/historial', test);
-galeriaRouter.put('/historial/:id', test);
+galeriaRouter.get('/galeria', test);
+galeriaRouter.get('/galeria/:id', test);
+galeriaRouter.post('/galeria', test);
+galeriaRouter.put('/galeria/:id', test);
 
 export default galeriaRouter;

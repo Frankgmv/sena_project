@@ -1,51 +1,45 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize'
+import { sequelize } from "../../conection.js"
+import Usuario from "./usuario.js";
+import Seccion from "./seccion.js";
+import Categoria from "./categoria.js";
 
-const Link = Sequelize.define('Links',{
+const Link = sequelize.define('Link',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
         autoIncrement: true,
+        primaryKey:true
     },
     titulo:{
         type: DataTypes.STRING,
         allowNulls: false,
     },
     link:{
-        type:DataTypes.STRING,
+        type:DataTypes.TEXT,
         allowNulls: false,
-    },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNulls: false,
-    },
-    idUsuaio:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'user',
-            key: 'id',
-        }
-    },
-    idSeccion:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'seccion',
-            key: 'id',
-        }
-    },
-    idCategoria:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'categoria',
-            key: 'id',
-        }
     },
     descripcion:{
-        type: DataTypes.STRING,
-        defaultValue:true
+        type: DataTypes.TEXT,
+        allowNulls:true
+    },
+    tipo:{
+        type:DataTypes.STRING,
+        allowNulls: false,
     }
+},{
+    tableName:"Links",
+    timestamps: true,
+    updatedAt:false
 })  
-Link.createTable({
-    tableName:"Links"
-})
+
+
+Usuario.hasMany(Link, {foreignKey:"UsuarioId"})
+Seccion.hasMany(Link, {foreignKey:"SeccionId"})
+Categoria.hasMany(Link, {foreignKey:"CategoriaId"})
+
+Link.belongsTo(Usuario, {foreignKey:"UsuarioId"})
+Link.belongsTo(Seccion, {foreignKey:"SeccionId"})
+Link.belongsTo(Categoria,  {foreignKey:"CategoriaId"})
 
 export default Link

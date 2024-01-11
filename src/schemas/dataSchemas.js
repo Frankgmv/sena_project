@@ -1,4 +1,5 @@
 import z from "zod"
+import { verificarHttpUrl } from "../helpers/includes.js";
 
 export const permisoSchema = z.object({
     permiso: z.string({
@@ -193,3 +194,67 @@ export const putNoticiaShema = z.object({
         invalid_type_error:"UsuarioId es un número"
     }).min(1, "El UsuarioId es requerido").optional()
 }).nullable();
+
+export const linkSchema = z.object({
+    titulo: z.string({
+        required_error:"titulo requerido",
+        invalid_type_error:"Titulo debe ser texto"
+    }).max(30, "Titulo muy largo (30 máximo)").min(5, "Titulo muy corto (5 mín)"),
+    link:z.string({
+        required_error:"Link requerido",
+        invalid_type_error:"Link debe ser URL - Link"
+    }).refine(verificarHttpUrl, {
+        message:"La url debe contener http:// o https://"
+      }),
+    descripcion:z.string({
+        invalid_type_error:"la descripcion debe ser un texto"
+    }).max(255, "Descripcion muy larga (250 máx)").optional(),
+    tipo:z.string({
+        required_error:"El tipo es pdf 0 blog",
+        invalid_type_error:"tipo debe ser texto"
+    }).max(6, "Tipo muy largo (6 máx) "),
+    UsuarioId:z.number({
+        required_error:"UsuarioId requerido",
+        invalid_type_error:"UsuarioId es un número"
+    }),
+    SeccionId:z.number({
+        required_error:"SeccionId requerido",
+        invalid_type_error:"SeccionId es un número"
+    }),
+    CategoriaId:z.number({
+        required_error:"CategoriaId requerido",
+        invalid_type_error:"CategoriaId es un número"
+    })
+})
+
+export const putLinkSchema = z.object({
+    titulo: z.string({
+        required_error:"titulo requerido",
+        invalid_type_error:"Titulo debe ser texto"
+    }).max(30, "Titulo muy largo (30 máximo)").min(5, "Titulo muy corto (5 mín)").optional(),
+    link:z.string({
+        required_error:"Link requerido",
+        invalid_type_error:"Link debe ser URL - Link"
+    }).refine(verificarHttpUrl, {
+        message:"La url debe contener http:// o https://"
+      }).optional(),
+    descripcion:z.string({
+        invalid_type_error:"la descripcion debe ser un texto"
+    }).max(255, "Descripcion muy larga (250 máx)").optional(),
+    tipo:z.string({
+        required_error:"El tipo es pdf 0 blog",
+        invalid_type_error:"tipo debe ser texto"
+    }).max(6, "Tipo muy largo (6 máx) ").optional(),
+    UsuarioId:z.number({
+        required_error:"UsuarioId requerido",
+        invalid_type_error:"UsuarioId es un número"
+    }).optional(),
+    SeccionId:z.number({
+        required_error:"SeccionId requerido",
+        invalid_type_error:"SeccionId es un número"
+    }).optional(),
+    CategoriaId:z.number({
+        required_error:"CategoriaId requerido",
+        invalid_type_error:"CategoriaId es un número"
+    }).optional()
+}).nullable()

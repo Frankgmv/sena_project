@@ -43,12 +43,11 @@ const Usuario = sequelize.define('Usuario', {
         defaultValue:false
     }
 },{
-    tableName:"Usuarios"
+    tableName:"Usuarios",
+    timestamps:true
 })
 
 Rol.hasMany(Usuario)
 Usuario.belongsTo(Rol);
-
-
 
 export default Usuario

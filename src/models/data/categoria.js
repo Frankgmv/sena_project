@@ -24,18 +24,17 @@ const Categoria = sequelize.define('Categoria', {
 })
 
 // funcion para insertar los datos de los categorias por defecto.
-async function insertDefaultData(categorias) {
-
+async function insertDefaultData(dataCategorias) {
     try {
         // await Categoria.sync();
         const haycategorias = await Categoria.findAll();
         if (haycategorias.length === 0) {
-            for (let categoria of categorias) {
+            for (let categoria of dataCategorias) {
                 await Categoria.create(categoria);
             }
         }
     } catch (error) {
-        throw new ErrorCategoria(error.message)
+        throw new ErrorCategoria(error)
     }
 }
 

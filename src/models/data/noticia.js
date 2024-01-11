@@ -36,7 +36,8 @@ const Noticia = sequelize.define('Noticia',{
     }
 },{
     timestamps:true,
-    tableName: "Noticias"
+    tableName: "Noticias",
+    updatedAt:false
 })
 
 Usuario.hasMany(Noticia, {foreignKey:"UsuarioId"});

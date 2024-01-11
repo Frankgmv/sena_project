@@ -20,3 +20,10 @@ export const esMayorDe15 = (fechaNacimiento) => {
 
     return edad >= 15;
 }
+
+export const verificarHttpUrl = (url) => {
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      return false
+    }
+    return true;
+  }

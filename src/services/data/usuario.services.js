@@ -9,7 +9,7 @@ import {
     validarEmail,
     validarPassword
 } from "../../helpers/includes.js";
-import "colors"
+
 export const postUsuarioService = (data) => {
     return new Promise(async (resolve, reject) => {
         const {
@@ -138,6 +138,7 @@ export const getAllUsuariosService = (estado, pagina, num_usuarios = 12) => {
         }
     })
 }
+
 export const getUsuarioService = (idUser) => {
     return new Promise(async (resolve, reject) => {
         try {

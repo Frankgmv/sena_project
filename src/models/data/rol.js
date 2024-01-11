@@ -27,20 +27,21 @@ const Rol = sequelize.define('Rol', {
         defaultValue: true
     }
 }, {
-    tableName: "Roles"
+    tableName: "Roles",
+    timestamps:false
 })
 
-async function insertDefaultData(Roles) {
+async function insertDefaultData(dataRoles) {
     try {
         // await Rol.sync();
         const hayRoles = await Rol.findAll();
         if (hayRoles.length === 0) {
-            for (let rol of Roles) {
+            for (let rol of dataRoles) {
                 await Rol.create(rol);
             }
         }
     } catch (error) {
-        throw new ErrorRol(error.message)
+        throw new ErrorRol(error)
     }
 }
 

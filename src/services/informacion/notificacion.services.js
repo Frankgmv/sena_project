@@ -13,7 +13,6 @@ export const postNotificacionService = (notificacionData) => {
             if (existe) {
                 resolve({
                     ok: false,
-                    estadoNotificacion: "existente",
                     message: `${notificacionData.titulo} ya existe`,
                     notificacion: existe
                 })

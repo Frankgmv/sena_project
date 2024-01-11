@@ -35,10 +35,3 @@ export const validarPermisos = async (req, res, next) =>{
 
 
 }
-
-// Validar formato de fehca
-export const validarFormatoFecha = (value) => {
-    // Expresión regular para validar el formato YYYY/MM/DD
-    const formatoFecha = /^\d{4}\/\d{2}\/\d{2}$/;
-    return formatoFecha.test(value);
-};

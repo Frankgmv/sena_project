@@ -1,14 +1,17 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize';
+import { sequelize } from '../../conection.js';
+import Usuario from './usuario.js';
 
-const Noticia = Sequelize.define('Noticias',{
+const Noticia = sequelize.define('Noticia',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
+        primaryKey:true,
         autoIncrement: true,
     },
     titulo:{
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     fecha:{
         type:DataTypes.DATE,
@@ -16,36 +19,27 @@ const Noticia = Sequelize.define('Noticias',{
     },
     encabezado:{
         type:DataTypes.STRING,
-        allowNulls: false
+        allowNulls: true
     },
     imgPath:{
         type:DataTypes.STRING,
         allowNulls: true
     },
-    descipcion:{
+    descripcion:{
         type:DataTypes.STRING,
         allowNulls: false
     },
-    encabezado:{
-        type:DataTypes.BLOB,
-        allowNulls: false
-    },
-    idUser:{
-        type:DataTypes.INTEGER,
-        allowNulls: false,
-        references: {
-            model:'Usuario',
-            key: 'id',
-        }
-    },
     estado:{
         type:DataTypes.BOOLEAN,
-        allowNulls: false
+        allowNulls: false,
+        defaultValue:true
     }
+},{
+    timestamps:true,
+    tableName: "Noticias"
 })
 
-Noticia.createTable({
-    tableName:"Noticias"
-})
+Usuario.hasMany(Noticia, {foreignKey:"UsuarioId"});
+Noticia.belongsTo(Usuario, {foreignKey:"UsuarioId"});
 
 export default Noticia

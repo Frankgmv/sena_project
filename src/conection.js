@@ -10,7 +10,13 @@ import {
 } from "./middlewares/fabricaErrores.js";
 
 config()
-const { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER
+
+const {
+    DB_HOST,
+    DB_NAME,
+    DB_PASSWORD,
+    DB_PORT,
+    DB_USER
 } = process.env
 
 // ? conección a la base de datos Postgres
@@ -26,18 +32,29 @@ export const sequelize = new Sequelize({
     username: DB_USER
 });
 
-// * Conexión para la db cuando se despliegue en remoto
-// const sequelize = new Sequelize(process.env.DB_STRING_CONNECT_CLOUD, {
-//     dialect: 'postgres',
-//     ssl:true
-// });
+/* 
+//* Conexión para la db cuando se despliegue en remoto
+ const sequelize = new Sequelize(process.env.DB_STRING_CONNECT_CLOUD, {
+     dialect: 'postgres',
+     ssl:true,
+    pool: {
+        max: 10, // Número máximo de conexiones en el pool
+        min: 0,  // Número mínimo de conexiones en el pool
+        acquire: 30000,
+        idle: 10000
+    }
+});
+*/
 
 // ? función para verifica la conexión
 
+
 export const connect = async () => {
     try {
-        await sequelize.authenticate()
+        await sequelize.authenticate();
+        // await sequelize.sync({force:true});
         // await sequelize.sync({alter:true});
+        // await sequelize.sync();
         console.log(`  <<  Conexión exitosa a la base de datos >> `.blue);
     } catch (err) {
         throw new ErrorConexion(err);

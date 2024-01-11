@@ -70,21 +70,21 @@ CREATE TABLE usuarios (
     id_rol INT REFERENCES roles(id) ON DELETE CASCADE
 );
 
--- ? Tabla "detalle_permiso"
+-- * Tabla "detalle_permiso"
 CREATE TABLE detalle_permiso (
     id SERIAL PRIMARY KEY,
     id_permiso INT REFERENCES permisos(id) ON DELETE CASCADE,
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ! Tabla "noticias"
+-- * Tabla "noticias"
 CREATE TABLE noticias (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(70),
     fecha TIMESTAMP,
     encabezado VARCHAR(100),
     descripcion TEXT,
-    imagen VARCHAR(250),
+    imagenPath VARCHAR(250),
     estado BOOLEAN
 );
 

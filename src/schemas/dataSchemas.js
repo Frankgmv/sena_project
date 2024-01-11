@@ -1,8 +1,4 @@
 import z from "zod"
-import {
-    validarFormatoFecha
-} from "../middlewares/validarAcciones.js";
-
 
 export const permisoSchema = z.object({
     permiso: z.string({
@@ -15,6 +11,18 @@ export const permisoSchema = z.object({
         invalid_type_error: "El permisoKey debe ser un texto"
     }).min(5, "permisoKey debe tener mínimo 5 carácteres")
 })
+
+export const putPermisoSchema = z.object({
+    permiso: z.string({
+            required_error: "El permiso es requerido",
+            invalid_type_error: "El permiso debe ser un texto"
+        }).min(10, "EL permiso debe tener mínimo 10 carácteres")
+        .max(50, "El permiso debe tener máximo 50 carácteres").optional(),
+    permisoKey: z.string({
+        required_error: "El permisoKey es requerido",
+        invalid_type_error: "El permisoKey debe ser un texto"
+    }).min(5, "permisoKey debe tener mínimo 5 carácteres").optional()
+}).nullable();
 
 export const rolSchema = z.object({
     estado: z.boolean({
@@ -41,8 +49,8 @@ export const usuarioSchema = z.object({
         .max(50, "El Apellido debe tener máximo 50 carácteres"),
     fechaNacimiento: z.string({
         required_error: "La fecha de nacimiento es obligatoria"
-    }).refine(validarFormatoFecha, {
-        message: "El formato debe ser YYYY/MM/DD"
+    }).regex(/^\d{4}-\d{2}-\d{2}$/, {
+        message: "Fecha inválida, formato YYYY-MM-DD"
     }),
     correo: z.string({
             required_error: "El Correo es requerido",
@@ -82,8 +90,8 @@ export const usuarioPutSchema = z.object({
         .max(50, "El Apellido debe tener máximo 50 carácteres").optional(),
     fechaNacimiento: z.string({
         required_error: "La fecha de nacimiento es obligatoria"
-    }).refine(validarFormatoFecha, {
-        message: "El formato debe ser YYYY/MM/DD"
+    }).regex(/^\d{4}-\d{2}-\d{2}$/, {
+        message: "Fecha inválida, formato YYYY-MM-DD"
     }).optional(),
     correo: z.string({
             required_error: "El Correo es requerido",
@@ -116,3 +124,72 @@ export const detallePermisoSchema = z.object({
         invalid_type_error: "El PermisoId debe ser un número"
     })
 })
+
+
+export const noticiaShema = z.object({
+    titulo: z.string({
+            required_error: "El titulo es requerido",
+            invalid_type_error: "El titulo debe ser un texto"
+        }).min(1, "EL titulo debe tener minimo 5 caracteres")
+        .max(50, "el titulo es de maximo 100 caracteres"),
+    fecha: z.string({
+        required_error: "La fecha es requerida",
+        invalid_type_error: "La fecha debe ser un texto"
+    }).regex(/^\d{4}-\d{2}-\d{2}$/, {
+        message: "Fecha inválida, formato YYYY-MM-DD"
+    }),
+    encabezado: z.string({
+        required_error: "El encabezado es requerido",
+        invalid_type_error: "El encabezado debe ser un texto"
+    }).max(100, "El encabezado es muy extenso"),
+    descripcion: z.string({
+        required_error: "La descripcion es requerida",
+        invalid_type_error: "La descripcion debe ser un texto"
+    }).min(1, "La descripcion es requerida"),
+    imgPath: z.string({
+        required_error: "La imgPath es requerida",
+        invalid_type_error: "La imgPath debe ser un texto"
+    }),
+    estado: z.boolean({
+        invalid_type_error: "El estado es buleano",
+        required_error: "El estado es requerido"
+    }),
+    UsuarioId: z.number({
+        required_error: "El UsuarioId es requerido",
+        invalid_type_error:"UsuarioId es un número"
+    }).min(1, "El UsuarioId es requerido")
+});
+
+export const putNoticiaShema = z.object({
+    titulo: z.string({
+            required_error: "El titulo es requerido",
+            invalid_type_error: "El titulo debe ser un texto"
+        }).min(1, "EL titulo debe tener minimo 5 caracteres")
+        .max(50, "el titulo es de maximo 100 caracteres").optional(),
+    fecha: z.string({
+        required_error: "La fecha es requerida",
+        invalid_type_error: "La fecha debe ser un texto"
+    }).regex(/^\d{4}-\d{2}-\d{2}$/, {
+        message: "Fecha inválida, formato YYYY-MM-DD"
+    }).optional(),
+    encabezado: z.string({
+        required_error: "El encabezado es requerido",
+        invalid_type_error: "El encabezado debe ser un texto"
+    }).max(100, "El encabezado es muy extenso").optional(),
+    descripcion: z.string({
+        required_error: "La descripcion es requerida",
+        invalid_type_error: "La descripcion debe ser un texto"
+    }).min(1, "La descripcion es requerida").optional(),
+    imgPath: z.string({
+        required_error: "La imgPath es requerida",
+        invalid_type_error: "La imgPath debe ser un texto"
+    }).max(250).optional(),
+    estado: z.boolean({
+        invalid_type_error: "El estado es buleano",
+        required_error: "El estado es requerido"
+    }).optional(),
+    UsuarioId: z.number({
+        required_error: "El UsuarioId es requerido",
+        invalid_type_error:"UsuarioId es un número"
+    }).min(1, "El UsuarioId es requerido").optional()
+}).nullable();

@@ -88,7 +88,7 @@ CREATE TABLE noticias (
     estado BOOLEAN
 );
 
--- ! Tabla "links"
+-- * Tabla "links"
 CREATE TABLE links (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(70),
@@ -100,7 +100,7 @@ CREATE TABLE links (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ! Tabla "anuncios"
+-- ? Tabla "anuncios"
 CREATE TABLE anuncios (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(70),

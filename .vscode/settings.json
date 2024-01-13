@@ -6,5 +6,6 @@
         ".gitignore":true,
         "README.md":true,
         "package-lock.json":true
-    }
+    },
+    "mos.port": ""
 }

@@ -10,7 +10,7 @@ const DetallePermiso = sequelize.define('DetallePermiso',{
         autoIncrement: true
     }
 },{
-    timestamps:false,
+    createdAt:true,
     updatedAt:false
 })
 

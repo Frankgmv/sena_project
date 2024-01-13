@@ -7,6 +7,10 @@
         {
             "seccion":"Prueba 2",
             "seccionKey":"S_PRUEBA2"
+        },
+        {
+            "seccion":"Prueba 3",
+            "seccionKey":"S_PRUEBA3"
         }
     ]
 }

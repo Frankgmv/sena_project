@@ -1,57 +1,30 @@
-import Categoria from "../../models/data/categoria.js";
-import Link from "../../models/data/link.js";
-import Seccion from "../../models/data/seccion.js";
-import Usuario from "../../models/data/usuario.js";
+import Anuncio from "../../models/data/anuncio.js";
 
-
-export const postLinkService = (data) => {
+export const postAnucioService = (data) => {
     return new Promise(async (resolve, reject) => {
-        const {
-            UsuarioId,
-            SeccionId,
-            CategoriaId,
-            tipo
-        } = data
-
-        if (tipo !== "pdf" && tipo !== "blog") {
-            resolve({
-                ok: false,
-                message: "El tipo es invalido",
-                tipos: ["pdf", "blog"]
-            });
-        }
-
         try {
 
-            const existeUsuario = await Usuario.findByPk(UsuarioId);
-            const existeCategoria = await Categoria.findByPk(CategoriaId);
-            const existeSeccion = await Seccion.findByPk(SeccionId);
-
-
-            // Validar que las entidades existan
-            if (!existeUsuario || !existeCategoria || !existeSeccion) return resolve({
-                ok: false,
-                mensage: "Hubo un error con el Usuario, la Categoria o la Seccion",
-                pathError: ["CategoriaId", "UsuarioId", "SeccionId"]
-            })
-
-            // Crear Link
-            const nuevoLink = new Link(data)
-
-            // Guardar en db
-            const respuesta = await nuevoLink.save();
-
+            const existeTitulo = await Anuncio.findAll({ where:{ titulo: data.titulo } });
+            if(existeTitulo.length > 0){
+                resolve({
+                    ok:false,
+                    message:"Anuncio existente."
+                })
+            }
+            
+            const crearAnuncio = await Anuncio.create(data);
+            const response = await crearAnuncio.save();
             resolve({
-                ok: true,
-                message: `"${nuevoLink.titulo}" creado exitosamente`,
-                usuario: nuevoLink
+                ok:true,
+                message:"Anuncio creado.",
+                anuncio:response
             })
         } catch (error) {
             reject(error)
         }
     })
 }
-
+/*
 export const getAllLinksService = (tipo) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -153,3 +126,5 @@ export const deleteLinkService = (idLink) => {
         }
     })
 }
+
+*/ 

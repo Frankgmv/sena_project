@@ -45,3 +45,18 @@ export const notificacionSchema = z.object({
         invalid_type_error:'tipo de dato inválido'
     })
 })
+
+export const historialSchema = z.object({
+    cambio: z.string({
+        required_error: 'El nombre del cambio es obligatorio',
+        invalid_type_error: 'El tipo de dato es inválido'
+    }),
+    descripcion: z.string({
+        required_error: 'La descripcion del cambio es obligatoria',
+        invalid_type_error: 'El tipo de dato es inválido'
+    }),
+    UsuarioId:z.number({
+        required_error:"UsuarioId es requerido",
+        invalid_type_error:"UsuarioId es un número"
+    })
+})

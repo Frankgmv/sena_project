@@ -29,6 +29,7 @@ import seccionRouter from './data/seccion.routes.js';
 import tokenRouter from './data/token.routes.js';
 import usuarioRouter from './data/usuario.routes.js';
 import detallePermisoRouter from './data/detallePermiso.routes.js';
+import eventoRouter from './data/evento.routes.js';
 
 // * Rutas de validacion
 
@@ -57,6 +58,7 @@ router.use("/data",
     detallePermisoRouter,
     noticiaRouter,
     linkRouter,
+    eventoRouter,
     itemRouter,
     anuncioRouter,
     tokenRouter,

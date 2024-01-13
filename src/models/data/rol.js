@@ -33,7 +33,7 @@ const Rol = sequelize.define('Rol', {
 
 async function insertDefaultData(dataRoles) {
     try {
-        // await Rol.sync();
+        await Rol.sync();
         const hayRoles = await Rol.findAll();
         if (hayRoles.length === 0) {
             for (let rol of dataRoles) {
@@ -45,6 +45,6 @@ async function insertDefaultData(dataRoles) {
     }
 }
 
-insertDefaultData(dataRol.roles);
+// insertDefaultData(dataRol.roles);
 
 export default Rol

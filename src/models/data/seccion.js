@@ -28,7 +28,7 @@ const Seccion = sequelize.define('Secciones', {
 // funcion para insertar los datos de los Secciones por defecto.
 async function insertDefaultData(dataSecciones) {
     try {
-        // await Seccion.sync();
+        await Seccion.sync();
         const haySecciones = await Seccion.findAll();
         if (haySecciones.length === 0) {
             for (let seccion of dataSecciones) {
@@ -40,6 +40,6 @@ async function insertDefaultData(dataSecciones) {
     }
 }
 
-insertDefaultData(seccionesPorDefecto.secciones);
+// insertDefaultData(seccionesPorDefecto.secciones);
 
 export default Seccion

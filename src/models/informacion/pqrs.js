@@ -41,7 +41,7 @@ const Pqrs = sequelize.define('Pqrs', {
     }
 }, {
     freezeTableName: true,
-    timestamps: true,
+    createdAt:true,
     updatedAt:false
 })
 

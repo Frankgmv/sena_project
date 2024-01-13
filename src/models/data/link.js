@@ -29,7 +29,7 @@ const Link = sequelize.define('Link',{
     }
 },{
     tableName:"Links",
-    timestamps: true,
+    createdAt:true,
     updatedAt:false
 })  
 

@@ -100,7 +100,7 @@ CREATE TABLE links (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ? Tabla "anuncios"
+-- ?? pendiente Tabla "anuncios"
 CREATE TABLE anuncios (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(70),
@@ -111,7 +111,7 @@ CREATE TABLE anuncios (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ! Tabla "historial"
+-- * Tabla "historial"
 CREATE TABLE historial (
     id SERIAL PRIMARY KEY,
     fecha TIMESTAMP,
@@ -120,7 +120,7 @@ CREATE TABLE historial (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ! Tabla "tokens"
+-- ? Tabla "tokens"
 CREATE TABLE tokens (
     id SERIAL PRIMARY KEY,
     token VARCHAR(255),
@@ -138,7 +138,7 @@ CREATE TABLE archivos (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ! Tabla "eventos"
+-- * Tabla "eventos"
 CREATE TABLE eventos (
     id SERIAL PRIMARY KEY,
     nombre_evento VARCHAR(30),

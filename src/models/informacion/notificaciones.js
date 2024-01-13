@@ -16,9 +16,9 @@ const Notificacion = sequelize.define('Notificacion',{
         defaultValue: false
     }
 },{
-    timestamps: true,
-    updatedAt:false,
-    tableName:"Notificaciones"
+    tableName:"Notificaciones",
+    createdAt:true,
+    updatedAt:false
 })
 
 

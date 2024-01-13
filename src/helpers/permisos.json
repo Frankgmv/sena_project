@@ -1,6 +1,6 @@
 {
     "permisos": [{
-            "permiso": "SUPER_ADMIN",
+            "permiso": "SUPER ADMIN",
             "permisoKey": "P_ADMIN"
         },
         {

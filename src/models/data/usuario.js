@@ -44,7 +44,8 @@ const Usuario = sequelize.define('Usuario', {
     }
 },{
     tableName:"Usuarios",
-    timestamps:true
+    createdAt:true,
+    updatedAt:false
 })
 
 Rol.hasMany(Usuario)

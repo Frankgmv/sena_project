@@ -1,6 +1,7 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
 
-const Item = Sequelize.define('Items',{
+const Item = sequelize.define('Items',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
@@ -18,22 +19,13 @@ const Item = Sequelize.define('Items',{
         type:DataTypes.DATE,
         allowNulls: false
     },
-    iduser:{
-        type:DataTypes.DATE,
-        allowNulls: false,
-        references:{
-            model:'User',
-            key: 'id',
-        }
-    },
     estado:{
         type:DataTypes.BOOLEAN,
         allowNulls: false
     }
-})
-
-Item.createTable({
-    tableName:"Items"
+},{
+    tableName:"Items",
+    timestamps:true
 })
 
 export default Item

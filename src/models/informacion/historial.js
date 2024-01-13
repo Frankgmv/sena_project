@@ -1,31 +1,29 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import Usuario from '../data/usuario.js'
 
-const Historial = Sequelize.define('Historial',{
+const Historial = sequelize.define('Historial',{
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
+        primaryKey:true,
         autoIncrement: true,
-    },
-    fecha:{
-        type: DataTypes.DATE,
-        allowNulls: false,
     },
     cambio:{
         type:DataTypes.STRING,
         allowNulls: false
     },
-    descipcion:{
+    descripcion:{
         type:DataTypes.STRING,
         allowNulls: false
-    },
-    idUsuario:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'user',
-            key: 'id',
-        }
-    },
+    }
+},{
+    freezeTableName:true,
+    createdAt:true,
+    updatedAt:false
 })
 
+Usuario.hasMany(Historial, {foreignKey:"UsuarioId"});
+Historial.belongsTo(Usuario);
 
 export default Historial

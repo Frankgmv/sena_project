@@ -23,13 +23,15 @@ const Permiso = sequelize.define("Permiso", {
         allowNulls: false,
     }
 }, {
-    timestmps: true
+    // tableName:"Permisos",
+    createdAt:true,
+    updatedAt:false
 })
 
 // funcion para insertar los datos de los permisos por defecto.
 async function insertDefaultData(Permisos) {
     try {
-        // await Permiso.sync();
+        await Permiso.sync();
         const hayPermisos = await Permiso.findAll();
         if (hayPermisos.length === 0) {
             for (let permiso of Permisos) {
@@ -41,6 +43,6 @@ async function insertDefaultData(Permisos) {
     }
 }
 
-insertDefaultData(permisosPorDefecto.permisos);
+// insertDefaultData(permisosPorDefecto.permisos);
 
 export default Permiso

@@ -35,8 +35,8 @@ const Noticia = sequelize.define('Noticia',{
         defaultValue:true
     }
 },{
-    timestamps:true,
     tableName: "Noticias",
+    createdAt:true,
     updatedAt:false
 })
 

@@ -1,5 +1,7 @@
 import z from "zod"
-import { verificarHttpUrl } from "../helpers/includes.js";
+import {
+    verificarHttpUrl
+} from "../helpers/includes.js";
 
 export const permisoSchema = z.object({
     permiso: z.string({
@@ -157,7 +159,7 @@ export const noticiaShema = z.object({
     }),
     UsuarioId: z.number({
         required_error: "El UsuarioId es requerido",
-        invalid_type_error:"UsuarioId es un número"
+        invalid_type_error: "UsuarioId es un número"
     }).min(1, "El UsuarioId es requerido")
 });
 
@@ -191,70 +193,189 @@ export const putNoticiaShema = z.object({
     }).optional(),
     UsuarioId: z.number({
         required_error: "El UsuarioId es requerido",
-        invalid_type_error:"UsuarioId es un número"
+        invalid_type_error: "UsuarioId es un número"
     }).min(1, "El UsuarioId es requerido").optional()
 }).nullable();
 
 export const linkSchema = z.object({
     titulo: z.string({
-        required_error:"titulo requerido",
-        invalid_type_error:"Titulo debe ser texto"
+        required_error: "titulo requerido",
+        invalid_type_error: "Titulo debe ser texto"
     }).max(30, "Titulo muy largo (30 máximo)").min(5, "Titulo muy corto (5 mín)"),
-    link:z.string({
-        required_error:"Link requerido",
-        invalid_type_error:"Link debe ser URL - Link"
+    link: z.string({
+        required_error: "Link requerido",
+        invalid_type_error: "Link debe ser URL - Link"
     }).refine(verificarHttpUrl, {
-        message:"La url debe contener http:// o https://"
-      }),
-    descripcion:z.string({
-        invalid_type_error:"la descripcion debe ser un texto"
+        message: "La url debe contener http:// o https://"
+    }),
+    descripcion: z.string({
+        invalid_type_error: "la descripcion debe ser un texto"
     }).max(255, "Descripcion muy larga (250 máx)").optional(),
-    tipo:z.string({
-        required_error:"El tipo es pdf 0 blog",
-        invalid_type_error:"tipo debe ser texto"
+    tipo: z.string({
+        required_error: "El tipo es pdf 0 blog",
+        invalid_type_error: "tipo debe ser texto"
     }).max(6, "Tipo muy largo (6 máx) "),
-    UsuarioId:z.number({
-        required_error:"UsuarioId requerido",
-        invalid_type_error:"UsuarioId es un número"
+    UsuarioId: z.number({
+        required_error: "UsuarioId requerido",
+        invalid_type_error: "UsuarioId es un número"
     }),
-    SeccionId:z.number({
-        required_error:"SeccionId requerido",
-        invalid_type_error:"SeccionId es un número"
+    SeccionId: z.number({
+        required_error: "SeccionId requerido",
+        invalid_type_error: "SeccionId es un número"
     }),
-    CategoriaId:z.number({
-        required_error:"CategoriaId requerido",
-        invalid_type_error:"CategoriaId es un número"
+    CategoriaId: z.number({
+        required_error: "CategoriaId requerido",
+        invalid_type_error: "CategoriaId es un número"
     })
 })
 
 export const putLinkSchema = z.object({
     titulo: z.string({
-        required_error:"titulo requerido",
-        invalid_type_error:"Titulo debe ser texto"
+        required_error: "titulo requerido",
+        invalid_type_error: "Titulo debe ser texto"
     }).max(30, "Titulo muy largo (30 máximo)").min(5, "Titulo muy corto (5 mín)").optional(),
-    link:z.string({
-        required_error:"Link requerido",
-        invalid_type_error:"Link debe ser URL - Link"
+    link: z.string({
+        required_error: "Link requerido",
+        invalid_type_error: "Link debe ser URL - Link"
     }).refine(verificarHttpUrl, {
-        message:"La url debe contener http:// o https://"
-      }).optional(),
-    descripcion:z.string({
-        invalid_type_error:"la descripcion debe ser un texto"
+        message: "La url debe contener http:// o https://"
+    }).optional(),
+    descripcion: z.string({
+        invalid_type_error: "la descripcion debe ser un texto"
     }).max(255, "Descripcion muy larga (250 máx)").optional(),
-    tipo:z.string({
-        required_error:"El tipo es pdf 0 blog",
-        invalid_type_error:"tipo debe ser texto"
+    tipo: z.string({
+        required_error: "El tipo es pdf 0 blog",
+        invalid_type_error: "tipo debe ser texto"
     }).max(6, "Tipo muy largo (6 máx) ").optional(),
-    UsuarioId:z.number({
-        required_error:"UsuarioId requerido",
-        invalid_type_error:"UsuarioId es un número"
+    UsuarioId: z.number({
+        required_error: "UsuarioId requerido",
+        invalid_type_error: "UsuarioId es un número"
     }).optional(),
-    SeccionId:z.number({
-        required_error:"SeccionId requerido",
-        invalid_type_error:"SeccionId es un número"
+    SeccionId: z.number({
+        required_error: "SeccionId requerido",
+        invalid_type_error: "SeccionId es un número"
     }).optional(),
-    CategoriaId:z.number({
-        required_error:"CategoriaId requerido",
-        invalid_type_error:"CategoriaId es un número"
+    CategoriaId: z.number({
+        required_error: "CategoriaId requerido",
+        invalid_type_error: "CategoriaId es un número"
+    }).optional()
+}).nullable()
+
+export const anuncioSchema = z.object({
+    titulo: z.string({
+        required_error: "titulo requerido",
+        invalid_type_error: "Titulo debe ser texto"
+    }).max(200, "Titulo muy largo (200 máximo)").min(5, "Titulo muy corto (5 mín)"),
+    imgPath: z.string({
+        required_error: "Link requerido",
+        invalid_type_error: "Link debe ser URL - Link"
+    }).optional(),
+    descripcion: z.string({
+        invalid_type_error: "la descripcion debe ser un texto"
+    }).max(1200),
+    UsuarioId: z.number({
+        required_error: "UsuarioId requerido",
+        invalid_type_error: "UsuarioId es un número"
+    }),
+    SeccionId: z.number({
+        required_error: "SeccionId requerido",
+        invalid_type_error: "SeccionId es un número"
+    })
+})
+
+export const putAnuncioSchema = z.object({
+    titulo: z.string({
+        required_error: "titulo requerido",
+        invalid_type_error: "Titulo debe ser texto"
+    }).max(100, "Titulo muy largo (100 máximo)").min(5, "Titulo muy corto (5 mín)").optional(),
+    imgPath: z.string({
+        required_error: "Link requerido",
+        invalid_type_error: "Link debe ser URL - Link"
+    }).optional(),
+    descripcion: z.string({
+        invalid_type_error: "la descripcion debe ser un texto"
+    }).max(1200).optional(),
+    UsuarioId: z.number({
+        required_error: "UsuarioId requerido",
+        invalid_type_error: "UsuarioId es un número"
+    }).optional(),
+    SeccionId: z.number({
+        required_error: "SeccionId requerido",
+        invalid_type_error: "SeccionId es un número"
+    }).optional()
+}).nullable()
+
+
+export const eventoSchema = z.object({
+    evento: z.string({
+            required_error: "Nombre del evento requerido",
+            invalid_type_error: "El nombre debe ser un texto"
+        })
+        .max(70, "Nombre largo (70 máx)").min(5, "Nombre muy corto (5 mín)"),
+
+    fecha: z.string({
+        required_error: "La fecha es requerida",
+        invalid_type_error: "La fecha debe ser un texto"
+    }).regex(/^\d{4}-\d{2}-\d{2}$/, {
+        message: "Fecha inválida, formato YYYY-MM-DD"
+    }),
+});
+
+export const putEventoSchema = z.object({
+    evento: z.string({
+        required_error: "Nombre del evento requerido",
+        invalid_type_error: "El nombre debe ser un texto"
+    }).max(70, "Nombre largo (70 máx)").min(5, "Nombre muy corto (5 mín)").optional(),
+    fecha: z.string({
+        required_error: "La fecha es requerida",
+        invalid_type_error: "La fecha debe ser un texto"
+    }).regex(/^\d{4}-\d{2}-\d{2}$/, {
+        message: "Fecha inválida, formato YYYY-MM-DD"
+    }).optional(),
+}).nullable()
+
+export const tokenSchema = z.object({
+    token: z.string({
+        required_error: "El token es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    }),
+    nombre: z.string({
+        required_error: "El nombre del token es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    }),
+    tokenKey: z.string({
+        required_error: "El Token Key es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    }),
+    tiempo: z.string({
+        required_error: "El tiempo del token es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    }),
+    UsuarioId: z.number({
+        required_error: "El id del usuario es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    })
+})
+
+export const putTokenSchema = z.object({
+    token: z.string({
+        required_error: "El token es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    }).optional(),
+    nombre: z.string({
+        required_error: "El nombre del token es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    }).optional(),
+    tokenKey: z.string({
+        required_error: "El Token Key es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    }).optional(),
+    tiempo: z.string({
+        required_error: "El tiempo del token es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
+    }).optional(),
+    UsuarioId: z.number({
+        required_error: "El id del usuario es obligatorio",
+        invalid_type_error: "El tipo de dato es invalido"
     }).optional()
 }).nullable()

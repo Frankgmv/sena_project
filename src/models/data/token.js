@@ -5,6 +5,7 @@ import {
     sequelize
 } from '../../conection.js';
 import Usuario from './usuario.js';
+import { token } from 'morgan';
 
 const Token = sequelize.define('Token', {
     id: {
@@ -15,20 +16,20 @@ const Token = sequelize.define('Token', {
     },
     nombre: {
         type: DataTypes.STRING,
-        allowNulls: true
+        allowNulls: false
     },
     token: {
         type: DataTypes.TEXT,
-        allowNulls: true
+        allowNulls: false
     },
     tokenKey: {
         type: DataTypes.STRING,
-        allowNulls: true,
+        allowNulls: false,
         unique: true
     },
     tiempo: {
-        type: DataTypes.TEXT,
-        allowNulls: true
+        type: DataTypes.STRING,
+        allowNulls: false
     }
 }, {
     tableName: "Tokens",
@@ -38,5 +39,5 @@ const Token = sequelize.define('Token', {
 
 Usuario.hasMany(Token, {primaryKey:"UsuarioId"});
 Token.belongsTo(Usuario, {primaryKey:"UsuarioId"});
-// Token.sync({force:true})
+
 export default Token;

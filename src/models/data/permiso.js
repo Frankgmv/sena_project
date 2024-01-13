@@ -43,6 +43,6 @@ async function insertDefaultData(Permisos) {
     }
 }
 
-// insertDefaultData(permisosPorDefecto.permisos);
+insertDefaultData(permisosPorDefecto.permisos);
 
 export default Permiso

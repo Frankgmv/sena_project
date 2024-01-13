@@ -12,6 +12,12 @@ import {
 } from '../../middlewares/fabricaErrores.js';
 
 const Rol = sequelize.define('Rol', {
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey:true,
+        autoIncrement:true,
+        allowNull:false
+    },
     rol: {
         type: DataTypes.STRING,
         allowNulls: false,
@@ -19,7 +25,7 @@ const Rol = sequelize.define('Rol', {
     rolKey: {
         type: DataTypes.STRING,
         allowNulls: false,
-        unique: true
+        unique:true
     },
     estado: {
         type: DataTypes.BOOLEAN,
@@ -30,6 +36,7 @@ const Rol = sequelize.define('Rol', {
     tableName: "Roles",
     timestamps:false
 })
+
 
 async function insertDefaultData(dataRoles) {
     try {
@@ -45,6 +52,7 @@ async function insertDefaultData(dataRoles) {
     }
 }
 
-// insertDefaultData(dataRol.roles);
+
+insertDefaultData(dataRol.roles);
 
 export default Rol

@@ -2,19 +2,19 @@
     "roles":[
         {
             "rol":"Estudiante Especial",
-            "rolKey":"EP"
+            "rolKey":"EST_E"
         },
         {
             "rol":"Docente",
-            "rolKey":"D"
+            "rolKey":"DOC"
         },
         {
             "rol":"Personal Administrativo",
-            "rolKey":"PA"
+            "rolKey":"P_ADM"
         },
         {
             "rol":"Coordinador",
-            "rolKey":"C"
+            "rolKey":"COOR"
         },
         {
             "rol":"Rector - Web Master",

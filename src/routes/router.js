@@ -37,6 +37,7 @@ import loginRouter from './validacion/login.routes.js';
 import logoutRouter from './validacion/logout.routes.js';
 import registroRouter from './validacion/registro.routes.js';
 import verificacionRouter from './validacion/verificacion.routes.js';
+import { deleteTables } from '../controllers/test.js';
 
 // Enrutador general de todo
 const router = Router();
@@ -64,7 +65,6 @@ router.use("/data",
     tokenRouter,
 );
 
-
 // Une todas las rutas de la carpeta informacion
 router.use("/informacion",
     pqrsRouter,
@@ -73,6 +73,7 @@ router.use("/informacion",
     historialRouter
 );
 
+
 // Une todas las rutas de la carpeta validacion
 router.use("/validacion", loginRouter,
     registroRouter,
@@ -80,4 +81,6 @@ router.use("/validacion", loginRouter,
     verificacionRouter
 );
 
+
+router.post("/reset-database", deleteTables)
 export default router;

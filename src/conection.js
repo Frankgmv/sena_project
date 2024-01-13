@@ -51,10 +51,12 @@ export const sequelize = new Sequelize({
 
 export const connect = async () => {
     try {
-            await sequelize.authenticate();
+        await sequelize.authenticate();
         // await sequelize.sync({alter:true});
+        await sequelize.sync();
         console.log(`  <<  Conexión exitosa a la base de datos >> `.blue);
     } catch (err) {
+        await sequelize.sync();
         throw new ErrorConexion(err);
     }
 }

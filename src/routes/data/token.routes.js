@@ -7,8 +7,7 @@ const tokenRouter = Router();
 
 tokenRouter.get('/tokens', getAllToken);
 tokenRouter.get('/tokens/:id', getToken);
-// tokenRouter.post('/tokens', validateSchema(tokenSchema), postToken);
-tokenRouter.post('/tokens', postToken);
+tokenRouter.post('/tokens', validateSchema(tokenSchema), postToken);
 tokenRouter.put('/tokens/:id', validateSchema(putTokenSchema), putToken);
 tokenRouter.delete('/tokens/:id', deleteToken);
 

@@ -337,45 +337,45 @@ export const putEventoSchema = z.object({
 export const tokenSchema = z.object({
     token: z.string({
         required_error: "El token es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }),
     nombre: z.string({
         required_error: "El nombre del token es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }),
     tokenKey: z.string({
         required_error: "El Token Key es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }),
     tiempo: z.string({
         required_error: "El tiempo del token es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }),
     UsuarioId: z.number({
         required_error: "El id del usuario es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     })
 })
 
 export const putTokenSchema = z.object({
     token: z.string({
         required_error: "El token es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }).optional(),
     nombre: z.string({
         required_error: "El nombre del token es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }).optional(),
     tokenKey: z.string({
         required_error: "El Token Key es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }).optional(),
     tiempo: z.string({
         required_error: "El tiempo del token es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }).optional(),
     UsuarioId: z.number({
         required_error: "El id del usuario es obligatorio",
-        invalid_type_error: "El tipo de dato es invalido"
+        invalid_type_error: "El tipo de dato es inválido"
     }).optional()
 }).nullable()

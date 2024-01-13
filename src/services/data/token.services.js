@@ -1,5 +1,8 @@
-import { Op } from "sequelize";
+import {
+    Op
+} from "sequelize";
 import Token from "../../models/data/token.js";
+import Usuario from "../../models/data/usuario.js";
 
 export const postTokenService = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -19,6 +22,14 @@ export const postTokenService = (data) => {
                     message: "TokenKey o nombre ya usados."
                 })
             }
+
+            const existeUsuario = await Usuario.findByPk(data.UsuarioId);
+
+            if (!existeUsuario) return resolve({
+                ok: false,
+                message: "usuario no existe."
+            })
+
 
             const guardarToken = new Token(data);
             const resp = await guardarToken.save();
@@ -75,14 +86,13 @@ export const getTokenService = (idToken) => {
 export const putTokenService = (idToken, data) => {
     return new Promise(async (resolve, reject) => {
         try {
+
             const encontrarToken = await Token.findByPk(idToken)
 
-            if (!encontrarToken) {
-                resolve({
-                    ok: false,
-                    message: "Token no encontrado."
-                })
-            }
+            if (!encontrarToken) return resolve({
+                ok: false,
+                message: "Token no encontrado."
+            })
 
             const actualizarToken = await encontrarToken.update(data);
             const resp = await actualizarToken.save();
@@ -92,6 +102,7 @@ export const putTokenService = (idToken, data) => {
                 message: "Token actualizado.",
                 token: resp
             })
+
         } catch (error) {
             reject(error);
         }
@@ -113,7 +124,7 @@ export const deleteTokenService = (idToken) => {
                 ok: true,
                 message: "Token Eliminado."
             })
-            
+
         } catch (error) {
             reject(error);
         }

@@ -1,13 +1,13 @@
 import {
     Sequelize
-} from "sequelize";
+} from 'sequelize'
 import {
     config
-} from "dotenv";
-import "colors";
+} from 'dotenv'
+import 'colors'
 import {
     ErrorConexion
-} from "./middlewares/fabricaErrores.js";
+} from './middlewares/fabricaErrores.js'
 
 config()
 
@@ -21,7 +21,7 @@ const {
 
 // ? conección a la base de datos Postgres
 
-Sequelize.DEBUG = true;
+Sequelize.DEBUG = true
 
 export const sequelize = new Sequelize({
     host: DB_HOST,
@@ -30,9 +30,9 @@ export const sequelize = new Sequelize({
     password: DB_PASSWORD,
     port: DB_PORT,
     username: DB_USER
-});
+})
 
-/* 
+/*
 //* Conexión para la db cuando se despliegue en remoto
  const sequelize = new Sequelize(process.env.DB_STRING_CONNECT_CLOUD, {
      dialect: 'postgres',
@@ -48,17 +48,16 @@ export const sequelize = new Sequelize({
 
 // ? función para verifica la conexión
 
-
 export const connect = async () => {
     try {
-        await sequelize.authenticate();
+        await sequelize.authenticate()
         // await sequelize.sync({alter:true});
-        await sequelize.sync();
-        console.log(`  <<  Conexión exitosa a la base de datos >> `.blue);
+        await sequelize.sync()
+        console.log(`  <<  Conexión exitosa a la base de datos >> `.blue)
     } catch (err) {
-        await sequelize.sync();
-        throw new ErrorConexion(err);
+        await sequelize.sync({alter:true})
+        throw new ErrorConexion(err)
     }
 }
 
-connect();
+connect()

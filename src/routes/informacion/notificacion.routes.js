@@ -1,6 +1,6 @@
 import {
     Router
-} from 'express';
+} from 'express'
 
 import {
     deleteAllNotificaciones,
@@ -9,30 +9,30 @@ import {
     getNotificaciones,
     postNotificacion,
     putNotificacion
-} from "../../controllers/informacion/notificacion.controller.js";
-import validateSchema from "../../middlewares/validarSchemas.js";
+} from '../../controllers/informacion/notificacion.controller.js'
+import { validateSchema } from '../../middlewares/validarSchemas.js'
 import {
     notificacionSchema
-} from "../../schemas/informacionSchemas.js";
+} from '../../schemas/informacionSchemas.js'
 
-const notificacionRouter = Router();
+const notificacionRouter = Router()
 
-//? Obtener todas las notificaciones
-notificacionRouter.get('/notificaciones', getAllNotificaciones);
+// ? Obtener todas las notificaciones
+notificacionRouter.get('/notificaciones', getAllNotificaciones)
 
-//? Obtener notificaciones
-notificacionRouter.get('/notificaciones/:id', getNotificaciones);
+// ? Obtener notificaciones
+notificacionRouter.get('/notificaciones/:id', getNotificaciones)
 
-//? Publicar y validar notificaciones
-notificacionRouter.post('/notificaciones', validateSchema(notificacionSchema), postNotificacion);
+// ? Publicar y validar notificaciones
+notificacionRouter.post('/notificaciones', validateSchema(notificacionSchema), postNotificacion)
 
-//? Actualizar notificaciones
-notificacionRouter.put('/notificaciones/:id', putNotificacion);
+// ? Actualizar notificaciones
+notificacionRouter.put('/notificaciones/:id', putNotificacion)
 
-//? Eliminar notificaciones
-notificacionRouter.delete('/notificaciones/:id', deleteNotificacion);
+// ? Eliminar notificaciones
+notificacionRouter.delete('/notificaciones/:id', deleteNotificacion)
 
-//? Eliminar todas las notificaciones leídas
-notificacionRouter.delete('/notificaciones-delete-all', deleteAllNotificaciones);
+// ? Eliminar todas las notificaciones leídas
+notificacionRouter.delete('/notificaciones-delete-all', deleteAllNotificaciones)
 
-export default notificacionRouter;
+export default notificacionRouter

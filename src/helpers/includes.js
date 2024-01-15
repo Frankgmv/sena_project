@@ -1,19 +1,18 @@
 import multer from "multer";
-import path, { } from "path"
+import path, { dirname} from "path";
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
-    destination: path.join(__dirname, '/src/upload/'),
+    destination: path.join(__dirname, '../upload/'),
     filename: (req, file, cb) => {
         let formato = file.mimetype.split('/');
         const llaveUnica = `${Date.now()}-${Math.round(Math.random() * 1E9)}`;
         cb(null, `${file.fieldname}-${llaveUnica}.${formato[formato.length - 1]}`);
     }
-});
+    });
 
 const fileFilter = (req, file, cb) => {
     
@@ -22,12 +21,17 @@ const fileFilter = (req, file, cb) => {
     } else {
       cb(new Error('Tipo de archivo no permitido'), false);
     }
-  };
+};
 
+const mime = {
+    allowTypes:['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
+    max: 1024 * 1024 * 10
+}
+
+const stargeStrategy = multer.memoryStorage()
 
 export const upload = multer({
-    storage,
-    fileFilter,
+    storage: stargeStrategy
 })
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;

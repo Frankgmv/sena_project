@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import validateSchema from '../../middlewares/validarSchemas.js'
+import {  validateSchema } from '../../middlewares/validarSchemas.js'
 import { tokenSchema, putTokenSchema } from '../../schemas/dataSchemas.js'
 import { postToken, getAllToken, getToken, putToken, deleteToken} from '../../controllers/data/token.controller.js'
 

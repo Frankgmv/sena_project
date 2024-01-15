@@ -30,9 +30,7 @@ async function insertDefaultData(dataCategorias) {
         await Categoria.sync();
         const haycategorias = await Categoria.findAll();
         if (haycategorias.length === 0) {
-            for (let categoria of dataCategorias) {
-                await Categoria.create(categoria);
-            }
+            await Categoria.bulkCreate(dataCategorias);
         }
     } catch (error) {
         throw new ErrorCategoria(error)

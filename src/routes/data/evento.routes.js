@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import validateSchema from '../../middlewares/validarSchemas.js';
+import {  validateSchema } from '../../middlewares/validarSchemas.js';
 import { eventoSchema, putEventoSchema } from '../../schemas/dataSchemas.js';
 import { deleteEvento, getAllEventos, getEvento, postEvento, putEvento } from '../../controllers/data/evento.controller.js';
 

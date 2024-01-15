@@ -31,9 +31,7 @@ async function insertDefaultData(dataSecciones) {
         await Seccion.sync();
         const haySecciones = await Seccion.findAll();
         if (haySecciones.length === 0) {
-            for (let seccion of dataSecciones) {
-                await Seccion.create(seccion);
-            }
+            await Seccion.bulkCreate(dataSecciones);
         }
     } catch (error) {
         throw new ErrorSeccion(error)

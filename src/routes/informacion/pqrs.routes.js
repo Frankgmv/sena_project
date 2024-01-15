@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { deleteAllPqrs, deletePqrs, getAllPqrs, getPqrs, postPqrs, putPqrs} from "../../controllers/informacion/pqrs.controller.js";
-import validateSchema from "../../middlewares/validarSchemas.js";
+import {  validateSchema } from "../../middlewares/validarSchemas.js";
 import { pqrsSchema } from "../../schemas/informacionSchemas.js";
 
 const pqrsRouter = Router();

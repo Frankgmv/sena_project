@@ -1,58 +1,63 @@
 import {
     DataTypes
 } from 'sequelize'
-
 import {
     sequelize
 } from '../../conection.js';
+import "colors";
+import rolesPorDefecto from "../../helpers/roles.json" assert {type: "json" };
 
-import dataRol from "../../helpers/roles.json" assert { type: "json"};
 import {
     ErrorRol
 } from '../../middlewares/fabricaErrores.js';
 
 const Rol = sequelize.define('Rol', {
-    id:{
-        type: DataTypes.INTEGER,
-        primaryKey:true,
-        autoIncrement:true,
-        allowNull:false
-    },
     rol: {
         type: DataTypes.STRING,
         allowNulls: false,
+        primaryKey:true,
+        autoIncrement:false
     },
     rolKey: {
         type: DataTypes.STRING,
-        allowNulls: false,
-        unique:true
+        allowNulls: false
     },
     estado: {
         type: DataTypes.BOOLEAN,
-        allowNulls: false,
-        defaultValue: true
+        allowNulls: false
     }
 }, {
     tableName: "Roles",
-    timestamps:false
+    timestamps: false
 })
 
 
-async function insertDefaultData(dataRoles) {
-    try {
-        await Rol.sync();
-        const hayRoles = await Rol.findAll();
-        if (hayRoles.length === 0) {
-            for (let rol of dataRoles) {
-                await Rol.create(rol);
+function insertDefaultData(dataRoles) {
+    return new Promise(async () => {
+        try {
+            await Rol.sync();
+            const hayRoles = await Rol.findAll();
+
+            if (hayRoles.length == 0) {
+                for (let rol of dataRoles) {
+                    console.log(`${JSON.stringify(rol)}`.blue);
+                    await Rol.create(rol)
+                }
             }
+        } catch (error) {
+            throw new ErrorRol(error);
         }
+    });
+}
+
+const callData = async () => {
+    try {
+        await insertDefaultData(rolesPorDefecto.roles);
     } catch (error) {
-        throw new ErrorRol(error)
+        throw new ErrorRol(error);
     }
 }
 
-
-insertDefaultData(dataRol.roles);
+callData();
 
 export default Rol

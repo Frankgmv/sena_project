@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import validateSchema from '../../middlewares/validarSchemas.js';
+import {  validateSchema } from '../../middlewares/validarSchemas.js';
 import { rolSchema } from '../../schemas/dataSchemas.js';
 import { getRol, getRoles, putRol } from '../../controllers/data/rol.controller.js';
 

@@ -120,7 +120,7 @@ CREATE TABLE historial (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ? Tabla "tokens"
+-- * Tabla "tokens"
 CREATE TABLE tokens (
     id SERIAL PRIMARY KEY,
     token VARCHAR(255),

@@ -38,6 +38,6 @@ async function insertDefaultData(dataSecciones) {
     }
 }
 
-insertDefaultData(seccionesPorDefecto.secciones);
+// insertDefaultData(seccionesPorDefecto.secciones);
 
 export default Seccion

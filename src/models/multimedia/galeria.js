@@ -7,15 +7,15 @@ const Galeria = Sequelize.define('Galeria', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
-        autoIncrement: true,
+        autoIncrement: true
     },
     fecha: {
         type: DataTypes.DATE,
-        allowNulls: false,
+        allowNulls: false
     },
     nombreEvento: {
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     imgPath: {
         type: DataTypes.STRING,
@@ -25,17 +25,16 @@ const Galeria = Sequelize.define('Galeria', {
         type: DataTypes.INTEGER,
         references: {
             model: 'user',
-            key: 'id',
+            key: 'id'
         }
     },
     idEvento: {
         type: DataTypes.INTEGER,
         references: {
             model: 'evento',
-            key: 'id',
+            key: 'id'
         }
-    },
+    }
 })
-
 
 export default Galeria

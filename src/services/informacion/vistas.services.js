@@ -1,55 +1,55 @@
-import Vistas from "../../models/informacion/vistas.js";
+import Vistas from '../../models/informacion/vistas.js'
 
 export const postVistasService = (Vistadata) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const obtenerVisualizacion = await Vistas.findAll();
+            const obtenerVisualizacion = await Vistas.findAll()
 
             if (obtenerVisualizacion.length !== 0) {
                 resolve({
                     ok: false
                 })
             } else {
-                const createVistas = await Vistas.create(Vistadata);
-                await createVistas.save();
+                const createVistas = await Vistas.create(Vistadata)
+                await createVistas.save()
                 resolve({
                     ok: true,
-                    message: "Visualización registrada",
+                    message: 'Visualización registrada',
                     vistas: createVistas
-                });
+                })
             }
         } catch (err) {
             reject(err)
         }
-    });
+    })
 }
 
 export const getVistasService = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const obtenerVisualizacion = await Vistas.findAll({
-                order: ["id"]
-            }); 
-            if (obtenerVisualizacion.length === 0) return resolve({
+                order: ['id']
+            })
+            if (obtenerVisualizacion.length === 0) {
+ return resolve({
                 ok:false,
-                message: "No se encontró ningún dato",
+                message: 'No se encontró ningún dato',
                 vistas:obtenerVisualizacion
-            });
+            })
+}
 
             resolve({
                 ok: true,
-                message: "Visualizaciones encontradas",
+                message: 'Visualizaciones encontradas',
                 vistas: obtenerVisualizacion
-            });
-
+            })
         } catch (err) {
             reject(err)
         }
-    });
+    })
 }
 
 export const putVistasService = () => {
-
     // ! hacer una de reinicio para el día y el mes
     // TODO const fecha = new Date();
     // const fechaReinicio = new Date();
@@ -57,31 +57,32 @@ export const putVistasService = () => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            let obtenerVisualizacion = await Vistas.findAll();
+            let obtenerVisualizacion = await Vistas.findAll()
 
-            if(obtenerVisualizacion.length === 0) return resolve({
+            if (obtenerVisualizacion.length === 0) {
+ return resolve({
                 ok:false,
-                message: "No se encontró ningún dato para actualizar",
+                message: 'No se encontró ningún dato para actualizar',
                 vistas:obtenerVisualizacion
             })
+}
 
-            obtenerVisualizacion = obtenerVisualizacion[0].dataValues;
-            const dataVisual = await Vistas.findByPk(obtenerVisualizacion.id);
+            obtenerVisualizacion = obtenerVisualizacion[0].dataValues
+            const dataVisual = await Vistas.findByPk(obtenerVisualizacion.id)
 
             const dataUpdate = {
-                "vistasTotales": dataVisual["vistasTotales"] + 1,
-                "vistasMes": dataVisual["vistasMes"] + 1,
-                "vistasDia": dataVisual["vistasDia"] + 1
+                'vistasTotales': dataVisual['vistasTotales'] + 1,
+                'vistasMes': dataVisual['vistasMes'] + 1,
+                'vistasDia': dataVisual['vistasDia'] + 1
             }
 
-            await dataVisual.update(dataUpdate);
+            await dataVisual.update(dataUpdate)
 
             resolve({
                 ok:true,
-                message: "visualización existe, fue actualizada",
+                message: 'visualización existe, fue actualizada',
                 vistas: dataVisual
-            });
-
+            })
         } catch (error) {
             reject(error)
         }
@@ -91,15 +92,15 @@ export const putVistasService = () => {
 export const deleteVistasService = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let obtenerVisualizacion = await Vistas.findAll();
+            let obtenerVisualizacion = await Vistas.findAll()
 
             for (let vista of obtenerVisualizacion) {
-                await vista.destroy();
+                await vista.destroy()
             }
             resolve({
                 ok:true,
-                estadoVistas: "eliminadas",
-                message: "Vistas eliminadas",
+                estadoVistas: 'eliminadas',
+                message: 'Vistas eliminadas',
                 vistas: obtenerVisualizacion
             })
         } catch (error) {

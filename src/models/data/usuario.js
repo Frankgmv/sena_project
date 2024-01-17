@@ -14,15 +14,15 @@ const Usuario = sequelize.define('Usuario', {
     },
     nombre: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     apellido: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     fechaNacimiento: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
     },
     correo: {
         type: DataTypes.TEXT,
@@ -31,24 +31,24 @@ const Usuario = sequelize.define('Usuario', {
     },
     celular: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     estado: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue:false
     }
-},{
-    tableName:"Usuarios",
+}, {
+    tableName:'Usuarios',
     createdAt:true,
     updatedAt:false
 })
 
 Rol.hasMany(Usuario)
-Usuario.belongsTo(Rol);
+Usuario.belongsTo(Rol)
 
 export default Usuario

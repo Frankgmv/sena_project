@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { Router } from 'express'
+import { test } from '../../controllers/test.js'
 
-const verificacionRouter = Router();
+const verificacionRouter = Router()
 
-verificacionRouter.get('/verificacion', test);
+verificacionRouter.get('/verificacion', test)
 
-export default verificacionRouter;
+export default verificacionRouter

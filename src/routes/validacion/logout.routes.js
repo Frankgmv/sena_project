@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { Router } from 'express'
+import { test } from '../../controllers/test.js'
 
-const logoutRouter = Router();
+const logoutRouter = Router()
 
-logoutRouter.post('/logout', test);
+logoutRouter.post('/logout', test)
 
-export default logoutRouter;
+export default logoutRouter

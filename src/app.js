@@ -1,6 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import rutas from './helpers/rutasGuia.json' assert { type: "json" }
+
 import manejadorErrores from './middlewares/manejadorErrores.js'
 import routesGeneral from './routes/router.js'
 const app = express()

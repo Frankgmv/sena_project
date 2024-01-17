@@ -1,22 +1,21 @@
-import Anuncio from "../../models/data/anuncio.js";
+import Anuncio from '../../models/data/anuncio.js'
 
 export const postAnucioService = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-
-            const existeTitulo = await Anuncio.findAll({ where:{ titulo: data.titulo } });
-            if(existeTitulo.length > 0){
+            const existeTitulo = await Anuncio.findAll({ where:{ titulo: data.titulo } })
+            if (existeTitulo.length > 0) {
                 resolve({
                     ok:false,
-                    message:"Anuncio existente."
+                    message:'Anuncio existente.'
                 })
             }
-            
-            const crearAnuncio = await Anuncio.create(data);
-            const response = await crearAnuncio.save();
+
+            const crearAnuncio = await Anuncio.create(data)
+            const response = await crearAnuncio.save()
             resolve({
                 ok:true,
-                message:"Anuncio creado.",
+                message:'Anuncio creado.',
                 anuncio:response
             })
         } catch (error) {
@@ -127,4 +126,4 @@ export const deleteLinkService = (idLink) => {
     })
 }
 
-*/ 
+*/

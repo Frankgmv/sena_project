@@ -1,18 +1,17 @@
 import {
     DataTypes
-} from 'sequelize';
+} from 'sequelize'
 import {
     sequelize
-} from '../../conection.js';
-import Usuario from './usuario.js';
-import { token } from 'morgan';
+} from '../../conection.js'
+import Usuario from './usuario.js'
 
 const Token = sequelize.define('Token', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
     },
     nombre: {
         type: DataTypes.STRING,
@@ -32,12 +31,12 @@ const Token = sequelize.define('Token', {
         allowNulls: false
     }
 }, {
-    tableName: "Tokens",
+    tableName: 'Tokens',
     createdAt: true,
     updatedAt: false
 })
 
-Usuario.hasMany(Token, {primaryKey:"UsuarioId"});
-Token.belongsTo(Usuario, {primaryKey:"UsuarioId"});
+Usuario.hasMany(Token, {primaryKey:'UsuarioId'})
+Token.belongsTo(Usuario, {primaryKey:'UsuarioId'})
 
-export default Token;
+export default Token

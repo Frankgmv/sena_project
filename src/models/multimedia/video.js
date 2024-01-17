@@ -1,22 +1,22 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Video = Sequelize.define('Videos',{
+const Video = Sequelize.define('Videos', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
-        autoIncrement: true,
+        autoIncrement: true
     },
     linkVideo:{
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     fecha:{
         type:DataTypes.DATE,
-        allowNulls: false,
+        allowNulls: false
     },
     tituloVideo:{
         type:DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     imgPath:{
         type:DataTypes.STRING,
@@ -26,20 +26,13 @@ const Video = Sequelize.define('Videos',{
         type: DataTypes.INTEGER,
         references:{
             model: 'user',
-            key: 'id',
+            key: 'id'
         }
-    },
-    idUsuaio:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'evento',
-            key: 'id',
-        }
-    },
-})  
+    }
+})
 
 Video.createTable({
-    tableName:"Videos"
+    tableName:'Videos'
 })
 
 export default Video

@@ -3,7 +3,7 @@ import { sequelize } from '../../conection.js'
 import Usuario from './usuario.js'
 import Seccion from './seccion.js'
 
-const Anuncio = sequelize.define('Anuncio',{
+const Anuncio = sequelize.define('Anuncio', {
     id:{
         type: DataTypes.INTEGER,
         allowNulls: false,
@@ -22,16 +22,16 @@ const Anuncio = sequelize.define('Anuncio',{
         type:DataTypes.TEXT,
         allowNulls: true
     }
-},{
-    tableName:"Anuncios",
+}, {
+    tableName:'Anuncios',
     createdAt:true,
     updatedAt:false
-});
+})
 
-Usuario.hasMany(Anuncio, {foreignKey:"UsuarioId"})
-Seccion.hasMany(Anuncio, {foreignKey:"SeccionId"})
+Usuario.hasMany(Anuncio, {foreignKey:'UsuarioId'})
+Seccion.hasMany(Anuncio, {foreignKey:'SeccionId'})
 
-Anuncio.belongsTo(Usuario, {foreignKey:"UsuarioId"})
-Anuncio.belongsTo(Seccion, {foreignKey:"SeccionId"})
+Anuncio.belongsTo(Usuario, {foreignKey:'UsuarioId'})
+Anuncio.belongsTo(Seccion, {foreignKey:'SeccionId'})
 
 export default Anuncio

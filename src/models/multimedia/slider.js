@@ -1,20 +1,20 @@
-import { Sequelize, DataTypes } from 'sequelize' 
+import { Sequelize, DataTypes } from 'sequelize'
 
-const Slider = Sequelize.define('Slider   ',{
+const Slider = Sequelize.define('Slider   ', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
-        autoIncrement: true,
+        autoIncrement: true
     },
     idFoto:{
         type:DataTypes.DATE,
         allowNulls: false,
         references:{
             model: 'galeria',
-            key: 'id',
+            key: 'id'
         }
-    },
-},{
+    }
+}, {
     freezeTableName: true
 })
 

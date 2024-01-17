@@ -1,4 +1,4 @@
-import Evento from "../../models/data/evento.js";
+import Evento from '../../models/data/evento.js'
 
 export const postEventoService = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -8,23 +8,24 @@ export const postEventoService = (data) => {
                     evento: data.evento
                 }
             })
-            if (existeEvento) return resolve({
-                ok: false,
-                message: "Evento ya existe."
-            })
+            if (existeEvento) {
+                return resolve({
+                    ok: false,
+                    message: 'Evento ya existe.'
+                })
+            }
 
-            const nuevoEvento = await Evento.create(data);
+            const nuevoEvento = await Evento.create(data)
 
-            const guardar = await nuevoEvento.save();
+            const guardar = await nuevoEvento.save()
 
             resolve({
                 ok: true,
-                message: "Evento creado.",
+                message: 'Evento creado.',
                 evento: guardar
             })
-
         } catch (error) {
-            reject(error);
+            reject(error)
         }
     })
 }
@@ -32,17 +33,15 @@ export const postEventoService = (data) => {
 export const getAllEventosService = () => {
     return new Promise(async (resolve, reject) => {
         try {
-
-            const eventos = await Evento.findAll();
+            const eventos = await Evento.findAll()
 
             resolve({
                 ok: true,
-                message: "Todos los eventos",
+                message: 'Todos los eventos',
                 evento: eventos
             })
-
         } catch (error) {
-            reject(error);
+            reject(error)
         }
     })
 }
@@ -50,22 +49,22 @@ export const getAllEventosService = () => {
 export const getEventoService = (idEvento) => {
     return new Promise(async (resolve, reject) => {
         try {
+            const evento = await Evento.findByPk(idEvento)
 
-            const evento = await Evento.findByPk(idEvento);
-
-            if (!evento) return resolve({
-                ok: false,
-                message: "Evento no existe"
-            })
+            if (!evento) {
+                return resolve({
+                    ok: false,
+                    message: 'Evento no existe'
+                })
+            }
 
             resolve({
                 ok: true,
-                message: "eventos encontrado.",
+                message: 'eventos encontrado.',
                 evento: evento
             })
-
         } catch (error) {
-            reject(error);
+            reject(error)
         }
     })
 }
@@ -73,27 +72,28 @@ export const getEventoService = (idEvento) => {
 export const putEventoService = (idEvento, data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const evento = await Evento.findByPk(idEvento);
-            if (!evento) return resolve({
-                ok: false,
-                message: "Evento no existe"
-            })
-
-            if(data.id){
-                delete data.id;
+            const evento = await Evento.findByPk(idEvento)
+            if (!evento) {
+                return resolve({
+                    ok: false,
+                    message: 'Evento no existe'
+                })
             }
 
-            const eventoActualizado = await evento.update(data);
+            if (data.id) {
+                delete data.id
+            }
+
+            const eventoActualizado = await evento.update(data)
             await eventoActualizado.save()
 
             resolve({
                 ok: true,
-                message: "Evento actualizado",
+                message: 'Evento actualizado',
                 evento: eventoActualizado
             })
-
         } catch (error) {
-            reject(error);
+            reject(error)
         }
     })
 }
@@ -101,27 +101,22 @@ export const putEventoService = (idEvento, data) => {
 export const deleteEventoService = (idEvento) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const eventoEncontrado = await Evento.findByPk(idEvento);
-            if (!eventoEncontrado) return resolve({
-                ok: false,
-                message: "Evento no existe"
-            })
+            const eventoEncontrado = await Evento.findByPk(idEvento)
+            if (!eventoEncontrado) {
+                return resolve({
+                    ok: false,
+                    message: 'Evento no existe'
+                })
+            }
 
-            await eventoEncontrado.destroy();
+            await eventoEncontrado.destroy()
 
             resolve({
                 ok: true,
-                message: "Evento Eliminado exitosamente"
+                message: 'Evento Eliminado exitosamente'
             })
-
         } catch (error) {
-            reject(error);
+            reject(error)
         }
     })
 }
-
-
-
-
-
-

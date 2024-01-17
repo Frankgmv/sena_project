@@ -1,15 +1,15 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../../conection.js'
 
-const Item = sequelize.define('Items',{
+const Item = sequelize.define('Items', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
-        autoIncrement: true,
+        autoIncrement: true
     },
     titulo:{
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     link:{
         type:DataTypes.BOOLEAN,
@@ -23,8 +23,8 @@ const Item = sequelize.define('Items',{
         type:DataTypes.BOOLEAN,
         allowNulls: false
     }
-},{
-    tableName:"Items",
+}, {
+    tableName:'Items',
     timestamps:true
 })
 

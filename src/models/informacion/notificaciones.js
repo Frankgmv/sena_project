@@ -1,10 +1,10 @@
-import {DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize'
 import { sequelize } from '../../conection.js'
 
-const Notificacion = sequelize.define('Notificacion',{
+const Notificacion = sequelize.define('Notificacion', {
     titulo:{
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     descripcion:{
         type:DataTypes.STRING,
@@ -15,11 +15,10 @@ const Notificacion = sequelize.define('Notificacion',{
         allowNulls: false,
         defaultValue: false
     }
-},{
-    tableName:"Notificaciones",
+}, {
+    tableName:'Notificaciones',
     createdAt:true,
     updatedAt:false
 })
-
 
 export default Notificacion

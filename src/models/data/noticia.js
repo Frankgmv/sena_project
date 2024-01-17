@@ -1,13 +1,13 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../../conection.js';
-import Usuario from './usuario.js';
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import Usuario from './usuario.js'
 
-const Noticia = sequelize.define('Noticia',{
+const Noticia = sequelize.define('Noticia', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
         primaryKey:true,
-        autoIncrement: true,
+        autoIncrement: true
     },
     titulo:{
         type: DataTypes.STRING,
@@ -34,13 +34,13 @@ const Noticia = sequelize.define('Noticia',{
         allowNulls: false,
         defaultValue:true
     }
-},{
-    tableName: "Noticias",
+}, {
+    tableName: 'Noticias',
     createdAt:true,
     updatedAt:false
 })
 
-Usuario.hasMany(Noticia, {foreignKey:"UsuarioId"});
-Noticia.belongsTo(Usuario, {foreignKey:"UsuarioId"});
+Usuario.hasMany(Noticia, {foreignKey:'UsuarioId'})
+Noticia.belongsTo(Usuario, {foreignKey:'UsuarioId'})
 
 export default Noticia

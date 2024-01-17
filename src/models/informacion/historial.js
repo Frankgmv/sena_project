@@ -2,12 +2,12 @@ import { DataTypes } from 'sequelize'
 import { sequelize } from '../../conection.js'
 import Usuario from '../data/usuario.js'
 
-const Historial = sequelize.define('Historial',{
+const Historial = sequelize.define('Historial', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
         primaryKey:true,
-        autoIncrement: true,
+        autoIncrement: true
     },
     cambio:{
         type:DataTypes.STRING,
@@ -17,13 +17,13 @@ const Historial = sequelize.define('Historial',{
         type:DataTypes.STRING,
         allowNulls: false
     }
-},{
+}, {
     freezeTableName:true,
     createdAt:true,
     updatedAt:false
 })
 
-Usuario.hasMany(Historial, {foreignKey:"UsuarioId"});
-Historial.belongsTo(Usuario);
+Usuario.hasMany(Historial, {foreignKey:'UsuarioId'})
+Historial.belongsTo(Usuario)
 
 export default Historial

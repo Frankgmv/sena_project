@@ -3,22 +3,22 @@ import {
 } from 'sequelize'
 import {
     sequelize
-} from "../../conection.js"
+} from '../../conection.js'
 
 const Vistas = sequelize.define('Vistas', {
     vistasTotales: {
         type: DataTypes.INTEGER,
-        allowNulls: false,
+        allowNulls: false
     },
     vistasMes: {
         type: DataTypes.INTEGER,
-        allowNulls: false,
+        allowNulls: false
     },
     vistasDia: {
         type: DataTypes.INTEGER,
-        allowNulls: false,
-    },
-},{
+        allowNulls: false
+    }
+}, {
     timestamps:false
 })
 

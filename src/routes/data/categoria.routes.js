@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import { getAllCategorias, getCategoria } from '../../controllers/data/categoria.controller.js';
+import { Router } from 'express'
+import { getAllCategorias, getCategoria } from '../../controllers/data/categoria.controller.js'
 
-const categoriaRouter = Router();
+const categoriaRouter = Router()
 
-categoriaRouter.get('/categorias', getAllCategorias);
-categoriaRouter.get('/categorias/:id', getCategoria);
+categoriaRouter.get('/categorias', getAllCategorias)
+categoriaRouter.get('/categorias/:id', getCategoria)
 
-export default categoriaRouter;
+export default categoriaRouter

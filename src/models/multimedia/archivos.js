@@ -1,34 +1,34 @@
 import { Sequelize, DataTypes } from 'sequelize'
 
-const Archivo = Sequelize.define('Archivos',{
+const Archivo = Sequelize.define('Archivos', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
-        autoIncrement: true,
+        autoIncrement: true
     },
     titulo:{
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     archivo:{
         type:DataTypes.BLOB,
-        allowNulls: false,
+        allowNulls: false
     },
     fecha:{
         type:DataTypes.DATE,
-        allowNulls: false,
+        allowNulls: false
     },
     idUsuaio:{
         type: DataTypes.INTEGER,
         references:{
             model: 'user',
-            key: 'id',
+            key: 'id'
         }
-    },
-})  
+    }
+})
 
 Archivo.createTable({
-    tableName:"Archivos"
+    tableName:'Archivos'
 })
 
 export default Archivo

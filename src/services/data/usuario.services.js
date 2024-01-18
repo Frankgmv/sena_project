@@ -9,9 +9,14 @@ import {
     validarEmail,
     validarPassword
 } from '../../helpers/includes.js'
+import t from '../../helpers/transacciones.js'
+import {
+    TransactionError
+} from '../../middlewares/fabricaErrores.js'
 
 export const postUsuarioService = (data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         const {
             id: documento,
             fechaNacimiento,
@@ -21,6 +26,13 @@ export const postUsuarioService = (data) => {
         } = data
         const emailLower = email.toLowerCase()
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             //  consultar roles
             const existeRol = await Rol.findByPk(RolId)
 
@@ -80,15 +92,24 @@ export const postUsuarioService = (data) => {
             const passwordHast = bcrypt.hashSync(password, saltos)
 
             // Crear usuario
-            const nuevoUsuario = new Usuario({
+            const nuevoUsuario = await Usuario.create({
                 ...data,
                 correo: emailLower,
                 password: passwordHast
-            })
+            }, {transaction: transaccion.data})
 
             // Guardar en db
             const respuesta = await nuevoUsuario.save()
 
+            if (!respuesta) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Usuario no fue creado'
+                })
+            }
+
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'usuario creado exitosamente!',
@@ -167,7 +188,15 @@ export const getUsuarioService = (idUser) => {
 }
 export const putUsuarioService = (idUser, data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const usuario = await Usuario.findByPk(idUser)
             if (!usuario) {
                 return resolve({
@@ -180,8 +209,17 @@ export const putUsuarioService = (idUser, data) => {
                 delete data.id
             }
 
-            const usuarioActualizado = await usuario.update(data)
+            const usuarioActualizado = await usuario.update(data, {transaction: transaccion.data})
 
+            if (!usuarioActualizado) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Usuario no fue actualizado'
+                })
+            }
+
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: ' Usuario Actualizado correctamente',

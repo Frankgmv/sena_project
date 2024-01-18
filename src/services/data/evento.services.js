@@ -1,8 +1,19 @@
 import Evento from '../../models/data/evento.js'
+import t from '../../helpers/transacciones.js'
+import {
+    TransactionError
+} from '../../middlewares/fabricaErrores.js'
 
 export const postEventoService = (data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
             const existeEvento = await Evento.findOne({
                 where: {
                     evento: data.evento
@@ -15,10 +26,20 @@ export const postEventoService = (data) => {
                 })
             }
 
-            const nuevoEvento = await Evento.create(data)
+            const nuevoEvento = await Evento.create(data, {
+                transaction: transaccion.data
+            })
+
+            if (!nuevoEvento) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok: false,
+                    message: 'Evento no fue creado'
+                })
+            }
 
             const guardar = await nuevoEvento.save()
-
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'Evento creado.',
@@ -71,7 +92,14 @@ export const getEventoService = (idEvento) => {
 
 export const putEventoService = (idEvento, data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
             const evento = await Evento.findByPk(idEvento)
             if (!evento) {
                 return resolve({
@@ -84,9 +112,18 @@ export const putEventoService = (idEvento, data) => {
                 delete data.id
             }
 
-            const eventoActualizado = await evento.update(data)
-            await eventoActualizado.save()
+            const eventoActualizado = await evento.update(data, {transaction: transaccion.data})
+            const updatedEvento = await eventoActualizado.save()
 
+            if (!updatedEvento) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Evento no fue actualizado'
+                })
+            }
+
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'Evento actualizado',

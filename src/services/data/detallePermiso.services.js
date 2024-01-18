@@ -4,10 +4,21 @@ import {
 import DetallePermiso from '../../models/data/detallePermiso.js'
 import Permiso from '../../models/data/permiso.js'
 import Usuario from '../../models/data/usuario.js'
+import {
+    TransactionError
+} from '../../middlewares/fabricaErrores.js'
+import t from '../../helpers/transacciones.js'
 
 export const postDetallePermisoService = (data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
             const {
                 UsuarioId,
                 PermisoId
@@ -45,9 +56,21 @@ export const postDetallePermisoService = (data) => {
                 })
             }
 
-            const crearDetallePermiso = new DetallePermiso(data)
+            const crearDetallePermiso = await DetallePermiso.create(data, {
+                transaction: transaccion.data
+            })
+
+            if (!crearDetallePermiso) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'detallePermiso no fue creado'
+                })
+            }
 
             const detallePermisoEliminado = await crearDetallePermiso.save()
+
+            await t.commit(transaccion.data)
 
             resolve({
                 ok: true,

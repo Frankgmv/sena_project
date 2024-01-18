@@ -1,16 +1,28 @@
 import Anuncio from '../../models/data/anuncio.js'
 import Seccion from '../../models/data/seccion.js'
 import Usuario from '../../models/data/usuario.js'
+import t from '../../helpers/transacciones.js'
+import {
+    TransactionError
+} from '../../middlewares/fabricaErrores.js'
 import 'colors'
 
 export const postAnucioService = (data) => {
     return new Promise(async (resolve, reject) => {
+        // Transaccion
+        let transaccion
         try {
+            transaccion = await t.create()
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const existeTitulo = await Anuncio.findAll({
                 where: {
                     titulo: data.titulo
                 }
             })
+
             if (existeTitulo.length > 0) {
                 return resolve({
                     ok: false,
@@ -44,9 +56,21 @@ export const postAnucioService = (data) => {
                 })
             }
 
-            const crearAnuncio = await Anuncio.create(data)
-            console.log(JSON.stringify(data).yellow)
+            const crearAnuncio = await Anuncio.create(data, {
+                transaction: transaccion.data
+            })
+
+            if (!crearAnuncio) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok: false,
+                    message: 'El anuncio no se pudo crear'
+                })
+            }
+
             const response = await crearAnuncio.save()
+
+            await t.commit(transaccion.data)
             return resolve({
                 ok: true,
                 message: 'Anuncio creado.',

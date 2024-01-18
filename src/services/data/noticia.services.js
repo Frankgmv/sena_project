@@ -1,9 +1,20 @@
 import Noticia from '../../models/data/noticia.js'
 import Usuario from '../../models/data/usuario.js'
+import t from '../../helpers/transacciones.js'
+import {
+    TransactionError
+} from '../../middlewares/fabricaErrores.js'
 
 export const postNoticiaService = (data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
             const existeNoticia = await Noticia.findOne({
                 where: {
                     titulo: data.titulo
@@ -30,9 +41,18 @@ export const postNoticiaService = (data) => {
                 })
             }
 
-            const crearNoticia = new Noticia(data)
+            const crearNoticia = Noticia.create(data, {
+                transaction: transaccion.data
+            })
             await crearNoticia.save()
-
+            if (!crearNoticia) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok: false,
+                    message: 'Noticia no fue creado'
+                })
+            }
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'Noticia creada exitosamente.',
@@ -47,7 +67,7 @@ export const postNoticiaService = (data) => {
 export const getAllNoticiasService = (estado, pagina, numNoticias = 12) => {
     var consulta = {
         offset: (pagina - 1) * numNoticias,
-        limit: + numNoticias
+        limit: +numNoticias
     }
 
     return new Promise(async (resolve, reject) => {
@@ -111,7 +131,14 @@ export const getNoticiaService = (id) => {
 
 export const putNoticiaService = (id, data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
             if (data.id) {
                 delete data.id
             }
@@ -125,9 +152,18 @@ export const putNoticiaService = (id, data) => {
                 })
             }
 
-            const modificarNoticia = await noticia.update(data)
+            const modificarNoticia = await noticia.update(data, {transaction: transaccion.data})
             await modificarNoticia.save()
 
+            if (!modificarNoticia) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Noticia no fue modificada'
+                })
+            }
+
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'Noticia modificada exitosamente.',

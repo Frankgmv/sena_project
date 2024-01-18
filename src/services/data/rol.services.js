@@ -1,8 +1,18 @@
 import Rol from '../../models/data/rol.js'
+import t from '../../helpers/transacciones.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postRol = (data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const existeRol = await Rol.findOne({
                 where: {
                     rol: data.rol
@@ -19,11 +29,20 @@ export const postRol = (data) => {
                     mensaje: 'Ya existe un rol o Llave rol igual a la que intenta registrar'
                 })
             }
-            const ActualizarRol = await Rol.create(data)
+            const crearRol = await Rol.create(data, {transaction: transaccion.data})
+            if (!crearRol) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Rol no fue creado'
+                })
+            }
+
+            await t.commit(transaccion.data)
             return resolve({
                 ok: true,
                 mensaje: 'Rol creado correctamente',
-                rol: ActualizarRol
+                rol: crearRol
             })
         } catch (error) {
             return reject(error)
@@ -77,7 +96,15 @@ export const getRolService = (idRol) => {
 
 export const putRolService = (idRol, data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const ActualizarRol = await Rol.findByPk(idRol)
 
             if (!ActualizarRol) {
@@ -87,10 +114,19 @@ export const putRolService = (idRol, data) => {
                 })
             }
 
-            await ActualizarRol.update({
+            const actualizarRol = await ActualizarRol.update({
                 estado: data.estado
-            })
+            }, {transaction: transaccion.data})
 
+            if (!actualizarRol) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Rol no fue actualizado'
+                })
+            }
+
+            await t.commit(transaccion.data)
             return resolve({
                 ok: true,
                 mensaje: 'Rol actualizado correctamente',

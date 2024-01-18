@@ -6,8 +6,9 @@ import {
 } from '../../conection.js'
 // import rolesPorDefecto from "../../helpers/roles.json" assert { type: "json" };
 import {
-    ErrorRol
+    ErrorRol, TransactionError
 } from '../../middlewares/fabricaErrores.js'
+import t from '../../helpers/transacciones.js'
 
 const Rol = sequelize.define('Rol', {
     id: {
@@ -35,41 +36,52 @@ const Rol = sequelize.define('Rol', {
 })
 
 async function insertDefaultData(dataRoles) {
+    let transaccion
     try {
+        // Transaccion
+        transaccion = await t.create()
+
+        if (!transaccion.ok) {
+            throw new TransactionError('Error al crear transaccion')
+        }
         await Rol.sync()
         const hayRoles = await Rol.findAll()
 
         if (hayRoles.length === 0) {
             for (let rol of dataRoles) {
-                Rol.create(rol)
+                const rolCreado = Rol.create(rol, {transaction: transaccion.data})
+                if (!rolCreado) {
+                    t.rollback(transaccion.data)
+                }
             }
         }
+        await t.commit(transaccion.data)
     } catch (error) {
         throw new ErrorRol(error)
     }
 }
 
 // insertDefaultData(rolesPorDefecto.roles)
-insertDefaultData([{
-        'rol': 'Estudiante Especial',
-        'rolKey': 'EST_E'
-    },
-    {
-        'rol': 'Docente',
-        'rolKey': 'DOC'
-    },
-    {
-        'rol': 'Personal Administrativo',
-        'rolKey': 'P_ADM'
-    },
-    {
-        'rol': 'Coordinador',
-        'rolKey': 'COOR'
-    },
-    {
-        'rol': 'Web Master',
-        'rolKey': 'WM'
-    }
-])
+// insertDefaultData([{
+//         'rol': 'Estudiante Especial',
+//         'rolKey': 'EST_E'
+//     },
+//     {
+//         'rol': 'Docente',
+//         'rolKey': 'DOC'
+//     },
+//     {
+//         'rol': 'Personal Administrativo',
+//         'rolKey': 'P_ADM'
+//     },
+//     {
+//         'rol': 'Coordinador',
+//         'rolKey': 'COOR'
+//     },
+//     {
+//         'rol': 'Web Master',
+//         'rolKey': 'WM'
+//     }
+// ])
 
 export default Rol

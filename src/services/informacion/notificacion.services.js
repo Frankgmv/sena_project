@@ -1,8 +1,18 @@
 import Notificaciones from '../../models/informacion/notificaciones.js'
+import t from '../../helpers/transacciones.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postNotificacionService = (notificacionData) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const existe = await Notificaciones.findOne({
                 where: {
                     titulo: notificacionData.titulo
@@ -16,8 +26,17 @@ export const postNotificacionService = (notificacionData) => {
                     notificacion: existe
                 })
             } else {
-                const notiCreada = await Notificaciones.create(notificacionData)
+                const notiCreada = await Notificaciones.create(notificacionData, {transaction: transaccion.data})
                 const notiGuardada = await notiCreada.save()
+                if (!notiGuardada) {
+                    await t.rollback(transaccion.data)
+                    return resolve({
+                        ok:false,
+                        message: 'Nofificacion no fue creada'
+                    })
+                }
+
+                await t.commit(transaccion.data)
                 resolve({
                     ok: true,
                     message: 'Notificación creada',
@@ -77,7 +96,15 @@ export const getAllNotificionesService = () => {
 
 export const putNotificacionService = (idNoti) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const findNoti = await Notificaciones.findByPk(idNoti)
             if (!findNoti) {
                 return resolve({
@@ -88,7 +115,17 @@ export const putNotificacionService = (idNoti) => {
 
             const updated = await findNoti.update({
                 estado: true
-            })
+            }, {transaction: transaccion.data})
+
+            if (!updated) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Notificacion no fue creada'
+                })
+            }
+
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'Actualizado correctamente',
@@ -125,7 +162,15 @@ export const deleteNotificacionService = (idNoti) => {
 
 export function deleteAllNotificacionesService() {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const EliminarNotificacionesSinLeer = await Notificaciones.findAll({
                 where: {
                     estado: true
@@ -140,8 +185,10 @@ export function deleteAllNotificacionesService() {
             }
 
             for (const notif of EliminarNotificacionesSinLeer) {
-                await notif.destroy()
+                await notif.destroy({transaction: transaccion.data})
             }
+
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'Notificaciones leídas eliminadas correctamente'

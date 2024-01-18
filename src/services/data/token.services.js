@@ -3,10 +3,20 @@ import {
 } from 'sequelize'
 import Token from '../../models/data/token.js'
 import Usuario from '../../models/data/usuario.js'
+import t from '../../helpers/transacciones.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postTokenService = (data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const encontrarToken = await Token.findOne({
                 where: {
                     [Op.or]: {
@@ -32,9 +42,17 @@ export const postTokenService = (data) => {
                 })
             }
 
-            const guardarToken = new Token(data)
+            const guardarToken = await Token.create(data, {transaction: transaccion.data})
             const resp = await guardarToken.save()
+            if (!guardarToken) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Token no fue creado'
+                })
+            }
 
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'Token creado.',
@@ -86,7 +104,15 @@ export const getTokenService = (idToken) => {
 
 export const putTokenService = (idToken, data) => {
     return new Promise(async (resolve, reject) => {
+        let transaccion
         try {
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
             const encontrarToken = await Token.findByPk(idToken)
 
             if (!encontrarToken) {
@@ -99,12 +125,22 @@ export const putTokenService = (idToken, data) => {
             const actualizarToken = await encontrarToken.update(data)
             const resp = await actualizarToken.save()
 
+            if (!resp) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok:false,
+                    message: 'Token no fue Actualizado'
+                })
+            }
+
+            await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'Token actualizado.',
                 token: resp
             })
         } catch (error) {
+            await t.commit(transaccion.data)
             reject(error)
         }
     })

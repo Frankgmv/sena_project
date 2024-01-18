@@ -1,22 +1,24 @@
+import fs from 'fs'
+import sharp from 'sharp'
+import {
+    crearNombreImagenes
+} from '../../helpers/includes.js'
 import {
     validateSchemaInto
 } from '../../middlewares/validarSchemas.js'
 import {
     anuncioSchema
 } from '../../schemas/dataSchemas.js'
-import 'colors'
-import sharp from 'sharp'
-import fs from 'fs'
-import {
-    crearNombreImagenes
-} from '../../helpers/includes.js'
+
+import { postAnucioService } from '../../services/data/anuncio.services.js'
 
 export const postAnuncio = async (req, res, next) => {
     // Inicializar variables globales
     let bodyBuild = {}
     const maxBytes = 1E7
+    let datosAnuncio
 
-    // Parsear Las Usuario y Seccion Id's
+    // Parsear Las Usuario y Seccion Id's del body
     try {
         const UsuarioId = parseInt(req.body.UsuarioId)
         const SeccionId = parseInt(req.body.SeccionId)
@@ -26,10 +28,7 @@ export const postAnuncio = async (req, res, next) => {
             SeccionId
         }
     } catch (error) {
-        res.status(400).json({
-            ok: false,
-            message: 'Error al parsear SesionId o UsuarioId'
-        })
+        next(error.message)
     }
 
     try {
@@ -40,15 +39,15 @@ export const postAnuncio = async (req, res, next) => {
         if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
 
         let image = req.file
-        console.log(image)
         if (image) {
-            const tiposPermitidos = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif']
+            // Montar anuncio con imagen
+            const tiposPermitidos = ['image/png', 'image/jpeg', 'image/jpg']
 
             // Validar tipos permitodos
             if (!tiposPermitidos.includes(image.mimetype)) {
                 return res.status(400).json({
                     ok: false,
-                    message: 'Formato inválido. [png, jpg, jpeg, gif]'
+                    message: `Formato ${image.mimetype.split('/')[1]} inválido. [png, jpg, jpeg]`
                 })
             }
 
@@ -58,8 +57,6 @@ export const postAnuncio = async (req, res, next) => {
                     message: 'La imagen es muy grande. (10MB máx)'
                 })
             }
-
-            // Acciones o proceso para montar el anuncio
 
             // Utilizamos un formato de compresión de imágenes sin pérdidas
             const buffer = Buffer.from(image.buffer, 'binary')
@@ -78,17 +75,27 @@ export const postAnuncio = async (req, res, next) => {
             // Guardamos la imagen comprimida
             const bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
 
-            const crearPath = `src/upload/${nombreArchivo.nombre}`
-            fs.writeFileSync(crearPath, bufferComprimido)
+            const urlPath = `src/upload/${nombreArchivo.nombre}`
+            fs.writeFileSync(urlPath, bufferComprimido)
 
-            res.send('Archivo subido correctamente')
+            datosAnuncio = {...bodyBuild, imgPath: nombreArchivo.nombre}
         } else {
             // Montar anuncio sin imagen
-
-            res.status(200).json({
-                message: 'no hay imagen'
-            })
+            datosAnuncio = {...bodyBuild, imgPath: null}
         }
+        // Guardar anuncio
+        const guardar = await postAnucioService(datosAnuncio)
+        res.json(guardar)
+        if (!guardar.ok) return res.status(400)
+        else res.status(201)
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getAllAnuncios = async (req, res, next) => {
+    try {
+
     } catch (error) {
         next(error)
     }

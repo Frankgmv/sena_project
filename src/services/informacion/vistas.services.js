@@ -6,7 +6,7 @@ export const postVistasService = (Vistadata) => {
             const obtenerVisualizacion = await Vistas.findAll()
 
             if (obtenerVisualizacion.length !== 0) {
-                resolve({
+                return resolve({
                     ok: false
                 })
             } else {
@@ -31,12 +31,12 @@ export const getVistasService = () => {
                 order: ['id']
             })
             if (obtenerVisualizacion.length === 0) {
- return resolve({
-                ok:false,
-                message: 'No se encontró ningún dato',
-                vistas:obtenerVisualizacion
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No se encontró ningún dato',
+                    vistas: obtenerVisualizacion
+                })
+            }
 
             resolve({
                 ok: true,
@@ -60,12 +60,12 @@ export const putVistasService = () => {
             let obtenerVisualizacion = await Vistas.findAll()
 
             if (obtenerVisualizacion.length === 0) {
- return resolve({
-                ok:false,
-                message: 'No se encontró ningún dato para actualizar',
-                vistas:obtenerVisualizacion
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No se encontró ningún dato para actualizar',
+                    vistas: obtenerVisualizacion
+                })
+            }
 
             obtenerVisualizacion = obtenerVisualizacion[0].dataValues
             const dataVisual = await Vistas.findByPk(obtenerVisualizacion.id)
@@ -79,7 +79,7 @@ export const putVistasService = () => {
             await dataVisual.update(dataUpdate)
 
             resolve({
-                ok:true,
+                ok: true,
                 message: 'visualización existe, fue actualizada',
                 vistas: dataVisual
             })
@@ -98,7 +98,7 @@ export const deleteVistasService = () => {
                 await vista.destroy()
             }
             resolve({
-                ok:true,
+                ok: true,
                 estadoVistas: 'eliminadas',
                 message: 'Vistas eliminadas',
                 vistas: obtenerVisualizacion

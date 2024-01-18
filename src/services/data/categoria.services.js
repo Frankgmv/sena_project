@@ -6,13 +6,13 @@ export const getAllCategoriasService = () => {
             const categorias = await Categoria.findAll()
 
             if (categorias.length === 0) {
- return resolve({
-                ok: false,
-                message: 'No hay categorias registradas',
-                accionRecomendada:'Por favor agregue las categorias por defecto',
-                categorias: categorias
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No hay categorias registradas',
+                    accionRecomendada: 'Por favor agregue las categorias por defecto',
+                    categorias: categorias
+                })
+            }
 
             resolve({
                 ok: true,
@@ -31,11 +31,11 @@ export const getCategoriaService = (idCategoria) => {
             const categoria = await Categoria.findByPk(idCategoria)
 
             if (!categoria) {
- return resolve({
-                ok: false,
-                message: 'No se encontro la categoria'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No se encontro la categoria'
+                })
+            }
 
             resolve({
                 ok: true,

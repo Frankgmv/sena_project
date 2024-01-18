@@ -22,11 +22,11 @@ export function getAllPqrsService() {
             const getAllPqrs = await Pqrs.findAll()
 
             if (getAllPqrs.length === 0) {
- return resolve({
-                ok: false,
-                message: 'No hay Pqrs'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No hay Pqrs'
+                })
+            }
 
             resolve({
                 ok: true,
@@ -44,11 +44,11 @@ export function putPqrsService(idPqrs) {
         try {
             const getPqrsAndUpdate = await Pqrs.findByPk(idPqrs)
             if (!getPqrsAndUpdate) {
- return resolve({
-                ok: false,
-                message: 'No se encontró ningún dato para actualizar'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No se encontró ningún dato para actualizar'
+                })
+            }
 
             const updated = await getPqrsAndUpdate.update({
                 estado: true
@@ -69,17 +69,17 @@ export function getPqrsService(idPqrs) {
         try {
             const getPqrs = await Pqrs.findByPk(idPqrs)
             if (!getPqrs) {
- resolve({
-                ok: false,
-                message: 'No se encontró ningún dato'
-            })
-}            else {
- resolve({
-                ok: true,
-                message: 'Datos de Pqrs',
-                pqrs: getPqrs
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No se encontró ningún dato'
+                })
+            } else {
+                resolve({
+                    ok: true,
+                    message: 'Datos de Pqrs',
+                    pqrs: getPqrs
+                })
+            }
         } catch (err) {
             reject(err)
         }
@@ -91,11 +91,11 @@ export function deletePqrsService(idPqrs) {
         try {
             const findPqrs = await Pqrs.findByPk(idPqrs)
             if (!findPqrs) {
- resolve({
-                ok: false,
-                message: 'pqrs no encontrado'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'pqrs no encontrado'
+                })
+            }
 
             await findPqrs.destroy()
             resolve({
@@ -119,11 +119,11 @@ export function deleteAllPqrsService() {
             })
 
             if (EliminarPqrsSinLeer.length === 0) {
- resolve({
-                ok: false,
-                message: 'No hay Pqrs sin leer'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No hay Pqrs sin leer'
+                })
+            }
 
             for (const pqrs of EliminarPqrsSinLeer) {
                 await pqrs.destroy()

@@ -4,10 +4,9 @@ export const crearNombreImagenes = (file) => {
     let formato = file.mimetype.split('/')
     let nombreImg = file.originalname.split('.')
 
-    const llaveUnica = `${Date.now()}_${Math.round(Math.random() * 1E4)}`
+    const llaveUnica = `${formato[0]}_${Date.now()}_${Math.round(Math.random() * 1E4)}`
     const mimetype = formato[formato.length - 1]
-    const nombre = `${nombreImg[0]}_${llaveUnica}.${mimetype}`
-
+    const nombre = `${nombreImg[0]}_${llaveUnica}.${mimetype}`.replace(/\s/g, '').toLowerCase()
     return {nombre, mimetype}
 }
 

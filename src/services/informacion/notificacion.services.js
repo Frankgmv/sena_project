@@ -10,7 +10,7 @@ export const postNotificacionService = (notificacionData) => {
             })
 
             if (existe) {
-                resolve({
+                return resolve({
                     ok: false,
                     message: `${notificacionData.titulo} ya existe`,
                     notificacion: existe
@@ -36,11 +36,11 @@ export const getNotificionesService = (idNoti) => {
             const findNoti = await Notificaciones.findByPk(idNoti)
 
             if (!findNoti) {
- return resolve({
-                ok: false,
-                message: 'No se encontró ningún dato'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No se encontró ningún dato'
+                })
+            }
 
             resolve({
                 ok: true,
@@ -59,11 +59,11 @@ export const getAllNotificionesService = () => {
                 orderBy: ['id']
             })
             if (notis.length === 0) {
- return resolve({
-                ok: false,
-                message: 'No hay notificaciones'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No hay notificaciones'
+                })
+            }
             resolve({
                 ok: true,
                 message: 'Lista de notificaciones',
@@ -80,11 +80,11 @@ export const putNotificacionService = (idNoti) => {
         try {
             const findNoti = await Notificaciones.findByPk(idNoti)
             if (!findNoti) {
- resolve({
-                ok: false,
-                message: 'Notificación no encontrada'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'Notificación no encontrada'
+                })
+            }
 
             const updated = await findNoti.update({
                 estado: true
@@ -105,11 +105,11 @@ export const deleteNotificacionService = (idNoti) => {
         try {
             const findNotificaciones = await Notificaciones.findByPk(idNoti)
             if (!findNotificaciones) {
- resolve({
-                ok: false,
-                message: 'Notificación no encontrada'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'Notificación no encontrada'
+                })
+            }
 
             await findNotificaciones.destroy()
             resolve({
@@ -133,11 +133,11 @@ export function deleteAllNotificacionesService() {
             })
 
             if (EliminarNotificacionesSinLeer.length === 0) {
- return resolve({
-                ok: false,
-                message: 'No hay notificaciones leídas'
-            })
-}
+                return resolve({
+                    ok: false,
+                    message: 'No hay notificaciones leídas'
+                })
+            }
 
             for (const notif of EliminarNotificacionesSinLeer) {
                 await notif.destroy()

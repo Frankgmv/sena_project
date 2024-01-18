@@ -3,20 +3,22 @@ import {
 } from 'sequelize'
 import {
     sequelize
-} from '../../conection.js';
-import "colors";
-import rolesPorDefecto from "../../helpers/roles.json" assert {type: "json" };
-
+} from '../../conection.js'
+// import rolesPorDefecto from "../../helpers/roles.json" assert { type: "json" };
 import {
     ErrorRol
-} from '../../middlewares/fabricaErrores.js';
+} from '../../middlewares/fabricaErrores.js'
 
 const Rol = sequelize.define('Rol', {
+    id: {
+        type: DataTypes.INTEGER,
+        allowNulls: false,
+        primaryKey: true,
+        autoIncrement: true
+    },
     rol: {
         type: DataTypes.STRING,
-        allowNulls: false,
-        primaryKey:true,
-        autoIncrement:false
+        allowNulls: false
     },
     rolKey: {
         type: DataTypes.STRING,
@@ -24,40 +26,50 @@ const Rol = sequelize.define('Rol', {
     },
     estado: {
         type: DataTypes.BOOLEAN,
-        allowNulls: false
+        allowNulls: false,
+        defaultValue: true
     }
 }, {
-    tableName: "Roles",
+    tableName: 'Roles',
     timestamps: false
 })
 
-
-function insertDefaultData(dataRoles) {
-    return new Promise(async () => {
-        try {
-            await Rol.sync();
-            const hayRoles = await Rol.findAll();
-
-            if (hayRoles.length == 0) {
-                for (let rol of dataRoles) {
-                    console.log(`${JSON.stringify(rol)}`.blue);
-                    await Rol.create(rol)
-                }
-            }
-        } catch (error) {
-            throw new ErrorRol(error);
-        }
-    });
-}
-
-const callData = async () => {
+async function insertDefaultData(dataRoles) {
     try {
-        await insertDefaultData(rolesPorDefecto.roles);
+        await Rol.sync()
+        const hayRoles = await Rol.findAll()
+
+        if (hayRoles.length === 0) {
+            for (let rol of dataRoles) {
+                Rol.create(rol)
+            }
+        }
     } catch (error) {
-        throw new ErrorRol(error);
+        throw new ErrorRol(error)
     }
 }
 
-// callData();
+// insertDefaultData(rolesPorDefecto.roles)
+insertDefaultData([{
+        'rol': 'Estudiante Especial',
+        'rolKey': 'EST_E'
+    },
+    {
+        'rol': 'Docente',
+        'rolKey': 'DOC'
+    },
+    {
+        'rol': 'Personal Administrativo',
+        'rolKey': 'P_ADM'
+    },
+    {
+        'rol': 'Coordinador',
+        'rolKey': 'COOR'
+    },
+    {
+        'rol': 'Web Master',
+        'rolKey': 'WM'
+    }
+])
 
 export default Rol

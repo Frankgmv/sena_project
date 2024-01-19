@@ -44,7 +44,7 @@ export const postTokenService = (data) => {
 
             const guardarToken = await Token.create(data, {transaction: transaccion.data})
             const resp = await guardarToken.save()
-            if (!guardarToken) {
+            if (!resp) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,
@@ -123,9 +123,8 @@ export const putTokenService = (idToken, data) => {
             }
 
             const actualizarToken = await encontrarToken.update(data)
-            const resp = await actualizarToken.save()
 
-            if (!resp) {
+            if (!actualizarToken) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,
@@ -137,7 +136,7 @@ export const putTokenService = (idToken, data) => {
             resolve({
                 ok: true,
                 message: 'Token actualizado.',
-                token: resp
+                token: actualizarToken
             })
         } catch (error) {
             await t.commit(transaccion.data)

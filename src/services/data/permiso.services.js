@@ -31,9 +31,9 @@ export const postPermisoService = async (data) => {
             const nuevoPermiso = await Permiso.create(data, {
                 transaction: transaccion.data
             })
-            await nuevoPermiso.save()
+            const guardar = await nuevoPermiso.save()
 
-            if (!nuevoPermiso) {
+            if (!guardar) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
@@ -45,7 +45,7 @@ export const postPermisoService = async (data) => {
             resolve({
                 ok: true,
                 mensage: 'Permiso creado correctamente',
-                permiso: nuevoPermiso
+                permiso: guardar
             })
         } catch (error) {
             reject(error)

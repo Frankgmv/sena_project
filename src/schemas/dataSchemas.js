@@ -133,12 +133,6 @@ export const noticiaShema = z.object({
             invalid_type_error: 'El titulo debe ser un texto'
         }).min(1, 'EL titulo debe tener minimo 5 caracteres')
         .max(50, 'el titulo es de maximo 100 caracteres'),
-    fecha: z.string({
-        required_error: 'La fecha es requerida',
-        invalid_type_error: 'La fecha debe ser un texto'
-    }).regex(/^\d{4}-\d{2}-\d{2}$/, {
-        message: 'Fecha inválida, formato YYYY-MM-DD'
-    }),
     encabezado: z.string({
         required_error: 'El encabezado es requerido',
         invalid_type_error: 'El encabezado debe ser un texto'
@@ -147,17 +141,9 @@ export const noticiaShema = z.object({
         required_error: 'La descripcion es requerida',
         invalid_type_error: 'La descripcion debe ser un texto'
     }).min(1, 'La descripcion es requerida'),
-    imgPath: z.string({
-        required_error: 'La imgPath es requerida',
-        invalid_type_error: 'La imgPath debe ser un texto'
-    }),
-    estado: z.boolean({
-        invalid_type_error: 'El estado es buleano',
-        required_error: 'El estado es requerido'
-    }),
     UsuarioId: z.number({
         required_error: 'El UsuarioId es requerido',
-        invalid_type_error: 'UsuarioId es un número'
+        invalid_type_error: 'UsuarioId es un string si letras'
     }).min(1, 'El UsuarioId es requerido')
 })
 

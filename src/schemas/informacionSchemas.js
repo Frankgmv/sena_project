@@ -12,7 +12,7 @@ export const pqrsSchema = z.object({
     tipo: z.string({
         required_error: 'El Tipo es obligatorio'
     }),
-    reminente: z.string({
+    remitente: z.string({
         required_error: 'El Remitente es obligatorio'
     }),
     correo: z.string({

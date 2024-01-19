@@ -4,7 +4,7 @@ import {
 import {
     sequelize
 } from '../../conection.js'
-// import rolesPorDefecto from "../../helpers/roles.json" assert { type: "json" };
+import rolesPorDefecto from "../../helpers/roles.json" assert { type: "json" };
 import {
     ErrorRol, TransactionError
 } from '../../middlewares/fabricaErrores.js'
@@ -36,26 +36,15 @@ const Rol = sequelize.define('Rol', {
 })
 
 async function insertDefaultData(dataRoles) {
-    let transaccion
     try {
-        // Transaccion
-        transaccion = await t.create()
-
-        if (!transaccion.ok) {
-            throw new TransactionError('Error al crear transaccion')
-        }
         await Rol.sync()
         const hayRoles = await Rol.findAll()
 
         if (hayRoles.length === 0) {
             for (let rol of dataRoles) {
-                const rolCreado = Rol.create(rol, {transaction: transaccion.data})
-                if (!rolCreado) {
-                    t.rollback(transaccion.data)
-                }
+                const rolCreado = Rol.create(rol)
             }
         }
-        await t.commit(transaccion.data)
     } catch (error) {
         throw new ErrorRol(error)
     }

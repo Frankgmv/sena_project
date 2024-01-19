@@ -16,6 +16,10 @@ app.use(morgan('dev'))
 // ? Add cors finally app.use(cors({options}))
 
 // ? "Rutas" madres
+
+// Reclamar imagenes a la API
+app.use('/images',express.static('./src/upload'))
+
 app.use('/api/v1', routesGeneral)
 
 app.get('/', (_req, res) => {

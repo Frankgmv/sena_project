@@ -12,7 +12,7 @@ import {
 } from '../../middlewares/fabricaErrores.js'
 import t from '../../helpers/transacciones.js'
 // Datos de los permisos
-// import permisosPorDefecto from "./../../helpers/permisos.json" assert { type: "json"};
+import permisosPorDefecto from "./../../helpers/permisos.json" assert { type: "json"};
 
 const Permiso = sequelize.define('Permiso', {
     permiso: {
@@ -51,6 +51,6 @@ async function insertDefaultData(dataPermisos) {
     }
 }
 
-// insertDefaultData(permisosPorDefecto.permisos);
+insertDefaultData(permisosPorDefecto.permisos);
 
 export default Permiso

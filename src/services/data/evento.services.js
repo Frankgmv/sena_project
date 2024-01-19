@@ -30,15 +30,14 @@ export const postEventoService = (data) => {
                 transaction: transaccion.data
             })
 
-            if (!nuevoEvento) {
+            const guardar = await nuevoEvento.save()
+            if (!guardar) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
                     message: 'Evento no fue creado'
                 })
             }
-
-            const guardar = await nuevoEvento.save()
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
@@ -113,9 +112,8 @@ export const putEventoService = (idEvento, data) => {
             }
 
             const eventoActualizado = await evento.update(data, {transaction: transaccion.data})
-            const updatedEvento = await eventoActualizado.save()
 
-            if (!updatedEvento) {
+            if (!eventoActualizado) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,

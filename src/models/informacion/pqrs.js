@@ -18,7 +18,7 @@ const Pqrs = sequelize.define('Pqrs', {
         type: DataTypes.STRING,
         allowNulls: false
     },
-    reminente: {
+    remitente: {
         type: DataTypes.STRING,
         allowNulls: false
     },

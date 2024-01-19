@@ -20,9 +20,9 @@ export const postVistasService = (Vistadata) => {
                 })
             } else {
                 const crearVista = await Vistas.create(Vistadata, {transaction: transaccion.data})
-                const vistaCreada = await crearVista.save()
+                const guardar = await crearVista.save()
 
-                if (!vistaCreada) {
+                if (!guardar) {
                     await t.rollback(transaccion.data)
                     return resolve({
                         ok:false,
@@ -34,7 +34,7 @@ export const postVistasService = (Vistadata) => {
                 resolve({
                     ok: true,
                     message: 'Visualización registrada',
-                    vistas: vistaCreada
+                    vistas: guardar
                 })
             }
         } catch (err) {

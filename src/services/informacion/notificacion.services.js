@@ -27,8 +27,8 @@ export const postNotificacionService = (notificacionData) => {
                 })
             } else {
                 const notiCreada = await Notificaciones.create(notificacionData, {transaction: transaccion.data})
-                const notiGuardada = await notiCreada.save()
-                if (!notiGuardada) {
+                const guardar = await notiCreada.save()
+                if (!guardar) {
                     await t.rollback(transaccion.data)
                     return resolve({
                         ok:false,
@@ -40,7 +40,7 @@ export const postNotificacionService = (notificacionData) => {
                 resolve({
                     ok: true,
                     message: 'Notificación creada',
-                    notificacion: notiGuardada
+                    notificacion: guardar
                 })
             }
         } catch (err) {

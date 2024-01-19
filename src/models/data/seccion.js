@@ -10,7 +10,7 @@ import {
 import t from '../../helpers/transacciones.js'
 
 // Data json de los secciones por defecto
-// import seccionesPorDefecto from "../../helpers/sessiones.json" assert { type: "json" };
+import seccionesPorDefecto from "../../helpers/sessiones.json" assert { type: "json" };
 
 const Seccion = sequelize.define('Secciones', {
     seccion: {
@@ -49,6 +49,6 @@ async function insertDefaultData(dataSecciones) {
     }
 }
 
-// insertDefaultData(seccionesPorDefecto.secciones);
+insertDefaultData(seccionesPorDefecto.secciones)
 
 export default Seccion

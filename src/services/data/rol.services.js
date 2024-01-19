@@ -30,7 +30,9 @@ export const postRol = (data) => {
                 })
             }
             const crearRol = await Rol.create(data, {transaction: transaccion.data})
-            if (!crearRol) {
+            const guardar = await crearRol.save()
+
+            if (!guardar) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,
@@ -45,7 +47,7 @@ export const postRol = (data) => {
                 rol: crearRol
             })
         } catch (error) {
-            return reject(error)
+            reject(error)
         }
     })
 }
@@ -133,7 +135,7 @@ export const putRolService = (idRol, data) => {
                 rol: ActualizarRol
             })
         } catch (error) {
-            return reject(error)
+            reject(error)
         }
     })
 }

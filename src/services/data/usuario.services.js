@@ -223,7 +223,7 @@ export const putUsuarioService = (idUser, data) => {
             resolve({
                 ok: true,
                 message: ' Usuario Actualizado correctamente',
-                usuarioActualizado
+                usuario: usuarioActualizado
             })
         } catch (error) {
             reject(error)

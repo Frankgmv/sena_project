@@ -60,7 +60,8 @@ export const postAnucioService = (data) => {
                 transaction: transaccion.data
             })
 
-            if (!crearAnuncio) {
+            const response = await crearAnuncio.save()
+            if (!response) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
@@ -68,13 +69,62 @@ export const postAnucioService = (data) => {
                 })
             }
 
-            const response = await crearAnuncio.save()
-
             await t.commit(transaccion.data)
             return resolve({
                 ok: true,
                 message: 'Anuncio creado.',
                 anuncio: response
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+export const getAllAnunciosService = (seccionKey) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (seccionKey !== 'todos') {
+                const anuncios = await Anuncio.findAll({
+                    where: {
+                        SeccionId: seccionKey
+                    }
+                })
+
+                return resolve({
+                    ok: true,
+                    message: 'Lista de anuncios',
+                    anuncios
+                })
+            }
+            const anuncios = await Anuncio.findAll()
+
+            resolve({
+                ok: true,
+                message: 'Lista de anuncios',
+                anuncios
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+export const getAnuncioService = (idAnuncio) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const anuncio = await Anuncio.findByPk(idAnuncio)
+
+            if (!anuncio) {
+                return resolve({
+                    ok: false,
+                    message: 'Anuncio no encontrado'
+                })
+            }
+
+            resolve({
+                ok: true,
+                anuncio
             })
         } catch (error) {
             reject(error)

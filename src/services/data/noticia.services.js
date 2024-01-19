@@ -41,11 +41,12 @@ export const postNoticiaService = (data) => {
                 })
             }
 
-            const crearNoticia = Noticia.create(data, {
+            const crearNoticia = await Noticia.create(data, {
                 transaction: transaccion.data
             })
-            await crearNoticia.save()
-            if (!crearNoticia) {
+
+            const guardar = await crearNoticia.save()
+            if (!guardar) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
@@ -56,7 +57,7 @@ export const postNoticiaService = (data) => {
             resolve({
                 ok: true,
                 message: 'Noticia creada exitosamente.',
-                noticia: crearNoticia
+                noticia: guardar
             })
         } catch (error) {
             reject(error)
@@ -153,8 +154,6 @@ export const putNoticiaService = (id, data) => {
             }
 
             const modificarNoticia = await noticia.update(data, {transaction: transaccion.data})
-            await modificarNoticia.save()
-
             if (!modificarNoticia) {
                 await t.rollback(transaccion.data)
                 return resolve({

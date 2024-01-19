@@ -13,9 +13,9 @@ export function postPqrsService(pqrsData) {
             }
 
             const nuevoPqrs = await Pqrs.create(pqrsData, {transaction: transaccion.data})
-            const pqrsCreado = await nuevoPqrs.save()
+            const guardar = await nuevoPqrs.save()
 
-            if (!pqrsCreado) {
+            if (!guardar) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,
@@ -27,7 +27,7 @@ export function postPqrsService(pqrsData) {
             resolve({
                 ok: true,
                 message: 'Pqrs registrado',
-                pqrs: pqrsCreado
+                pqrs: guardar
             })
         } catch (err) {
             reject(err)

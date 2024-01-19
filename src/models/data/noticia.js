@@ -13,10 +13,6 @@ const Noticia = sequelize.define('Noticia', {
         type: DataTypes.STRING,
         allowNulls: false
     },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNulls: false
-    },
     encabezado:{
         type:DataTypes.STRING,
         allowNulls: true

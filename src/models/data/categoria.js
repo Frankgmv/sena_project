@@ -4,7 +4,7 @@ import {
 import {
     sequelize
 } from '../../conection.js'
-// import categoriasPorDefecto from '../../helpers/categorias.json' assert { type: "json" };
+import categoriasPorDefecto from '../../helpers/categorias.json' assert { type: "json" };
 import {
     ErrorCategoria,
     TransactionError
@@ -48,6 +48,6 @@ async function insertDefaultData(dataCategorias) {
     }
 }
 
-// insertDefaultData(categoriasPorDefecto.categorias);
+insertDefaultData(categoriasPorDefecto.categorias)
 
 export default Categoria

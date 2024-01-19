@@ -48,7 +48,10 @@ export const postLinkService = (data) => {
 
             // Crear Link
             const nuevoLink = await Link.create(data, {transaction: transaccion.data})
-            if (!nuevoLink) {
+
+            // Guardar en db
+            const respuesta = await nuevoLink.save()
+            if (!respuesta) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,
@@ -56,8 +59,6 @@ export const postLinkService = (data) => {
                 })
             }
 
-            // Guardar en db
-            const respuesta = await nuevoLink.save()
             await t.commit(transaccion.data)
 
             resolve({
@@ -141,7 +142,7 @@ export const putLinkService = (idLink, data) => {
             }
 
             const linkActualizado = await link.update(data, {transaction: transaccion.data})
-            await linkActualizado.save()
+
             if (!linkActualizado) {
                 await t.rollback(transaccion.data)
                 return resolve({

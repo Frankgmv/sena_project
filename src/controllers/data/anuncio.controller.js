@@ -10,7 +10,7 @@ import {
     anuncioSchema
 } from '../../schemas/dataSchemas.js'
 
-import { postAnucioService } from '../../services/data/anuncio.services.js'
+import { getAllAnunciosService, getAnuncioService, postAnucioService } from '../../services/data/anuncio.services.js'
 
 export const postAnuncio = async (req, res, next) => {
     // Inicializar variables globales
@@ -94,9 +94,25 @@ export const postAnuncio = async (req, res, next) => {
 }
 
 export const getAllAnuncios = async (req, res, next) => {
-    try {
+    const { seccionKey } = req.query
+    let seccionKeyRes = seccionKey || 'todos'
 
+    try {
+       const anuncios = await getAllAnunciosService(seccionKeyRes)
+       if (!anuncios.ok) return res.status(404)
+       res.status(200)
     } catch (error) {
         next(error)
     }
 }
+
+export const getAnuncio = async (req, res, next) => {
+    try {
+       const anuncio = await getAnuncioService(req.params.id)
+       if (!anuncio.ok) return res.status(404)
+       res.status(200)
+    } catch (error) {
+        next(error)
+    }
+}
+

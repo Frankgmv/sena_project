@@ -15,7 +15,7 @@ import Pqrs from '../models/informacion/pqrs.js'
 import Vistas from '../models/informacion/vistas.js'
 
 export const test = (req, res) => {
-    res.send('Runta funcionando')
+    res.send('Ruta funcionando')
 }
 
 export const deleteTables = async (req, res, next) => {

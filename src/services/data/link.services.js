@@ -23,16 +23,9 @@ export const postLinkService = (data) => {
                 tipos: ['pdf', 'blog']
             })
         }
+
         let transaccion
-
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const existeUsuario = await Usuario.findByPk(UsuarioId)
             const existeCategoria = await Categoria.findByPk(CategoriaId)
             const existeSeccion = await Seccion.findByPk(SeccionId)
@@ -44,6 +37,13 @@ export const postLinkService = (data) => {
                     mensage: 'Hubo un error con el Usuario, la Categoria o la Seccion',
                     pathError: ['CategoriaId', 'UsuarioId', 'SeccionId']
                 })
+            }
+
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
             }
 
             // Crear Link
@@ -122,13 +122,6 @@ export const putLinkService = (idLink, data) => {
         }
 
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const link = await Link.findByPk(idLink)
             if (!link) {
                 return resolve({
@@ -139,6 +132,13 @@ export const putLinkService = (idLink, data) => {
 
             if (data.id) {
                 delete data.id
+            }
+
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
             }
 
             const linkActualizado = await link.update(data, {transaction: transaccion.data})

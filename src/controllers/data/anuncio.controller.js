@@ -1,21 +1,31 @@
 import fs from 'fs'
 import sharp from 'sharp'
 import {
-    crearNombreImagenes
+    crearNombreImagenes,
+    deleteFile
 } from '../../helpers/includes.js'
 import {
     validateSchemaInto
 } from '../../middlewares/validarSchemas.js'
 import {
-    anuncioSchema
+    anuncioSchema,
+    putAnuncioSchema
 } from '../../schemas/dataSchemas.js'
-
-import { getAllAnunciosService, getAnuncioService, postAnucioService } from '../../services/data/anuncio.services.js'
+import {
+    maxBytes,
+    tiposPermitidos
+} from '../../variables.js'
+import {
+    deleteAnuncioService,
+    getAllAnunciosService,
+    getAnuncioService,
+    postAnucioService,
+    putAnuncioService
+} from '../../services/data/anuncio.services.js'
 
 export const postAnuncio = async (req, res, next) => {
     // Inicializar variables globales
     let bodyBuild = {}
-    const maxBytes = 1E7
     let datosAnuncio
 
     // Parsear Las Usuario y Seccion Id's del body
@@ -78,10 +88,16 @@ export const postAnuncio = async (req, res, next) => {
             const urlPath = `src/upload/${nombreArchivo.nombre}`
             fs.writeFileSync(urlPath, bufferComprimido)
 
-            datosAnuncio = {...bodyBuild, imgPath: nombreArchivo.nombre}
+            datosAnuncio = {
+                ...bodyBuild,
+                imgPath: nombreArchivo.nombre
+            }
         } else {
             // Montar anuncio sin imagen
-            datosAnuncio = {...bodyBuild, imgPath: null}
+            datosAnuncio = {
+                ...bodyBuild,
+                imgPath: null
+            }
         }
         // Guardar anuncio
         const guardar = await postAnucioService(datosAnuncio)
@@ -94,13 +110,16 @@ export const postAnuncio = async (req, res, next) => {
 }
 
 export const getAllAnuncios = async (req, res, next) => {
-    const { seccionKey } = req.query
+    const {
+        seccionKey
+    } = req.query
     let seccionKeyRes = seccionKey || 'todos'
 
     try {
-       const anuncios = await getAllAnunciosService(seccionKeyRes)
-       if (!anuncios.ok) return res.status(404)
-       res.status(200)
+        const anuncios = await getAllAnunciosService(seccionKeyRes)
+        res.json(anuncios)
+        if (!anuncios.ok) return res.status(404)
+        res.status(200)
     } catch (error) {
         next(error)
     }
@@ -108,11 +127,107 @@ export const getAllAnuncios = async (req, res, next) => {
 
 export const getAnuncio = async (req, res, next) => {
     try {
-       const anuncio = await getAnuncioService(req.params.id)
-       if (!anuncio.ok) return res.status(404)
-       res.status(200)
+        const anuncio = await getAnuncioService(req.params.id)
+        res.json(anuncio)
+        if (!anuncio.ok) return res.status(404)
+        res.status(200)
     } catch (error) {
         next(error)
     }
 }
 
+export const putAnuncio = async (req, res, next) => {
+    try {
+        let bodyBuild = {
+            ...req.body
+        }
+
+        if (req.body.UsuarioId) {
+            const UsuarioId = parseInt(req.body.UsuarioId)
+            bodyBuild = {
+                ...bodyBuild,
+                UsuarioId
+            }
+        }
+        let datosAnuncio
+
+        const validarSchemaResponse = validateSchemaInto(putAnuncioSchema, bodyBuild)
+        if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+
+        let image = req.file
+        if (image) {
+            if (!tiposPermitidos.includes(image.mimetype)) {
+                return res.status(400).json({
+                    ok: false,
+                    message: `Formato ${image.mimetype.split('/'[1])} inválido . [png, jpg, jpeg]`
+                })
+            }
+
+            if (image.size > maxBytes) {
+                return res.status(400).json({
+                    message: 'La imagen es muy grande. (10MB máx)'
+                })
+            }
+            const buffer = Buffer.from(image.buffer, 'binary')
+
+            const nombreArchivo = crearNombreImagenes(image)
+            let processImage = sharp(buffer)
+
+            const ancho = processImage.with
+            const alto = processImage.height
+
+            if (ancho > 1024 || alto > 1024) {
+                const escala = Math.min(1, 1024 / ancho, 1024 / alto)
+                processImage = processImage.scale(escala)
+            }
+
+            const bufferComprimido = await processImage.toBuffer(nombreArchivo.mimetype)
+            console.log(bufferComprimido)
+            const urlPath = `src/upload/${nombreArchivo.nombre}`
+            fs.writeFileSync(urlPath, bufferComprimido)
+
+            datosAnuncio = {
+                ...bodyBuild,
+                imgPath: nombreArchivo.nombre
+            }
+
+            const consultaAnuncio = await getAnuncioService(req.params.id)
+            console.log(consultaAnuncio)
+            if (consultaAnuncio.ok) {
+                if (deleteFile(consultaAnuncio.anuncio.imgPath)) {
+                    next('error al remplazar el archivo')
+                }
+            }
+        } else {
+            datosAnuncio = {
+                ...bodyBuild
+            }
+        }
+        const actualizarAnuncio = await putAnuncioService(req.params.id, datosAnuncio)
+        res.json(actualizarAnuncio)
+        if (!actualizarAnuncio.ok) return res.status(400)
+        res.status(200)
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const deleteAnuncio = async (req, res, next) => {
+    try {
+        const consultaAnuncio = await getAnuncioService(req.params.id)
+
+        if (consultaAnuncio.ok) {
+            if (deleteFile(consultaAnuncio.anuncio.imgPath)) {
+                next('El archivo no se eliminar')
+            }
+        }
+
+        const deleteAnuncio = await deleteAnuncioService(req.params.id)
+
+        res.json(deleteAnuncio)
+        if (!deleteAnuncio.ok) return res.status(404)
+        res.status(200)
+    } catch (error) {
+        next(error)
+    }
+}

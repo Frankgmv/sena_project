@@ -9,12 +9,6 @@ export const postNoticiaService = (data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
             const existeNoticia = await Noticia.findOne({
                 where: {
                     titulo: data.titulo
@@ -41,6 +35,12 @@ export const postNoticiaService = (data) => {
                 })
             }
 
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
             const crearNoticia = await Noticia.create(data, {
                 transaction: transaccion.data
             })
@@ -134,12 +134,6 @@ export const putNoticiaService = (id, data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
             if (data.id) {
                 delete data.id
             }
@@ -153,11 +147,20 @@ export const putNoticiaService = (id, data) => {
                 })
             }
 
-            const modificarNoticia = await noticia.update(data, {transaction: transaccion.data})
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
+            const modificarNoticia = await noticia.update(data, {
+                transaction: transaccion.data
+            })
             if (!modificarNoticia) {
                 await t.rollback(transaccion.data)
                 return resolve({
-                    ok:false,
+                    ok: false,
                     message: 'Noticia no fue modificada'
                 })
             }

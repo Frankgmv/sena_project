@@ -12,11 +12,6 @@ export const postAnucioService = (data) => {
         // Transaccion
         let transaccion
         try {
-            transaccion = await t.create()
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const existeTitulo = await Anuncio.findAll({
                 where: {
                     titulo: data.titulo
@@ -54,6 +49,11 @@ export const postAnucioService = (data) => {
                     ok: false,
                     message: 'SeccionId no existe'
                 })
+            }
+
+            transaccion = await t.create()
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
             }
 
             const crearAnuncio = await Anuncio.create(data, {
@@ -124,7 +124,106 @@ export const getAnuncioService = (idAnuncio) => {
 
             resolve({
                 ok: true,
-                anuncio
+                anuncio: anuncio.dataValues
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+export const putAnuncioService = (idAnuncio, data) => {
+    return new Promise(async (resolve, reject) => {
+        // Transaccion
+        let transaccion
+        try {
+            const modAnuncio = await Anuncio.findByPk(idAnuncio)
+
+            if (!modAnuncio) {
+                return resolve({
+                    ok: false,
+                    message: 'El anuncio no encontrado'
+                })
+            }
+
+            if (data.UsuarioId) {
+                const existeUsuario = await Usuario.findOne({
+                    where: {
+                        id: data.UsuarioId
+                    }
+                })
+
+                if (!existeUsuario) {
+                    return resolve({
+                        ok: false,
+                        message: 'UsuarioId no existe'
+                    })
+                }
+            }
+
+            if (data.SeccionId) {
+                const existeSeccion = await Seccion.findOne({
+                    where: {
+                        id: data.SeccionId
+                    }
+                })
+
+                if (!existeSeccion) {
+                    return resolve({
+                        ok: false,
+                        message: 'SeccionId no existe'
+                    })
+                }
+            }
+
+            if (data.id) {
+                delete data.id
+            }
+
+            transaccion = await t.create()
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
+            const updatedAnuncio = await modAnuncio.update(data, { transaction: transaccion.data })
+
+            if (!updatedAnuncio) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok: false,
+                    message: 'El anuncio no se pudo actualizar'
+                })
+            }
+
+            await t.commit(transaccion.data)
+            resolve({
+                ok: true,
+                message: ' Anuncio actualizado correctamente',
+                anuncio: updatedAnuncio
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+export const deleteAnuncioService = (idAnuncio) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const anuncio = await Anuncio.findByPk(idAnuncio)
+
+            if (!anuncio) {
+                return resolve({
+                    ok: false,
+                    message: 'Anuncio no encontrado'
+                })
+            }
+
+            await anuncio.destroy()
+
+            resolve({
+                ok: true,
+                message: 'Anuncio eliminado'
             })
         } catch (error) {
             reject(error)

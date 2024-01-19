@@ -7,13 +7,6 @@ export const postHistorialService = (data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const existeUsuario = await Usuario.findByPk(data.UsuarioId)
 
             if (!existeUsuario) {
@@ -22,6 +15,13 @@ export const postHistorialService = (data) => {
                     message: 'El usuario no existe'
                 })
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             const generarRegistro = await Historial.create(data, {transaction: transaccion.data})
             const response = await generarRegistro.save()

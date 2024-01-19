@@ -62,18 +62,19 @@ export function putPqrsService(idPqrs) {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
             const getPqrsAndUpdate = await Pqrs.findByPk(idPqrs)
             if (!getPqrsAndUpdate) {
                 return resolve({
                     ok: false,
                     message: 'No se encontró ningún dato para actualizar'
                 })
+            }
+
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
             }
 
             const updated = await getPqrsAndUpdate.update({

@@ -12,7 +12,7 @@ const Anuncio = sequelize.define('Anuncio', {
     },
     titulo:{
         type: DataTypes.STRING,
-        allowNulls: false
+        allowNulls: true
     },
     descripcion:{
         type:DataTypes.TEXT,

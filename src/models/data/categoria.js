@@ -4,7 +4,7 @@ import {
 import {
     sequelize
 } from '../../conection.js'
-import categoriasPorDefecto from '../../helpers/categorias.json' assert { type: "json" };
+import categoriasPorDefecto from '../../helpers/categorias.json' assert { type: "json" }
 import {
     ErrorCategoria,
     TransactionError
@@ -23,7 +23,7 @@ const Categoria = sequelize.define('Categoria', {
     }
 }, {
     tableName: 'Categorias',
-    timestamps:false
+    timestamps: false
 })
 
 // funcion para insertar los datos de los categorias por defecto.
@@ -31,23 +31,24 @@ async function insertDefaultData(dataCategorias) {
     let transaccion
     try {
         // Transaccion
-        transaccion = await t.create()
-
-        if (!transaccion.ok) {
-            throw new TransactionError('Error al crear transaccion')
-        }
 
         await Categoria.sync()
         const haycategorias = await Categoria.findAll()
         if (haycategorias.length === 0) {
-            await Categoria.bulkCreate(dataCategorias, {transaction: transaccion.data})
+            transaccion = await t.create()
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+            await Categoria.bulkCreate(dataCategorias, {
+                transaction: transaccion.data
+            })
+            await t.commit(transaccion.data)
         }
-        await t.commit(transaccion.data)
     } catch (error) {
         throw new ErrorCategoria(error)
     }
 }
 
-insertDefaultData(categoriasPorDefecto.categorias)
+// insertDefaultData(categoriasPorDefecto.categorias)
 
 export default Categoria

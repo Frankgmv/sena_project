@@ -8,12 +8,6 @@ export const postEventoService = (data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
             const existeEvento = await Evento.findOne({
                 where: {
                     evento: data.evento
@@ -25,6 +19,13 @@ export const postEventoService = (data) => {
                     message: 'Evento ya existe.'
                 })
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             const nuevoEvento = await Evento.create(data, {
                 transaction: transaccion.data
@@ -93,12 +94,6 @@ export const putEventoService = (idEvento, data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
             const evento = await Evento.findByPk(idEvento)
             if (!evento) {
                 return resolve({
@@ -109,6 +104,12 @@ export const putEventoService = (idEvento, data) => {
 
             if (data.id) {
                 delete data.id
+            }
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
             }
 
             const eventoActualizado = await evento.update(data, {transaction: transaccion.data})

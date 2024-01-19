@@ -1,8 +1,8 @@
 import sharp from 'sharp'
 import fs from 'fs'
-import * as path from 'path'
 import {
-    crearNombreImagenes
+    crearNombreImagenes,
+    deleteFile
 } from '../../helpers/includes.js'
 import {
     validateSchemaInto
@@ -18,11 +18,14 @@ import {
     postNoticiaService,
     putNoticiaService
 } from '../../services/data/noticia.services.js'
+import {
+    maxBytes,
+    tiposPermitidos
+} from '../../variables.js'
 import 'colors'
 
 export const postNoticia = async (req, res, next) => {
     let bodyBuild = {}
-    const maxBytes = 1E7
     let datosNoticia
     try {
         const UsuarioId = parseInt(req.body.UsuarioId)
@@ -41,9 +44,6 @@ export const postNoticia = async (req, res, next) => {
 
         let image = req.file
         if (image) {
-            // Montar anuncio con imagen
-            const tiposPermitidos = ['image/png', 'image/jpeg', 'image/jpg']
-
             // Validar tipos permitodos
             if (!tiposPermitidos.includes(image.mimetype)) {
                 return res.status(400).json({
@@ -136,7 +136,6 @@ export const putNoticia = async (req, res, next) => {
         let bodyBuild = {
             ...req.body
         }
-        const maxBytes = 1E7
         if (req.body.UsuarioId) {
             const UsuarioId = parseInt(req.body.UsuarioId)
             bodyBuild = {
@@ -151,8 +150,6 @@ export const putNoticia = async (req, res, next) => {
 
         let image = req.file
         if (image) {
-            const tiposPermitidos = ['image/png', 'image/jpeg', 'image/jpg']
-
             if (!tiposPermitidos.includes(image.mimetype)) {
                 return res.status(400).json({
                     ok: false,
@@ -192,13 +189,8 @@ export const putNoticia = async (req, res, next) => {
             const consultaNoticia = await getNoticiaService(req.params.id)
 
             if (consultaNoticia.ok) {
-                let pathAntiguio = `src/upload/${consultaNoticia.noticia.imgPath}`
-                const existe = fs.existsSync(pathAntiguio)
-
-                if (pathAntiguio && existe) {
-                    fs.rm(pathAntiguio, (err) => {
-                        if (err) return next('error al remplazar el archivo')
-                    })
+                if (deleteFile(consultaNoticia.noticia.imgPath)) {
+                    next('error al remplazar el archivo')
                 }
             }
         } else {
@@ -206,7 +198,6 @@ export const putNoticia = async (req, res, next) => {
                 ...bodyBuild
             }
         }
-
         const actualizarNoticia = await putNoticiaService(req.params.id, datosNoticia)
         res.json(actualizarNoticia)
         if (!actualizarNoticia.ok) return res.status(400)
@@ -218,6 +209,19 @@ export const putNoticia = async (req, res, next) => {
 
 export const deleteNoticia = async (req, res, next) => {
     try {
+        const consultaNoticia = await getNoticiaService(req.params.id)
+
+        if (consultaNoticia.ok) {
+            let pathAntiguio = `src/upload/${consultaNoticia.noticia.imgPath}`
+            const existe = fs.existsSync(pathAntiguio)
+
+            if (pathAntiguio && existe) {
+                fs.rm(pathAntiguio, (err) => {
+                    if (err) return next('error al eliminar el archivo')
+                })
+            }
+        }
+
         const EliminarNoticias = await deleteNoticiaService(req.params.id)
         res.json(EliminarNoticias)
         if (!EliminarNoticias.ok) return res.status(404)

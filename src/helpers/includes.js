@@ -1,5 +1,5 @@
 import multer from 'multer'
-
+import fs from 'fs'
 export const crearNombreImagenes = (file) => {
     let formato = file.mimetype.split('/')
     let nombreImg = file.originalname.split('.')
@@ -7,7 +7,10 @@ export const crearNombreImagenes = (file) => {
     const llaveUnica = `${formato[0]}_${Date.now()}_${Math.round(Math.random() * 1E4)}`
     const mimetype = formato[formato.length - 1]
     const nombre = `${nombreImg[0]}_${llaveUnica}.${mimetype}`.replace(/\s/g, '').toLowerCase()
-    return {nombre, mimetype}
+    return {
+        nombre,
+        mimetype
+    }
 }
 
 export const upload = multer({
@@ -40,4 +43,16 @@ export const verificarHttpUrl = (url) => {
         return false
     }
     return true
+}
+
+export const deleteFile = (pathFile) => {
+    let pathAntiguio = `src/upload/${pathFile}`
+    const existe = fs.existsSync(pathAntiguio)
+
+    if (pathAntiguio && existe) {
+        fs.rm(pathAntiguio, (err) => {
+            if (err) return true
+            else return false
+        })
+    }
 }

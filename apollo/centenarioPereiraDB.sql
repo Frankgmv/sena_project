@@ -132,7 +132,7 @@ CREATE TABLE tokens (
 -- ! Tabla "archivos" MULTIMEDIA
 CREATE TABLE archivos (
     id SERIAL PRIMARY KEY,
-    titulo VARCHAR(100),
+    titulo VARCHAR(100),x|
     archivo BYTEA,
     fecha TIMESTAMP,
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT

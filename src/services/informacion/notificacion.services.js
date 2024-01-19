@@ -98,13 +98,6 @@ export const putNotificacionService = (idNoti) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const findNoti = await Notificaciones.findByPk(idNoti)
             if (!findNoti) {
                 return resolve({
@@ -112,6 +105,13 @@ export const putNotificacionService = (idNoti) => {
                     message: 'Notificación no encontrada'
                 })
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             const updated = await findNoti.update({
                 estado: true
@@ -164,13 +164,6 @@ export function deleteAllNotificacionesService() {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const EliminarNotificacionesSinLeer = await Notificaciones.findAll({
                 where: {
                     estado: true
@@ -183,6 +176,13 @@ export function deleteAllNotificacionesService() {
                     message: 'No hay notificaciones leídas'
                 })
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             for (const notif of EliminarNotificacionesSinLeer) {
                 await notif.destroy({transaction: transaccion.data})

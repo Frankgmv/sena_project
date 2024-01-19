@@ -6,13 +6,6 @@ export const postRol = (data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const existeRol = await Rol.findOne({
                 where: {
                     rol: data.rol
@@ -29,6 +22,14 @@ export const postRol = (data) => {
                     mensaje: 'Ya existe un rol o Llave rol igual a la que intenta registrar'
                 })
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
+
             const crearRol = await Rol.create(data, {transaction: transaccion.data})
             const guardar = await crearRol.save()
 
@@ -100,13 +101,6 @@ export const putRolService = (idRol, data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const ActualizarRol = await Rol.findByPk(idRol)
 
             if (!ActualizarRol) {
@@ -115,6 +109,13 @@ export const putRolService = (idRol, data) => {
                     mensage: 'Rol no encontrado'
                 })
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             const actualizarRol = await ActualizarRol.update({
                 estado: data.estado

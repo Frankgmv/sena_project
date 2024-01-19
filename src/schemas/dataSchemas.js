@@ -283,7 +283,7 @@ export const putAnuncioSchema = z.object({
         required_error: 'UsuarioId requerido',
         invalid_type_error: 'UsuarioId es un número'
     }).optional(),
-    SeccionId: z.number({
+    SeccionId: z.string({
         required_error: 'SeccionId requerido',
         invalid_type_error: 'SeccionId es un número'
     }).optional()

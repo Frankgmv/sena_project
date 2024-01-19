@@ -26,13 +26,6 @@ export const postUsuarioService = (data) => {
         } = data
         const emailLower = email.toLowerCase()
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             //  consultar roles
             const existeRol = await Rol.findByPk(RolId)
 
@@ -90,6 +83,13 @@ export const postUsuarioService = (data) => {
             // Encriptar
             const saltos = bcrypt.genSaltSync(10)
             const passwordHast = bcrypt.hashSync(password, saltos)
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             // Crear usuario
             const nuevoUsuario = await Usuario.create({
@@ -190,13 +190,6 @@ export const putUsuarioService = (idUser, data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const usuario = await Usuario.findByPk(idUser)
             if (!usuario) {
                 return resolve({
@@ -208,6 +201,13 @@ export const putUsuarioService = (idUser, data) => {
             if (data.id) {
                 delete data.id
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             const usuarioActualizado = await usuario.update(data, {transaction: transaccion.data})
 

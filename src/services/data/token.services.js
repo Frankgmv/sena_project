@@ -10,13 +10,6 @@ export const postTokenService = (data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const encontrarToken = await Token.findOne({
                 where: {
                     [Op.or]: {
@@ -32,6 +25,13 @@ export const postTokenService = (data) => {
                     message: 'TokenKey o nombre ya usados.'
                 })
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             const existeUsuario = await Usuario.findByPk(data.UsuarioId)
 
@@ -106,13 +106,6 @@ export const putTokenService = (idToken, data) => {
     return new Promise(async (resolve, reject) => {
         let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const encontrarToken = await Token.findByPk(idToken)
 
             if (!encontrarToken) {
@@ -121,6 +114,13 @@ export const putTokenService = (idToken, data) => {
                     message: 'Token no encontrado.'
                 })
             }
+
+             // Transaccion
+             transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
 
             const actualizarToken = await encontrarToken.update(data)
 

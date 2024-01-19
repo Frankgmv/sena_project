@@ -5,12 +5,13 @@ import {
     sequelize
 } from '../../conection.js'
 import {
-    ErrorSeccion, TransactionError
+    ErrorSeccion,
+    TransactionError
 } from '../../middlewares/fabricaErrores.js'
 import t from '../../helpers/transacciones.js'
 
 // Data json de los secciones por defecto
-import seccionesPorDefecto from "../../helpers/sessiones.json" assert { type: "json" };
+import seccionesPorDefecto from "../../helpers/sessiones.json" assert { type: "json" }
 
 const Seccion = sequelize.define('Secciones', {
     seccion: {
@@ -30,25 +31,27 @@ const Seccion = sequelize.define('Secciones', {
 async function insertDefaultData(dataSecciones) {
     let transaccion
     try {
-        // Transaccion
-        transaccion = await t.create()
-
-        if (!transaccion.ok) {
-            throw new TransactionError('Error al crear transaccion')
-        }
         await Seccion.sync()
 
         const haySecciones = await Seccion.findAll()
         if (haySecciones.length === 0) {
-            await Seccion.bulkCreate(dataSecciones, {transaction: transaccion.data})
+            // Transaccion
+            transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+            await Seccion.bulkCreate(dataSecciones, {
+                transaction: transaccion.data
+            })
+            await t.commit(transaccion.data)
         }
 
-        await t.commit(transaccion.data)
     } catch (error) {
         throw new ErrorSeccion(error)
     }
 }
 
-insertDefaultData(seccionesPorDefecto.secciones)
+// insertDefaultData(seccionesPorDefecto.secciones)
 
 export default Seccion

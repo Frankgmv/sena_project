@@ -50,27 +50,27 @@ async function insertDefaultData(dataRoles) {
     }
 }
 
-// insertDefaultData(rolesPorDefecto.roles)
-// insertDefaultData([{
-//         'rol': 'Estudiante Especial',
-//         'rolKey': 'EST_E'
-//     },
-//     {
-//         'rol': 'Docente',
-//         'rolKey': 'DOC'
-//     },
-//     {
-//         'rol': 'Personal Administrativo',
-//         'rolKey': 'P_ADM'
-//     },
-//     {
-//         'rol': 'Coordinador',
-//         'rolKey': 'COOR'
-//     },
-//     {
-//         'rol': 'Web Master',
-//         'rolKey': 'WM'
-//     }
-// ])
+insertDefaultData(rolesPorDefecto.roles)
+insertDefaultData([{
+        'rol': 'Estudiante Especial',
+        'rolKey': 'EST_E'
+    },
+    {
+        'rol': 'Docente',
+        'rolKey': 'DOC'
+    },
+    {
+        'rol': 'Personal Administrativo',
+        'rolKey': 'P_ADM'
+    },
+    {
+        'rol': 'Coordinador',
+        'rolKey': 'COOR'
+    },
+    {
+        'rol': 'Web Master',
+        'rolKey': 'WM'
+    }
+])
 
 export default Rol

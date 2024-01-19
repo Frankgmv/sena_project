@@ -1,5 +1,6 @@
 import sharp from 'sharp'
 import fs from 'fs'
+import * as path from 'path'
 import {
     crearNombreImagenes
 } from '../../helpers/includes.js'
@@ -17,7 +18,6 @@ import {
     postNoticiaService,
     putNoticiaService
 } from '../../services/data/noticia.services.js'
-import Noticia from '../../models/data/noticia.js'
 import 'colors'
 
 export const postNoticia = async (req, res, next) => {
@@ -189,17 +189,14 @@ export const putNoticia = async (req, res, next) => {
                 imgPath: nombreArchivo.nombre
             }
 
-            const consultaNoticia = await Noticia.findByPk(req.params.id)
+            const consultaNoticia = await getNoticiaService(req.params.id)
 
-            if (consultaNoticia) {
-                let pathAntiguio = consultaNoticia.imgPath
-                let pathActual = `../../upload/${pathAntiguio}`
-
-                const existe = fs.existsSync(
-                    import.meta.dirname, pathActual)
+            if (consultaNoticia.ok) {
+                let pathAntiguio = `src/upload/${consultaNoticia.noticia.imgPath}`
+                const existe = fs.existsSync(pathAntiguio)
 
                 if (pathAntiguio && existe) {
-                    fs.rm(`${import.meta.dirname}${pathActual}`, (err) => {
+                    fs.rm(pathAntiguio, (err) => {
                         if (err) return next('error al remplazar el archivo')
                     })
                 }
@@ -209,7 +206,6 @@ export const putNoticia = async (req, res, next) => {
                 ...bodyBuild
             }
         }
-        res.json(datosNoticia)
 
         const actualizarNoticia = await putNoticiaService(req.params.id, datosNoticia)
         res.json(actualizarNoticia)

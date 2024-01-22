@@ -7,7 +7,6 @@ import {
 
 export const postNoticiaService = (data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const existeNoticia = await Noticia.findOne({
                 where: {
@@ -36,7 +35,7 @@ export const postNoticiaService = (data) => {
             }
 
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
@@ -132,7 +131,6 @@ export const getNoticiaService = (id) => {
 
 export const putNoticiaService = (id, data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             if (data.id) {
                 delete data.id
@@ -148,7 +146,7 @@ export const putNoticiaService = (id, data) => {
             }
 
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')

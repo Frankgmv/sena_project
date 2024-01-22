@@ -23,8 +23,6 @@ export const postLinkService = (data) => {
                 tipos: ['pdf', 'blog']
             })
         }
-
-        let transaccion
         try {
             const existeUsuario = await Usuario.findByPk(UsuarioId)
             const existeCategoria = await Categoria.findByPk(CategoriaId)
@@ -40,7 +38,7 @@ export const postLinkService = (data) => {
             }
 
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
@@ -106,7 +104,6 @@ export const getAllLinksService = (tipo) => {
 
 export const putLinkService = (idLink, data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         const {
             tipo
         } = data
@@ -135,7 +132,7 @@ export const putLinkService = (idLink, data) => {
             }
 
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')

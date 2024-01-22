@@ -197,7 +197,8 @@ export const putNoticia = async (req, res, next) => {
             }
         } else {
             datosNoticia = {
-                ...bodyBuild
+                ...bodyBuild,
+                imgPath: null
             }
         }
         const actualizarNoticia = await putNoticiaService(req.params.id, datosNoticia)

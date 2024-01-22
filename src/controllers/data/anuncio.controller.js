@@ -24,24 +24,16 @@ import {
 } from '../../services/data/anuncio.services.js'
 
 export const postAnuncio = async (req, res, next) => {
-    // Inicializar variables globales
-    let bodyBuild = {}
-    let datosAnuncio
-
-    // Parsear Las Usuario y Seccion Id's del body
     try {
+        // Parsear Las Usuario y Seccion Id's del body
+        let datosAnuncio
         const UsuarioId = parseInt(req.body.UsuarioId)
         const SeccionId = parseInt(req.body.SeccionId)
-        bodyBuild = {
+        let bodyBuild = {
             ...req.body,
             UsuarioId,
             SeccionId
         }
-    } catch (error) {
-        next(error.message)
-    }
-
-    try {
         let bufferComprimido
         let urlPath
         // validar la schema para los datos
@@ -52,9 +44,6 @@ export const postAnuncio = async (req, res, next) => {
 
         let image = req.file
         if (image) {
-            // Montar anuncio con imagen
-            const tiposPermitidos = ['image/png', 'image/jpeg', 'image/jpg']
-
             // Validar tipos permitodos
             if (!tiposPermitidos.includes(image.mimetype)) {
                 return res.status(400).json({
@@ -187,7 +176,6 @@ export const putAnuncio = async (req, res, next) => {
             }
 
             bufferComprimido = await processImage.toBuffer(nombreArchivo.mimetype)
-            console.log(bufferComprimido)
             urlPath = `src/upload/${nombreArchivo.nombre}`
 
             datosAnuncio = {
@@ -196,7 +184,6 @@ export const putAnuncio = async (req, res, next) => {
             }
 
             const consultaAnuncio = await getAnuncioService(req.params.id)
-            console.log(consultaAnuncio)
             if (consultaAnuncio.ok) {
                 if (deleteFile(consultaAnuncio.anuncio.imgPath)) {
                     next('error al remplazar el archivo')
@@ -204,7 +191,8 @@ export const putAnuncio = async (req, res, next) => {
             }
         } else {
             datosAnuncio = {
-                ...bodyBuild
+                ...bodyBuild,
+                imgPath: null
             }
         }
         const actualizarAnuncio = await putAnuncioService(req.params.id, datosAnuncio)

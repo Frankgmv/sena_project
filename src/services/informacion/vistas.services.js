@@ -1,17 +1,12 @@
 import Vistas from '../../models/informacion/vistas.js'
 import t from '../../helpers/transacciones.js'
-import { TransactionError } from '../../middlewares/fabricaErrores.js'
+import {
+    TransactionError
+} from '../../middlewares/fabricaErrores.js'
 
 export const postVistasService = (Vistadata) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
             const obtenerVisualizacion = await Vistas.findAll()
 
             if (obtenerVisualizacion.length !== 0) {
@@ -19,13 +14,21 @@ export const postVistasService = (Vistadata) => {
                     ok: false
                 })
             } else {
-                const crearVista = await Vistas.create(Vistadata, {transaction: transaccion.data})
+                // Transaccion
+                let transaccion = await t.create()
+
+                if (!transaccion.ok) {
+                    throw new TransactionError('Error al crear transaccion')
+                }
+                const crearVista = await Vistas.create(Vistadata, {
+                    transaction: transaccion.data
+                })
                 const guardar = await crearVista.save()
 
                 if (!guardar) {
                     await t.rollback(transaccion.data)
                     return resolve({
-                        ok:false,
+                        ok: false,
                         message: 'Vista no fue creado'
                     })
                 }
@@ -75,15 +78,7 @@ export const putVistasService = () => {
     // fechaReinicio.setHours(1, 0, 0, 0);
 
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             let obtenerVisualizacion = await Vistas.findAll()
 
             if (obtenerVisualizacion.length === 0) {
@@ -103,12 +98,21 @@ export const putVistasService = () => {
                 'vistasDia': dataVisual['vistasDia'] + 1
             }
 
-            const vistaUpdated = await dataVisual.update(dataUpdate, {transaction: transaccion.data})
+            // Transaccion
+            let transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+
+            const vistaUpdated = await dataVisual.update(dataUpdate, {
+                transaction: transaccion.data
+            })
 
             if (!vistaUpdated) {
                 await t.rollback(transaccion.data)
                 return resolve({
-                    ok:false,
+                    ok: false,
                     message: 'Vista no fue actualizada'
                 })
             }

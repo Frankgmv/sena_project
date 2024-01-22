@@ -183,7 +183,8 @@ export const putItem = async (req, res, next) => {
             }
         } else {
             datosItem = {
-                ...bodyBuild
+                ...bodyBuild,
+                imgPath: null
             }
         }
         const actualizarItem = await putItemService(req.params.id, datosItem)

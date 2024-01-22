@@ -16,7 +16,6 @@ import {
 
 export const postUsuarioService = (data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         const {
             id: documento,
             fechaNacimiento,
@@ -85,7 +84,7 @@ export const postUsuarioService = (data) => {
             const passwordHast = bcrypt.hashSync(password, saltos)
 
              // Transaccion
-             transaccion = await t.create()
+            let transaccion = await t.create()
 
              if (!transaccion.ok) {
                  throw new TransactionError('Error al crear transaccion')
@@ -188,7 +187,6 @@ export const getUsuarioService = (idUser) => {
 }
 export const putUsuarioService = (idUser, data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const usuario = await Usuario.findByPk(idUser)
             if (!usuario) {
@@ -203,7 +201,7 @@ export const putUsuarioService = (idUser, data) => {
             }
 
              // Transaccion
-             transaccion = await t.create()
+            let transaccion = await t.create()
 
              if (!transaccion.ok) {
                  throw new TransactionError('Error al crear transaccion')

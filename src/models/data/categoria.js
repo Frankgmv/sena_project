@@ -28,14 +28,13 @@ const Categoria = sequelize.define('Categoria', {
 
 // funcion para insertar los datos de los categorias por defecto.
 async function insertDefaultData(dataCategorias) {
-    let transaccion
     try {
         // Transaccion
 
         await Categoria.sync()
         const haycategorias = await Categoria.findAll()
         if (haycategorias.length === 0) {
-            transaccion = await t.create()
+            let transaccion = await t.create()
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
             }

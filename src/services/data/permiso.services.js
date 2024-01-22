@@ -6,15 +6,7 @@ import {
 
 export const postPermisoService = async (data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const consultaKey = await Permiso.findOne({
                 where: {
                     permisoKey: data.permisoKey
@@ -26,6 +18,13 @@ export const postPermisoService = async (data) => {
                     ok: false,
                     message: 'El permiso ya existe'
                 })
+            }
+
+            // Transaccion
+            let transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
             }
 
             const nuevoPermiso = await Permiso.create(data, {
@@ -103,14 +102,7 @@ export const putPermisoService = async (idPermiso, {
     permisoKey
 }) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
-            // Transaccion
-            transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
             const actulizarPermisos = await Permiso.findByPk(idPermiso)
             if (!actulizarPermisos) {
                 return resolve({
@@ -118,6 +110,13 @@ export const putPermisoService = async (idPermiso, {
                     message: 'Permiso no encontrado'
                 })
             }
+
+             // Transaccion
+             let transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
             const updatedPermios = await actulizarPermisos.update({
                 permiso,
                 permisoKey

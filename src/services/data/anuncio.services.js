@@ -9,8 +9,6 @@ import 'colors'
 
 export const postAnucioService = (data) => {
     return new Promise(async (resolve, reject) => {
-        // Transaccion
-        let transaccion
         try {
             const existeTitulo = await Anuncio.findAll({
                 where: {
@@ -51,7 +49,7 @@ export const postAnucioService = (data) => {
                 })
             }
 
-            transaccion = await t.create()
+            let transaccion = await t.create()
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
             }

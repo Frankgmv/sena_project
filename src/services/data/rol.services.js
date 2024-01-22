@@ -4,7 +4,6 @@ import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postRol = (data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const existeRol = await Rol.findOne({
                 where: {
@@ -24,7 +23,7 @@ export const postRol = (data) => {
             }
 
              // Transaccion
-             transaccion = await t.create()
+             let transaccion = await t.create()
 
              if (!transaccion.ok) {
                  throw new TransactionError('Error al crear transaccion')
@@ -99,7 +98,6 @@ export const getRolService = (idRol) => {
 
 export const putRolService = (idRol, data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const ActualizarRol = await Rol.findByPk(idRol)
 
@@ -111,7 +109,7 @@ export const putRolService = (idRol, data) => {
             }
 
              // Transaccion
-             transaccion = await t.create()
+            let transaccion = await t.create()
 
              if (!transaccion.ok) {
                  throw new TransactionError('Error al crear transaccion')

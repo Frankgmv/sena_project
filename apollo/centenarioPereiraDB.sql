@@ -129,7 +129,7 @@ CREATE TABLE tokens (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ? Tabla "Items"
+-- * Tabla "Items"
 CREATE TABLE items (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(255),

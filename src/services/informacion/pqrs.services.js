@@ -1,24 +1,27 @@
 import Pqrs from '../../models/informacion/pqrs.js'
 import t from '../../helpers/transacciones.js'
-import { TransactionError } from '../../middlewares/fabricaErrores.js'
+import {
+    TransactionError
+} from '../../middlewares/fabricaErrores.js'
 export function postPqrsService(pqrsData) {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            const nuevoPqrs = await Pqrs.create(pqrsData, {transaction: transaccion.data})
+            const nuevoPqrs = await Pqrs.create(pqrsData, {
+                transaction: transaccion.data
+            })
             const guardar = await nuevoPqrs.save()
 
             if (!guardar) {
                 await t.rollback(transaccion.data)
                 return resolve({
-                    ok:false,
+                    ok: false,
                     message: 'PQRS no fue creado'
                 })
             }
@@ -60,7 +63,6 @@ export function getAllPqrsService() {
 
 export function putPqrsService(idPqrs) {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const getPqrsAndUpdate = await Pqrs.findByPk(idPqrs)
             if (!getPqrsAndUpdate) {
@@ -71,7 +73,7 @@ export function putPqrsService(idPqrs) {
             }
 
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
@@ -79,12 +81,14 @@ export function putPqrsService(idPqrs) {
 
             const updated = await getPqrsAndUpdate.update({
                 estado: true
-            }, {transaction: transaccion.data})
+            }, {
+                transaction: transaccion.data
+            })
 
             if (!updated) {
                 await t.rollback(transaccion.data)
                 return resolve({
-                    ok:false,
+                    ok: false,
                     message: 'PQRS no fue actualizado'
                 })
             }
@@ -148,10 +152,9 @@ export function deletePqrsService(idPqrs) {
 
 export function deleteAllPqrsService() {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
@@ -171,7 +174,9 @@ export function deleteAllPqrsService() {
             }
 
             for (const pqrs of EliminarPqrsSinLeer) {
-                await pqrs.destroy({transaction: transaccion.data})
+                await pqrs.destroy({
+                    transaction: transaccion.data
+                })
             }
             await t.commit(transaccion.data)
             resolve({

@@ -6,7 +6,6 @@ import {
 
 export const postEventoService = (data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const existeEvento = await Evento.findOne({
                 where: {
@@ -21,7 +20,7 @@ export const postEventoService = (data) => {
             }
 
              // Transaccion
-             transaccion = await t.create()
+             let transaccion = await t.create()
 
              if (!transaccion.ok) {
                  throw new TransactionError('Error al crear transaccion')
@@ -92,7 +91,6 @@ export const getEventoService = (idEvento) => {
 
 export const putEventoService = (idEvento, data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const evento = await Evento.findByPk(idEvento)
             if (!evento) {
@@ -106,7 +104,7 @@ export const putEventoService = (idEvento, data) => {
                 delete data.id
             }
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')

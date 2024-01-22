@@ -9,12 +9,10 @@ export const validateSchema = (Shema) => (req, res, next) => {
     }
 }
 
-export const  validateSchemaInto = (Shema, body)  => {
+export const validateSchemaInto = (Shema, body) => {
     try {
-        Shema.parse(body)
-        return { ok:true }
+        return Shema.parse(body)
     } catch (err) {
         return err
     }
 }
-

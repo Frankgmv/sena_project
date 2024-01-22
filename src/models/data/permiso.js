@@ -31,14 +31,13 @@ const Permiso = sequelize.define('Permiso', {
 
 // funcion para insertar los datos de los permisos por defecto.
 async function insertDefaultData(dataPermisos) {
-    let transaccion
+    
     try {
-        // Transaccion
-
+        
         await Permiso.sync()
         const hayPermisos = await Permiso.findAll()
         if (hayPermisos.length === 0) {
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')

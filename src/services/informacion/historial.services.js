@@ -5,7 +5,6 @@ import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postHistorialService = (data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const existeUsuario = await Usuario.findByPk(data.UsuarioId)
 
@@ -17,7 +16,7 @@ export const postHistorialService = (data) => {
             }
 
              // Transaccion
-             transaccion = await t.create()
+            let transaccion = await t.create()
 
              if (!transaccion.ok) {
                  throw new TransactionError('Error al crear transaccion')

@@ -6,7 +6,6 @@ import Usuario from '../../models/data/usuario.js'
 
 export const postItemService = (data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const consultaUsuario = await Usuario.findByPk(data.UsuarioId)
             if (!consultaUsuario) {
@@ -31,7 +30,7 @@ export const postItemService = (data) => {
                 })
             }
 
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
@@ -102,7 +101,6 @@ export const getItemService = (idItem) => {
 
 export const putItemService = (idItem, data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             if (data.id) {
                 delete data.id
@@ -118,7 +116,7 @@ export const putItemService = (idItem, data) => {
             }
 
             // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')

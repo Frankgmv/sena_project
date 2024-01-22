@@ -29,14 +29,13 @@ const Seccion = sequelize.define('Secciones', {
 
 // funcion para insertar los datos de los Secciones por defecto.
 async function insertDefaultData(dataSecciones) {
-    let transaccion
+    
     try {
         await Seccion.sync()
 
         const haySecciones = await Seccion.findAll()
         if (haySecciones.length === 0) {
-            // Transaccion
-            transaccion = await t.create()
+            let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')

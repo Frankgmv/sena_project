@@ -4,11 +4,12 @@ import {
 import Token from '../../models/data/token.js'
 import Usuario from '../../models/data/usuario.js'
 import t from '../../helpers/transacciones.js'
-import { TransactionError } from '../../middlewares/fabricaErrores.js'
+import {
+    TransactionError
+} from '../../middlewares/fabricaErrores.js'
 
 export const postTokenService = (data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const encontrarToken = await Token.findOne({
                 where: {
@@ -26,12 +27,12 @@ export const postTokenService = (data) => {
                 })
             }
 
-             // Transaccion
-             transaccion = await t.create()
+            // Transaccion
+            let transaccion = await t.create()
 
-             if (!transaccion.ok) {
-                 throw new TransactionError('Error al crear transaccion')
-             }
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
 
             const existeUsuario = await Usuario.findByPk(data.UsuarioId)
 
@@ -42,12 +43,14 @@ export const postTokenService = (data) => {
                 })
             }
 
-            const guardarToken = await Token.create(data, {transaction: transaccion.data})
+            const guardarToken = await Token.create(data, {
+                transaction: transaccion.data
+            })
             const resp = await guardarToken.save()
             if (!resp) {
                 await t.rollback(transaccion.data)
                 return resolve({
-                    ok:false,
+                    ok: false,
                     message: 'Token no fue creado'
                 })
             }
@@ -104,7 +107,6 @@ export const getTokenService = (idToken) => {
 
 export const putTokenService = (idToken, data) => {
     return new Promise(async (resolve, reject) => {
-        let transaccion
         try {
             const encontrarToken = await Token.findByPk(idToken)
 
@@ -115,19 +117,19 @@ export const putTokenService = (idToken, data) => {
                 })
             }
 
-             // Transaccion
-             transaccion = await t.create()
+            // Transaccion
+            let transaccion = await t.create()
 
-             if (!transaccion.ok) {
-                 throw new TransactionError('Error al crear transaccion')
-             }
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
 
             const actualizarToken = await encontrarToken.update(data)
 
             if (!actualizarToken) {
                 await t.rollback(transaccion.data)
                 return resolve({
-                    ok:false,
+                    ok: false,
                     message: 'Token no fue Actualizado'
                 })
             }
@@ -139,7 +141,6 @@ export const putTokenService = (idToken, data) => {
                 token: actualizarToken
             })
         } catch (error) {
-            await t.commit(transaccion.data)
             reject(error)
         }
     })

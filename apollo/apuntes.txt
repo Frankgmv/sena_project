@@ -14,3 +14,6 @@ Agregar todos los secciones a el json de secciones
 agregar lo de del historial y notificaciones en controladores importantes como las noticias, los usuarios nuevos etc
 
 enlazar esto con el login de los usuarios activos que hacer acciones, obtener el id y así generer los historiales y notificaciones
+
+
+crear un enpoint para limpiar o borrar imagenes que no esten asociadas en la base de datos

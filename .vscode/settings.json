@@ -1,9 +1,9 @@
 {
     "files.exclude": {
-        "node_modules": false,
+        "node_modules": true,
         "LICENSE":true,
-        "package.json":false,
-        ".gitignore":false,
+        "package.json":true,
+        ".gitignore":true,
         "README.md":true,
         "package-lock.json":true
     },

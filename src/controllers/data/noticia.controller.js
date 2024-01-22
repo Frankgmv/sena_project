@@ -38,6 +38,8 @@ export const postNoticia = async (req, res, next) => {
     }
 
     try {
+        let bufferComprimido
+        let urlPath
         // validar la schema para los datos
         const validarSchemaResponse = validateSchemaInto(noticiaShema, bodyBuild)
         if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
@@ -74,10 +76,8 @@ export const postNoticia = async (req, res, next) => {
             }
 
             // Guardamos la imagen comprimida
-            const bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
-
-            const urlPath = `src/upload/${nombreArchivo.nombre}`
-            fs.writeFileSync(urlPath, bufferComprimido)
+            bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
+            urlPath = `src/upload/${nombreArchivo.nombre}`
 
             datosNoticia = {
                 ...bodyBuild,
@@ -94,6 +94,8 @@ export const postNoticia = async (req, res, next) => {
         const crearNoticia = await postNoticiaService(datosNoticia)
         res.json(crearNoticia)
         if (!crearNoticia.ok) return res.status(400)
+
+        fs.writeFileSync(urlPath, bufferComprimido)
         res.status(200)
     } catch (error) {
         next(error)
@@ -133,11 +135,13 @@ export const getNoticia = async (req, res, next) => {
 
 export const putNoticia = async (req, res, next) => {
     try {
+        let bufferComprimido
+        let urlPath
         let bodyBuild = {
             ...req.body
         }
-        if (req.body.UsuarioId) {
-            const UsuarioId = parseInt(req.body.UsuarioId)
+        if (bodyBuild.UsuarioId) {
+            const UsuarioId = parseInt(bodyBuild.UsuarioId)
             bodyBuild = {
                 ...bodyBuild,
                 UsuarioId
@@ -176,10 +180,8 @@ export const putNoticia = async (req, res, next) => {
                 proccesImage = proccesImage.scale(escala)
             }
 
-            const bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
-
-            const urlPath = `src/upload/${nombreArchivo.nombre}`
-            fs.writeFileSync(urlPath, bufferComprimido)
+            bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
+            urlPath = `src/upload/${nombreArchivo.nombre}`
 
             datosNoticia = {
                 ...bodyBuild,
@@ -201,6 +203,8 @@ export const putNoticia = async (req, res, next) => {
         const actualizarNoticia = await putNoticiaService(req.params.id, datosNoticia)
         res.json(actualizarNoticia)
         if (!actualizarNoticia.ok) return res.status(400)
+
+        fs.writeFileSync(urlPath, bufferComprimido)
         res.status(200)
     } catch (error) {
         next(error)
@@ -212,13 +216,8 @@ export const deleteNoticia = async (req, res, next) => {
         const consultaNoticia = await getNoticiaService(req.params.id)
 
         if (consultaNoticia.ok) {
-            let pathAntiguio = `src/upload/${consultaNoticia.noticia.imgPath}`
-            const existe = fs.existsSync(pathAntiguio)
-
-            if (pathAntiguio && existe) {
-                fs.rm(pathAntiguio, (err) => {
-                    if (err) return next('error al eliminar el archivo')
-                })
+            if (deleteFile(consultaNoticia.noticia.imgPath)) {
+                next('error al eliminar el archivo')
             }
         }
 

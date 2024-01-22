@@ -100,7 +100,7 @@ CREATE TABLE links (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ?? pendiente Tabla "anuncios"
+-- * pendiente Tabla "anuncios"
 CREATE TABLE anuncios (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(70),
@@ -126,6 +126,15 @@ CREATE TABLE tokens (
     token VARCHAR(255),
     fecha_creacion TIMESTAMP,
     tiempo_vencimiento VARCHAR(30),
+    id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
+);
+
+-- ? Tabla "Items"
+CREATE TABLE items (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(255),
+    link VARCHAR(200),
+    estado BOOLEAN,
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 

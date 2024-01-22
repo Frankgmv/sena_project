@@ -42,6 +42,8 @@ export const postAnuncio = async (req, res, next) => {
     }
 
     try {
+        let bufferComprimido
+        let urlPath
         // validar la schema para los datos
         const validarSchemaResponse = validateSchemaInto(anuncioSchema, bodyBuild)
 
@@ -83,10 +85,8 @@ export const postAnuncio = async (req, res, next) => {
             }
 
             // Guardamos la imagen comprimida
-            const bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
-
-            const urlPath = `src/upload/${nombreArchivo.nombre}`
-            fs.writeFileSync(urlPath, bufferComprimido)
+            bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
+            urlPath = `src/upload/${nombreArchivo.nombre}`
 
             datosAnuncio = {
                 ...bodyBuild,
@@ -103,7 +103,9 @@ export const postAnuncio = async (req, res, next) => {
         const guardar = await postAnucioService(datosAnuncio)
         res.json(guardar)
         if (!guardar.ok) return res.status(400)
-        else res.status(201)
+
+        fs.writeFileSync(urlPath, bufferComprimido)
+        res.status(201)
     } catch (error) {
         next(error)
     }
@@ -138,6 +140,9 @@ export const getAnuncio = async (req, res, next) => {
 
 export const putAnuncio = async (req, res, next) => {
     try {
+        let bufferComprimido
+        let urlPath
+
         let bodyBuild = {
             ...req.body
         }
@@ -181,10 +186,9 @@ export const putAnuncio = async (req, res, next) => {
                 processImage = processImage.scale(escala)
             }
 
-            const bufferComprimido = await processImage.toBuffer(nombreArchivo.mimetype)
+            bufferComprimido = await processImage.toBuffer(nombreArchivo.mimetype)
             console.log(bufferComprimido)
-            const urlPath = `src/upload/${nombreArchivo.nombre}`
-            fs.writeFileSync(urlPath, bufferComprimido)
+            urlPath = `src/upload/${nombreArchivo.nombre}`
 
             datosAnuncio = {
                 ...bodyBuild,
@@ -206,6 +210,8 @@ export const putAnuncio = async (req, res, next) => {
         const actualizarAnuncio = await putAnuncioService(req.params.id, datosAnuncio)
         res.json(actualizarAnuncio)
         if (!actualizarAnuncio.ok) return res.status(400)
+
+        fs.writeFileSync(urlPath, bufferComprimido)
         res.status(200)
     } catch (error) {
         next(error)

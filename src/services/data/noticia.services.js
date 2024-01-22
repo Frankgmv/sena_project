@@ -122,7 +122,7 @@ export const getNoticiaService = (id) => {
             resolve({
                 ok: true,
                 message: 'Noticia encontrada exitosamente.',
-                noticia: noticia
+                noticia
             })
         } catch (error) {
             reject(error)

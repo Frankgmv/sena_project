@@ -362,3 +362,45 @@ export const putTokenSchema = z.object({
         invalid_type_error: 'El tipo de dato es inválido'
     }).optional()
 }).nullable()
+
+export const itemSchema = z.object({
+    titulo: z.string({
+        required_error: 'titulo requerido',
+        invalid_type_error: 'Titulo debe ser texto'
+    }).max(30, 'Titulo muy largo (30 máximo)').min(5, 'Titulo muy corto (5 mín)'),
+    link: z.string({
+        required_error: 'Link requerido',
+        invalid_type_error: 'Link debe ser URL - Link'
+    }).refine(verificarHttpUrl, {
+        message: 'La url debe contener http:// o https://'
+    }),
+    estado: z.boolean({
+        required_error: 'El estado es requerido',
+        invalid_type_error: 'El estado debe ser un booleano'
+    }).optional(),
+    UsuarioId: z.number({
+        required_error: 'El id del usuario es obligatorio',
+        invalid_type_error: 'El tipo de dato es inválido'
+    })
+})
+
+export const putItemSchema = z.object({
+    titulo: z.string({
+        required_error: 'titulo requerido',
+        invalid_type_error: 'Titulo debe ser texto'
+    }).max(30, 'Titulo muy largo (30 máximo)').min(5, 'Titulo muy corto (5 mín)').optional(),
+    link: z.string({
+        required_error: 'Link requerido',
+        invalid_type_error: 'Link debe ser URL - Link'
+    }).refine(verificarHttpUrl, {
+        message: 'La url debe contener http:// o https://'
+    }).optional(),
+    estado: z.boolean({
+        required_error: 'El estado es requerido',
+        invalid_type_error: 'El estado debe ser un booleano'
+    }).optional(),
+    UsuarioId: z.number({
+        required_error: 'El id del usuario es obligatorio',
+        invalid_type_error: 'El tipo de dato es inválido'
+    }).optional()
+}).nullable()

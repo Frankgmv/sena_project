@@ -93,6 +93,8 @@ export function putPqrsService(idPqrs) {
                 })
             }
 
+            await updated.save()
+
             await t.commit(transaccion.data)
             resolve({
                 ok: true,

@@ -1,12 +1,13 @@
 import { Router } from 'express'
-import { test } from '../../controllers/test.js'
+import { validateSchema } from '../../middlewares/validarSchemas.js'
+import { sliderSchema } from '../../schemas/MultimediaSchemas.js'
+import { deleteSlider, getAllSlider, getSlider, postSlider } from '../../controllers/multimedia/slider.controller.js'
 
 const sliderRouter = Router()
 
-sliderRouter.get('/slider', test)
-sliderRouter.get('/slider/:id', test)
-sliderRouter.post('/slider', test)
-sliderRouter.put('/slider/:id', test)
-sliderRouter.delete('/slider/:id', test)
+sliderRouter.get('/slider', getAllSlider)
+sliderRouter.get('/slider/:id', getSlider)
+sliderRouter.post('/slider', validateSchema(sliderSchema), postSlider)
+sliderRouter.delete('/slider/:id', deleteSlider)
 
 export default sliderRouter

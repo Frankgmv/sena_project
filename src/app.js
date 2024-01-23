@@ -23,7 +23,7 @@ app.use('/images',express.static('./src/upload'))
 app.use('/api/v1', routesGeneral)
 
 app.get('/', (_req, res) => {
-    res.json(JSON.stringify(rutas))
+    res.json(rutas)
 })
 
 // TODO verificar que los errores se recogan bien cuando viene de zod y otras partes más ya que traen mucha más estructura

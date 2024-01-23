@@ -2,6 +2,7 @@ import Anuncio from '../models/data/anuncio.js'
 import Categoria from '../models/data/categoria.js'
 import DetallePermiso from '../models/data/detallePermiso.js'
 import Evento from '../models/data/evento.js'
+import Item from '../models/data/item.js'
 import Link from '../models/data/link.js'
 import Noticia from '../models/data/noticia.js'
 import Permiso from '../models/data/permiso.js'
@@ -13,6 +14,8 @@ import Historial from '../models/informacion/historial.js'
 import Notificacion from '../models/informacion/notificaciones.js'
 import Pqrs from '../models/informacion/pqrs.js'
 import Vistas from '../models/informacion/vistas.js'
+import Galeria from '../models/multimedia/galeria.js'
+import Slider from '../models/multimedia/slider.js'
 
 export const test = (req, res) => {
     res.send('Ruta funcionando')
@@ -20,6 +23,9 @@ export const test = (req, res) => {
 
 export const deleteTables = async (req, res, next) => {
     try {
+        await Slider.drop()
+        await Galeria.drop()
+        await Item.drop()
         await Evento.drop()
         await Token.drop()
         await Historial.drop()

@@ -31,3 +31,10 @@ export const putGaleriaSchema = z.object({
         invalid_type_error: 'Evento debe ser una cadena de texto'
     }).optional()
 }).nullable()
+
+export const sliderSchema = z.object({
+    ImagenId: z.number({
+        required_error: 'ImagenId requerida',
+        invalid_type_error: 'ImagenId es un texto'
+    })
+})

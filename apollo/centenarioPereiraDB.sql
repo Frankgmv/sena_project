@@ -155,7 +155,7 @@ CREATE TABLE eventos (
     fecha_evento DATE
 );
 
--- ! Tabla "galeria" MULTIMEDIA
+-- * Tabla "galeria" MULTIMEDIA
 CREATE TABLE galeria (
     id SERIAL PRIMARY KEY,
     fecha TIMESTAMP,
@@ -175,13 +175,13 @@ CREATE TABLE videos (
     id_usuario INT DEFAULT 1 REFERENCES usuarios(id) ON DELETE SET DEFAULT
 );
 
--- ! Tabla "slider" MULTIMEDIA
+-- ? Tabla "slider" MULTIMEDIA
 CREATE TABLE slider (
     id SERIAL PRIMARY KEY,
     id_imagen INT REFERENCES galeria(id) ON DELETE CASCADE
 );
 
--- ?Consultas de relleno 
+-- *Consultas de relleno 
 
 INSERT INTO roles (rol, estado) VALUES ('estudiante', true),
 ('personal-administrativo', true),

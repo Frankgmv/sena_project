@@ -101,6 +101,19 @@ export const getAllLinksService = (tipo) => {
         }
     })
 }
+export const getLinksService = (idLink) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const links = await Link.findByPk(idLink)
+            resolve({
+                ok: true,
+                links
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 
 export const putLinkService = (idLink, data) => {
     return new Promise(async (resolve, reject) => {

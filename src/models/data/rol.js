@@ -41,15 +41,15 @@ async function insertDefaultData(dataRoles) {
         const hayRoles = await Rol.findAll()
 
         if (hayRoles.length === 0) {
-            for (let rol of dataRoles) {
-                const rolCreado = Rol.create(rol)
-            }
+            await Rol.bulkCreate(dataRoles)
         }
     } catch (error) {
         throw new ErrorRol(error)
     }
 }
 
-// insertDefaultData(rolesPorDefecto.roles)
+setTimeout(() => {
+    // insertDefaultData(rolesPorDefecto.roles)
+}, 2500);
 
 export default Rol

@@ -21,6 +21,6 @@ pqrsRouter.put('/pqrs/:id', putPqrs)
 pqrsRouter.delete('/pqrs/:id', deletePqrs)
 
 // ? Eliminar todos los pqrs leídos
-pqrsRouter.delete('/pqrs-all', deleteAllPqrs)
+pqrsRouter.delete('/pqrs-delete-all', deleteAllPqrs)
 
 export default pqrsRouter

@@ -119,6 +119,14 @@ export const putVideoService = (idVideo, data) => {
                 }
             }
 
+            const fileVideo = await Video.findByPk(idVideo)
+            if (!fileVideo) {
+                return resolve({
+                    ok: true,
+                    message: 'Video no encontrado'
+                })
+            }
+
             // Transaccion
             let transaccion = await t.create()
 
@@ -126,7 +134,8 @@ export const putVideoService = (idVideo, data) => {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            const update = await Video.update(data, {transaction: transaccion.data})
+            console.log(JSON.stringify(data).yellow)
+            const update = await fileVideo.update(data, {transaction: transaccion.data})
 
             if (!update) {
                 await t.rollback(transaccion.data)

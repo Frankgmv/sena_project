@@ -42,6 +42,9 @@ export const esMayorDe15 = (fechaNacimiento) => {
 export const verificarHttpUrl = (url) => {
     return !(!url.startsWith('http://') && !url.startsWith('https://'))
 }
+export const verificarHttpUrlOIframe = (url) => {
+    return !(!url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('<iframe'))
+}
 
 export const deleteFile = (pathFile) => {
     let path = `src/upload/${pathFile}`

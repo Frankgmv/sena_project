@@ -18,7 +18,7 @@ app.use(morgan('dev'))
 // ? "Rutas" madres
 
 // Reclamar imagenes a la API
-app.use('/images',express.static('./src/upload'))
+app.use('/api/v1/recursos',express.static('./src/upload'))
 
 app.use('/api/v1', routesGeneral)
 

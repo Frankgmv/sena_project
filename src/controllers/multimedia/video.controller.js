@@ -6,7 +6,7 @@ import { putVideoSchema, videoSchema } from '../../schemas/MultimediaSchemas.js'
 import { deleteVideoService, getAllVideoService, getVideoService, postVideoService, putVideoService
 } from '../../services/multimedia/video.services.js'
 import { maxBytes, tiposPermitidos } from '../../variables.js'
-
+import 'colors'
 export const postVideo = async (req, res, next) => {
     try {
         let bodyBuild = {}
@@ -150,10 +150,12 @@ export const putVideo = async (req, res, next) => {
             }
 
             const consultaVideo = await getVideoService(req.params.id)
-
+            console.log(`${consultaVideo}`.yellow)
             if (consultaVideo.ok) {
-                if (deleteFile(consultaVideo.video.imgPath)) {
-                    next('error al remplazar el archivo')
+                if (consultaVideo.video.imgPath) {
+                    if (deleteFile(consultaVideo.video.imgPath)) {
+                        next('error al remplazar el archivo')
+                    }
                 }
             }
         } else {

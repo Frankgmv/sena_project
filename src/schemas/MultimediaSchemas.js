@@ -1,5 +1,5 @@
 import z from 'zod'
-import { verificarHttpUrl } from '../helpers/includes.js'
+import { verificarHttpUrlOIframe } from '../helpers/includes.js'
 
 export const galeriaSchema = z.object({
     titulo: z.string({
@@ -48,8 +48,8 @@ export const videoSchema = z.object({
     link: z.string({
         required_error: 'Link es requerido',
         invalid_type_error: 'link es un URL'
-    }).refine(verificarHttpUrl, {
-        message: 'La url debe contener http:// o https://'
+    }).refine(verificarHttpUrlOIframe, {
+        message: 'La url debe contener http:// o https:// o <iframe de youtube'
     }),
     titulo: z.string({
         required_error: '',
@@ -65,8 +65,8 @@ export const putVideoSchema = z.object({
     link: z.string({
         required_error: 'Link es requerido',
         invalid_type_error: 'link es un URL'
-    }).refine(verificarHttpUrl, {
-        message: 'La url debe contener http:// o https://'
+    }).refine(verificarHttpUrlOIframe, {
+        message: 'La url debe contener http:// o https:// o <iframe de youtube'
     }).optional(),
     titulo: z.string({
         required_error: '',

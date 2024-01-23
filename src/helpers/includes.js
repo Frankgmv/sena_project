@@ -1,7 +1,7 @@
 import multer from 'multer'
 import fs from 'fs'
 
-export const crearNombreImagenes = (file) => {
+export const crearNombreRecurso = (file) => {
     let formato = file.mimetype.split('/')
     let nombreImg = file.originalname.split('.')
 

@@ -1,8 +1,11 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import Usuario from '../data/usuario.js'
 
-const Archivo = Sequelize.define('Archivos', {
+const Archivo = sequelize.define('Archivo', {
     id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNulls: false,
         autoIncrement: true
     },
@@ -11,24 +14,16 @@ const Archivo = Sequelize.define('Archivos', {
         allowNulls: false
     },
     archivo:{
-        type:DataTypes.BLOB,
+        type: DataTypes.TEXT,
         allowNulls: false
-    },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNulls: false
-    },
-    idUsuaio:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'user',
-            key: 'id'
-        }
     }
+}, {
+    tableName:'Archivos',
+    createdAt: true,
+    updatedAt: false
 })
 
-Archivo.createTable({
-    tableName:'Archivos'
-})
+Usuario.hasMany(Archivo, {foreignKey:'UsuarioId', as: 'archivos'})
+Archivo.belongsTo(Usuario)
 
 export default Archivo

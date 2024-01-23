@@ -2,7 +2,7 @@ import 'colors'
 import fs from 'fs'
 import sharp from 'sharp'
 import {
-    crearNombreImagenes,
+    crearNombreRecurso,
     deleteFile
 } from '../../helpers/includes.js'
 import {
@@ -60,7 +60,7 @@ export const postNoticia = async (req, res, next) => {
             // Utilizamos un formato de compresión de imágenes sin pérdidas
             const buffer = Buffer.from(image.buffer, 'binary')
 
-            const nombreArchivo = crearNombreImagenes(image)
+            const nombreArchivo = crearNombreRecurso(image)
             let proccesImage = sharp(buffer)
 
             const ancho = proccesImage.width
@@ -165,7 +165,7 @@ export const putNoticia = async (req, res, next) => {
 
             const buffer = Buffer.from(image.buffer, 'binary')
 
-            const nombreArchivo = crearNombreImagenes(image)
+            const nombreArchivo = crearNombreRecurso(image)
             let proccesImage = sharp(buffer)
 
             const ancho = proccesImage.width

@@ -1,7 +1,7 @@
 import fs from 'fs'
 import sharp from 'sharp'
 import {
-    crearNombreImagenes, deleteFile
+    crearNombreRecurso, deleteFile
 } from '../../helpers/includes.js'
 import {
     validateSchemaInto
@@ -59,7 +59,7 @@ export const postItem = async (req, res, next) => {
             // Utilizamos un formato de compresión de imágenes sin pérdidas
             const buffer = Buffer.from(image.buffer, 'binary')
 
-            const nombreArchivo = crearNombreImagenes(image)
+            const nombreArchivo = crearNombreRecurso(image)
             let proccesImage = sharp(buffer)
 
             const ancho = proccesImage.width
@@ -155,7 +155,7 @@ export const putItem = async (req, res, next) => {
 
             const buffer = Buffer.from(image.buffer, 'binary')
 
-            const nombreArchivo = crearNombreImagenes(image)
+            const nombreArchivo = crearNombreRecurso(image)
             let proccesImage = sharp(buffer)
 
             const ancho = proccesImage.width

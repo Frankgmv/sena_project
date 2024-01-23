@@ -1,7 +1,7 @@
 import fs from 'fs'
 import sharp from 'sharp'
 import {
-  crearNombreImagenes,
+  crearNombreRecurso,
   deleteFile
 } from '../../helpers/includes.js'
 import {
@@ -68,7 +68,7 @@ export const postGaleria = async (req, res, next) => {
 
       const buffer = Buffer.from(image.buffer, 'binary')
 
-      const nombreImagen = crearNombreImagenes(image)
+      const nombreImagen = crearNombreRecurso(image)
       let proccesImage = sharp(buffer)
 
       const ancho = proccesImage.width
@@ -171,7 +171,7 @@ export const putGaleria = async (req, res, next) => {
 
       const buffer = Buffer.from(image.buffer, 'binary')
 
-      const nombreArchivo = crearNombreImagenes(image)
+      const nombreArchivo = crearNombreRecurso(image)
       let processImage = sharp(buffer)
 
       const ancho = processImage.with

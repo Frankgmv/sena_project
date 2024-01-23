@@ -1,5 +1,4 @@
 import z from 'zod'
-import { verificarHttpUrlOIframe } from '../helpers/includes.js'
 
 export const galeriaSchema = z.object({
     titulo: z.string({
@@ -45,12 +44,6 @@ export const videoSchema = z.object({
         required_error: 'UsuarioId requerida',
         invalid_type_error: 'UsuarioId es un número'
     }),
-    link: z.string({
-        required_error: 'Link es requerido',
-        invalid_type_error: 'link es un URL'
-    }).refine(verificarHttpUrlOIframe, {
-        message: 'La url debe contener http:// o https:// o <iframe de youtube'
-    }),
     titulo: z.string({
         required_error: '',
         invalid_type_error: ''
@@ -62,14 +55,20 @@ export const putVideoSchema = z.object({
         required_error: 'UsuarioId requerida',
         invalid_type_error: 'UsuarioId es un número'
     }).optional(),
-    link: z.string({
-        required_error: 'Link es requerido',
-        invalid_type_error: 'link es un URL'
-    }).refine(verificarHttpUrlOIframe, {
-        message: 'La url debe contener http:// o https:// o <iframe de youtube'
-    }).optional(),
     titulo: z.string({
         required_error: '',
         invalid_type_error: ''
     }).optional()
 }).nullable()
+
+export const archivoSchema = z.object({
+    titulo: z.string({
+        required_error: 'El titulo del archivo es obligatorio',
+        invalid_type_error : 'El titulo debe ser tipo String'
+    }).min(8, 'El titulo debe tener minimo 8 carácteres')
+    .max(60, 'El titulo debe tener máximo 60 carácteres'),
+    UsuarioId: z.number({
+        required_error: 'UsuarioId requerida',
+        invalid_type_error: 'UsuarioId es un número'
+    })
+})

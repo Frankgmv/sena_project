@@ -1,6 +1,6 @@
 import fs from 'fs'
 import sharp from 'sharp'
-import { crearNombreImagenes, deleteFile } from '../../helpers/includes.js'
+import { crearNombreRecurso, deleteFile } from '../../helpers/includes.js'
 import { validateSchemaInto } from '../../middlewares/validarSchemas.js'
 import { putVideoSchema, videoSchema } from '../../schemas/MultimediaSchemas.js'
 import { deleteVideoService, getAllVideoService, getVideoService, postVideoService, putVideoService
@@ -39,7 +39,7 @@ export const postVideo = async (req, res, next) => {
 
             const buffer = Buffer.from(image.buffer, 'binary')
 
-            const nombreArchivo = crearNombreImagenes(image)
+            const nombreArchivo = crearNombreRecurso(image)
             let proccesImage = sharp(buffer)
 
             const ancho = proccesImage.width
@@ -130,7 +130,7 @@ export const putVideo = async (req, res, next) => {
 
             const buffer = Buffer.from(image.buffer, 'binary')
 
-            const nombreArchivo = crearNombreImagenes(image)
+            const nombreArchivo = crearNombreRecurso(image)
             let proccesImage = sharp(buffer)
 
             const ancho = proccesImage.width

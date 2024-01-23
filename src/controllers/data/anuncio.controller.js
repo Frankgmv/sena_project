@@ -1,7 +1,7 @@
 import fs from 'fs'
 import sharp from 'sharp'
 import {
-    crearNombreImagenes,
+    crearNombreRecurso,
     deleteFile
 } from '../../helpers/includes.js'
 import {
@@ -62,7 +62,7 @@ export const postAnuncio = async (req, res, next) => {
             // Utilizamos un formato de compresión de imágenes sin pérdidas
             const buffer = Buffer.from(image.buffer, 'binary')
 
-            const nombreArchivo = crearNombreImagenes(image)
+            const nombreArchivo = crearNombreRecurso(image)
             let proccesImage = sharp(buffer)
 
             const ancho = proccesImage.width
@@ -164,7 +164,7 @@ export const putAnuncio = async (req, res, next) => {
             }
             const buffer = Buffer.from(image.buffer, 'binary')
 
-            const nombreArchivo = crearNombreImagenes(image)
+            const nombreArchivo = crearNombreRecurso(image)
             let processImage = sharp(buffer)
 
             const ancho = processImage.with

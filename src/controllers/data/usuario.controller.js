@@ -6,7 +6,7 @@ export const postUsuario = async (req, res, next) => {
         const crearUsuario = await postUsuarioService(req.body)
         res.json(crearUsuario)
         if (!crearUsuario.ok) return res.status(400)
-        res.status(200)
+        res.status(201)
     } catch (error) {
         next(error)
     }

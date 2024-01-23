@@ -1,5 +1,6 @@
-import sharp from 'sharp'
+import 'colors'
 import fs from 'fs'
+import sharp from 'sharp'
 import {
     crearNombreImagenes,
     deleteFile
@@ -22,22 +23,17 @@ import {
     maxBytes,
     tiposPermitidos
 } from '../../variables.js'
-import 'colors'
 
 export const postNoticia = async (req, res, next) => {
-    let bodyBuild = {}
-    let datosNoticia
     try {
+        let bodyBuild = {}
+        let datosNoticia
         const UsuarioId = parseInt(req.body.UsuarioId)
         bodyBuild = {
             ...req.body,
             UsuarioId
         }
-    } catch (error) {
-        next(error)
-    }
 
-    try {
         let bufferComprimido
         let urlPath
         // validar la schema para los datos
@@ -96,7 +92,7 @@ export const postNoticia = async (req, res, next) => {
         if (!crearNoticia.ok) return res.status(400)
 
         fs.writeFileSync(urlPath, bufferComprimido)
-        res.status(200)
+        res.status(201)
     } catch (error) {
         next(error)
     }

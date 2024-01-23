@@ -15,5 +15,8 @@ agregar lo de del historial y notificaciones en controladores importantes como l
 
 enlazar esto con el login de los usuarios activos que hacer acciones, obtener el id y así generer los historiales y notificaciones
 
-
 crear un enpoint para limpiar o borrar imagenes que no esten asociadas en la base de datos
+
+Aprender a usar las notificaciones
+agregar enviar emails
+validar que la edad sea menor a 80 años

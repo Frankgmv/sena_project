@@ -6,17 +6,18 @@
             "path": "/informacion",
             "rutas": {
                 "/historial": {
-                    "metodos": ["get", "post", "delete"]
+                    
+                    
                 },
                 "/notificaciones": {
-                    "metodos": ["get", "post", "put", "delete", {"notificaciones-delete-all": "borrar todos los pqrs leidos - true"}]
+                    "metodos": ["get", "post", "put", "delete", ["notificaciones-delete-all", "borrar todos los pqrs leidos - true"]]
                 },
                 "/pqrs": {
-                    "metodos": ["get", "post", "put", "delete", {"pqrs-delete-all": "borrar todos las notificaciones leidas - true"}]
+                    "metodos": ["get", "post", ["put", "no body"], "delete", ["pqrs-delete-all", "borrar todos las notificaciones leidas - true"]]
                 },
                 "/vistas": {
                     "metodos": ["get", "post", "delete"],
-                    "uso":"No se require parametros ni cuerpo, trabaja solo ejecutandola"
+                    "uso":"No params, no body"
                 }
             }
         },

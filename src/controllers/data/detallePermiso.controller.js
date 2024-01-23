@@ -9,7 +9,7 @@ export const postDetallePermiso = async (req, res, next) => {
         const crearDetallePermiso = await postDetallePermisoService(req.body)
         res.json(crearDetallePermiso)
         if (!crearDetallePermiso.ok) return res.status(400)
-        res.status(200)
+        res.status(201)
     } catch (error) {
         next(error)
     }

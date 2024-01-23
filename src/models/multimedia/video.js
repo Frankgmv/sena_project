@@ -1,38 +1,33 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import Usuario from '../data/usuario.js'
 
-const Video = Sequelize.define('Videos', {
+const Video = sequelize.define('Videos', {
     id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNulls: false,
         autoIncrement: true
     },
-    linkVideo:{
-        type: DataTypes.STRING,
+    link:{
+        type: DataTypes.TEXT,
         allowNulls: false
     },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNulls: false
-    },
-    tituloVideo:{
+    titulo:{
         type:DataTypes.STRING,
         allowNulls: false
     },
     imgPath:{
-        type:DataTypes.STRING,
-        allowNulls: false
-    },
-    idUsuaio:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'user',
-            key: 'id'
-        }
+        type:DataTypes.TEXT,
+        allowNulls: true
     }
+}, {
+    freezeTableName:true,
+    createdAt:true,
+    updatedAt:false
 })
 
-Video.createTable({
-    tableName:'Videos'
-})
+Usuario.hasMany(Video, {foreignKey:'UsuarioId', as: 'videos'})
+Video.belongsTo(Usuario)
 
 export default Video

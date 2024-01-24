@@ -24,7 +24,7 @@ export const postSliderService = (data) => {
             if (existeYa) {
                 return resolve({
                     ok: false,
-                    message: 'imagen ya asignada al slider'
+                    message: 'imagen ya en el Slider'
                 })
             }
 
@@ -41,14 +41,13 @@ export const postSliderService = (data) => {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'Slider no se pudo agregar'
+                    message: 'Imagen no se puedo agregar'
                 })
             }
             await t.commit(transaccion.data)
             return resolve({
                 ok: true,
-                message: 'Slider agregado',
-                slider: guardar
+                message: 'Imagen agregada a Slider'
             })
         } catch (error) {
             reject(error)
@@ -69,7 +68,8 @@ export const getAllSliderService = () => {
 
             resolve({
                 ok: true,
-                slider: slidersRegistro
+                message: 'Lista de imágenes de Slider',
+                data: slidersRegistro
             })
         } catch (error) {
             reject(error)
@@ -96,7 +96,8 @@ export const getSliderService = (idSlider) => {
             }
             resolve({
                 ok: true,
-                slider: registroSlider
+                message: 'Imagen encontrada',
+                data: registroSlider
             })
         } catch (error) {
             reject(error)

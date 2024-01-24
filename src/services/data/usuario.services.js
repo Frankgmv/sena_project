@@ -42,7 +42,7 @@ export const postUsuarioService = (data) => {
             if (!existeRol) {
                 return resolve({
                     ok: false,
-                    mensage: 'El rol no existe'
+                    mensage: 'Rol no encontrado'
                 })
             }
 
@@ -50,7 +50,7 @@ export const postUsuarioService = (data) => {
             if (isInto) {
                 return resolve({
                     ok: false,
-                    message: 'El correo o documento ya están en uso'
+                    message: 'Correo o Documento ya en uso'
                 })
             }
 
@@ -58,7 +58,7 @@ export const postUsuarioService = (data) => {
             if (!validarEmail(email)) {
                 return resolve({
                     ok: false,
-                    message: `El correo ${email} es inválido`
+                    message: `Correo ${email} es inválido`
                 })
             }
 
@@ -66,8 +66,7 @@ export const postUsuarioService = (data) => {
             if (!validarPassword(password)) {
                 return resolve({
                     ok: false,
-                    message: `Contraseña Inválida`,
-                    patron: 'Debe tener ser de 8 car. y contener una mayúscula, una mínuscula, un número, un caracter especial'
+                    message: 'Contraseña Inválida. \n Debe tener ser de 8 car. y contener una mayúscula, una mínuscula, un número, un caracter especial'
                 })
             }
 
@@ -111,8 +110,7 @@ export const postUsuarioService = (data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'usuario creado exitosamente!',
-                usuario: respuesta
+                message: 'usuario creado'
             })
         } catch (error) {
             reject(error)
@@ -153,11 +151,12 @@ export const getAllUsuariosService = (estado, pagina, numUsuarios = 12) => {
 
             resolve({
                 ok: true,
+                message: 'Lista de usuarios',
                 totalUsuarios: usuarios.length,
                 limite: numUsuarios,
                 estado,
                 pagina,
-                usuarios
+                data: usuarios
             })
         } catch (error) {
             reject(error)
@@ -178,13 +177,15 @@ export const getUsuarioService = (idUser) => {
 
             resolve({
                 ok: true,
-                usuario
+                messge: 'usuario obtenido',
+                data: usuario
             })
         } catch (error) {
             reject(error)
         }
     })
 }
+
 export const putUsuarioService = (idUser, data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -192,7 +193,7 @@ export const putUsuarioService = (idUser, data) => {
             if (!usuario) {
                 return resolve({
                     ok: false,
-                    message: 'usuario no encontrado'
+                    message:  'Usuario no encontrado'
                 })
             }
 
@@ -220,14 +221,14 @@ export const putUsuarioService = (idUser, data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: ' Usuario Actualizado correctamente',
-                usuario: usuarioActualizado
+                message: ' Usuario Actualizado'
             })
         } catch (error) {
             reject(error)
         }
     })
 }
+
 export const deleteUsuarioService = (idUser) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -242,7 +243,7 @@ export const deleteUsuarioService = (idUser) => {
 
             resolve({
                 ok: true,
-                message: ' Usuario Eliminado correctamente'
+                message: ' Usuario Eliminado'
             })
         } catch (error) {
             reject(error)

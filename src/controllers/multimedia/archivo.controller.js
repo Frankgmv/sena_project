@@ -72,7 +72,6 @@ export const postArchivo = async (req, res, next) => {
         }
         const guardarArchivo = await postArchivoService(datosArchivo)
 
-        // res.setHeader('Content-Type')
         res.json(guardarArchivo)
         if (!guardarArchivo.ok) return res.status(400)
         fs.writeFileSync(urlPath, pdfBuffer)
@@ -99,7 +98,7 @@ export const deleteArchivo = async (req, res, next) => {
         const getArchivo = await getArchivoService()
 
         if (getArchivo.ok) {
-            if (deleteFile(getArchivo.archivo.archivo)) {
+            if (deleteFile(getArchivo.data.archivo)) {
                 next('error al eliminar el archivo')
             }
         }

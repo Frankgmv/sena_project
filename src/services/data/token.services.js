@@ -23,7 +23,7 @@ export const postTokenService = (data) => {
             if (encontrarToken) {
                 resolve({
                     ok: false,
-                    message: 'TokenKey o nombre ya usados.'
+                    message: 'TokenKey o Nombre Toeken en uso'
                 })
             }
 
@@ -39,7 +39,7 @@ export const postTokenService = (data) => {
             if (!existeUsuario) {
                 return resolve({
                     ok: false,
-                    message: 'usuario no existe.'
+                    message: 'UsuarioId no encontrado'
                 })
             }
 
@@ -58,8 +58,7 @@ export const postTokenService = (data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Token creado.',
-                token: resp
+                message: 'Token creado'
             })
         } catch (error) {
             reject(error)
@@ -74,8 +73,8 @@ export const getAllTokenService = () => {
 
             resolve({
                 ok: true,
-                message: 'Tokens obtenidos.',
-                tokens: AllTokens
+                message: 'Lista de Tokens',
+                data: AllTokens
             })
         } catch (error) {
             reject(error)
@@ -90,14 +89,14 @@ export const getTokenService = (idToken) => {
             if (!tokens) {
                 return resolve({
                     ok: false,
-                    message: 'Token no encontrado.'
+                    message: 'Token no encontrado'
                 })
             }
 
             resolve({
                 ok: true,
-                message: 'Token obtenido.',
-                tokens: tokens
+                message: 'Token obtenido',
+                data: tokens
             })
         } catch (error) {
             reject(error)
@@ -113,7 +112,7 @@ export const putTokenService = (idToken, data) => {
             if (!encontrarToken) {
                 return resolve({
                     ok: false,
-                    message: 'Token no encontrado.'
+                    message: 'Token no encontrado'
                 })
             }
 
@@ -137,8 +136,7 @@ export const putTokenService = (idToken, data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Token actualizado.',
-                token: actualizarToken
+                message: 'Token actualizado'
             })
         } catch (error) {
             reject(error)
@@ -153,7 +151,7 @@ export const deleteTokenService = (idToken) => {
             if (!tokenEliminado) {
                 return resolve({
                     ok: false,
-                    message: 'Token no encontrado.'
+                    message: 'Token no encontrado'
                 })
             }
 
@@ -161,7 +159,7 @@ export const deleteTokenService = (idToken) => {
 
             resolve({
                 ok: true,
-                message: 'Token Eliminado.'
+                message: 'Token Eliminado'
             })
         } catch (error) {
             reject(error)

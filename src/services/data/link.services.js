@@ -49,11 +49,12 @@ export const postLinkService = (data) => {
 
             // Guardar en db
             const respuesta = await nuevoLink.save()
+
             if (!respuesta) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,
-                    message: 'El link no fue creado'
+                    message: 'Link no fue creado'
                 })
             }
 
@@ -61,8 +62,7 @@ export const postLinkService = (data) => {
 
             resolve({
                 ok: true,
-                message: `"${nuevoLink.titulo}" creado exitosamente`,
-                usuario: respuesta
+                message: `Link creado`
             })
         } catch (error) {
             reject(error)
@@ -77,7 +77,7 @@ export const getAllLinksService = (tipo) => {
                 return resolve({
                     ok: false,
                     message: 'tipo inválido',
-                    estados: ['pdf', 'blog', 'todos']
+                    tipos: ['pdf', 'blog', 'todos']
                 })
             }
             let consulta = {}
@@ -93,8 +93,8 @@ export const getAllLinksService = (tipo) => {
             const links = await Link.findAll(consulta)
             resolve({
                 ok: true,
-                total_link: links.length,
-                links
+                message: 'Lista de links',
+                data: links
             })
         } catch (error) {
             reject(error)
@@ -104,10 +104,19 @@ export const getAllLinksService = (tipo) => {
 export const getLinksService = (idLink) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const links = await Link.findByPk(idLink)
+            const link = await Link.findByPk(idLink)
+
+            if (!link) {
+                return resolve({
+                    ok:false,
+                    message: 'Link no encontrado'
+                })
+            }
+
             resolve({
                 ok: true,
-                links
+                message: 'link obtenido',
+                data: link
             })
         } catch (error) {
             reject(error)
@@ -157,14 +166,13 @@ export const putLinkService = (idLink, data) => {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,
-                    message: 'El Link no fue actualizado'
+                    message: 'Link no fue actualizado'
                 })
             }
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: `"${link.titulo}" actualizado correctamente`,
-                link: linkActualizado
+                message: `Link actualizado`
             })
         } catch (error) {
             reject(error)
@@ -187,7 +195,7 @@ export const deleteLinkService = (idLink) => {
 
             resolve({
                 ok: true,
-                message: `"${buscarLink.titulo}" eliminado correctamente`
+                message: `Link eliminado`
             })
         } catch (error) {
             reject(error)

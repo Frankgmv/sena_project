@@ -5,19 +5,10 @@ export const getAllSessionesService = () => {
         try {
             const secciones = await Seccion.findAll()
 
-            if (secciones.length === 0) {
-                return resolve({
-                    ok: false,
-                    message: 'No hay secciones registradas',
-                    accionRecomendada: 'Por favor agregue las secciones por defecto',
-                    secciones: secciones
-                })
-            }
-
             resolve({
                 ok: true,
                 message: 'Secciones obtenidas',
-                secciones: secciones
+                data: secciones
             })
         } catch (error) {
             reject(error)
@@ -33,14 +24,14 @@ export const getSessionService = (idSeccion) => {
             if (!seccion) {
                 return resolve({
                     ok: false,
-                    message: 'No se encontro la seccion'
+                    message: 'Seccion no encontrada'
                 })
             }
 
             resolve({
                 ok: true,
                 message: 'Seccion obtenida',
-                seccion: seccion
+                data: seccion
             })
         } catch (error) {
             reject(error)

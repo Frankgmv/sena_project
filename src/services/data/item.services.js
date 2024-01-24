@@ -26,7 +26,7 @@ export const postItemService = (data) => {
             if (constularTitulo) {
                 return resolve({
                     ok: false,
-                    message: 'El titulo o link estan en uso'
+                    message: 'Titulo o Link en uso'
                 })
             }
 
@@ -41,18 +41,18 @@ export const postItemService = (data) => {
             })
 
             const guardar = await crearItem.save()
+
             if (!guardar) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'Item no fue creado'
+                    message: 'Item no creado'
                 })
             }
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Item creada exitosamente.',
-                item: guardar
+                message: 'Item creado'
             })
         } catch (error) {
             reject(error)
@@ -67,8 +67,8 @@ export const getAllItemService = () => {
 
             resolve({
                 ok:true,
-                message: 'Items encontrados',
-                items
+                message: 'Lista de items',
+                data: items
             })
         } catch (error) {
             reject(error)
@@ -84,14 +84,14 @@ export const getItemService = (idItem) => {
             if (!item) {
                 return resolve({
                     ok:false,
-                    message:'Item no encontrado'
+                    message:  'Item no encontrado'
                 })
             }
 
             resolve({
                 ok:true,
-                message: 'Item encontrado',
-                item
+                message: 'Item obtenido',
+                data: item
             })
         } catch (error) {
             reject(error)
@@ -111,7 +111,7 @@ export const putItemService = (idItem, data) => {
             if (!item) {
                 return resolve({
                     ok: false,
-                    message: 'El item no existe'
+                    message: 'ItemId no encontrado'
                 })
             }
 
@@ -137,8 +137,7 @@ export const putItemService = (idItem, data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Item modificado exitosamente.',
-                item: modificarItem
+                message: 'Item modificado'
             })
         } catch (error) {
             reject(error)
@@ -154,14 +153,14 @@ export const deleteItemService = (idItem) => {
             if (!item) {
                 return resolve({
                     ok:false,
-                    message:'Item no encontrado'
+                    message:  'Item no encontrado'
                 })
             }
             await item.destroy()
 
             resolve({
                 ok:true,
-                message: `item ${item.titulo} eliminado.`
+                message: `item eliminado`
             })
         } catch (error) {
             reject(error)

@@ -27,7 +27,7 @@ export const postVideoService = (data) => {
             if (constularDatos) {
                 return resolve({
                     ok: false,
-                    message: 'El titulo o link estan en uso'
+                    message: 'Titulo o Link en uso'
                 })
             }
 
@@ -54,8 +54,7 @@ export const postVideoService = (data) => {
 
             resolve({
                 ok: true,
-                message: 'Video creado',
-                video: guardar
+                message: 'Video guardado'
             })
         } catch (error) {
             reject(error)
@@ -70,8 +69,8 @@ export const getAllVideoService = () => {
 
             resolve({
                 ok: true,
-                message: 'Videos encontrados',
-                videos
+                message: 'Lista de videos',
+                data: videos
             })
         } catch (error) {
             reject(error)
@@ -94,7 +93,7 @@ export const getVideoService = (idVideo) => {
             resolve({
                 ok: true,
                 message: 'Videos encontrados',
-                video: video.dataValues
+                data: video.dataValues
             })
         } catch (error) {
             reject(error)
@@ -149,8 +148,7 @@ export const putVideoService = (idVideo, data) => {
 
             resolve({
                 ok: true,
-                message: 'Video actualizado',
-                video: update
+                message: 'Video actualizado'
             })
         } catch (error) {
             reject(error)

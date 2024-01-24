@@ -36,8 +36,7 @@ export const postVistasService = (Vistadata) => {
                 await t.commit(transaccion.data)
                 resolve({
                     ok: true,
-                    message: 'Visualización registrada',
-                    vistas: guardar
+                    message: 'Visualización registrada'
                 })
             }
         } catch (err) {
@@ -55,15 +54,14 @@ export const getVistasService = () => {
             if (obtenerVisualizacion.length === 0) {
                 return resolve({
                     ok: false,
-                    message: 'No se encontró ningún dato',
-                    vistas: obtenerVisualizacion
+                    message: 'No se encontró registro'
                 })
             }
 
             resolve({
                 ok: true,
                 message: 'Visualizaciones encontradas',
-                vistas: obtenerVisualizacion
+                data: obtenerVisualizacion
             })
         } catch (err) {
             reject(err)
@@ -120,8 +118,7 @@ export const putVistasService = () => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'visualización existe, fue actualizada',
-                vistas: dataVisual
+                message: 'visualización existe, fue actualizada'
             })
         } catch (error) {
             reject(error)
@@ -139,9 +136,7 @@ export const deleteVistasService = () => {
             }
             resolve({
                 ok: true,
-                estadoVistas: 'eliminadas',
-                message: 'Vistas eliminadas',
-                vistas: obtenerVisualizacion
+                message: 'Registro de Vistas eliminado'
             })
         } catch (error) {
             reject(error)

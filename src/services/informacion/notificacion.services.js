@@ -23,29 +23,54 @@ export const postNotificacionService = (notificacionData) => {
             if (existe) {
                 return resolve({
                     ok: false,
-                    message: `${notificacionData.titulo} ya existe`,
-                    notificacion: existe
-                })
-            } else {
-                const notiCreada = await Notificaciones.create(notificacionData, {
-                    transaction: transaccion.data
-                })
-                const guardar = await notiCreada.save()
-                if (!guardar) {
-                    await t.rollback(transaccion.data)
-                    return resolve({
-                        ok: false,
-                        message: 'Nofificacion no fue creada'
-                    })
-                }
-
-                await t.commit(transaccion.data)
-                resolve({
-                    ok: true,
-                    message: 'Notificación creada',
-                    notificacion: guardar
+                    message: `${notificacionData.titulo} en uso`
                 })
             }
+
+            const notiCreada = await Notificaciones.create(notificacionData, {
+                transaction: transaccion.data
+            })
+
+            const guardar = await notiCreada.save()
+
+            if (!guardar) {
+                await t.rollback(transaccion.data)
+                return resolve({
+                    ok: false,
+                    message: 'Nofificacion no fue creada'
+                })
+            }
+
+            await t.commit(transaccion.data)
+            resolve({
+                ok: true,
+                message: 'Notificación creada'
+            })
+        } catch (err) {
+            reject(err)
+        }
+    })
+}
+
+export const getAllNotificionesService = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const notis = await Notificaciones.findAll({
+                orderBy: ['id']
+            })
+
+            if (notis.length === 0) {
+                return resolve({
+                    ok: false,
+                    message: 'No hay notificaciones'
+                })
+            }
+
+            resolve({
+                ok: true,
+                message: 'Lista de notificaciones',
+                data: notis
+            })
         } catch (err) {
             reject(err)
         }
@@ -60,36 +85,14 @@ export const getNotificionesService = (idNoti) => {
             if (!findNoti) {
                 return resolve({
                     ok: false,
-                    message: 'No se encontró ningún dato'
+                    message: 'Notificacion no encontrada'
                 })
             }
 
             resolve({
                 ok: true,
-                message: 'Notificación encontrada',
-                notificacion: findNoti
-            })
-        } catch (err) {
-            reject(err)
-        }
-    })
-}
-export const getAllNotificionesService = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const notis = await Notificaciones.findAll({
-                orderBy: ['id']
-            })
-            if (notis.length === 0) {
-                return resolve({
-                    ok: false,
-                    message: 'No hay notificaciones'
-                })
-            }
-            resolve({
-                ok: true,
-                message: 'Lista de notificaciones',
-                notificaciones: notis
+                message: 'Notificación obtenida',
+                data: findNoti
             })
         } catch (err) {
             reject(err)
@@ -101,6 +104,7 @@ export const putNotificacionService = (idNoti) => {
     return new Promise(async (resolve, reject) => {
         try {
             const findNoti = await Notificaciones.findByPk(idNoti)
+
             if (!findNoti) {
                 return resolve({
                     ok: false,
@@ -125,15 +129,14 @@ export const putNotificacionService = (idNoti) => {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'Notificacion no fue creada'
+                    message: 'Notificacion no fue actualizada'
                 })
             }
 
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Actualizado correctamente',
-                notificacion: updated
+                message: 'Notificación actualizado'
             })
         } catch (err) {
             reject(err)
@@ -145,6 +148,7 @@ export const deleteNotificacionService = (idNoti) => {
     return new Promise(async (resolve, reject) => {
         try {
             const findNotificaciones = await Notificaciones.findByPk(idNoti)
+
             if (!findNotificaciones) {
                 return resolve({
                     ok: false,
@@ -153,10 +157,10 @@ export const deleteNotificacionService = (idNoti) => {
             }
 
             await findNotificaciones.destroy()
+
             resolve({
                 ok: true,
-                message: 'Notificación Eliminado correctamente',
-                notificacion: findNotificaciones
+                message: 'Notificación eliminado'
             })
         } catch (err) {
             reject(err)
@@ -196,7 +200,7 @@ export function deleteAllNotificacionesService() {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Notificaciones leídas eliminadas correctamente'
+                message: 'Notificaciones leídas eliminadas'
             })
         } catch (err) {
             reject(err)

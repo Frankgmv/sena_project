@@ -180,7 +180,7 @@ export const deleteVideo = async (req, res, next) => {
         const consultaVideo = await getVideoService(req.params.id)
 
         if (consultaVideo.ok) {
-            if (deleteFile(consultaVideo.video.imgPath)) {
+            if (deleteFile(consultaVideo.data.imgPath)) {
                 next('error al eliminar el archivo')
             }
         }

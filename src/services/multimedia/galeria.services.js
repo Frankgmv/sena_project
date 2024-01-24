@@ -47,15 +47,14 @@ export const postGaleriaService = (data) => {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'Imagen no fue creado'
+                    message: 'Registro no fue creado'
                 })
             }
 
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Imagen guardada exitosamente.',
-                imagen: guardar
+                message: 'Imagen guardada'
             })
         } catch (error) {
             reject(error)
@@ -67,10 +66,11 @@ export const getAllGaleriaService = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const imagenes = await Galeria.findAll()
+
             resolve({
                 ok: true,
-                message: 'Imagenes de la galeria',
-                imagenes
+                message: 'Lista de imágenes',
+                data: imagenes
             })
         } catch (error) {
             reject(error)
@@ -92,8 +92,8 @@ export const getGaleriaService = (idImagen) => {
 
             resolve({
                 ok: true,
-                message: 'Imágen de la galeria encontrada',
-                imagen : imagen.dataValues
+                message: 'Imágen encontrada',
+                data : imagen.dataValues
             })
         } catch (error) {
             reject(error)
@@ -156,8 +156,7 @@ export const putGaleriaService = (idImagen, data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Imagen creada exitosamente.',
-                imagen: updateImagen
+                message: 'Imagen actualizada'
             })
         } catch (error) {
             reject(error)
@@ -178,9 +177,10 @@ export const deleteGaleriaService = (idImagen) => {
             }
 
             await imagen.destroy()
+
             resolve({
                 ok: true,
-                message: `Imágen  de la galeria "${imagen.titulo}" borrada exitosamente`
+                message: `Imágen borrada`
             })
         } catch (error) {
             reject(error)

@@ -2,56 +2,6 @@ import Rol from '../../models/data/rol.js'
 import t from '../../helpers/transacciones.js'
 import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
-export const postRol = (data) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const existeRol = await Rol.findOne({
-                where: {
-                    rol: data.rol
-                }
-            })
-            const existeKey = await Rol.findOne({
-                where: {
-                    rolKey: data.rolKey
-                }
-            })
-            if (existeRol || existeKey) {
-                return resolve({
-                    ok: false,
-                    mensaje: 'Ya existe un rol o Llave rol igual a la que intenta registrar'
-                })
-            }
-
-             // Transaccion
-             let transaccion = await t.create()
-
-             if (!transaccion.ok) {
-                 throw new TransactionError('Error al crear transaccion')
-             }
-
-            const crearRol = await Rol.create(data, {transaction: transaccion.data})
-            const guardar = await crearRol.save()
-
-            if (!guardar) {
-                await t.rollback(transaccion.data)
-                return resolve({
-                    ok:false,
-                    message: 'Rol no fue creado'
-                })
-            }
-
-            await t.commit(transaccion.data)
-            return resolve({
-                ok: true,
-                mensaje: 'Rol creado correctamente',
-                rol: crearRol
-            })
-        } catch (error) {
-            reject(error)
-        }
-    })
-}
-
 export const getAllRolesService = () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -66,8 +16,8 @@ export const getAllRolesService = () => {
 
             resolve({
                 ok: true,
-                mensage: 'Roles obtenidos correctamente',
-                roles: roles
+                mensage: 'Lista de roles',
+                data: roles
             })
         } catch (error) {
             reject(error)
@@ -87,8 +37,8 @@ export const getRolService = (idRol) => {
 
             resolve({
                 ok: true,
-                mensage: 'Rol obtenido correctamente',
-                rol: rol
+                mensage: 'Rol obtenido',
+                data: rol
             })
         } catch (error) {
             reject(error)
@@ -130,8 +80,7 @@ export const putRolService = (idRol, data) => {
             await t.commit(transaccion.data)
             return resolve({
                 ok: true,
-                mensaje: 'Rol actualizado correctamente',
-                rol: ActualizarRol
+                mensaje: 'Rol actualizado'
             })
         } catch (error) {
             reject(error)

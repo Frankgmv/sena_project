@@ -46,8 +46,7 @@ export const postArchivoService = (data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Archivo guardado exitosamente.',
-                archivo: guardar
+                message: 'Archivo guardado exitosamente'
             })
         } catch (error) {
             reject(error)
@@ -66,9 +65,10 @@ export const getArchivoService = () => {
                 message: 'No hay archivos'
                })
             }
+
             resolve({
                 ok: true,
-                archivo: archivo[0]
+                data: archivo[0]
             })
         } catch (error) {
             reject(error)
@@ -87,7 +87,7 @@ export const deleteArchivoService = () => {
 
             resolve({
                 ok: true,
-                message: ' Archivo eliminado'
+                message: 'Archivo eliminado'
             })
         } catch (error) {
             reject(error)

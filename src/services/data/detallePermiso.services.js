@@ -17,7 +17,7 @@ export const postDetallePermisoService = (data) => {
             if (!existeUsuario) {
                 return resolve({
                     ok: false,
-                    message: 'El usuario no existe'
+                    message: 'UsuarioId no encontrado'
                 })
             }
 
@@ -25,7 +25,7 @@ export const postDetallePermisoService = (data) => {
             if (!existePermiso) {
                 return resolve({
                     ok: false,
-                    message: 'El permiso no existe'
+                    message: 'PermisoId no encontrado'
                 })
             }
 
@@ -41,23 +41,24 @@ export const postDetallePermisoService = (data) => {
             if (consultarDetallePermiso) {
                 return resolve({
                     ok: false,
-                    message: 'El permiso ya se encuentra creado'
+                    message: 'Permiso ya creado'
                 })
             }
 
             const crearDetallePermiso = await DetallePermiso.create(data)
 
-            const detallePermisoCreado = await crearDetallePermiso.save()
+            await crearDetallePermiso.save()
+
             resolve({
                 ok: true,
-                message: 'detalle permiso creado exitosamente',
-                datos: detallePermisoCreado
+                message: 'detalle permiso creado'
             })
         } catch (error) {
             reject(error)
         }
     })
 }
+
 export const getDetallePermisosByDocumentoService = (idUsuario) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -69,8 +70,8 @@ export const getDetallePermisosByDocumentoService = (idUsuario) => {
 
             resolve({
                 ok: true,
-                message: ' Permisos obtenidos',
-                datos: detallePermisoUsuario
+                message: 'Lista de detalle permiso',
+                data: detallePermisoUsuario
             })
         } catch (error) {
             reject(error)
@@ -86,7 +87,7 @@ export const deleteDetallePermisosService = (idDetallePermiso) => {
             if (!consultarDetallePermiso) {
                 return resolve({
                     ok: false,
-                    message: 'El permiso no se encontró'
+                    message: 'Detalle permiso no encontrado'
                 })
             }
 
@@ -94,7 +95,7 @@ export const deleteDetallePermisosService = (idDetallePermiso) => {
 
             resolve({
                 ok: true,
-                message: 'detalle permiso Eliminado exitosamente'
+                message: 'Detalle permiso eliminado'
             })
         } catch (error) {
             reject(error)

@@ -11,7 +11,7 @@ export const postHistorialService = (data) => {
             if (!existeUsuario) {
                 return resolve({
                     ok: false,
-                    message: 'El usuario no existe'
+                    message: 'Usuario no encontrado'
                 })
             }
 
@@ -36,8 +36,7 @@ export const postHistorialService = (data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'registro creado.',
-                registro: response
+                message: 'registro creado'
             })
         } catch (error) {
             reject(error)
@@ -52,8 +51,8 @@ export const getAllHistorialService = () => {
 
             resolve({
                 ok: true,
-                message: 'Historial Completo',
-                historial: registros
+                message: 'Lista de historial',
+                data: registros
             })
         } catch (error) {
             reject(error)
@@ -75,7 +74,7 @@ export const getHistorialService = (idHistorial) => {
             resolve({
                 ok: true,
                 message: 'Registro encontrado',
-                Historial: registro
+                data: registro
             })
         } catch (error) {
             reject(error)

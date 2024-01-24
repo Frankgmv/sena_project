@@ -218,7 +218,7 @@ export const deleteGaleria = async (req, res, next) => {
     const consultaImagen = await getGaleriaService(req.params.id)
 
     if (consultaImagen.ok) {
-      if (deleteFile(consultaImagen.imagen.imgPath)) {
+      if (deleteFile(consultaImagen.data.imgPath)) {
         next('El archivo no se eliminar')
       }
     }

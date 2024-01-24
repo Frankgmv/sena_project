@@ -15,7 +15,7 @@ export const postEventoService = (data) => {
             if (existeEvento) {
                 return resolve({
                     ok: false,
-                    message: 'Evento ya existe.'
+                    message: 'Evento ya existe'
                 })
             }
 
@@ -35,14 +35,13 @@ export const postEventoService = (data) => {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'Evento no fue creado'
+                    message: 'Evento no creado'
                 })
             }
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Evento creado.',
-                evento: guardar
+                message: 'Evento creado'
             })
         } catch (error) {
             reject(error)
@@ -57,8 +56,8 @@ export const getAllEventosService = () => {
 
             resolve({
                 ok: true,
-                message: 'Todos los eventos',
-                evento: eventos
+                message: 'Lista de eventos',
+                data: eventos
             })
         } catch (error) {
             reject(error)
@@ -74,14 +73,14 @@ export const getEventoService = (idEvento) => {
             if (!evento) {
                 return resolve({
                     ok: false,
-                    message: 'Evento no existe'
+                    message: 'Evento no encontrado'
                 })
             }
 
             resolve({
                 ok: true,
-                message: 'eventos encontrado.',
-                evento: evento
+                message: 'Evento obtenido',
+                data: evento
             })
         } catch (error) {
             reject(error)
@@ -96,7 +95,7 @@ export const putEventoService = (idEvento, data) => {
             if (!evento) {
                 return resolve({
                     ok: false,
-                    message: 'Evento no existe'
+                    message: 'EventoId no existe'
                 })
             }
 
@@ -116,15 +115,14 @@ export const putEventoService = (idEvento, data) => {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok:false,
-                    message: 'Evento no fue actualizado'
+                    message: 'Evento no actualizado'
                 })
             }
 
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Evento actualizado',
-                evento: eventoActualizado
+                message: 'Evento actualizado'
             })
         } catch (error) {
             reject(error)
@@ -139,7 +137,7 @@ export const deleteEventoService = (idEvento) => {
             if (!eventoEncontrado) {
                 return resolve({
                     ok: false,
-                    message: 'Evento no existe'
+                    message: 'EventoId no existe'
                 })
             }
 
@@ -147,7 +145,7 @@ export const deleteEventoService = (idEvento) => {
 
             resolve({
                 ok: true,
-                message: 'Evento Eliminado exitosamente'
+                message: 'Evento eliminado'
             })
         } catch (error) {
             reject(error)

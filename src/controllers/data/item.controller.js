@@ -203,7 +203,7 @@ export const deleteItem = async (req, res, next) => {
         const constularItem = await getItemService(req.params.id)
 
         if (constularItem.ok) {
-           if (deleteFile(constularItem.item.imgPath)) {
+           if (deleteFile(constularItem.data.imgPath)) {
                 next('error al eliminar archivo')
            }
         }

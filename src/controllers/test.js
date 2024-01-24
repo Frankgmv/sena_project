@@ -42,7 +42,7 @@ export const deleteTables = async (req, res, next) => {
         await Notificacion.drop()
         await Pqrs.drop()
 
-        res.status(200).json({message:'Tablas borradas exitosamente...'})
+        res.status(200).json({message:  'Tablas borradas exitosamente...'})
     } catch (error) {
         next(error.message)
     }

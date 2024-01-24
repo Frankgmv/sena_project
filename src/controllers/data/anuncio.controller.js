@@ -211,7 +211,7 @@ export const deleteAnuncio = async (req, res, next) => {
         const consultaAnuncio = await getAnuncioService(req.params.id)
 
         if (consultaAnuncio.ok) {
-            if (deleteFile(consultaAnuncio.anuncio.imgPath)) {
+            if (deleteFile(consultaAnuncio.data.imgPath)) {
                 next('El archivo no se eliminar')
             }
         }

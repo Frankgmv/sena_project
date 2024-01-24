@@ -19,7 +19,7 @@ export const postAnucioService = (data) => {
             if (existeTitulo.length > 0) {
                 return resolve({
                     ok: false,
-                    message: 'Titulo anuncio existente.'
+                    message: 'Titulo anuncio existente'
                 })
             }
 
@@ -63,15 +63,14 @@ export const postAnucioService = (data) => {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'El anuncio no se pudo crear'
+                    message: 'Anuncio no creado'
                 })
             }
 
             await t.commit(transaccion.data)
             return resolve({
                 ok: true,
-                message: 'Anuncio creado.',
-                anuncio: response
+                message: 'Anuncio creado'
             })
         } catch (error) {
             reject(error)
@@ -92,7 +91,7 @@ export const getAllAnunciosService = (seccionKey) => {
                 return resolve({
                     ok: true,
                     message: 'Lista de anuncios',
-                    anuncios
+                    data: anuncios
                 })
             }
             const anuncios = await Anuncio.findAll()
@@ -100,7 +99,7 @@ export const getAllAnunciosService = (seccionKey) => {
             resolve({
                 ok: true,
                 message: 'Lista de anuncios',
-                anuncios
+                data: anuncios.dataValues
             })
         } catch (error) {
             reject(error)
@@ -122,7 +121,8 @@ export const getAnuncioService = (idAnuncio) => {
 
             resolve({
                 ok: true,
-                anuncio: anuncio.dataValues
+                message: 'Anuncio obtenido',
+                data: anuncio.dataValues
             })
         } catch (error) {
             reject(error)
@@ -140,7 +140,7 @@ export const putAnuncioService = (idAnuncio, data) => {
             if (!modAnuncio) {
                 return resolve({
                     ok: false,
-                    message: 'El anuncio no encontrado'
+                    message: 'Anuncio no encontrado'
                 })
             }
 
@@ -189,15 +189,14 @@ export const putAnuncioService = (idAnuncio, data) => {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'El anuncio no se pudo actualizar'
+                    message: 'Anuncio no actualizado'
                 })
             }
 
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: ' Anuncio actualizado correctamente',
-                anuncio: updatedAnuncio
+                message: 'Anuncio actualizado'
             })
         } catch (error) {
             reject(error)

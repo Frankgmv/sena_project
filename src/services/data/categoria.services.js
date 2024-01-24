@@ -8,16 +8,14 @@ export const getAllCategoriasService = () => {
             if (categorias.length === 0) {
                 return resolve({
                     ok: false,
-                    message: 'No hay categorias registradas',
-                    accionRecomendada: 'Por favor agregue las categorias por defecto',
-                    categorias: categorias
+                    message: 'No hay categorias'
                 })
             }
 
             resolve({
                 ok: true,
-                message: 'categorias obtenidas',
-                categorias: categorias
+                message: 'Lista de categorias',
+                data: categorias
             })
         } catch (error) {
             reject(error)
@@ -33,14 +31,14 @@ export const getCategoriaService = (idCategoria) => {
             if (!categoria) {
                 return resolve({
                     ok: false,
-                    message: 'No se encontro la categoria'
+                    message: 'Categoria no encontrada'
                 })
             }
 
             resolve({
                 ok: true,
                 message: 'categoria obtenida',
-                categoria: categoria
+                data: categoria
             })
         } catch (error) {
             reject(error)

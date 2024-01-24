@@ -23,14 +23,14 @@ export const postNoticiaService = (data) => {
             if (existeNoticia) {
                 return resolve({
                     ok: false,
-                    message: 'La noticia ya existe'
+                    message: 'Noticia ya existe'
                 })
             }
 
             if (!existeUsuario) {
                 return resolve({
                     ok: false,
-                    message: 'El usuario no existe'
+                    message: 'UsuarioId no encontrado'
                 })
             }
 
@@ -45,18 +45,18 @@ export const postNoticiaService = (data) => {
             })
 
             const guardar = await crearNoticia.save()
+
             if (!guardar) {
                 await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'Noticia no fue creado'
+                    message: 'Noticia no fue creada'
                 })
             }
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Noticia creada exitosamente.',
-                noticia: guardar
+                message: 'Noticia creada'
             })
         } catch (error) {
             reject(error)
@@ -92,13 +92,15 @@ export const getAllNoticiasService = (estado, pagina, numNoticias = 12) => {
                 }
             }
             const noticias = await Noticia.findAll(consulta)
+
             resolve({
                 ok: true,
-                totalUsuarios: noticias.length,
+                message: 'Lista de noticias',
+                totalNoticias: noticias.length,
                 limite: numNoticias,
                 estado,
                 pagina,
-                noticias
+                data: noticias
             })
         } catch (error) {
             reject(error)
@@ -120,8 +122,8 @@ export const getNoticiaService = (id) => {
 
             resolve({
                 ok: true,
-                message: 'Noticia encontrada exitosamente.',
-                noticia
+                message: 'Noticia obtenida',
+                data: noticia
             })
         } catch (error) {
             reject(error)
@@ -141,7 +143,7 @@ export const putNoticiaService = (id, data) => {
             if (!noticia) {
                 return resolve({
                     ok: false,
-                    message: 'La noticia no existe'
+                    message: 'Noticia no encontrada'
                 })
             }
 
@@ -166,8 +168,7 @@ export const putNoticiaService = (id, data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Noticia modificada exitosamente.',
-                noticia: modificarNoticia
+                message: 'Noticia modificada'
             })
         } catch (error) {
             reject(error)
@@ -188,7 +189,7 @@ export const deleteNoticiaService = (id) => {
             await noticia.destroy()
             resolve({
                 ok: true,
-                message: `Noticia ${noticia.titulo}  eliminada exitosamente`
+                message: `Noticia eliminada`
             })
         } catch (error) {
             reject(error)

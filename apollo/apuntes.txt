@@ -5,7 +5,7 @@ orden de los metodos y los servicios
 
 post
 get All
-get
+get One
 put 
 delete
 
@@ -20,3 +20,33 @@ crear un enpoint para limpiar o borrar imagenes que no esten asociadas en la bas
 Aprender a usar las notificaciones
 agregar enviar emails
 validar que la edad sea menor a 80 años
+
+
+ESTANDAR DE SERVICIOS
+
+POST ({
+    ok: boolean,
+    message: 'mensaje de acierto o error'
+})
+
+GET  ({
+    ok: boolean,
+    message: 'mensaje de acierto o error',
+    data: respuesta (Anexar campor solo en acierto)
+})
+
+GET ONE ({
+    ok: boolean,
+    message: 'mensaje de acierto o error',
+    data: respuesta (Anexar campor solo en acierto)
+})
+
+PUT  ({
+    ok: boolean,
+    message: 'mensaje de acierto o error'
+})
+
+DELETE ({
+    ok: boolean,
+    message: 'mensaje de acierto o error'
+})

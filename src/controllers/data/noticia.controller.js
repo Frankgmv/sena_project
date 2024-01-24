@@ -213,7 +213,7 @@ export const deleteNoticia = async (req, res, next) => {
         const consultaNoticia = await getNoticiaService(req.params.id)
 
         if (consultaNoticia.ok) {
-            if (deleteFile(consultaNoticia.noticia.imgPath)) {
+            if (deleteFile(consultaNoticia.data.imgPath)) {
                 next('error al eliminar el archivo')
             }
         }

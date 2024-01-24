@@ -1,12 +1,11 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { Router } from 'express'
+import { upload } from '../../helpers/includes.js'
+import { deleteArchivo, getArchivo, postArchivo } from '../../controllers/multimedia/archivo.controller.js'
 
-const archivoRouter = Router();
+const archivoRouter = Router()
 
-archivoRouter.get('/archivo', test);
-archivoRouter.get('/archivo/:id', test);
-archivoRouter.post('/archivo', test);
-archivoRouter.put('/archivo/:id', test);
-archivoRouter.delete('/archivo/:id', test);
+archivoRouter.get('/archivos', getArchivo)
+archivoRouter.post('/archivos', upload.single('archivo'), postArchivo)
+archivoRouter.delete('/archivos', deleteArchivo)
 
-export default archivoRouter;
+export default archivoRouter

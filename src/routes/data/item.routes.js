@@ -1,12 +1,13 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { Router } from 'express'
+import { upload } from '../../helpers/includes.js'
+import { deleteItem, getAllItem, getItem, postItem, putItem } from '../../controllers/data/item.controller.js'
 
-const itemRouter = Router();
+const itemRouter = Router()
 
-itemRouter.get('/items', test);
-itemRouter.get('/item/:id', test);
-itemRouter.post('/item', test);
-itemRouter.put('/item/:id', test);
-itemRouter.delete('/item/:id', test);
+itemRouter.get('/items', getAllItem)
+itemRouter.get('/items/:id', getItem)
+itemRouter.post('/items', upload.single('imagen'), postItem)
+itemRouter.put('/items/:id', upload.single('imagen'), putItem)
+itemRouter.delete('/items/:id', deleteItem)
 
-export default itemRouter;
+export default itemRouter

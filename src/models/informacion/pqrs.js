@@ -8,7 +8,7 @@ import {
 const Pqrs = sequelize.define('Pqrs', {
     nombre: {
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     apellido: {
         type: DataTypes.STRING,
@@ -18,7 +18,7 @@ const Pqrs = sequelize.define('Pqrs', {
         type: DataTypes.STRING,
         allowNulls: false
     },
-    reminente: {
+    remitente: {
         type: DataTypes.STRING,
         allowNulls: false
     },
@@ -41,8 +41,8 @@ const Pqrs = sequelize.define('Pqrs', {
     }
 }, {
     freezeTableName: true,
-    timestamps: true
+    createdAt:true,
+    updatedAt:false
 })
-
 
 export default Pqrs

@@ -1,31 +1,24 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
 
-const Notificacion = Sequelize.define('Notificacion',{
-    id: {
-        type: DataTypes.INTEGER,
-        allowNulls: false,
-        autoIncrement: true,
-    },
+const Notificacion = sequelize.define('Notificacion', {
     titulo:{
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     descripcion:{
         type:DataTypes.STRING,
         allowNulls: false
     },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNulls: false
-    },
     estado:{
-        type:DataTypes.BOOLEAN,
-        allowNulls: false
+        type: DataTypes.BOOLEAN,
+        allowNulls: false,
+        defaultValue: false
     }
-})
-
-Notificacion.createTable({
-    tableName:"Notificaciones"
+}, {
+    tableName:'Notificaciones',
+    createdAt:true,
+    updatedAt:false
 })
 
 export default Notificacion

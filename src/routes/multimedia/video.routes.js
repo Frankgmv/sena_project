@@ -1,12 +1,12 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { Router } from 'express'
+import { upload } from '../../helpers/includes.js'
+import { deleteVideo, getAllVideo, getVideo, postVideo, putVideo } from '../../controllers/multimedia/video.controller.js'
+const videoRouter = Router()
 
-const videoRouter = Router();
+videoRouter.get('/videos', getAllVideo)
+videoRouter.get('/videos/:id', getVideo)
+videoRouter.post('/videos', upload.single('imagen'), postVideo)
+videoRouter.put('/videos/:id', upload.single('imagen'), putVideo)
+videoRouter.delete('/videos/:id', deleteVideo)
 
-videoRouter.get('/video', test);
-videoRouter.get('/video/:id', test);
-videoRouter.post('/video', test);
-videoRouter.put('/video/:id', test);
-videoRouter.delete('/video/:id', test);
-
-export default videoRouter;
+export default videoRouter

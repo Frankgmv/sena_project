@@ -1,39 +1,43 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import {
+    DataTypes
+} from 'sequelize'
+import {
+    sequelize
+} from '../../conection.js'
+import Usuario from './usuario.js'
 
-const Item = Sequelize.define('Item',{
+const Item = sequelize.define('Item', {
     id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNulls: false,
-        autoIncrement: true,
+        autoIncrement: true
     },
-    titulo:{
+    titulo: {
         type: DataTypes.STRING,
+        allowNulls: false
+    },
+    link: {
+        type: DataTypes.TEXT,
+        allowNulls: false
+    },
+    imgPath:{
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    estado: {
+        type: DataTypes.BOOLEAN,
         allowNulls: false,
-    },
-    link:{
-        type:DataTypes.BOOLEAN,
-        allowNulls: false
-    },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNulls: false
-    },
-    iduser:{
-        type:DataTypes.DATE,
-        allowNulls: false,
-        references:{
-            model:'User',
-            key: 'id',
-        }
-    },
-    estado:{
-        type:DataTypes.BOOLEAN,
-        allowNulls: false
+        defaultValue: true
     }
+}, {
+    tableName: 'Items',
+    createdAt: true,
+    updatedAt: false
+
 })
 
-Item.createTable({
-    tableName:"Items"
-})
+Usuario.hasMany(Item, {foreignKey: 'UsuarioId'})
+Item.belongsTo(Usuario, {foreignKey: 'UsuarioId'})
 
 export default Item

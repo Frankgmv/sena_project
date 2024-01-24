@@ -1,30 +1,42 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import {
+    DataTypes
+} from 'sequelize'
+import {
+    sequelize
+} from '../../conection.js'
+import Usuario from './usuario.js'
 
-const Token = Sequelize.define('Token',{
+const Token = sequelize.define('Token', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
-        autoIncrement: true,
+        primaryKey: true,
+        autoIncrement: true
     },
-    fecha:{
-        type: DataTypes.DATE,
+    nombre: {
+        type: DataTypes.STRING,
+        allowNulls: false
+    },
+    token: {
+        type: DataTypes.TEXT,
+        allowNulls: false
+    },
+    tokenKey: {
+        type: DataTypes.STRING,
         allowNulls: false,
+        unique: true
     },
-    token:{
-        type:DataTypes.STRING,
+    tiempo: {
+        type: DataTypes.STRING,
         allowNulls: false
-    },
-    tiempo:{
-        type:DataTypes.INTEGER,
-        allowNulls: false
-    },
-    idusuario:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'user',
-            key: 'id',
-        }
-    },
+    }
+}, {
+    tableName: 'Tokens',
+    createdAt: true,
+    updatedAt: false
 })
+
+Usuario.hasMany(Token, {primaryKey:'UsuarioId'})
+Token.belongsTo(Usuario, {primaryKey:'UsuarioId'})
 
 export default Token

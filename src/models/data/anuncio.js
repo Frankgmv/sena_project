@@ -1,41 +1,37 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import Usuario from './usuario.js'
+import Seccion from './seccion.js'
 
-const Anuncio = Sequelize.define('Anuncio',{
-    id: {
+const Anuncio = sequelize.define('Anuncio', {
+    id:{
         type: DataTypes.INTEGER,
         allowNulls: false,
-        autoIncrement: true,
+        primaryKey:true,
+        autoIncrement: true
     },
     titulo:{
         type: DataTypes.STRING,
-        allowNulls: false,
-    },
-    descripcion:{
-        type:DataTypes.STRING,
-        allowNulls: false,
-    },
-    imgPath:{
-        type:DataTypes.STRING,
         allowNulls: true
     },
-    fecha:{
-        type:DataTypes.DATE,
-        allowNulls: false,
+    descripcion:{
+        type:DataTypes.TEXT,
+        allowNulls: true
     },
-    idUsuaio:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'user',
-            key: 'id',
-        }
-    },
-    idSeccion:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'seccion',
-            key: 'id',
-        }
-    },
-})  
+    imgPath:{
+        type:DataTypes.TEXT,
+        allowNulls: true
+    }
+}, {
+    tableName:'Anuncios',
+    createdAt:true,
+    updatedAt:false
+})
+
+Usuario.hasMany(Anuncio, {foreignKey:'UsuarioId'})
+Seccion.hasMany(Anuncio, {foreignKey:'SeccionId'})
+
+Anuncio.belongsTo(Usuario, {foreignKey:'UsuarioId'})
+Anuncio.belongsTo(Seccion, {foreignKey:'SeccionId'})
 
 export default Anuncio

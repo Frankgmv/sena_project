@@ -1,21 +1,21 @@
-import { Sequelize, DataTypes } from 'sequelize' 
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import Galeria from './galeria.js'
 
-const Slider = Sequelize.define('Slider   ',{
+const Slider = sequelize.define('Slider', {
     id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNulls: false,
-        autoIncrement: true,
-    },
-    idFoto:{
-        type:DataTypes.DATE,
-        allowNulls: false,
-        references:{
-            model: 'galeria',
-            key: 'id',
-        }
-    },
-},{
-    freezeTableName: true
+        autoIncrement: true
+    }
+}, {
+    freezeTableName: true,
+    createdAt:true,
+    updatedAt:false
 })
+
+Galeria.hasMany(Slider, {foreignKey: 'ImagenId', as: 'imagenes'})
+Slider.belongsTo(Galeria, {foreignKey: 'ImagenId', as: 'imagenes'})
 
 export default Slider

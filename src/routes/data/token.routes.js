@@ -1,12 +1,15 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { Router } from 'express'
+import { validateSchema } from '../../middlewares/validarSchemas.js'
+import { tokenSchema, putTokenSchema } from '../../schemas/dataSchemas.js'
+import {postToken, getAllToken, getToken, putToken, deleteToken
+} from '../../controllers/data/token.controller.js'
 
-const tokenRouter = Router();
+const tokenRouter = Router()
 
-tokenRouter.get('/tokens', test);
-tokenRouter.get('/token/:id', test);
-tokenRouter.post('/token', test);
-tokenRouter.put('/token/:id', test);
-tokenRouter.delete('/token/:id', test);
+tokenRouter.get('/tokens', getAllToken)
+tokenRouter.get('/tokens/:id', getToken)
+tokenRouter.post('/tokens', validateSchema(tokenSchema), postToken)
+tokenRouter.put('/tokens/:id', validateSchema(putTokenSchema), putToken)
+tokenRouter.delete('/tokens/:id', deleteToken)
 
-export default tokenRouter;
+export default tokenRouter

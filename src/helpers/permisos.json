@@ -1,0 +1,71 @@
+{
+    "permisos": [{
+            "permiso": "SUPER ADMIN",
+            "permisoKey": "P_ADMIN"
+        },
+        {
+            "permiso": "Slider de fotos",
+            "permisoKey": "P_SLIDER"
+        },
+        {
+            "permiso": "Menú Innovación Educativa",
+            "permisoKey": "P_MENU"
+        },
+        {
+            "permiso": "Galeria del calendario",
+            "permisoKey": "P_GALERIA"
+        },
+        {
+            "permiso": "Videos",
+            "permisoKey": "P_VIDEOS"
+        },
+        {
+            "permiso": "Blogs",
+            "permisoKey": "P_BLOGS"
+        },
+        {
+            "permiso": "Gobierno Escolar",
+            "permisoKey": "P_GOBIERNO"
+        },
+        {
+            "permiso": "Estudiantes",
+            "permisoKey": "P_ESTUDIANTES"
+        },
+        {
+            "permiso": "Plataformas Acádemicas",
+            "permisoKey": "P_PLATFORMAS_ACADEMICAS"
+        },
+        {
+            "permiso": "Noticias",
+            "permisoKey": "P_NOTICIAS"
+        },
+        {
+            "permiso": "Link de Archivos y direcciones",
+            "permisoKey": "P_LINKS"
+        },
+        {
+            "permiso": "Actualizar Contraseñas",
+            "permisoKey": "P_UPDATE_PASSWORD"
+        },
+        {
+            "permiso": "Aceptar Registros de usuarios",
+            "permisoKey": "P_ACEPTAR_USUARIOS"
+        },
+        {
+            "permiso": "Inhabilitar Usuarios",
+            "permisoKey": "P_INHABILITAR_USUARIOS"
+        },
+        {
+            "permiso": "Recibir Notificaciones",
+            "permisoKey": "P_NOTIFICACIONES"
+        },
+        {
+            "permiso": "Actualizar Clave Especial de registro",
+            "permisoKey": "P_CLAVE_ESPECIAL"
+        },
+        {
+            "permiso": "Editar informacion de usuarios",
+            "permisoKey": "P_EDITAR_USUARIOS"
+        }
+    ]
+}

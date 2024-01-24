@@ -1,0 +1,29 @@
+{
+    "roles":[
+        {
+            "rol":"Estudiante Especial",
+            "rolKey":"EST_E",
+            "estado": true  
+        },
+        {
+            "rol":"Docente",
+            "rolKey":"DOC",
+            "estado": true
+        },
+        {
+            "rol":"Personal Administrativo",
+            "rolKey":"P_ADM",
+            "estado": true
+        },
+        {
+            "rol":"Coordinador",
+            "rolKey":"COOR",
+            "estado": true
+        },
+        {
+            "rol":"Web Master",
+            "rolKey":"WM",
+            "estado": true
+        }
+    ]
+}

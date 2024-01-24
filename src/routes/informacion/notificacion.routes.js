@@ -1,11 +1,38 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import {
+    Router
+} from 'express'
 
-const notificacionRouter = Router();
+import {
+    deleteAllNotificaciones,
+    deleteNotificacion,
+    getAllNotificaciones,
+    getNotificaciones,
+    postNotificacion,
+    putNotificacion
+} from '../../controllers/informacion/notificacion.controller.js'
+import { validateSchema } from '../../middlewares/validarSchemas.js'
+import {
+    notificacionSchema
+} from '../../schemas/informacionSchemas.js'
 
-notificacionRouter.get('/notificacion', test);
-notificacionRouter.get('/notificacion/:id', test);
-notificacionRouter.post('/notificacion', test);
-notificacionRouter.delete('/notificacion/:id', test);
+const notificacionRouter = Router()
 
-export default notificacionRouter;
+// ? Obtener todas las notificaciones
+notificacionRouter.get('/notificaciones', getAllNotificaciones)
+
+// ? Obtener notificaciones
+notificacionRouter.get('/notificaciones/:id', getNotificaciones)
+
+// ? Publicar y validar notificaciones
+notificacionRouter.post('/notificaciones', validateSchema(notificacionSchema), postNotificacion)
+
+// ? Actualizar notificaciones
+notificacionRouter.put('/notificaciones/:id', putNotificacion)
+
+// ? Eliminar notificaciones
+notificacionRouter.delete('/notificaciones/:id', deleteNotificacion)
+
+// ? Eliminar todas las notificaciones leídas
+notificacionRouter.delete('/notificaciones-delete-all', deleteAllNotificaciones)
+
+export default notificacionRouter

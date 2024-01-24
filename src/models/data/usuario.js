@@ -1,57 +1,54 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import {
+    DataTypes
+} from 'sequelize'
+import {
+    sequelize
+} from '../../conection.js'
+import Rol from './rol.js'
 
-const Usuario = Sequelize.define('Usuario',{
-    id:{
+const Usuario = sequelize.define('Usuario', {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
-    }, 
-    nombre:{
+        autoIncrement: false
+    },
+    nombre: {
         type: DataTypes.STRING,
-        allowNull: false,
-    }, 
-    apelldio:{
+        allowNull: false
+    },
+    apellido: {
         type: DataTypes.STRING,
-        allowNull: false,
-    }, 
-    fechaNacimiento:{
+        allowNull: false
+    },
+    fechaNacimiento: {
         type: DataTypes.DATE,
+        allowNull: false
+    },
+    correo: {
+        type: DataTypes.TEXT,
         allowNull: false,
-    }, 
-    correo:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    }, 
-    celular:{
+        unique:true
+    },
+    celular: {
         type: DataTypes.STRING,
-        allowNull: false,
-    }, 
-    password:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
-    id_rol:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'rol',
-            key: 'id',
-        }
-    },
-    id_permiso:{
-        type: DataTypes.INTEGER,
-        references:{
-            model: 'detallePermiso',
-            key: 'id',
-        }
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
     estado: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue:false
     }
+}, {
+    tableName:'Usuarios',
+    createdAt:true,
+    updatedAt:false
 })
 
-Usuario.createTable({
-    tableName:"Usuarios"
-})
+Rol.hasMany(Usuario, {foreignKey: 'UsuarioId'})
+Usuario.belongsTo(Rol)
 
 export default Usuario

@@ -1,12 +1,11 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { Router } from 'express'
+import { getAllSecciones, getSeccion } from '../../controllers/data/seccion.controller.js'
 
-const seccionRouter = Router();
+const seccionRouter = Router()
 
-seccionRouter.get('/secciones', test);
-seccionRouter.get('/seccion/:id', test);
-seccionRouter.post('/seccion', test);
-seccionRouter.put('/seccion/:id', test);
-seccionRouter.delete('/seccion/:id', test);
+// TODO Agregar todas las secciones en el json de los helpers
 
-export default seccionRouter;
+seccionRouter.get('/secciones', getAllSecciones)
+seccionRouter.get('/secciones/:id', getSeccion)
+
+export default seccionRouter

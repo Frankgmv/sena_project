@@ -1,41 +1,37 @@
 import {
-    Sequelize,
     DataTypes
 } from 'sequelize'
 
-const Galeria = Sequelize.define('Galeria', {
+import Usuario from '../data/usuario.js'
+import Evento from '../data/evento.js'
+
+import { sequelize } from '../../conection.js'
+
+const Galeria = sequelize.define('Galeria', {
     id: {
         type: DataTypes.INTEGER,
         allowNulls: false,
-        autoIncrement: true,
+        primaryKey:true,
+        autoIncrement: true
     },
-    fecha: {
-        type: DataTypes.DATE,
-        allowNulls: false,
-    },
-    nombreEvento: {
+    titulo: {
         type: DataTypes.STRING,
-        allowNulls: false,
+        allowNulls: false
     },
     imgPath: {
         type: DataTypes.STRING,
         allowNulls: false
-    },
-    idUsuaio: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'user',
-            key: 'id',
-        }
-    },
-    idEvento: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'evento',
-            key: 'id',
-        }
-    },
+    }
+}, {
+    updatedAt: false,
+    createdAt: true,
+    freezeTableName: true
 })
 
+Usuario.hasMany(Galeria, {foreignKey: 'UsuarioId'})
+Galeria.belongsTo(Usuario)
+
+Evento.hasMany(Galeria, {foreignKey: 'EventoId'})
+Galeria.belongsTo(Evento)
 
 export default Galeria

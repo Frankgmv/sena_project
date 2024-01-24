@@ -1,0 +1,866 @@
+{
+	"info": {
+		"_postman_id": "2063043f-748c-4499-9f49-7989a1824c62",
+		"name": "API_SENA",
+		"description": "Carpeta con peticiones por carpetas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24513022"
+	},
+	"item": [
+		{
+			"name": "auxiliares",
+			"item": [
+				{
+					"name": "reset-db",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_api}}reset-database",
+							"host": [
+								"{{url_api}}reset-database"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DATA",
+			"item": [
+				{
+					"name": "permisos",
+					"item": [
+						{
+							"name": "getPermisos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}permisos",
+									"host": [
+										"{{url_api}}{{dt}}permisos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "secciones",
+					"item": [
+						{
+							"name": "getSeccion",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}secciones",
+									"host": [
+										"{{url_api}}{{dt}}secciones"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "categorias",
+					"item": [
+						{
+							"name": "getCategorias",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}categorias",
+									"host": [
+										"{{url_api}}{{dt}}categorias"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "roles",
+					"item": [
+						{
+							"name": "getRoles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}roles",
+									"host": [
+										"{{url_api}}{{dt}}roles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "usuarios",
+					"item": [
+						{
+							"name": "GetUsers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}usuarios",
+									"host": [
+										"{{url_api}}{{dt}}usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostUsuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : 1011393361,\r\n    \"nombre\" : \"tu \",\r\n    \"apellido\" : \"tio\",\r\n    \"fechaNacimiento\" : \"2020-06-09\",\r\n    \"correo\" : \"kava1@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}usuarios",
+									"host": [
+										"{{url_api}}{{dt}}usuarios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "detalle_permisos",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}detalle-permisos/1011393360",
+									"host": [
+										"{{url_api}}{{dt}}detalle-permisos"
+									],
+									"path": [
+										"1011393360"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "noticias",
+					"item": [
+						{
+							"name": "getNoticias",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}noticias",
+									"host": [
+										"{{url_api}}{{dt}}noticias"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "link",
+					"item": [
+						{
+							"name": "GetLink",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}links",
+									"host": [
+										"{{url_api}}{{dt}}links"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostLink",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\" : \"Magazine\",\r\n    \"link\" : \"https://youtube.com\",\r\n    \"tipo\" : \"blog\",\r\n    \"UsuarioId\" : 1011393360,\r\n    \"SeccionId\" : 1,\r\n    \"CategoriaId\" : 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}links",
+									"host": [
+										"{{url_api}}{{dt}}links"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutLink",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\" : \"CineMaga\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}links/1",
+									"host": [
+										"{{url_api}}{{dt}}links"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "De le te",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}links/2",
+									"host": [
+										"{{url_api}}{{dt}}links"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "anuncios",
+					"item": [
+						{
+							"name": "GetAnuncios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}anuncios",
+									"host": [
+										"{{url_api}}{{dt}}anuncios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostAnuncios",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\" : \"No have class bruhh\",\r\n    \"descripcion\" : \"In this day the students no haven't classes. Becouse, idk :D\",\r\n    \"UsuarioId\" : 1011393360,\r\n    \"SeccionId\" : 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}anuncios",
+									"host": [
+										"{{url_api}}{{dt}}anuncios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putAnuncios",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\" : \"Yes have class bruhh\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}anuncios/1",
+									"host": [
+										"{{url_api}}{{dt}}anuncios"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "De le te",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\" : \"Yes have class bruhh\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}anuncios/1",
+									"host": [
+										"{{url_api}}{{dt}}anuncios"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "tokens",
+					"item": [
+						{
+							"name": "GetToken",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}tokens",
+									"host": [
+										"{{url_api}}{{dt}}tokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostToken",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"token\" : \"Beta\",\r\n    \"nombre\" : \"Juanpis\",\r\n    \"tokenKey\" : \"Beta\",\r\n    \"tiempo\" : \"500\",\r\n    \"UsuarioId\" : 1011393360\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}tokens",
+									"host": [
+										"{{url_api}}{{dt}}tokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutToken",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tiempo\" : \"1D\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}tokens/1",
+									"host": [
+										"{{url_api}}{{dt}}tokens"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DelToken",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tiempo\" : \"1D\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}tokens/1",
+									"host": [
+										"{{url_api}}{{dt}}tokens"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "items",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}items",
+									"host": [
+										"{{url_api}}{{dt}}items"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "eventos",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}eventos",
+									"host": [
+										"{{url_api}}{{dt}}eventos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "MULTIMEDIA",
+			"item": [
+				{
+					"name": "archivos",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{multi}}archivos",
+									"host": [
+										"{{url_api}}{{multi}}archivos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "galeria",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{multi}}galeria",
+									"host": [
+										"{{url_api}}{{multi}}galeria"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "videos",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{multi}}videos",
+									"host": [
+										"{{url_api}}{{multi}}videos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "slider",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{multi}}slider",
+									"host": [
+										"{{url_api}}{{multi}}slider"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "INFORMACIÓN",
+			"item": [
+				{
+					"name": "pqrs",
+					"item": [
+						{
+							"name": "getAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{Info}}pqrs",
+									"host": [
+										"{{url_api}}{{Info}}pqrs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Carlos\",\r\n    \"apellido\": \"Jaramillo\",\r\n    \"tipo\":\"Solicitud\",\r\n    \"remitente\":\"Maestro\",\r\n    \"correo\" :\"carlJara@gmail.com\",\r\n    \"numeroContacto\": \"3042235432\",\r\n    \"mensaje\":\"Evento de despedida rector viejo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{info}}pqrs/1",
+									"host": [
+										"{{url_api}}{{info}}pqrs"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOne",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{info}}pqrs/1",
+									"host": [
+										"{{url_api}}{{info}}pqrs"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putPqrs",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"estado\" : \"false\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{info}}pqrs/1",
+									"host": [
+										"{{url_api}}{{info}}pqrs"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "notificaciones",
+					"item": [
+						{
+							"name": "GetNotificaciones",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{info}}notificaciones",
+									"host": [
+										"{{url_api}}{{info}}notificaciones"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostNotificaciones",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\" : \"No prueba hay CLASES :D\",\r\n    \"descripcion\" : \"Na mas no vayan a estudiar, la buena mi so\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{info}}notificaciones",
+									"host": [
+										"{{url_api}}{{info}}notificaciones"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PutNotificaciones",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\" : \"Si hay clases D:\",\r\n    \"descripcion\" : \"El rector no me dejo, vayan a estudiar mushashos\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{info}}notificaciones/2",
+									"host": [
+										"{{url_api}}{{info}}notificaciones"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "De le te",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{info}}notificaciones/2",
+									"host": [
+										"{{url_api}}{{info}}notificaciones"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "vistas",
+					"item": [
+						{
+							"name": "GetVistas",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{info}}vistas",
+									"host": [
+										"{{url_api}}{{info}}vistas"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "historial",
+					"item": [
+						{
+							"name": "GetHistorial",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{info}}historial/1",
+									"host": [
+										"{{url_api}}{{info}}historial"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostHistorial",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cambio\" : \"Actualización\",\r\n    \"descripcion\" : \"Actualizamos datos pe\",\r\n    \"UsuarioId\" : 1011393360\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{info}}historial",
+									"host": [
+										"{{url_api}}{{info}}historial"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "De le te",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cambio\" : \"Actualización 2\",\r\n    \"descripcion\" : \"Actualizamos datos pe\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{info}}historial",
+									"host": [
+										"{{url_api}}{{info}}historial"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

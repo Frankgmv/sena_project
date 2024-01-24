@@ -1,12 +1,14 @@
-import { Router } from 'express';
-import { test } from "../../controllers/test.js";
+import { Router } from 'express'
+import { deleteNoticia, getAllNoticias, getNoticia, postNoticia, putNoticia
+} from '../../controllers/data/noticia.controller.js'
+import { upload } from '../../helpers/includes.js'
 
-const noticiaRouter = Router();
+const noticiaRouter = Router()
 
-noticiaRouter.get('/noticias', test);
-noticiaRouter.get('/noticia/:id', test);
-noticiaRouter.post('/noticia', test);
-noticiaRouter.put('/noticia/:id', test);
-noticiaRouter.delete('/noticia/:id', test);
+noticiaRouter.get('/noticias', getAllNoticias)
+noticiaRouter.get('/noticias/:id', getNoticia)
+noticiaRouter.post('/noticias', upload.single('imagen'), postNoticia)
+noticiaRouter.put('/noticias/:id', upload.single('imagen'), putNoticia)
+noticiaRouter.delete('/noticias/:id', deleteNoticia)
 
-export default noticiaRouter;
+export default noticiaRouter

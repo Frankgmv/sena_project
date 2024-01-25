@@ -1,10 +1,13 @@
 import {
-    DataTypes
+    DataTypes, Op
 } from 'sequelize'
 import {
     sequelize
 } from '../../conection.js'
 import Rol from './rol.js'
+import usuarioDefault from '../../helpers/usuario.json' assert { type: 'json'}
+import t from '../../helpers/transacciones.js'
+import { UsuarioError } from '../../middlewares/fabricaErrores.js'
 
 const Usuario = sequelize.define('Usuario', {
     id: {
@@ -50,5 +53,35 @@ const Usuario = sequelize.define('Usuario', {
 
 Rol.hasMany(Usuario, {foreignKey: 'UsuarioId'})
 Usuario.belongsTo(Rol)
+
+async function insertDefaultData(insertDefaultData) {
+    try {
+        await Usuario.sync()
+        const exiteUsuario = await Usuario.findOne({
+            where:{
+                [Op.and]:{
+                    correo: insertDefaultData.correo,
+                    id: insertDefaultData.id
+                }
+            }
+        })
+        if (!exiteUsuario) {
+            let transaccion = await t.create()
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+            await Usuario.create(insertDefaultData, {
+                transaction: transaccion.data
+            }) 
+            await t.commit(transaccion.data)
+        }
+    } catch (error) {
+        throw new UsuarioError(error)
+    }
+}
+
+setTimeout(() => {
+    insertDefaultData(usuarioDefault.data_usuario)
+}, 3000);
 
 export default Usuario

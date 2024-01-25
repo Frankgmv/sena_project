@@ -5,6 +5,10 @@ import {
     sequelize
 } from '../../conection.js'
 import Usuario from './usuario.js'
+import { ErrorCategoria, TransactionError } from '../../middlewares/fabricaErrores.js'
+import t from '../../helpers/transacciones.js'
+import tokenDefault from '../../helpers/claveEspecial.json' assert { type: 'json' }
+import { TokenError } from  '../../middlewares/fabricaErrores.js'
 
 const Token = sequelize.define('Token', {
     id: {
@@ -38,5 +42,33 @@ const Token = sequelize.define('Token', {
 
 Usuario.hasMany(Token, {primaryKey:'UsuarioId'})
 Token.belongsTo(Usuario, {primaryKey:'UsuarioId'})
+
+async function insertDefaultData(dataToken) {
+    try {
+        await Token.sync()
+        const hayToken = await Token.findOne({
+            where: {
+                tokenKey: dataToken.tokenKey
+            }
+        })
+
+        if (!hayToken) {
+            let transaccion = await t.create()
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
+            await Token.create(dataToken, {
+                transaction: transaccion.data
+            })
+            await t.commit(transaccion.data)
+        }
+    } catch (error) {
+        throw new TokenError(error)
+    }
+}
+
+setTimeout(() => {
+    insertDefaultData(tokenDefault.data)
+}, 6000)
 
 export default Token

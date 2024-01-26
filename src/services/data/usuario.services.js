@@ -112,7 +112,7 @@ export const postUsuarioService = (data) => {
             resolve({
                 ok: true,
                 message: 'usuario creado exitosamente!',
-                usuario: respuesta
+                data: respuesta
             })
         } catch (error) {
             reject(error)

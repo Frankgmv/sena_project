@@ -110,7 +110,8 @@ export const postUsuarioService = (data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'usuario creado'
+                message: 'usuario creado',
+                data: respuesta
             })
         } catch (error) {
             reject(error)

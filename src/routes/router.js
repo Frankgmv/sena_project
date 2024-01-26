@@ -32,14 +32,10 @@ import detallePermisoRouter from './data/detallePermiso.routes.js'
 import eventoRouter from './data/evento.routes.js'
 
 // * Rutas de validacion
+import credencialesRouter from './validacion/credenciales.routes.js'
 
-import loginRouter from './validacion/login.routes.js'
-import logoutRouter from './validacion/logout.routes.js'
-import registroRouter from './validacion/registro.routes.js'
-import verificacionRouter from './validacion/verificacion.routes.js'
-import {
-    deleteTables
-} from '../controllers/test.js'
+// TODO eliminar borrar DB
+import { deleteTables } from '../controllers/test.js'
 
 // Enrutador general de todo
 const router = Router()
@@ -75,11 +71,9 @@ router.use('/informacion',
     historialRouter
 )
 // Une todas las rutas de la carpeta validacion
-router.use('/validacion', loginRouter,
-    registroRouter,
-    logoutRouter,
-    verificacionRouter
-)
+router.use('/validacion', credencialesRouter)
+
+// TODO eliminar ruta al terminar
 router.post('/reset-database', deleteTables)
 
 export default router

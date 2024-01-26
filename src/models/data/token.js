@@ -5,7 +5,7 @@ import {
     sequelize
 } from '../../conection.js'
 import Usuario from './usuario.js'
-import { ErrorCategoria, TransactionError } from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import t from '../../helpers/transacciones.js'
 import tokenDefault from '../../helpers/claveEspecial.json' assert { type: 'json' }
 import { TokenError } from  '../../middlewares/fabricaErrores.js'
@@ -68,7 +68,7 @@ async function insertDefaultData(dataToken) {
 }
 
 setTimeout(() => {
-    insertDefaultData(tokenDefault.data)
+    // insertDefaultData(tokenDefault.data)
 }, 6000)
 
 export default Token

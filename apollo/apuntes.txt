@@ -17,10 +17,12 @@ enlazar esto con el login de los usuarios activos que hacer acciones, obtener el
 
 crear un enpoint para limpiar o borrar imagenes que no esten asociadas en la base de datos
 
+// TODO
 Aprender a usar las notificaciones
 agregar enviar emails
 validar que la edad sea menor a 80 años
 
+<<<<<<< HEAD
 
 ESTANDAR DE SERVICIOS
 
@@ -50,3 +52,8 @@ DELETE ({
     ok: boolean,
     message: 'mensaje de acierto o error'
 })
+=======
+// PARA HOY
+- Registro de usuario
+- 
+>>>>>>> 0a303d95ee0385db13fcf019c89de429d44b23e3

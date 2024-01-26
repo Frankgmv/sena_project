@@ -1,0 +1,12 @@
+{
+    "data_usuario": {
+        "apellido": "tio",
+        "celular": "3225201928",
+        "correo": "tutio@gmail.com",
+        "fechaNacimiento": "2020-06-09",
+        "id": 1112131415,
+        "nombre": "tuu",
+        "password": "12345678Xd@",
+        "RolId": 5
+    }
+}

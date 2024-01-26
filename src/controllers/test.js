@@ -16,6 +16,8 @@ import Pqrs from '../models/informacion/pqrs.js'
 import Vistas from '../models/informacion/vistas.js'
 import Galeria from '../models/multimedia/galeria.js'
 import Slider from '../models/multimedia/slider.js'
+import Video from '../models/multimedia/video.js'
+import Archivo from '../models/multimedia/archivo.js'
 
 export const test = (req, res) => {
     res.send('Ruta funcionando')
@@ -23,6 +25,8 @@ export const test = (req, res) => {
 
 export const deleteTables = async (req, res, next) => {
     try {
+        await Video.drop()
+        await Archivo.drop()
         await Slider.drop()
         await Galeria.drop()
         await Item.drop()
@@ -31,6 +35,7 @@ export const deleteTables = async (req, res, next) => {
         await Historial.drop()
         await Anuncio.drop()
         await Link.drop()
+
         await Noticia.drop()
         await DetallePermiso.drop()
         await Usuario.drop()

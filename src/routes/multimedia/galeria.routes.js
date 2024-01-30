@@ -1,13 +1,14 @@
 import { Router } from 'express'
 import { postGaleria, getAllGaleria, getGaleria, putGaleria, deleteGaleria } from '../../controllers/multimedia/galeria.controller.js'
 import { upload } from '../../helpers/includes.js'
+import { authRutas } from '../../middlewares/tokenValidator.js'
 
 const galeriaRouter = Router()
 
 galeriaRouter.get('/galeria', getAllGaleria)
 galeriaRouter.get('/galeria/:id', getGaleria)
-galeriaRouter.post('/galeria', upload.single('imagen'), postGaleria)
-galeriaRouter.put('/galeria/:id', upload.single('imagen'), putGaleria)
-galeriaRouter.delete('/galeria/:id', deleteGaleria)
+galeriaRouter.post('/galeria', authRutas, upload.single('imagen'), postGaleria)
+galeriaRouter.put('/galeria/:id', authRutas, upload.single('imagen'), putGaleria)
+galeriaRouter.delete('/galeria/:id', authRutas, deleteGaleria)
 
 export default galeriaRouter

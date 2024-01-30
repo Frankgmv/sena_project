@@ -7,11 +7,12 @@ import {
 } from '../../schemas/dataSchemas.js'
 import { deleteDetallePermisos, getDetallePermisosByDocumento, postDetallePermiso
 } from '../../controllers/data/detallePermiso.controller.js'
+import { authRutas } from '../../middlewares/tokenValidator.js'
 
 const detallePermisoRouter = Router()
 
-detallePermisoRouter.get('/detalle-permisos/:idUsuario', getDetallePermisosByDocumento)
-detallePermisoRouter.post('/detalle-permisos', validateSchema(detallePermisoSchema), postDetallePermiso)
-detallePermisoRouter.delete('/detalle-permisos/:idDetallePermiso', deleteDetallePermisos)
+detallePermisoRouter.get('/detalle-permisos/:idUsuario', authRutas, getDetallePermisosByDocumento)
+detallePermisoRouter.post('/detalle-permisos', authRutas, validateSchema(detallePermisoSchema), postDetallePermiso)
+detallePermisoRouter.delete('/detalle-permisos/:idDetallePermiso', authRutas, deleteDetallePermisos)
 
 export default detallePermisoRouter

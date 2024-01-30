@@ -1,5 +1,6 @@
 import express from 'express'
 import morgan from 'morgan'
+import cookieParser from 'cookie-parser'
 import rutas from './helpers/rutasGuia.json' assert { type: "json" }
 
 import manejadorErrores from './middlewares/manejadorErrores.js'
@@ -12,6 +13,7 @@ app.use(express.urlencoded({
 }))
 
 app.use(morgan('dev'))
+app.use(cookieParser())
 // TODO cors
 // ? Add cors finally app.use(cors({options}))
 

@@ -31,7 +31,12 @@ export const validarPermisos = async (req, res, next) =>{
             message: error.message
         })
     }
+}
 
-
-
+export const validarSession = async (req, res, next) => {
+    try {
+        const token = req.cookie
+    } catch (error) {
+        next(error)
+    }
 }

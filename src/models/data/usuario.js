@@ -51,8 +51,8 @@ const Usuario = sequelize.define('Usuario', {
     updatedAt:false
 })
 
-Rol.hasMany(Usuario, {fore})
-Usuario.belongsTo(Rol)
+Rol.hasMany(Usuario)
+Usuario.belongsTo(Rol, {foreignKey: 'RolId'})
 
 async function insertDefaultData(insertDefaultData) {
     try {

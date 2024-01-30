@@ -23,7 +23,7 @@ export const postTokenService = (data) => {
             if (encontrarToken) {
                 resolve({
                     ok: false,
-                    message: 'TokenKey o Nombre Toeken en uso'
+                    message: 'TokenKey o Nombre Token en uso'
                 })
             }
 
@@ -97,6 +97,32 @@ export const getTokenService = (idToken) => {
                 ok: true,
                 message: 'Token obtenido',
                 data: tokens
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+export const getTokenKeyService = (tokenKey) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const token = await Token.findOne({
+                where: {
+                    tokenKey: tokenKey
+                }
+            })
+
+            if (!token) {
+                return resolve({
+                    ok: false,
+                    message: 'Token no encontrado'
+                })
+            }
+
+            resolve({
+                ok: true,
+                message: 'Token obtenido',
+                data: token
             })
         } catch (error) {
             reject(error)

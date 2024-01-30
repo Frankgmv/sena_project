@@ -44,3 +44,20 @@ export const registroSchema = z.object({
         invalid_type_error: 'El id_rol es un número'
     })
 })
+
+export const loginSchema = z.object({
+    id: z.number({
+        required_error: 'El documento es requerido',
+        invalid_type_error: 'El documento es un número'
+    }).min(10000000, 'El documento debe contener 8 carácteres mínimo')
+    .max(10000000000, 'El documento debe contener 10 carácteres máximo'),
+    password: z.string({
+        required_error: 'La contraseña es requerida',
+        invalid_type_error: 'La contraseña debe ser un texto'
+    }).min(8, 'La contraseña debe tener mínimo 8 carácteres')
+    .max(50, 'La contraseña debe tener máximo 50 carácteres'),
+RolId: z.number({
+    required_error: 'El id_rol es requerido',
+    invalid_type_error: 'El id_rol es un número'
+})
+})

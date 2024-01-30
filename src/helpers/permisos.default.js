@@ -3,7 +3,7 @@ import {
 } from '../services/data/permiso.services.js'
 import {
     getRolService
-} from '../services/data/rol.services'
+} from '../services/data/rol.services.js'
 import {
     permisosKeyCoordinador,
     permisosKeyDocente,

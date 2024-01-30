@@ -12,12 +12,16 @@
             "permisoKey": "P_MENU"
         },
         {
-            "permiso": "Galeria del calendario",
+            "permiso": "Galeria",
             "permisoKey": "P_GALERIA"
         },
         {
             "permiso": "Videos",
             "permisoKey": "P_VIDEOS"
+        },
+        {
+            "permiso": "Magazine - Periodico Escolar",
+            "permisoKey": "P_MAGAZINE"
         },
         {
             "permiso": "Blogs",

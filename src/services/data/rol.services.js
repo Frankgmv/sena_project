@@ -24,6 +24,7 @@ export const getAllRolesService = () => {
         }
     })
 }
+
 export const getRolService = (idRol) => {
     return new Promise(async (resolve, reject) => {
         try {

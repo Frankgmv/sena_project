@@ -2,28 +2,23 @@
     "roles":[
         {
             "rol":"Estudiante Especial",
-            "rolKey":"EST_E",
-            "estado": true  
+            "rolKey":"EST_E"
         },
         {
             "rol":"Docente",
-            "rolKey":"DOC",
-            "estado": true
+            "rolKey":"DOC"
         },
         {
             "rol":"Personal Administrativo",
-            "rolKey":"P_ADM",
-            "estado": true
+            "rolKey":"P_ADM"
         },
         {
             "rol":"Coordinador",
-            "rolKey":"COOR",
-            "estado": true
+            "rolKey":"COOR"
         },
         {
             "rol":"Web Master",
-            "rolKey":"WM",
-            "estado": true
+            "rolKey":"WM"
         }
     ]
 }

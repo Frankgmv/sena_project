@@ -49,7 +49,7 @@ async function insertDefaultData(dataRoles) {
 }
 
 setTimeout(() => {
-    // insertDefaultData(rolesPorDefecto.roles)
+    insertDefaultData(rolesPorDefecto.roles)
 }, 1800);
 
 export default Rol

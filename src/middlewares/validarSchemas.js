@@ -4,7 +4,8 @@ export const validateSchema = (Shema) => (req, res, next) => {
         next()
     } catch (err) {
         res.status(400).json({
-            message: err
+            error:true,
+            zodError: err
         })
     }
 }

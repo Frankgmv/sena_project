@@ -68,7 +68,7 @@ async function insertDefaultData(dataToken) {
 }
 
 setTimeout(() => {
-    // insertDefaultData(tokenDefault.data)
+    insertDefaultData(tokenDefault.data)
 }, 6000)
 
 export default Token

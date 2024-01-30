@@ -66,6 +66,7 @@ export const getAllPermisosService = async () => {
         }
     })
 }
+
 export const getPermisoService = async (idPermiso) => {
     return new Promise(async (resolve, reject) => {
         try {

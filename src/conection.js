@@ -21,8 +21,6 @@ const {
 
 // ? conección a la base de datos Postgres
 
-Sequelize.DEBUG = true
-
 export const sequelize = new Sequelize({
     host: DB_HOST,
     database: DB_NAME,
@@ -31,6 +29,8 @@ export const sequelize = new Sequelize({
     port: DB_PORT,
     username: DB_USER
 })
+
+sequelize.DEBUG = true
 
 /*
 //* Conexión para la db cuando se despliegue en remoto
@@ -52,7 +52,7 @@ export const connect = async () => {
     try {
         await sequelize.authenticate()
         // await sequelize.sync()
-        // await sequelize.sync({alter:true})
+        await sequelize.sync({alter:true})
         console.log(`  <<  Conexión exitosa a la base de datos >> `.blue)
     } catch (err) {
         throw new ErrorConexion(err)

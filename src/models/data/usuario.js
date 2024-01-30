@@ -51,7 +51,7 @@ const Usuario = sequelize.define('Usuario', {
     updatedAt:false
 })
 
-Rol.hasMany(Usuario)
+Rol.hasMany(Usuario, {fore})
 Usuario.belongsTo(Rol)
 
 async function insertDefaultData(insertDefaultData) {
@@ -81,7 +81,7 @@ async function insertDefaultData(insertDefaultData) {
 }
 
 setTimeout(() => {
-    // insertDefaultData(usuarioDefault.data_usuario)
+    insertDefaultData(usuarioDefault.data_usuario)
 }, 3000);
 
 export default Usuario

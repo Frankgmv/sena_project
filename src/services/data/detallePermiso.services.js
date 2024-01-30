@@ -5,6 +5,15 @@ import DetallePermiso from '../../models/data/detallePermiso.js'
 import Permiso from '../../models/data/permiso.js'
 import Usuario from '../../models/data/usuario.js'
 
+const postDetallePermisoDefaultService = (data) => {
+    const { RolId, id } = data
+    try {
+
+    } catch (error) {
+
+    }
+}
+
 export const postDetallePermisoService = (data) => {
     return new Promise(async (resolve, reject) => {
         try {

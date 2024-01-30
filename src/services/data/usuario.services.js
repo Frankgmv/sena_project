@@ -13,6 +13,7 @@ import t from '../../helpers/transacciones.js'
 import {
     TransactionError
 } from '../../middlewares/fabricaErrores.js'
+import { postDetallePermisosDefault } from '../../helpers/permisos.default.js'
 
 export const postUsuarioService = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -110,8 +111,7 @@ export const postUsuarioService = (data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'usuario creado',
-                data: respuesta
+                message: 'usuario creado'
             })
         } catch (error) {
             reject(error)
@@ -200,6 +200,9 @@ export const putUsuarioService = (idUser, data) => {
 
             if (data.id) {
                 delete data.id
+            }
+            if (data.estado) {
+                postDetallePermisosDefault(idUser, usuario.data.RolId)
             }
 
              // Transaccion

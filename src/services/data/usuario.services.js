@@ -13,7 +13,7 @@ import t from '../../helpers/transacciones.js'
 import {
     TransactionError
 } from '../../middlewares/fabricaErrores.js'
-import { postDetallePermisosDefault } from '../../helpers/permisos.default.js'
+import { postDetallePermisoDefault } from '../../helpers/permisos.default.js'
 
 export const postUsuarioService = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -201,16 +201,24 @@ export const putUsuarioService = (idUser, data) => {
             if (data.id) {
                 delete data.id
             }
-            if (data.estado) {
-                postDetallePermisosDefault(idUser, usuario.data.RolId)
+
+            if (data.estado === true) {
+                const respPermisos = await postDetallePermisoDefault({id: idUser, RolId: usuario.data.RolId})
+
+                if (!respPermisos.ok) {
+                    return resolve({
+                        ok: false,
+                        message: 'No se pudo asignar permisos por defecto'
+                    })
+                }
             }
 
              // Transaccion
             let transaccion = await t.create()
 
-             if (!transaccion.ok) {
-                 throw new TransactionError('Error al crear transaccion')
-             }
+                if (!transaccion.ok) {
+                    throw new TransactionError('Error al crear transaccion')
+                }
 
             const usuarioActualizado = await usuario.update(data, {transaction: transaccion.data})
 

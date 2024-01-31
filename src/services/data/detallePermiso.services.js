@@ -5,13 +5,34 @@ import DetallePermiso from '../../models/data/detallePermiso.js'
 import Permiso from '../../models/data/permiso.js'
 import Usuario from '../../models/data/usuario.js'
 
-const postDetallePermisoDefaultService = (data) => {
-    const { RolId, id } = data
-    try {
+export const postDetallePermisoDefaultService = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const consultarDetallePermiso = await DetallePermiso.findAll({
+                where: {
+                    PermisoId: data[0].PermisoId
+                }
+            })
 
-    } catch (error) {
+            if (consultarDetallePermiso.length !== 0) {
+                return resolve({
+                    ok: false,
+                    message: 'Permiso por defecto ya asignado'
+                })
+            }
 
-    }
+            for (let detalle of data) {
+                await DetallePermiso.create(detalle)
+            }
+
+            resolve({
+                ok: true,
+                message: 'Permisos asignados'
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
 }
 
 export const postDetallePermisoService = (data) => {

@@ -1,57 +1,84 @@
+import { postDetallePermisoDefaultService } from '../services/data/detallePermiso.services.js'
 import {
     getAllPermisosService
 } from '../services/data/permiso.services.js'
 import {
     getRolService
 } from '../services/data/rol.services.js'
-import {
-    permisosKeyCoordinador,
-    permisosKeyDocente,
-    permisosKeyEstudianteEspecial,
-    permisosKeyPersonalAdministrador,
-    permisosKeyWM
-} from '../variables.js'
+import { getUsuarioService } from '../services/data/usuario.services.js'
+import { variablesPermisos } from '../variables.js'
 
-export const postDetallePermisosDefault = async (data) => {
+const postDetallePermisosDefault = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const {RolId, id: idUsuario} = data
-            let permisoAsignados
+            const { RolId, id: idUsuario } = data
+            let permisoAsignados = []
 
             const queryRol = await getRolService(RolId)
-            if (!queryRol.ok) {
-                return resolve(queryRol)
+            const queryUsuario = await getUsuarioService(idUsuario)
+
+            if (!queryRol.ok || !queryUsuario.ok) {
+                return resolve({
+                    ok: false,
+                    message: 'Rol o Usuario no encontrado'
+                })
             }
 
-            const rol = rol.data
-
-            // consultar permisos en DB
+            const rol = queryRol.data
             const queryPermisos = await getAllPermisosService()
-            const permisos = queryPermisos.data
+            const permisosDB = queryPermisos.data
 
-            switch (rol.rolKey) {
-                case 'EST_E':
-                    permisoAsignados = permisosKeyEstudianteEspecial
-                    break
-                case 'DOC':
-                    permisoAsignados = permisosKeyDocente
-                    break
-                case 'P_ADM':
-                    permisoAsignados = permisosKeyPersonalAdministrador
-                    break
-                case 'COOR':
-                    permisoAsignados = permisosKeyCoordinador
-                    break
-                case 'WM':
-                    permisoAsignados = permisosKeyWM
-                    break
-                default:
-                    reject('Error en los permisos del Rol')
-                    break
+            permisosDB.forEach(permiso => {
+                if (variablesPermisos[rol.rolKey].includes(permiso.permisoKey)) {
+                    permisoAsignados.push({
+                        PermisoId: permiso.id,
+                        UsuarioId: idUsuario
+                    })
+                }
+            })
+
+            resolve({
+                ok:true,
+                data: permisoAsignados
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+// export const postDetallePermisoDefault = async (req, res, next) => {
+//     try {
+//         // id = Cedula usuario, RolId
+//         const data = req.body
+
+//         const detallesPermisosDefault = await postDetallePermisosDefault(data)
+//         if (!detallesPermisosDefault.ok) {
+//             return res.status(404).json(detallesPermisosDefault)
+//         }
+
+//         const guardarDetalle = await postDetallePermisoDefaultService(detallesPermisosDefault.data)
+//         res.json(guardarDetalle)
+
+//         if (!guardarDetalle.ok) return res.status(400)
+//         res.status(201)
+//     } catch (error) {
+//         next(error)
+//     }
+// }
+
+export const postDetallePermisoDefault = async (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // id = Cedula usuario, RolId
+            const detallesPermisosDefault = await postDetallePermisosDefault(data)
+
+            if (!detallesPermisosDefault.ok) {
+                return resolve(detallesPermisosDefault)
             }
-            console.log(permisoAsignados)
-            console.log(idUsuario)
-            console.log(permisos)
+
+            const guardarDetalle = await postDetallePermisoDefaultService(detallesPermisosDefault.data)
+            resolve(guardarDetalle)
         } catch (error) {
             reject(error)
         }

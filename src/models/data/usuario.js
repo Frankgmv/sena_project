@@ -81,7 +81,7 @@ async function insertDefaultData(insertDefaultData) {
 }
 
 setTimeout(() => {
-    insertDefaultData(usuarioDefault.data_usuario)
-}, 3000);
+    // insertDefaultData(usuarioDefault.data_usuario)
+}, 3000)
 
 export default Usuario

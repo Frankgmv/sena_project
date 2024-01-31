@@ -6,7 +6,7 @@ export const tiposPermitidos = ['image/png', 'image/jpeg', 'image/jpg']
 
 export const ArchivosPermitidos = ['application/pdf']
 
-export const permisosKeyEstudianteEspecial = [
+const permisosKeyEstudianteEspecial = [
     'P_MENU',
     'P_GALERIA',
     'P_GOBIERNO',
@@ -15,14 +15,14 @@ export const permisosKeyEstudianteEspecial = [
     'P_NOTICIAS'
 ]
 
-export const permisosKeyDocente = [
+const permisosKeyDocente = [
     ...permisosKeyEstudianteEspecial,
     'P_BLOGS',
     'P_PLATFORMAS_ACADEMICAS',
     'P_NOTIFICACIONES'
 ]
 
-export const permisosKeyPersonalAdministrador = [
+const permisosKeyPersonalAdministrador = [
     'P_MENU',
     'P_SLIDER',
     'P_VIDEOS',
@@ -32,7 +32,7 @@ export const permisosKeyPersonalAdministrador = [
     'P_NOTIFICACIONES'
 ]
 
-export const permisosKeyCoordinador = [
+const permisosKeyCoordinador = [
     ...permisosKeyPersonalAdministrador,
     'P_GALERIA',
     'P_BLOGS',
@@ -41,4 +41,12 @@ export const permisosKeyCoordinador = [
     'P_NOTIFICACIONES'
 ]
 
-export const permisosKeyWM = ['SUPER ADMIN']
+const permisosKeyWM = ['P_ADMIN']
+
+export const variablesPermisos = {
+    EST_E: permisosKeyEstudianteEspecial,
+    DOC: permisosKeyDocente,
+    P_ADM: permisosKeyPersonalAdministrador,
+    COOR: permisosKeyCoordinador,
+    WM: permisosKeyWM
+}

@@ -51,7 +51,6 @@ export const getUsuario = async (req, res, next) => {
 export const putUsuario = async (req, res, next) => {
     try {
         const usuarioActualizado = await putUsuarioService(req.params.id, req.body)
-
         res.json(usuarioActualizado)
         if (!usuarioActualizado.ok) return res.status(404)
         res.status(200)

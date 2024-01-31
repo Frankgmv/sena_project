@@ -88,6 +88,32 @@ export const getPermisoService = async (idPermiso) => {
     })
 }
 
+export const getPermisoKeyService = async (permisoKey) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const permiso = await Permiso.findOne({
+                where: {
+                    permisoKey
+                }
+            })
+
+            if (!permiso) {
+                return resolve({
+                    ok: false,
+                    message: 'Permiso no encontrado'
+                })
+            }
+            resolve({
+                ok: true,
+                message: 'Permiso obtenido',
+                data: permiso
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 export const putPermisoService = async (idPermiso, {
     permiso,
     permisoKey

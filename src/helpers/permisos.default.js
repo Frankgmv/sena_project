@@ -47,26 +47,6 @@ const postDetallePermisosDefault = async (data) => {
     })
 }
 
-// export const postDetallePermisoDefault = async (req, res, next) => {
-//     try {
-//         // id = Cedula usuario, RolId
-//         const data = req.body
-
-//         const detallesPermisosDefault = await postDetallePermisosDefault(data)
-//         if (!detallesPermisosDefault.ok) {
-//             return res.status(404).json(detallesPermisosDefault)
-//         }
-
-//         const guardarDetalle = await postDetallePermisoDefaultService(detallesPermisosDefault.data)
-//         res.json(guardarDetalle)
-
-//         if (!guardarDetalle.ok) return res.status(400)
-//         res.status(201)
-//     } catch (error) {
-//         next(error)
-//     }
-// }
-
 export const postDetallePermisoDefault = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {

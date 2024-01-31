@@ -59,7 +59,7 @@ export const postRegistro = async (req, res, next) => {
             })
         }
 
-        const accessToken = await createTokenAccess(consultarUsuario)
+        const accessToken = await createTokenAccess(consultarUsuario.data)
         res.cookie('accessToken', accessToken)
         res.status(201).json(guardarUsuario)
     } catch (error) {
@@ -104,7 +104,7 @@ export const login = async (req, res, next) => {
             })
         }
 
-        const accessToken = await createTokenAccess(consultarUsuario)
+        const accessToken = await createTokenAccess(dataUsuario)
         res.cookie('accessToken', accessToken)
         res.status(200).json({
             ok:true,

@@ -203,7 +203,7 @@ export const putUsuarioService = (idUser, data) => {
             }
 
             if (data.estado === true) {
-                const respPermisos = await postDetallePermisoDefault({id: idUser, RolId: usuario.data.RolId})
+                const respPermisos = await postDetallePermisoDefault({id: idUser, RolId: usuario.RolId})
 
                 if (!respPermisos.ok) {
                     return resolve({

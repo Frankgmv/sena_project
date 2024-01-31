@@ -8,11 +8,15 @@
             "permisoKey": "P_SLIDER"
         },
         {
+            "permiso": "Anuncios",
+            "permisoKey": "P_ANUNCIOS"
+        },
+        {
             "permiso": "Menú Innovación Educativa",
             "permisoKey": "P_MENU"
         },
         {
-            "permiso": "Galeria",
+            "permiso": "Galeria y Eventos",
             "permisoKey": "P_GALERIA"
         },
         {
@@ -48,16 +52,12 @@
             "permisoKey": "P_LINKS"
         },
         {
-            "permiso": "Actualizar Contraseñas",
-            "permisoKey": "P_UPDATE_PASSWORD"
+            "permiso": "Historial",
+            "permisoKey": "P_HISTORIAL"
         },
         {
-            "permiso": "Aceptar Registros de usuarios",
-            "permisoKey": "P_ACEPTAR_USUARIOS"
-        },
-        {
-            "permiso": "Inhabilitar Usuarios",
-            "permisoKey": "P_INHABILITAR_USUARIOS"
+            "permiso": "PQRS",
+            "permisoKey": "P_PQRS"
         },
         {
             "permiso": "Recibir Notificaciones",
@@ -69,7 +69,7 @@
         },
         {
             "permiso": "Editar informacion de usuarios",
-            "permisoKey": "P_EDITAR_USUARIOS"
+            "permisoKey": "P_USUARIOS"
         }
     ]
 }

@@ -33,6 +33,7 @@ export const getHistorial = async (req, res, next) => {
         next(error)
     }
 }
+
 export const deleteHistorial = async (req, res, next) => {
     try {
         const eliminarRegistro = await deleteHistorialService(req.params.id)

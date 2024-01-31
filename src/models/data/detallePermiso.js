@@ -16,6 +16,6 @@ const DetallePermiso = sequelize.define('DetallePermiso', {
 
 // Definir relaciones
 Usuario.belongsToMany(Permiso, { through: DetallePermiso, foreignKey: 'UsuarioId' })
-Permiso.belongsToMany(Usuario, { through: DetallePermiso, foreignKey: 'PermisoId' })
+Permiso.belongsToMany(Usuario, { through: DetallePermiso, foreignKey: 'PermisoId',  as :'permisoEntity' })
 
 export default DetallePermiso

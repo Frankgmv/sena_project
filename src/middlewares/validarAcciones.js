@@ -1,7 +1,7 @@
 import permisosPorDefecto from "../helpers/permisos.json" assert { type: "json" };
 import Permiso from "../models/data/permiso.js";
 
-export const validarPermisos = async (req, res, next) =>{
+export const validarPermisosKey = async (req, res, next) =>{
 
     const { id } = req.params;
 
@@ -30,13 +30,5 @@ export const validarPermisos = async (req, res, next) =>{
             errorServer: "Error al validar acción",
             message: error.message
         })
-    }
-}
-
-export const validarSession = async (req, res, next) => {
-    try {
-        const token = req.cookie
-    } catch (error) {
-        next(error)
     }
 }

@@ -8,11 +8,12 @@ import {
 import { deleteDetallePermisos, getDetallePermisosByDocumento, postDetallePermiso
 } from '../../controllers/data/detallePermiso.controller.js'
 import { authRutas } from '../../middlewares/tokenValidator.js'
+import { validarPermisos } from '../../middlewares/validarPermisos.js'
 
 const detallePermisoRouter = Router()
 
-detallePermisoRouter.get('/detalle-permisos/:idUsuario', authRutas, getDetallePermisosByDocumento)
-detallePermisoRouter.post('/detalle-permisos', authRutas, validateSchema(detallePermisoSchema), postDetallePermiso)
+detallePermisoRouter.get('/detalle-permisos/:idUsuario', authRutas, validarPermisos('P_ADMIN'), getDetallePermisosByDocumento)
+detallePermisoRouter.post('/detalle-permisos', authRutas, validarPermisos('P_ADMIN'), validateSchema(detallePermisoSchema), postDetallePermiso)
 detallePermisoRouter.delete('/detalle-permisos/:idDetallePermiso', authRutas, deleteDetallePermisos)
 
 export default detallePermisoRouter

@@ -35,7 +35,9 @@ import eventoRouter from './data/evento.routes.js'
 import credencialesRouter from './validacion/credenciales.routes.js'
 
 // TODO eliminar borrar DB
-import { deleteTables } from '../controllers/test.js'
+import { deleteTables, test } from '../controllers/test.js'
+import { authRutas } from '../middlewares/tokenValidator.js'
+import { validarPermisos } from '../middlewares/validarPermisos.js'
 
 // Enrutador general de todo
 const router = Router()
@@ -72,6 +74,10 @@ router.use('/informacion',
 )
 // Une todas las rutas de la carpeta validacion
 router.use('/validacion', credencialesRouter)
+
+// ? Validación de rutas
+// TODO borrar
+router.post('/testAuth', authRutas, validarPermisos('P_MENU'), test)
 
 // TODO eliminar ruta al terminar
 router.post('/reset-database', deleteTables)

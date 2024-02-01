@@ -7,19 +7,14 @@ import { validarPermisos } from '../../middlewares/validarPermisos.js'
 
 const pqrsRouter = Router()
 
-// ? Obtener todos los pqrs
 pqrsRouter.get('/pqrs', authRutas, validarPermisos('P_PQRS'), getAllPqrs)
 
-// ? Obtener un pqrs
 pqrsRouter.get('/pqrs/:id', authRutas, validarPermisos('P_PQRS'), getPqrs)
 
-// ? Publicar un pqrs
-pqrsRouter.post('/pqrs', authRutas, validarPermisos('P_PQRS'), validateSchema(pqrsSchema), postPqrs)
+pqrsRouter.post('/pqrs', validateSchema(pqrsSchema), postPqrs)
 
-// ? Actualizar un pqrs a leído
 pqrsRouter.put('/pqrs/:id', authRutas, validarPermisos('P_PQRS'), putPqrs)
 
-// ? Eliminar un pqrs
 pqrsRouter.delete('/pqrs/:id', authRutas, validarPermisos('P_PQRS'), deletePqrs)
 
 // ? Eliminar todos los pqrs leídos

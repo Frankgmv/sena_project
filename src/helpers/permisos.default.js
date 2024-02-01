@@ -4,7 +4,7 @@ import { getRolService } from '../services/data/rol.services.js'
 import { getUsuarioService } from '../services/data/usuario.services.js'
 import { variablesPermisos } from '../variables.js'
 
-const postDetallePermisosDefault = async (data) => {
+const organizarDetallePermisosDefault = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             const { RolId, id: idUsuario } = data
@@ -47,7 +47,7 @@ export const postDetallePermisoDefault = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             // id = Cedula usuario, RolId
-            const detallesPermisosDefault = await postDetallePermisosDefault(data)
+            const detallesPermisosDefault = await organizarDetallePermisosDefault(data)
 
             if (!detallesPermisosDefault.ok) {
                 return resolve(detallesPermisosDefault)

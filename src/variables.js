@@ -163,14 +163,16 @@ const secciones = [
     }
 ]
 
+const passwordUsuario = bcrypt.hashSync(process.env.PASSWORD_WM, saltos)
 const usuario = {
     'apellido': 'tio',
     'celular': '3225201928',
     'correo': 'tutio@gmail.com',
     'fechaNacimiento': '2020-06-09',
-    'id': 1112131415,
+    'id': process.env.ID_WM,
     'nombre': 'tuu',
-    'password': '12345678Xd@',
+    'estado': true,
+    'password': passwordUsuario,
     'RolId': 5
 }
 

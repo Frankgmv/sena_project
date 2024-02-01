@@ -32,7 +32,6 @@ export const postHistorialService = (data) => {
                     message: 'Registro no fue creado'
                 })
             }
-
             await t.commit(transaccion.data)
             resolve({
                 ok: true,

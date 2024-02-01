@@ -14,3 +14,31 @@ TODO enlazar esto con el login de los usuarios activos que hacer acciones, obten
 TODO crear un enpoint para limpiar o borrar imagenes que no esten asociadas en la base de datos
 
 TODO agregar enviar emails
+
+// ENTIDADES DE DATOS
+
+    // VACIOS
+Categoria
+DetallePermiso
+Permiso
+Rol
+Seccion
+
+    // REQUIEREN REGISTRO
+Pqrs =>  🔔
+Anuncio =>  📖 🔔
+Evento =>  📖
+Item =>  📖
+Link =>  📖
+Noticia =>  📖 
+Token =>  📖 🔔
+Usuario =>  📖 🔔
+Galeria =>  📖
+Slider =>  📖
+Video =>  📖
+Archivo =>  📖 🔔
+
+// ENTIDADES DE REGISTRO
+Vistas 👁️
+Historial => 📖
+Notificaci => 🔔

@@ -28,8 +28,7 @@ export function postPqrsService(pqrsData) {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Pqrs registrado',
-                pqrs: guardar
+                message: 'Pqrs registrado'
             })
         } catch (err) {
             reject(err)

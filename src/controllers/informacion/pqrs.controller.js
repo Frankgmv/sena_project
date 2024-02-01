@@ -1,10 +1,22 @@
+import { postNotificacionService } from '../../services/informacion/notificacion.services.js'
 import { deleteAllPqrsService, deletePqrsService, getAllPqrsService, getPqrsService, postPqrsService, putPqrsService
 } from '../../services/informacion/pqrs.services.js'
 
 export const postPqrs = async (req, res, next) => {
     try {
         const pqrsCreado = await postPqrsService(req.body)
-        return res.status(201).json(pqrsCreado)
+
+        if (!pqrsCreado.ok) {
+            return res.status(400).json(pqrsCreado)
+        }
+
+        const resPqrs = await postNotificacionService({
+            titulo: `Nuevos PQRS`,
+            descripcion: `Revisa tu bandeja de PQRS`
+        })
+        console.log(resPqrs)
+
+        res.status(201).json(pqrsCreado)
     } catch (err) {
         next(err)
     }

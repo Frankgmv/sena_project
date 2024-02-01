@@ -10,7 +10,9 @@ export function createTokenAccess(payLoad) {
                 expiresIn: '1d'
             },
             (err, token) => {
-                if (err) reject('hay un error')
+                if (err) {
+                    return reject(err)
+                }
                 resolve(token)
             }
         )

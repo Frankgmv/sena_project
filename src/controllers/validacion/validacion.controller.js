@@ -50,8 +50,7 @@ export const postRegistro = async (req, res, next) => {
                 message: 'iniciar sesión en el sistema'
             })
         }
-
-        const accessToken = await createTokenAccess(consultarUsuario.data)
+        const accessToken = await createTokenAccess(consultarUsuario.data.dataValues)
         res.cookie('accessToken', accessToken)
         res.status(201).json(guardarUsuario)
     } catch (error) {

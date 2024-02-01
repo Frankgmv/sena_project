@@ -5,13 +5,6 @@ import { TransactionError } from '../../middlewares/fabricaErrores.js'
 export const postNotificacionService = (notificacionData) => {
     return new Promise(async (resolve, reject) => {
         try {
-            // Transaccion
-            let transaccion = await t.create()
-
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
-
             const existe = await Notificaciones.findOne({
                 where: {
                     titulo: notificacionData.titulo
@@ -19,10 +12,18 @@ export const postNotificacionService = (notificacionData) => {
             })
 
             if (existe) {
+                await existe.update({estado: false})
+
                 return resolve({
                     ok: false,
                     message: `${notificacionData.titulo} en uso`
                 })
+            }
+
+            let transaccion = await t.create()
+
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
             }
 
             const notiCreada = await Notificaciones.create(notificacionData, {

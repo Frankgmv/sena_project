@@ -2,13 +2,13 @@
 	"info": {
 		"_postman_id": "2063043f-748c-4499-9f49-7989a1824c62",
 		"name": "API_SENA",
-		"description": "Carpeta con peticiones por carpetas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24513022"
+		"_exporter_id": "24513022",
+		"_collection_link": "https://gold-capsule-148558.postman.co/workspace/130d748c-cae0-425f-8393-46f1a4a8f7e4/collection/24513022-2063043f-748c-4499-9f49-7989a1824c62?action=share&source=collection_link&creator=24513022"
 	},
 	"item": [
 		{
-			"name": "auxiliares",
+			"name": "AUXILIARES",
 			"item": [
 				{
 					"name": "reset-db",
@@ -19,6 +19,80 @@
 							"raw": "{{url_api}}reset-database",
 							"host": [
 								"{{url_api}}reset-database"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1112131417,\r\n    \"nombre\" : \"tuu\",\r\n    \"apellido\" : \"tio\",\r\n    \"fechaNacimiento\" : \"2000-06-09\",\r\n    \"correo\" : \"tutio3@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5,\r\n    \"claveEspecial\" : \"MiClaveEspecial!124\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}{{valid}}logout",
+							"host": [
+								"{{url_api}}{{valid}}logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1112131417,\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}{{valid}}login",
+							"host": [
+								"{{url_api}}{{valid}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "testAuth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_api}}{{valid}}logout",
+							"host": [
+								"{{url_api}}{{valid}}logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_api}}{{valid}}logout",
+							"host": [
+								"{{url_api}}{{valid}}logout"
 							]
 						}
 					},
@@ -41,6 +115,52 @@
 									"raw": "{{url_api}}{{dt}}permisos",
 									"host": [
 										"{{url_api}}{{dt}}permisos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}permisos/19",
+									"host": [
+										"{{url_api}}{{dt}}permisos"
+									],
+									"path": [
+										"19"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostPermisos",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"permiso\" : \"Arriba del admin pa\",\r\n    \"permisoKey\" : \"UP_ADMIN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}permisos?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvayI6dHJ1ZSwibWVzc2dlIjoidXN1YXJpbyBvYnRlbmlkbyIsImRhdGEiOnsiaWQiOjExMTIxMzE0MTcsIm5vbWJyZSI6InR1dSIsImFwZWxsaWRvIjoidGlvIiwiZmVjaGFOYWNpbWllbnRvIjoiMjAwMC0wNi0wOVQwMDowMDowMC4wMDBaIiwiY29ycmVvIjoidHV0aW8zQGdtYWlsLmNvbSIsImNlbHVsYXIiOiIzMjI1MjAxOTI4IiwicGFzc3dvcmQiOiIkMmEkMTAkRWFzTnZoLkpSMFJsNzh2RFhNcVo0dUNxVVc2Mi50RVpYQ0QwTHlJRWtoZG9BVHl6cEx3MU8iLCJlc3RhZG8iOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI0LTAxLTMwVDE5OjU4OjE2LjQ3MloiLCJSb2xJZCI6NX0sImlhdCI6MTcwNjY0Njg5NSwiZXhwIjoxNzA2NzMzMjk1fQ.GO3Pw6BeHjNAl4nbIbFrymDWT4sWlNFcl1nQ-UA3za8",
+									"host": [
+										"{{url_api}}{{dt}}permisos"
+									],
+									"query": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvayI6dHJ1ZSwibWVzc2dlIjoidXN1YXJpbyBvYnRlbmlkbyIsImRhdGEiOnsiaWQiOjExMTIxMzE0MTcsIm5vbWJyZSI6InR1dSIsImFwZWxsaWRvIjoidGlvIiwiZmVjaGFOYWNpbWllbnRvIjoiMjAwMC0wNi0wOVQwMDowMDowMC4wMDBaIiwiY29ycmVvIjoidHV0aW8zQGdtYWlsLmNvbSIsImNlbHVsYXIiOiIzMjI1MjAxOTI4IiwicGFzc3dvcmQiOiIkMmEkMTAkRWFzTnZoLkpSMFJsNzh2RFhNcVo0dUNxVVc2Mi50RVpYQ0QwTHlJRWtoZG9BVHl6cEx3MU8iLCJlc3RhZG8iOmZhbHNlLCJjcmVhdGVkQXQiOiIyMDI0LTAxLTMwVDE5OjU4OjE2LjQ3MloiLCJSb2xJZCI6NX0sImlhdCI6MTcwNjY0Njg5NSwiZXhwIjoxNzA2NzMzMjk1fQ.GO3Pw6BeHjNAl4nbIbFrymDWT4sWlNFcl1nQ-UA3za8"
+										}
 									]
 								}
 							},
@@ -129,7 +249,30 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\" : 1011393361,\r\n    \"nombre\" : \"tu \",\r\n    \"apellido\" : \"tio\",\r\n    \"fechaNacimiento\" : \"2020-06-09\",\r\n    \"correo\" : \"kava1@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
+									"raw": "{\r\n    \"id\" : 1011393430,\r\n    \"nombre\" : \"tu \",\r\n    \"apellido\" : \"tio\",\r\n    \"fechaNacimiento\" : \"2000-06-09\",\r\n    \"correo\" : \"kava2@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}usuarios",
+									"host": [
+										"{{url_api}}{{dt}}usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostUsuario Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : 1011393430,\r\n    \"nombre\" : \"tu \",\r\n    \"apellido\" : \"tio\",\r\n    \"fechaNacimiento\" : \"2000-06-09\",\r\n    \"correo\" : \"kava2@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -391,7 +534,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"token\" : \"Beta\",\r\n    \"nombre\" : \"Juanpis\",\r\n    \"tokenKey\" : \"Beta\",\r\n    \"tiempo\" : \"500\",\r\n    \"UsuarioId\" : 1011393360\r\n}",
+									"raw": "{\r\n    \"token\" : \"tetris\",\r\n    \"nombre\" : \"Juanpis\",\r\n    \"tokenKey\" : \"tetris\",\r\n    \"tiempo\" : \"500\",\r\n    \"UsuarioId\" : 1112131415\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -448,12 +591,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{dt}}tokens/1",
+									"raw": "{{url_api}}{{dt}}tokens/3",
 									"host": [
 										"{{url_api}}{{dt}}tokens"
 									],
 									"path": [
-										"1"
+										"3"
 									]
 								}
 							},
@@ -510,8 +653,91 @@
 						{
 							"name": "New Request",
 							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "Su puta madre Frank",
+											"type": "text"
+										},
+										{
+											"key": "archivo",
+											"type": "file",
+											"src": "/C:/Users/Kevin/Downloads/Kevin_andres_castrillon.pdf"
+										},
+										{
+											"key": "UsuarioId",
+											"value": "1011393360",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{multi}}archivos",
+									"host": [
+										"{{url_api}}{{multi}}archivos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "Su puta madre Frank",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "archivo",
+											"type": "file",
+											"src": "/C:/Users/Kevin/Downloads/Plantilla.xlsx",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{multi}}archivos",
+									"host": [
+										"{{url_api}}{{multi}}archivos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request Copy 2",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "Su puta madre Frank",
+											"type": "text"
+										},
+										{
+											"key": "archivo",
+											"type": "file",
+											"src": "/C:/Users/Kevin/Downloads/Plantilla.xlsx"
+										}
+									]
+								},
 								"url": {
 									"raw": "{{url_api}}{{multi}}archivos",
 									"host": [
@@ -554,6 +780,112 @@
 									"raw": "{{url_api}}{{multi}}videos",
 									"host": [
 										"{{url_api}}{{multi}}videos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "UsuarioId",
+											"value": "1011393360",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/5AAyh7scplM?si=qjiC47KPMdyZMaDR\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
+											"type": "text"
+										},
+										{
+											"key": "titulo",
+											"value": "holas2",
+											"type": "text"
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{multi}}videos",
+									"host": [
+										"{{url_api}}{{multi}}videos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request Copy 2",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "UsuarioId",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Kevin/Pictures/Screenshots/Captura de pantalla 2024-01-22 212456.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{multi}}videos/5",
+									"host": [
+										"{{url_api}}{{multi}}videos"
+									],
+									"path": [
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request Copy 3",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "UsuarioId",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Kevin/Desktop/test.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{multi}}videos/3",
+									"host": [
+										"{{url_api}}{{multi}}videos"
+									],
+									"path": [
+										"3"
 									]
 								}
 							},

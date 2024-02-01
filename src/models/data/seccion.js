@@ -1,17 +1,8 @@
-import {
-    DataTypes
-} from 'sequelize'
-import {
-    sequelize
-} from '../../conection.js'
-import {
-    ErrorSeccion,
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import { ErrorSeccion, TransactionError } from '../../middlewares/fabricaErrores.js'
 import t from '../../helpers/transacciones.js'
-
-// Data json de los secciones por defecto
-import seccionesPorDefecto from "../../helpers/sessiones.json" assert { type: "json" }
+import { defaultVariables } from '../../variables.js'
 
 const Seccion = sequelize.define('Secciones', {
     seccion: {
@@ -29,7 +20,6 @@ const Seccion = sequelize.define('Secciones', {
 
 // funcion para insertar los datos de los Secciones por defecto.
 async function insertDefaultData(dataSecciones) {
-    
     try {
         await Seccion.sync()
 
@@ -45,12 +35,11 @@ async function insertDefaultData(dataSecciones) {
             })
             await t.commit(transaccion.data)
         }
-
     } catch (error) {
         throw new ErrorSeccion(error)
     }
 }
 
-insertDefaultData(seccionesPorDefecto.secciones)
+insertDefaultData(defaultVariables.secciones)
 
 export default Seccion

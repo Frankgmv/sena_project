@@ -1,21 +1,10 @@
-import {
-    Router
-} from 'express'
-
-import {
-    deleteAllNotificaciones,
-    deleteNotificacion,
-    getAllNotificaciones,
-    getNotificaciones,
-    postNotificacion,
-    putNotificacion
-} from '../../controllers/informacion/notificacion.controller.js'
+import { Router } from 'express'
 import { validateSchema } from '../../middlewares/validarSchemas.js'
-import {
-    notificacionSchema
-} from '../../schemas/informacionSchemas.js'
+import { notificacionSchema } from '../../schemas/informacionSchemas.js'
 import { authRutas } from '../../middlewares/tokenValidator.js'
 import { validarPermisos } from '../../middlewares/validarPermisos.js'
+import { deleteAllNotificaciones, deleteNotificacion, getAllNotificaciones, getNotificaciones, postNotificacion, putNotificacion
+} from '../../controllers/informacion/notificacion.controller.js'
 
 const notificacionRouter = Router()
 

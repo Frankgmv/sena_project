@@ -1,6 +1,4 @@
-import {
-    Op
-} from 'sequelize'
+import { Op } from 'sequelize'
 import DetallePermiso from '../../models/data/detallePermiso.js'
 import Permiso from '../../models/data/permiso.js'
 import Usuario from '../../models/data/usuario.js'

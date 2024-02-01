@@ -1,12 +1,8 @@
-import {
-    Op
-} from 'sequelize'
+import { Op } from 'sequelize'
 import Token from '../../models/data/token.js'
 import Usuario from '../../models/data/usuario.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postTokenService = (data) => {
     return new Promise(async (resolve, reject) => {

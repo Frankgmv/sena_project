@@ -1,8 +1,4 @@
-import {
-    deleteSliderService,
-    getAllSliderService,
-    getSliderService,
-    postSliderService
+import { deleteSliderService, getAllSliderService, getSliderService, postSliderService
 } from '../../services/multimedia/slider.services.js'
 
 export const postSlider = async (req, res, next) => {

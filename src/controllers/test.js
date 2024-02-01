@@ -18,6 +18,7 @@ import Galeria from '../models/multimedia/galeria.js'
 import Slider from '../models/multimedia/slider.js'
 import Video from '../models/multimedia/video.js'
 import Archivo from '../models/multimedia/archivo.js'
+// TODO borrar archivo de test
 
 export const test = (req, res) => {
     res.send('Ruta funcionando')

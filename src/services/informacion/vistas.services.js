@@ -1,8 +1,6 @@
 import Vistas from '../../models/informacion/vistas.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postVistasService = (Vistadata) => {
     return new Promise(async (resolve, reject) => {

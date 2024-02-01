@@ -1,29 +1,11 @@
 import fs from 'fs'
 import sharp from 'sharp'
-import {
-  crearNombreRecurso,
-  deleteFile
-} from '../../helpers/includes.js'
-import {
-  validateSchemaInto
-} from '../../middlewares/validarSchemas.js'
-import {
-  galeriaSchema,
-  putGaleriaSchema
-} from '../../schemas/MultimediaSchemas.js'
-import {
-  tiposPermitidos,
-  maxBytes
-} from '../../variables.js'
-
-import {
-  postGaleriaService,
-  getAllGaleriaService,
-  getGaleriaService,
-  putGaleriaService,
-  deleteGaleriaService
+import { crearNombreRecurso, deleteFile } from '../../helpers/includes.js'
+import { validateSchemaInto } from '../../middlewares/validarSchemas.js'
+import { galeriaSchema, putGaleriaSchema } from '../../schemas/MultimediaSchemas.js'
+import { tiposPermitidos, maxBytes } from '../../variables.js'
+import { postGaleriaService, getAllGaleriaService, getGaleriaService, putGaleriaService, deleteGaleriaService
 } from '../../services/multimedia/galeria.services.js'
-import 'colors'
 
 export const postGaleria = async (req, res, next) => {
   try {

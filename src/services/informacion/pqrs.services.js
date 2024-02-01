@@ -1,8 +1,7 @@
 import Pqrs from '../../models/informacion/pqrs.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
+
 export function postPqrsService(pqrsData) {
     return new Promise(async (resolve, reject) => {
         try {

@@ -1,5 +1,4 @@
-import { getAllRolesService, getRolService, putRolService
-} from '../../services/data/rol.services.js'
+import { getAllRolesService, getRolService, putRolService } from '../../services/data/rol.services.js'
 
 export const getRoles = async (req, res, next) => {
     try {

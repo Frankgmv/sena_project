@@ -1,14 +1,7 @@
-import {
-    DataTypes
-} from 'sequelize'
-import {
-    sequelize
-} from '../../conection.js'
-import rolesPorDefecto from "../../helpers/roles.json" assert { type: "json" };
-import {
-    ErrorRol, TransactionError
-} from '../../middlewares/fabricaErrores.js'
-import t from '../../helpers/transacciones.js'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import { ErrorRol } from '../../middlewares/fabricaErrores.js'
+import { defaultVariables } from '../../variables.js'
 
 const Rol = sequelize.define('Rol', {
     id: {
@@ -49,7 +42,7 @@ async function insertDefaultData(dataRoles) {
 }
 
 setTimeout(() => {
-    insertDefaultData(rolesPorDefecto.roles)
-}, 1800);
+    insertDefaultData(defaultVariables.roles)
+}, 1800)
 
 export default Rol

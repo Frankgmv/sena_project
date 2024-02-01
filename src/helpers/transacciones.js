@@ -1,9 +1,5 @@
-import {
-    Sequelize
-} from 'sequelize'
-import {
-    sequelize
-} from '../conection.js'
+import { Sequelize } from 'sequelize'
+import { sequelize } from '../conection.js'
 
 const create = async () => {
     return new Promise(async (resolve, reject) => {

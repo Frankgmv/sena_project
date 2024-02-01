@@ -1,13 +1,9 @@
-import {
-    DataTypes, Op
-} from 'sequelize'
-import {
-    sequelize
-} from '../../conection.js'
+import { DataTypes, Op } from 'sequelize'
+import { sequelize } from '../../conection.js'
 import Rol from './rol.js'
-import usuarioDefault from '../../helpers/usuario.json' assert { type: 'json'}
 import t from '../../helpers/transacciones.js'
-import { UsuarioError } from '../../middlewares/fabricaErrores.js'
+import { TransactionError, UsuarioError } from '../../middlewares/fabricaErrores.js'
+import { defaultVariables } from '../../variables.js'
 
 const Usuario = sequelize.define('Usuario', {
     id: {
@@ -72,7 +68,7 @@ async function insertDefaultData(insertDefaultData) {
             }
             await Usuario.create(insertDefaultData, {
                 transaction: transaccion.data
-            }) 
+            })
             await t.commit(transaccion.data)
         }
     } catch (error) {
@@ -81,7 +77,7 @@ async function insertDefaultData(insertDefaultData) {
 }
 
 setTimeout(() => {
-    insertDefaultData(usuarioDefault.data_usuario)
+    insertDefaultData(defaultVariables.usuario)
 }, 3000)
 
 export default Usuario

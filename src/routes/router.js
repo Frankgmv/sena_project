@@ -1,23 +1,18 @@
-import {
-    Router
-} from 'express'
+import { Router } from 'express'
 
-// * Rutas de informacion
-
+// Rutas de informacion
 import historialRouter from './informacion/historial.routes.js'
 import notificacionRouter from './informacion/notificacion.routes.js'
 import pqrsRouter from './informacion/pqrs.routes.js'
 import vistasRouter from './informacion/vistas.routes.js'
 
-// * Rutas de multimedia
-
+// Rutas de multimedia
 import archivoRouter from './multimedia/archivo.routes.js'
 import galeriaRouter from './multimedia/galeria.routes.js'
 import sliderRouter from './multimedia/slider.routes.js'
 import videoRouter from './multimedia/video.routes.js'
 
-// * Rutas de data
-
+// Rutas de data
 import anuncioRouter from './data/anuncio.routes.js'
 import categoriaRouter from './data/categoria.routes.js'
 import itemRouter from './data/item.routes.js'
@@ -31,15 +26,12 @@ import usuarioRouter from './data/usuario.routes.js'
 import detallePermisoRouter from './data/detallePermiso.routes.js'
 import eventoRouter from './data/evento.routes.js'
 
-// * Rutas de validacion
+// Rutas de validacion
 import credencialesRouter from './validacion/credenciales.routes.js'
 
 // TODO eliminar borrar DB
-import { deleteTables, test } from '../controllers/test.js'
-import { authRutas } from '../middlewares/tokenValidator.js'
-import { validarPermisos } from '../middlewares/validarPermisos.js'
+import { deleteTables } from '../controllers/test.js'
 
-// Enrutador general de todo
 const router = Router()
 
 // Une todas las rutas de la carpeta multimedia
@@ -72,12 +64,9 @@ router.use('/informacion',
     vistasRouter,
     historialRouter
 )
+
 // Une todas las rutas de la carpeta validacion
 router.use('/validacion', credencialesRouter)
-
-// ? Validación de rutas
-// TODO borrar
-router.post('/testAuth', authRutas, validarPermisos('P_MENU'), test)
 
 // TODO eliminar ruta al terminar
 router.post('/reset-database', deleteTables)

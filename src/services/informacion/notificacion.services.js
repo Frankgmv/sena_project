@@ -1,8 +1,6 @@
 import Notificaciones from '../../models/informacion/notificaciones.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postNotificacionService = (notificacionData) => {
     return new Promise(async (resolve, reject) => {

@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
-import rutas from './helpers/rutasGuia.json' assert { type: "json" }
+import rutas from './helpers/rutasGuia.js'
 
 import manejadorErrores from './middlewares/manejadorErrores.js'
 import routesGeneral from './routes/router.js'
@@ -17,14 +17,12 @@ app.use(cookieParser())
 // TODO cors
 // ? Add cors finally app.use(cors({options}))
 
-// ? "Rutas" madres
-
-// Reclamar imagenes a la API
-app.use('/api/v1/recursos',express.static('./src/upload'))
+// Reclamar recursos a la API
+app.use('/api/v1/recursos', express.static('./src/upload'))
 
 app.use('/api/v1', routesGeneral)
 
-app.get('/', (_req, res) => {
+app.get('/', (req, res) => {
     res.json(rutas)
 })
 

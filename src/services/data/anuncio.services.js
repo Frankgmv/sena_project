@@ -2,10 +2,7 @@ import Anuncio from '../../models/data/anuncio.js'
 import Seccion from '../../models/data/seccion.js'
 import Usuario from '../../models/data/usuario.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
-import 'colors'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postAnucioService = (data) => {
     return new Promise(async (resolve, reject) => {

@@ -1,10 +1,4 @@
-import {
-    deleteAllNotificacionesService,
-    deleteNotificacionService,
-    getAllNotificionesService,
-    getNotificionesService,
-    postNotificacionService,
-    putNotificacionService
+import { deleteAllNotificacionesService, deleteNotificacionService, getAllNotificionesService, getNotificionesService, postNotificacionService, putNotificacionService
 } from '../../services/informacion/notificacion.services.js'
 
 // ? actualizar por defecto el estado de una notificacion creada a true.

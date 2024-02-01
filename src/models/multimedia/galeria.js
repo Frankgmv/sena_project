@@ -1,10 +1,6 @@
-import {
-    DataTypes
-} from 'sequelize'
-
+import { DataTypes } from 'sequelize'
 import Usuario from '../data/usuario.js'
 import Evento from '../data/evento.js'
-
 import { sequelize } from '../../conection.js'
 
 const Galeria = sequelize.define('Galeria', {

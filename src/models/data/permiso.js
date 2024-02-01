@@ -1,18 +1,8 @@
-import {
-    DataTypes
-} from 'sequelize'
-import {
-    sequelize
-} from '../../conection.js'
-
-// fabrica de error personalizado
-import {
-    ErrorPermiso,
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import { ErrorPermiso, TransactionError } from '../../middlewares/fabricaErrores.js'
 import t from '../../helpers/transacciones.js'
-// Datos de los permisos
-import permisosPorDefecto from "./../../helpers/permisos.json" assert { type: "json" }
+import { defaultVariables } from '../../variables.js'
 
 const Permiso = sequelize.define('Permiso', {
     permiso: {
@@ -50,6 +40,6 @@ async function insertDefaultData(dataPermisos) {
     }
 }
 
-insertDefaultData(permisosPorDefecto.permisos)
+insertDefaultData(defaultVariables.permisos)
 
 export default Permiso

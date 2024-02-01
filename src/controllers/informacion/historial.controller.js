@@ -1,6 +1,4 @@
-import {
-    postHistorialService, getHistorialService, getAllHistorialService,
-    deleteHistorialService
+import { postHistorialService, getHistorialService, getAllHistorialService, deleteHistorialService
 } from '../../services/informacion/historial.services.js'
 
 export const postHistorial = async (req, res, next) => {

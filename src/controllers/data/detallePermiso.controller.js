@@ -1,7 +1,4 @@
-import {
-    deleteDetallePermisosService,
-    getDetallePermisosByDocumentoService,
-    postDetallePermisoService
+import { deleteDetallePermisosService, getDetallePermisosByDocumentoService, postDetallePermisoService
 } from '../../services/data/detallePermiso.services.js'
 
 export const postDetallePermiso = async (req, res, next) => {

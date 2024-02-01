@@ -133,7 +133,6 @@ export const putVideoService = (idVideo, data) => {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            console.log(JSON.stringify(data).yellow)
             const update = await fileVideo.update(data, {transaction: transaccion.data})
 
             if (!update) {

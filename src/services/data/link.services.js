@@ -3,9 +3,7 @@ import Link from '../../models/data/link.js'
 import Seccion from '../../models/data/seccion.js'
 import Usuario from '../../models/data/usuario.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postLinkService = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -23,6 +21,7 @@ export const postLinkService = (data) => {
                 tipos: ['pdf', 'blog']
             })
         }
+
         try {
             const existeUsuario = await Usuario.findByPk(UsuarioId)
             const existeCategoria = await Categoria.findByPk(CategoriaId)

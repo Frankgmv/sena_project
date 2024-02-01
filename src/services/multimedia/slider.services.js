@@ -1,7 +1,5 @@
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import Galeria from '../../models/multimedia/galeria.js'
 import Slider from '../../models/multimedia/slider.js'
 

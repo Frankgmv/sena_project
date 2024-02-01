@@ -1,9 +1,7 @@
 import Noticia from '../../models/data/noticia.js'
 import Usuario from '../../models/data/usuario.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postNoticiaService = (data) => {
     return new Promise(async (resolve, reject) => {

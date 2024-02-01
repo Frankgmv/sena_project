@@ -1,10 +1,6 @@
 import { postDetallePermisoDefaultService } from '../services/data/detallePermiso.services.js'
-import {
-    getAllPermisosService
-} from '../services/data/permiso.services.js'
-import {
-    getRolService
-} from '../services/data/rol.services.js'
+import { getAllPermisosService } from '../services/data/permiso.services.js'
+import { getRolService } from '../services/data/rol.services.js'
 import { getUsuarioService } from '../services/data/usuario.services.js'
 import { variablesPermisos } from '../variables.js'
 

@@ -1,27 +1,12 @@
 import fs from 'fs'
 import sharp from 'sharp'
+import { crearNombreRecurso, deleteFile } from '../../helpers/includes.js'
+import { validateSchemaInto } from '../../middlewares/validarSchemas.js'
+import { anuncioSchema, putAnuncioSchema } from '../../schemas/dataSchemas.js'
 import {
-    crearNombreRecurso,
-    deleteFile
-} from '../../helpers/includes.js'
-import {
-    validateSchemaInto
-} from '../../middlewares/validarSchemas.js'
-import {
-    anuncioSchema,
-    putAnuncioSchema
-} from '../../schemas/dataSchemas.js'
-import {
-    maxBytes,
-    tiposPermitidos
-} from '../../variables.js'
-import {
-    deleteAnuncioService,
-    getAllAnunciosService,
-    getAnuncioService,
-    postAnucioService,
-    putAnuncioService
+    deleteAnuncioService, getAllAnunciosService, getAnuncioService, postAnucioService, putAnuncioService
 } from '../../services/data/anuncio.services.js'
+import { maxBytes, tiposPermitidos } from '../../variables.js'
 
 export const postAnuncio = async (req, res, next) => {
     try {

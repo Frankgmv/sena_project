@@ -1,7 +1,5 @@
 import z from 'zod'
-import {
-    verificarHttpUrl
-} from '../helpers/includes.js'
+import { verificarHttpUrl } from '../helpers/includes.js'
 
 export const permisoSchema = z.object({
     permiso: z.string({

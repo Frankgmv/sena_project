@@ -1,28 +1,11 @@
-import 'colors'
 import fs from 'fs'
 import sharp from 'sharp'
-import {
-    crearNombreRecurso,
-    deleteFile
-} from '../../helpers/includes.js'
-import {
-    validateSchemaInto
-} from '../../middlewares/validarSchemas.js'
-import {
-    noticiaShema,
-    putNoticiaShema
-} from '../../schemas/dataSchemas.js'
-import {
-    deleteNoticiaService,
-    getAllNoticiasService,
-    getNoticiaService,
-    postNoticiaService,
-    putNoticiaService
+import { crearNombreRecurso, deleteFile } from '../../helpers/includes.js'
+import { validateSchemaInto } from '../../middlewares/validarSchemas.js'
+import { noticiaShema, putNoticiaShema } from '../../schemas/dataSchemas.js'
+import { maxBytes, tiposPermitidos } from '../../variables.js'
+import { deleteNoticiaService, getAllNoticiasService, getNoticiaService, postNoticiaService, putNoticiaService
 } from '../../services/data/noticia.services.js'
-import {
-    maxBytes,
-    tiposPermitidos
-} from '../../variables.js'
 
 export const postNoticia = async (req, res, next) => {
     try {

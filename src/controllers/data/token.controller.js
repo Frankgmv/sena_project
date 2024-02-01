@@ -1,6 +1,4 @@
-import {
-    postTokenService, getTokenService, getAllTokenService,
-    deleteTokenService, putTokenService
+import { postTokenService, getTokenService, getAllTokenService, deleteTokenService, putTokenService
 } from '../../services/data/token.services.js'
 
 export const postToken = async (req, res, next) => {

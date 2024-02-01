@@ -1,15 +1,7 @@
 import bcrypt from 'bcryptjs'
-import {
-    getTokenKeyService
-} from '../../services/data/token.services.js'
-import {
-    getUsuarioService,
-    postUsuarioService
-} from '../../services/data/usuario.services.js'
-
-import {
-    createTokenAccess
-} from '../../lib/jwt.js'
+import { getTokenKeyService } from '../../services/data/token.services.js'
+import { getUsuarioService, postUsuarioService } from '../../services/data/usuario.services.js'
+import { createTokenAccess, validarToken } from '../../lib/jwt.js'
 
 export const postRegistro = async (req, res, next) => {
     try {
@@ -77,7 +69,7 @@ export const logout = (req, res, next) => {
         })
 
         res.status(200).json({
-            ok:true,
+            ok: true,
             message: 'sessión cerrada'
         })
     } catch (err) {
@@ -107,7 +99,7 @@ export const login = async (req, res, next) => {
         const accessToken = await createTokenAccess(dataUsuario)
         res.cookie('accessToken', accessToken)
         res.status(200).json({
-            ok:true,
+            ok: true,
             message: 'Bienvenido'
         })
     } catch (error) {
@@ -115,3 +107,41 @@ export const login = async (req, res, next) => {
     }
 }
 
+export const verificarToken = async (req, res, next) => {
+    const {
+        accessToken
+    } = req.cookies
+
+    if (!accessToken) {
+        return res.status(401).json({
+            ok: false,
+            message: 'NO Autorizado'
+        })
+    }
+
+    try {
+        const dataToken = await validarToken(accessToken)
+
+        res.status(200).json({
+            ok: true,
+            message: 'Token verificado',
+            data: dataToken
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const perfil = async (req, res, next) => {
+    try {
+        const usuario = await getUsuarioService(req.usuario.id)
+
+        if (!usuario) {
+            return res.status(400).json(usuario)
+        }
+
+        res.status(200).json(usuario)
+    } catch (error) {
+        next(error)
+    }
+}

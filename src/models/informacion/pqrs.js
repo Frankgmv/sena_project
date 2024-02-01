@@ -1,9 +1,5 @@
-import {
-    DataTypes
-} from 'sequelize'
-import {
-    sequelize
-} from '../../conection.js'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
 
 const Pqrs = sequelize.define('Pqrs', {
     nombre: {

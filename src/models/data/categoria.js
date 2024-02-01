@@ -1,15 +1,8 @@
-import {
-    DataTypes
-} from 'sequelize'
-import {
-    sequelize
-} from '../../conection.js'
-import categoriasPorDefecto from '../../helpers/categorias.json' assert { type: "json" }
-import {
-    ErrorCategoria,
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../../conection.js'
+import { ErrorCategoria, TransactionError } from '../../middlewares/fabricaErrores.js'
 import t from '../../helpers/transacciones.js'
+import { defaultVariables } from '../../variables.js'
 
 const Categoria = sequelize.define('Categoria', {
     categoria: {
@@ -48,6 +41,6 @@ async function insertDefaultData(dataCategorias) {
     }
 }
 
-insertDefaultData(categoriasPorDefecto.categorias)
+insertDefaultData(defaultVariables.categorias)
 
 export default Categoria

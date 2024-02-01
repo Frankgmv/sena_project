@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { deleteNoticia, getAllNoticias, getNoticia, postNoticia, putNoticia
-} from '../../controllers/data/noticia.controller.js'
 import { upload } from '../../helpers/includes.js'
 import { authRutas } from '../../middlewares/tokenValidator.js'
 import { validarPermisos } from '../../middlewares/validarPermisos.js'
+import { deleteNoticia, getAllNoticias, getNoticia, postNoticia, putNoticia
+} from '../../controllers/data/noticia.controller.js'
 
 const noticiaRouter = Router()
 

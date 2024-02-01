@@ -1,24 +1,10 @@
 import fs from 'fs'
 import sharp from 'sharp'
-import {
-    crearNombreRecurso, deleteFile
-} from '../../helpers/includes.js'
-import {
-    validateSchemaInto
-} from '../../middlewares/validarSchemas.js'
-import {
-    itemSchema, putItemSchema
-} from '../../schemas/dataSchemas.js'
-import {
-    maxBytes,
-    tiposPermitidos
-} from '../../variables.js'
-import {
-    deleteItemService,
-    getAllItemService,
-    getItemService,
-    postItemService,
-    putItemService
+import { crearNombreRecurso, deleteFile } from '../../helpers/includes.js'
+import { validateSchemaInto } from '../../middlewares/validarSchemas.js'
+import { itemSchema, putItemSchema } from '../../schemas/dataSchemas.js'
+import { maxBytes, tiposPermitidos } from '../../variables.js'
+import { deleteItemService, getAllItemService, getItemService, postItemService, putItemService
 } from '../../services/data/item.services.js'
 
 export const postItem = async (req, res, next) => {

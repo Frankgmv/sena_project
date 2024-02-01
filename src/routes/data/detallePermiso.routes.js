@@ -1,14 +1,10 @@
-import {
-    Router
-} from 'express'
+import { Router } from 'express'
 import { validateSchema } from '../../middlewares/validarSchemas.js'
-import {
-    detallePermisoSchema
-} from '../../schemas/dataSchemas.js'
-import { deleteDetallePermisos, getDetallePermisosByDocumento, postDetallePermiso
-} from '../../controllers/data/detallePermiso.controller.js'
+import { detallePermisoSchema } from '../../schemas/dataSchemas.js'
 import { authRutas } from '../../middlewares/tokenValidator.js'
 import { validarPermisos } from '../../middlewares/validarPermisos.js'
+import { deleteDetallePermisos, getDetallePermisosByDocumento, postDetallePermiso
+} from '../../controllers/data/detallePermiso.controller.js'
 
 const detallePermisoRouter = Router()
 

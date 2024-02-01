@@ -2,9 +2,7 @@ import Galeria from '../../models/multimedia/galeria.js'
 import Usuario from '../../models/data/usuario.js'
 import Evento from '../../models/data/evento.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postGaleriaService = (data) => {
     return new Promise(async (resolve, reject) => {

@@ -1,59 +1,16 @@
-Buscar la manera de como resetear los campos de las vistapordia y por mes cada tiempo
+///////////// TAREA DEL KEVIN
+
+TODO Buscar la manera de como resetear los campos de las vistapordia y por mes cada tiempo
 
 
-orden de los metodos y los servicios
+///////////////////////// METAS DEL JUEVES ////////////////////////////////
 
-post
-get All
-get One
-put 
-delete
+TODO Agregar todos los secciones a el json de secciones
 
-Agregar todos los secciones a el json de secciones
+TODO agregar lo de del historial y notificaciones en controladores importantes como las noticias, los usuarios nuevos etc
 
-agregar lo de del historial y notificaciones en controladores importantes como las noticias, los usuarios nuevos etc
+TODO enlazar esto con el login de los usuarios activos que hacer acciones, obtener el id y así generer los historiales y notificaciones
 
-enlazar esto con el login de los usuarios activos que hacer acciones, obtener el id y así generer los historiales y notificaciones
+TODO crear un enpoint para limpiar o borrar imagenes que no esten asociadas en la base de datos
 
-crear un enpoint para limpiar o borrar imagenes que no esten asociadas en la base de datos
-
-// TODO
-Aprender a usar las notificaciones
-agregar enviar emails
-validar que la edad sea menor a 80 años
-
-<<<<<<< HEAD
-
-ESTANDAR DE SERVICIOS
-
-POST ({
-    ok: boolean,
-    message: 'mensaje de acierto o error'
-})
-
-GET  ({
-    ok: boolean,
-    message: 'mensaje de acierto o error',
-    data: respuesta (Anexar campor solo en acierto)
-})
-
-GET ONE ({
-    ok: boolean,
-    message: 'mensaje de acierto o error',
-    data: respuesta (Anexar campor solo en acierto)
-})
-
-PUT  ({
-    ok: boolean,
-    message: 'mensaje de acierto o error'
-})
-
-DELETE ({
-    ok: boolean,
-    message: 'mensaje de acierto o error'
-})
-=======
-// PARA HOY
-- Registro de usuario
-- 
->>>>>>> 0a303d95ee0385db13fcf019c89de429d44b23e3
+TODO agregar enviar emails

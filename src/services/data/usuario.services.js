@@ -1,18 +1,10 @@
 import bcrypt from 'bcryptjs'
-import {
-    Op
-} from 'sequelize'
+import { Op } from 'sequelize'
 import Usuario from '../../models/data/usuario.js'
 import Rol from '../../models/data/rol.js'
-import {
-    esMayorDe15,
-    validarEmail,
-    validarPassword
-} from '../../helpers/includes.js'
+import { esMayorDe15, validarEmail, validarPassword } from '../../helpers/includes.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import { postDetallePermisoDefault } from '../../helpers/permisos.default.js'
 
 export const postUsuarioService = (data) => {

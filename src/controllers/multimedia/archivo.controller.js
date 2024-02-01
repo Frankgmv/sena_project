@@ -1,23 +1,9 @@
 import fs from 'fs'
-import {
-    crearNombreRecurso, deleteFile
-} from '../../helpers/includes.js'
-import {
-    validateSchemaInto
-} from '../../middlewares/validarSchemas.js'
-import {
-    archivoSchema
-} from '../../schemas/MultimediaSchemas.js'
-import {
-    ArchivosPermitidos,
-    archiveMaxBytes
-} from '../../variables.js'
-
-import {
-    postArchivoService,
-    getArchivoService,
-    deleteArchivoService
-} from '../../services/multimedia/archivo.services.js'
+import { crearNombreRecurso, deleteFile } from '../../helpers/includes.js'
+import { validateSchemaInto } from '../../middlewares/validarSchemas.js'
+import { archivoSchema } from '../../schemas/MultimediaSchemas.js'
+import { ArchivosPermitidos, archiveMaxBytes } from '../../variables.js'
+import { deleteArchivoService, getArchivoService, postArchivoService } from '../../services/multimedia/archivo.services.js'
 
 export const postArchivo = async (req, res, next) => {
     try {

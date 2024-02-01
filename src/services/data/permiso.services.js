@@ -1,8 +1,6 @@
 import Permiso from '../../models/data/permiso.js'
 import t from '../../helpers/transacciones.js'
-import {
-    TransactionError
-} from '../../middlewares/fabricaErrores.js'
+import { TransactionError } from '../../middlewares/fabricaErrores.js'
 
 export const postPermisoService = async (data) => {
     return new Promise(async (resolve, reject) => {

@@ -15,6 +15,11 @@ TODO crear un enpoint para limpiar o borrar imagenes que no esten asociadas en l
 
 TODO agregar enviar emails
 
+- validar el estado en el login
+- validar que no modifiquen el rector
+- recuperacion de password
+- eliminar permisos de usuarios cuando se elimine usuario
+
 // ENTIDADES DE DATOS
 
     // VACIOS
@@ -36,7 +41,7 @@ Usuario =>  📖 🔔
 Galeria =>  📖
 Slider =>  📖
 Video =>  📖
-Archivo =>  📖 🔔
+Archivo =>  📖
 
 // ENTIDADES DE REGISTRO
 Vistas 👁️

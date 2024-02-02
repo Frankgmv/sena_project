@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "2063043f-748c-4499-9f49-7989a1824c62",
-		"name": "API_SENA",
+		"_postman_id": "85eb6ba6-d3af-4477-85bd-b7260f69a665",
+		"name": "API_SENA Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24513022",
-		"_collection_link": "https://gold-capsule-148558.postman.co/workspace/130d748c-cae0-425f-8393-46f1a4a8f7e4/collection/24513022-2063043f-748c-4499-9f49-7989a1824c62?action=share&source=collection_link&creator=24513022"
+		"_collection_link": "https://gold-capsule-148558.postman.co/workspace/New-Team-Workspace~130d748c-cae0-425f-8393-46f1a4a8f7e4/collection/24513022-85eb6ba6-d3af-4477-85bd-b7260f69a665?action=share&source=collection_link&creator=24513022"
 	},
 	"item": [
 		{
@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\" : 1112131417,\r\n    \"nombre\" : \"tuu\",\r\n    \"apellido\" : \"tio\",\r\n    \"fechaNacimiento\" : \"2000-06-09\",\r\n    \"correo\" : \"tutio3@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5,\r\n    \"claveEspecial\" : \"MiClaveEspecial!124\"\r\n}",
+							"raw": "{\r\n    \"id\" : 1011590221,\r\n    \"nombre\" : \"kevin\",\r\n    \"apellido\" : \"castro\",\r\n    \"fechaNacimiento\" : \"2004-06-09\",\r\n    \"correo\" : \"kevinCast2@gmail.com\",\r\n    \"celular\" : \"3042030333\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 3,\r\n    \"claveEspecial\" : \"MiClaveEspecial!124\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,9 +39,32 @@
 							}
 						},
 						"url": {
-							"raw": "{{url_api}}{{valid}}logout",
+							"raw": "{{url_api}}{{valid}}registro",
 							"host": [
-								"{{url_api}}{{valid}}logout"
+								"{{url_api}}{{valid}}registro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1011590222,\r\n    \"nombre\" : \"kevin\",\r\n    \"apellido\" : \"castro\",\r\n    \"fechaNacimiento\" : \"2004-06-09\",\r\n    \"correo\" : \"kevinCast1@gmail.com\",\r\n    \"celular\" : \"3042030333\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 1,\r\n    \"claveEspecial\" : \"MiClaveEspecial!124\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}{{valid}}registro",
+							"host": [
+								"{{url_api}}{{valid}}registro"
 							]
 						}
 					},
@@ -54,7 +77,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\" : 1112131417,\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
+							"raw": "{\r\n    \"id\" : 1112131415,\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -62,9 +85,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url_api}}{{valid}}login",
+							"raw": "{{url_api}}{{verif}}login",
 							"host": [
-								"{{url_api}}{{valid}}login"
+								"{{url_api}}{{verif}}login"
 							]
 						}
 					},
@@ -89,10 +112,165 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url_api}}{{valid}}logout",
+							"raw": "{{url_api}}{{verif}}logout",
 							"host": [
-								"{{url_api}}{{valid}}logout"
+								"{{url_api}}{{verif}}logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1011590221,\r\n    \"password\" : \" 1234567xD@\",\r\n    \"RolId\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}{{verif}}login",
+							"host": [
+								"{{url_api}}{{verif}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login 2 Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1011590222,\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}{{verif}}login",
+							"host": [
+								"{{url_api}}{{verif}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "perfil",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_api}}{{verif}}perfil",
+							"host": [
+								"{{url_api}}{{verif}}perfil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verificarToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_api}}{{verif}}verificar",
+							"host": [
+								"{{url_api}}{{verif}}verificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear-codigo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1011590221,\r\n    \"correo\" : \"kevincast2@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}{{recu}}crear-codigo",
+							"host": [
+								"{{url_api}}{{recu}}crear-codigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear-codigo Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 1011590221,\r\n    \"token\" : \"GT9pcK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}{{recu}}validar-codigo",
+							"host": [
+								"{{url_api}}{{recu}}validar-codigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validar-codigo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\" : \"1234567xD@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_api}}{{recu}}nuevo-password/1011590221",
+							"host": [
+								"{{url_api}}{{recu}}nuevo-password"
+							],
+							"path": [
+								"1011590221"
 							]
 						}
 					},
@@ -196,9 +374,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url_api}}{{dt}}categorias",
+									"raw": "{{url_api}}{{dt}}categorias/1",
 									"host": [
 										"{{url_api}}{{dt}}categorias"
+									],
+									"path": [
+										"1"
 									]
 								}
 							},
@@ -249,7 +430,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\" : 1011393430,\r\n    \"nombre\" : \"tu \",\r\n    \"apellido\" : \"tio\",\r\n    \"fechaNacimiento\" : \"2000-06-09\",\r\n    \"correo\" : \"kava2@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
+									"raw": "{\r\n    \"id\" : 1011393430,\r\n    \"nombre\" : \"carlos\",\r\n    \"apellido\" : \"Atorini\",\r\n    \"fechaNacimiento\" : \"1994-06-09\",\r\n    \"correo\" : \"carlosAtorinik@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 3\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -266,13 +447,13 @@
 							"response": []
 						},
 						{
-							"name": "PostUsuario Copy",
+							"name": "put",
 							"request": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\" : 1011393430,\r\n    \"nombre\" : \"tu \",\r\n    \"apellido\" : \"tio\",\r\n    \"fechaNacimiento\" : \"2000-06-09\",\r\n    \"correo\" : \"kava2@gmail.com\",\r\n    \"celular\" : \"3225201928\",\r\n    \"password\" : \"12345678Xd@\",\r\n    \"RolId\" : 5\r\n}",
+									"raw": "{\r\n    \"estado\" : true\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -280,9 +461,29 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{dt}}usuarios",
+									"raw": "{{url_api}}{{dt}}usuarios/1011590221",
 									"host": [
 										"{{url_api}}{{dt}}usuarios"
+									],
+									"path": [
+										"1011590221"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}usuarios/1011590220",
+									"host": [
+										"{{url_api}}{{dt}}usuarios"
+									],
+									"path": [
+										"1011590220"
 									]
 								}
 							},
@@ -299,12 +500,52 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url_api}}{{dt}}detalle-permisos/1011393360",
+									"raw": "{{url_api}}{{dt}}detalle-permisos/1011590222",
 									"host": [
 										"{{url_api}}{{dt}}detalle-permisos"
 									],
 									"path": [
-										"1011393360"
+										"1011590222"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UsuarioId\": 1011590111,\r\n    \"PermisoId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}detalle-permisos",
+									"host": [
+										"{{url_api}}{{dt}}detalle-permisos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}detalle-permisos/20",
+									"host": [
+										"{{url_api}}{{dt}}detalle-permisos"
+									],
+									"path": [
+										"20"
 									]
 								}
 							},
@@ -321,9 +562,117 @@
 								"method": "GET",
 								"header": [],
 								"url": {
+									"raw": "{{url_api}}{{dt}}noticias?pagina=1&limite=2&=",
+									"host": [
+										"{{url_api}}{{dt}}noticias"
+									],
+									"query": [
+										{
+											"key": "pagina",
+											"value": "1"
+										},
+										{
+											"key": "limite",
+											"value": "2"
+										},
+										{
+											"key": "",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "Test de noticias 2",
+											"type": "text"
+										},
+										{
+											"key": "encabezado",
+											"value": "Hay una nueva noticia  2",
+											"type": "text"
+										},
+										{
+											"key": "descripcion",
+											"value": "Se informa con esta noticia que quiere informar que es noticia",
+											"type": "text"
+										},
+										{
+											"key": "UsuarioId",
+											"value": "1011590222",
+											"type": "text"
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Usuario/Desktop/Colegio_Pereira/img/icono estudiante.png"
+										}
+									]
+								},
+								"url": {
 									"raw": "{{url_api}}{{dt}}noticias",
 									"host": [
 										"{{url_api}}{{dt}}noticias"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "noti modifc",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Usuario/Desktop/Colegio_Pereira/img/noticias_actualidad.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}noticias/1",
+									"host": [
+										"{{url_api}}{{dt}}noticias"
+									],
+									"path": [
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}noticias/2",
+									"host": [
+										"{{url_api}}{{dt}}noticias"
+									],
+									"path": [
+										"2"
 									]
 								}
 							},
@@ -355,7 +704,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"titulo\" : \"Magazine\",\r\n    \"link\" : \"https://youtube.com\",\r\n    \"tipo\" : \"blog\",\r\n    \"UsuarioId\" : 1011393360,\r\n    \"SeccionId\" : 1,\r\n    \"CategoriaId\" : 1\r\n}",
+									"raw": "{\r\n    \"titulo\" : \"test2\",\r\n    \"link\" : \"https://youtube.com\",\r\n    \"tipo\" : \"pdf\",\r\n    \"UsuarioId\" : 1011590111,\r\n    \"SeccionId\" : 1,\r\n    \"CategoriaId\" : 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -378,7 +727,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"titulo\" : \"CineMaga\"\r\n}",
+									"raw": "{\r\n    \"link\": \"ajuste de cuentas\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -386,12 +735,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{dt}}links/1",
+									"raw": "{{url_api}}{{dt}}links/7",
 									"host": [
 										"{{url_api}}{{dt}}links"
 									],
 									"path": [
-										"1"
+										"7"
 									]
 								}
 							},
@@ -402,13 +751,17 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
 								"url": {
-									"raw": "{{url_api}}{{dt}}links/2",
+									"raw": "{{url_api}}{{dt}}links/6",
 									"host": [
 										"{{url_api}}{{dt}}links"
 									],
 									"path": [
-										"2"
+										"6"
 									]
 								}
 							},
@@ -425,9 +778,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url_api}}{{dt}}anuncios",
+									"raw": "{{url_api}}{{dt}}anuncios/2",
 									"host": [
 										"{{url_api}}{{dt}}anuncios"
+									],
+									"path": [
+										"2"
 									]
 								}
 							},
@@ -439,13 +795,35 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"titulo\" : \"No have class bruhh\",\r\n    \"descripcion\" : \"In this day the students no haven't classes. Becouse, idk :D\",\r\n    \"UsuarioId\" : 1011393360,\r\n    \"SeccionId\" : 1\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "test anuncio 2 sin imagen",
+											"type": "text"
+										},
+										{
+											"key": "descripcion",
+											"value": "test de prueba numero 1",
+											"type": "text"
+										},
+										{
+											"key": "UsuarioId",
+											"value": "1112131415",
+											"type": "text"
+										},
+										{
+											"key": "SeccionId",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Usuario/Downloads/bibliotecaria.png",
+											"disabled": true
 										}
-									}
+									]
 								},
 								"url": {
 									"raw": "{{url_api}}{{dt}}anuncios",
@@ -462,21 +840,27 @@
 								"method": "PUT",
 								"header": [],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"titulo\" : \"Yes have class bruhh\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Usuario/Downloads/huella.jpg"
+										},
+										{
+											"key": "titulo",
+											"value": "modificacion anuncio",
+											"type": "text"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "{{url_api}}{{dt}}anuncios/1",
+									"raw": "{{url_api}}{{dt}}anuncios/2",
 									"host": [
 										"{{url_api}}{{dt}}anuncios"
 									],
 									"path": [
-										"1"
+										"2"
 									]
 								}
 							},
@@ -497,12 +881,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{dt}}anuncios/1",
+									"raw": "{{url_api}}{{dt}}anuncios/2",
 									"host": [
 										"{{url_api}}{{dt}}anuncios"
 									],
 									"path": [
-										"1"
+										"2"
 									]
 								}
 							},
@@ -519,9 +903,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url_api}}{{dt}}tokens",
+									"raw": "{{url_api}}{{dt}}tokens/1",
 									"host": [
 										"{{url_api}}{{dt}}tokens"
+									],
+									"path": [
+										"1"
 									]
 								}
 							},
@@ -534,7 +921,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"token\" : \"tetris\",\r\n    \"nombre\" : \"Juanpis\",\r\n    \"tokenKey\" : \"tetris\",\r\n    \"tiempo\" : \"500\",\r\n    \"UsuarioId\" : 1112131415\r\n}",
+									"raw": "{\r\n    \"token\" : \"asdfasdf\",\r\n    \"nombre\" : \"asdfasdf\",\r\n    \"tokenKey\" : \"TEDSddD\",\r\n    \"tiempo\" : \"5d\",\r\n    \"UsuarioId\" : 1112131415\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -557,7 +944,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"tiempo\" : \"1D\"\r\n}",
+									"raw": "{\r\n    \"UsuarioId\" : 1011393430\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -565,12 +952,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{dt}}tokens/1",
+									"raw": "{{url_api}}{{dt}}tokens/7",
 									"host": [
 										"{{url_api}}{{dt}}tokens"
 									],
 									"path": [
-										"1"
+										"7"
 									]
 								}
 							},
@@ -591,12 +978,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{dt}}tokens/3",
+									"raw": "{{url_api}}{{dt}}tokens/1",
 									"host": [
 										"{{url_api}}{{dt}}tokens"
 									],
 									"path": [
-										"3"
+										"1"
 									]
 								}
 							},
@@ -620,6 +1007,101 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "ALcaldia 2",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "http://alcaldia2.com",
+											"type": "text"
+										},
+										{
+											"key": "UsuarioId",
+											"value": "1011590111",
+											"type": "text"
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Usuario/Downloads/fot2.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}items",
+									"host": [
+										"{{url_api}}{{dt}}items"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "new title",
+											"type": "text"
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Usuario/Desktop/Colegio_Pereira/img/contacto_sugerencia.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}items/2",
+									"host": [
+										"{{url_api}}{{dt}}items"
+									],
+									"path": [
+										"2"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}items/2",
+									"host": [
+										"{{url_api}}{{dt}}items"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -635,6 +1117,46 @@
 									"raw": "{{url_api}}{{dt}}eventos",
 									"host": [
 										"{{url_api}}{{dt}}eventos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"evento\": \"Sala de juegos\",\r\n    \"fecha\": \"2024-01-22\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{dt}}eventos",
+									"host": [
+										"{{url_api}}{{dt}}eventos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{dt}}eventos/2",
+									"host": [
+										"{{url_api}}{{dt}}eventos"
+									],
+									"path": [
+										"2"
 									]
 								}
 							},
@@ -660,17 +1182,17 @@
 									"formdata": [
 										{
 											"key": "titulo",
-											"value": "Su puta madre Frank",
+											"value": "Magazine",
 											"type": "text"
 										},
 										{
 											"key": "archivo",
 											"type": "file",
-											"src": "/C:/Users/Kevin/Downloads/Kevin_andres_castrillon.pdf"
+											"src": "/C:/Users/Usuario/Downloads/certificado.matricula.pdf"
 										},
 										{
 											"key": "UsuarioId",
-											"value": "1011393360",
+											"value": "1112131415",
 											"type": "text"
 										}
 									]
@@ -765,6 +1287,102 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "titulo",
+											"value": "Periodico escolar 22 otro",
+											"type": "text"
+										},
+										{
+											"key": "UsuarioId",
+											"value": "1011590111",
+											"type": "text"
+										},
+										{
+											"key": "EventoId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Usuario/Desktop/Colegio_Pereira/img/blogs.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{multi}}galeria",
+									"host": [
+										"{{url_api}}{{multi}}galeria"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{multi}}galeria/3",
+									"host": [
+										"{{url_api}}{{multi}}galeria"
+									],
+									"path": [
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "imagen",
+											"type": "file",
+											"src": "/C:/Users/Usuario/Desktop/Colegio_Pereira/img/logo2.png",
+											"disabled": true
+										},
+										{
+											"key": "UsuarioId",
+											"value": "1011590111",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_api}}{{multi}}galeria/4",
+									"host": [
+										"{{url_api}}{{multi}}galeria"
+									],
+									"path": [
+										"4"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -795,24 +1413,23 @@
 									"formdata": [
 										{
 											"key": "UsuarioId",
-											"value": "1011393360",
+											"value": "1011590111",
 											"type": "text"
 										},
 										{
 											"key": "link",
-											"value": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/5AAyh7scplM?si=qjiC47KPMdyZMaDR\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
+											"value": "https://www.youtube.com/watch?v=0N1Dg0FNShw&list=RDMM0N1Dg0FNShw&start_radio=1",
 											"type": "text"
 										},
 										{
 											"key": "titulo",
-											"value": "holas2",
+											"value": "holas 3",
 											"type": "text"
 										},
 										{
 											"key": "imagen",
 											"type": "file",
-											"src": [],
-											"disabled": true
+											"src": "/C:/Users/Usuario/Desktop/Colegio_Pereira/img/plataformas_academicas.png"
 										}
 									]
 								},
@@ -834,25 +1451,31 @@
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "UsuarioId",
-											"value": "",
-											"type": "text",
-											"disabled": true
+											"key": "titulo",
+											"value": "vide modifc 2",
+											"type": "text"
 										},
 										{
 											"key": "imagen",
 											"type": "file",
-											"src": "/C:/Users/Kevin/Pictures/Screenshots/Captura de pantalla 2024-01-22 212456.png"
+											"src": "/C:/Users/Usuario/Desktop/Colegio_Pereira/img/plataformas_academicas.png"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{url_api}}{{multi}}videos/5",
+									"raw": "{{url_api}}{{multi}}videos/2",
 									"host": [
 										"{{url_api}}{{multi}}videos"
 									],
 									"path": [
-										"5"
+										"2"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -880,12 +1503,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{url_api}}{{multi}}videos/3",
+									"raw": "{{url_api}}{{multi}}videos/2",
 									"host": [
 										"{{url_api}}{{multi}}videos"
 									],
 									"path": [
-										"3"
+										"2"
 									]
 								}
 							},
@@ -897,7 +1520,7 @@
 					"name": "slider",
 					"item": [
 						{
-							"name": "New Request",
+							"name": "New Requestd",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -905,6 +1528,46 @@
 									"raw": "{{url_api}}{{multi}}slider",
 									"host": [
 										"{{url_api}}{{multi}}slider"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ImagenId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_api}}{{multi}}slider",
+									"host": [
+										"{{url_api}}{{multi}}slider"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{multi}}slider/3",
+									"host": [
+										"{{url_api}}{{multi}}slider"
+									],
+									"path": [
+										"3"
 									]
 								}
 							},
@@ -935,12 +1598,9 @@
 							"response": []
 						},
 						{
-							"name": "New",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"name": "pqrs",
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -952,12 +1612,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{info}}pqrs/1",
+									"raw": "{{url_api}}{{Info}}pqrs",
 									"host": [
-										"{{url_api}}{{info}}pqrs"
-									],
-									"path": [
-										"1"
+										"{{url_api}}{{Info}}pqrs"
 									]
 								}
 							},
@@ -969,9 +1626,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url_api}}{{info}}pqrs/1",
+									"raw": "{{url_api}}{{Info}}pqrs/1",
 									"host": [
-										"{{url_api}}{{info}}pqrs"
+										"{{url_api}}{{Info}}pqrs"
 									],
 									"path": [
 										"1"
@@ -995,12 +1652,43 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{info}}pqrs/1",
+									"raw": "{{url_api}}{{Info}}pqrs/4",
 									"host": [
-										"{{url_api}}{{info}}pqrs"
+										"{{url_api}}{{Info}}pqrs"
 									],
 									"path": [
-										"1"
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete All",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{Info}}pqrs-delete-all",
+									"host": [
+										"{{url_api}}{{Info}}pqrs-delete-all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url_api}}{{Info}}pqrs/2",
+									"host": [
+										"{{url_api}}{{Info}}pqrs"
+									],
+									"path": [
+										"2"
 									]
 								}
 							},
@@ -1017,9 +1705,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url_api}}{{info}}notificaciones",
+									"raw": "{{url_api}}{{Info}}notificaciones",
 									"host": [
-										"{{url_api}}{{info}}notificaciones"
+										"{{url_api}}{{Info}}notificaciones"
 									]
 								}
 							},
@@ -1133,12 +1821,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{info}}historial/1",
+									"raw": "{{url_api}}{{Info}}historial",
 									"host": [
-										"{{url_api}}{{info}}historial"
-									],
-									"path": [
-										"1"
+										"{{url_api}}{{Info}}historial"
 									]
 								}
 							},
@@ -1151,7 +1836,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"cambio\" : \"Actualización\",\r\n    \"descripcion\" : \"Actualizamos datos pe\",\r\n    \"UsuarioId\" : 1011393360\r\n}",
+									"raw": "{\r\n    \"cambio\" : \"Actualización\",\r\n    \"descripcion\" : \"Actualizamos datos pe\",\r\n    \"UsuarioId\" : 1011590220\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1159,9 +1844,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{info}}historial",
+									"raw": "{{url_api}}{{Info}}historial",
 									"host": [
-										"{{url_api}}{{info}}historial"
+										"{{url_api}}{{Info}}historial"
 									]
 								}
 							},
@@ -1182,9 +1867,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_api}}{{info}}historial",
+									"raw": "{{url_api}}{{Info}}historial/1",
 									"host": [
-										"{{url_api}}{{info}}historial"
+										"{{url_api}}{{Info}}historial"
+									],
+									"path": [
+										"1"
 									]
 								}
 							},

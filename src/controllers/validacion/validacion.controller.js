@@ -124,7 +124,13 @@ export const verificarToken = async (req, res, next) => {
         res.status(200).json({
             ok: true,
             message: 'Token verificado',
-            data: dataToken
+            data: {
+                id: dataToken.id,
+                nombre: dataToken.nombre,
+                apellido: dataToken.apellido,
+                correo: dataToken.correo,
+                RolId: dataToken.RolId
+            }
         })
     } catch (error) {
         next(error)
@@ -133,10 +139,14 @@ export const verificarToken = async (req, res, next) => {
 
 export const perfil = async (req, res, next) => {
     try {
-        const usuario = await getUsuarioService(req.usuario.id)
+        let usuario = await getUsuarioService(req.usuario.id)
 
         if (!usuario) {
             return res.status(400).json(usuario)
+        }
+        if (usuario.data.password) {
+            usuario.data.password = 'dato privado'
+            delete usuario.data.password
         }
 
         res.status(200).json(usuario)

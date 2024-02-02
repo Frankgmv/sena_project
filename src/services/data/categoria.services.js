@@ -5,13 +5,6 @@ export const getAllCategoriasService = () => {
         try {
             const categorias = await Categoria.findAll()
 
-            if (categorias.length === 0) {
-                return resolve({
-                    ok: false,
-                    message: 'No hay categorias'
-                })
-            }
-
             resolve({
                 ok: true,
                 message: 'Lista de categorias',

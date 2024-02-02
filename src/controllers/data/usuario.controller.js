@@ -1,11 +1,18 @@
 import { deleteUsuarioService, getAllUsuariosService, getUsuarioService, postUsuarioService, putUsuarioService
 } from '../../services/data/usuario.services.js'
+import { postNotificacionService } from '../../services/informacion/notificacion.services.js'
 
 export const postUsuario = async (req, res, next) => {
     try {
         const crearUsuario = await postUsuarioService(req.body)
         res.json(crearUsuario)
         if (!crearUsuario.ok) return res.status(400)
+
+        await postNotificacionService({
+            titulo: `Nuevos Usuario`,
+            descripcion: `Revisa tu bandeja de usuario`
+        })
+
         res.status(201)
     } catch (error) {
         next(error)
@@ -58,6 +65,7 @@ export const putUsuario = async (req, res, next) => {
         next(error)
     }
 }
+
 export const deleteUsuario = async (req, res, next) => {
     try {
         const usuarioEliminado = await deleteUsuarioService(req.params.id)

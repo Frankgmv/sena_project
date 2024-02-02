@@ -10,11 +10,10 @@ export const postPqrs = async (req, res, next) => {
             return res.status(400).json(pqrsCreado)
         }
 
-        const resPqrs = await postNotificacionService({
+        await postNotificacionService({
             titulo: `Nuevos PQRS`,
             descripcion: `Revisa tu bandeja de PQRS`
         })
-        console.log(resPqrs)
 
         res.status(201).json(pqrsCreado)
     } catch (err) {

@@ -31,7 +31,9 @@ export const postGaleria = async (req, res, next) => {
     }
 
     const validarBody = validateSchemaInto(galeriaSchema, bodyBuild)
-    if (validarBody.issues) return res.status(400).json(validarBody)
+    if (validarBody.issues) {
+      return res.status(400).json(validarBody)
+    }
 
     let image = req.file
     if (image) {
@@ -69,10 +71,10 @@ export const postGaleria = async (req, res, next) => {
         imgPath: nombreImagen.nombre
       }
     } else {
-      datosGaleria = {
-        ...bodyBuild,
-        imgPath: null
-      }
+      return res.status(400).json({
+        ok:false,
+        message:'la imagen es requerida'
+      })
     }
 
     const crearGaleria = await postGaleriaService(datosGaleria)
@@ -80,7 +82,9 @@ export const postGaleria = async (req, res, next) => {
     res.json(crearGaleria)
     if (!crearGaleria.ok) return res.status(400)
 
-    fs.writeFileSync(urlPath, bufferComprimido)
+    if (datosGaleria.imgPath) {
+      fs.writeFileSync(urlPath, bufferComprimido)
+    }
     res.status(201)
   } catch (error) {
     next(error)
@@ -134,7 +138,9 @@ export const putGaleria = async (req, res, next) => {
     }
 
     const validarSchemaResponse = validateSchemaInto(putGaleriaSchema, bodyBuild)
-    if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+    if (validarSchemaResponse.issues) {
+      return res.status(400).json(validarSchemaResponse)
+    }
 
     let image = req.file
     if (image) {
@@ -174,21 +180,23 @@ export const putGaleria = async (req, res, next) => {
 
       const consultaAnuncio = await getGaleriaService(req.params.id)
       if (consultaAnuncio.ok) {
-        if (deleteFile(consultaAnuncio.imagen.imgPath)) {
+        if (deleteFile(consultaAnuncio.data.imgPath)) {
           next('error al remplazar el archivo')
         }
       }
     } else {
       datosImagen = {
-        ...bodyBuild,
-        imgPath: null
+        ...bodyBuild
       }
     }
     const actualizarImagen = await putGaleriaService(req.params.id, datosImagen)
     res.json(actualizarImagen)
     if (!actualizarImagen.ok) return res.status(400)
 
-    fs.writeFileSync(urlPath, bufferComprimido)
+    if (datosImagen.imgPath) {
+      fs.writeFileSync(urlPath, bufferComprimido)
+    }
+
     res.status(200)
   } catch (error) {
     next(error)

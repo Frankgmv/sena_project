@@ -15,7 +15,7 @@ export const postLinkService = (data) => {
         } = data
 
         if (tipo !== 'pdf' && tipo !== 'blog') {
-            resolve({
+            return resolve({
                 ok: false,
                 message: 'El tipo es invalido',
                 tipos: ['pdf', 'blog']

@@ -7,13 +7,6 @@ export const getAllRolesService = () => {
         try {
             const roles = await Rol.findAll()
 
-            if (!roles) {
-                return resolve({
-                    ok: false,
-                    mensage: 'No hay roles registrados'
-                })
-            }
-
             resolve({
                 ok: true,
                 mensage: 'Lista de roles',
@@ -51,6 +44,10 @@ export const putRolService = (idRol, data) => {
     return new Promise(async (resolve, reject) => {
         try {
             const ActualizarRol = await Rol.findByPk(idRol)
+
+            if (data.id) {
+                delete data.id
+            }
 
             if (!ActualizarRol) {
                 return resolve({

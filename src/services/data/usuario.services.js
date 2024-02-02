@@ -7,6 +7,8 @@ import t from '../../helpers/transacciones.js'
 import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import { postDetallePermisoDefault } from '../../helpers/permisos.default.js'
 
+const saltos = bcrypt.genSaltSync(10)
+
 export const postUsuarioService = (data) => {
     return new Promise(async (resolve, reject) => {
         const {
@@ -18,9 +20,6 @@ export const postUsuarioService = (data) => {
         } = data
         const emailLower = email.toLowerCase()
         try {
-            //  consultar roles
-            const existeRol = await Rol.findByPk(RolId)
-
             // constular usuarios
             const isInto = await Usuario.findOne({
                 where: {
@@ -30,6 +29,9 @@ export const postUsuarioService = (data) => {
                     }
                 }
             })
+
+            //  consultar roles
+            const existeRol = await Rol.findByPk(RolId)
 
             // Validar que el rol exista
             if (!existeRol) {
@@ -72,7 +74,6 @@ export const postUsuarioService = (data) => {
             }
 
             // Encriptar
-            const saltos = bcrypt.genSaltSync(10)
             const passwordHast = bcrypt.hashSync(password, saltos)
 
              // Transaccion
@@ -182,6 +183,10 @@ export const getUsuarioService = (idUser) => {
 export const putUsuarioService = (idUser, data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            if (data.id) {
+                delete data.id
+            }
+
             const usuario = await Usuario.findByPk(idUser)
             if (!usuario) {
                 return resolve({
@@ -189,9 +194,41 @@ export const putUsuarioService = (idUser, data) => {
                     message:  'Usuario no encontrado'
                 })
             }
+            if (data.RolId) {
+                //  consultar roles
+                const existeRol = await Rol.findByPk(data.RolId)
 
-            if (data.id) {
-                delete data.id
+                // Validar que el rol exista
+                if (!existeRol) {
+                    return resolve({
+                        ok: false,
+                        mensage: 'Rol no encontrado'
+                    })
+                }
+            }
+
+            if (data.correo) {
+                // validar email
+                if (!validarEmail(data.correo)) {
+                    return resolve({
+                        ok: false,
+                        message: `Correo ${data.correo} es inválido`
+                    })
+                }
+            }
+
+            let dataNueva = data
+
+            if (data.password) {
+                // validar password
+                if (!validarPassword(data.password)) {
+                    return resolve({
+                        ok: false,
+                        message: 'Contraseña Inválida. \n Debe tener ser de 8 car. y contener una mayúscula, una mínuscula, un número, un caracter especial'
+                    })
+                }
+
+                dataNueva.password = bcrypt.hashSync(data.password, saltos)
             }
 
             if (data.estado === true) {
@@ -208,11 +245,11 @@ export const putUsuarioService = (idUser, data) => {
              // Transaccion
             let transaccion = await t.create()
 
-                if (!transaccion.ok) {
-                    throw new TransactionError('Error al crear transaccion')
-                }
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
+            }
 
-            const usuarioActualizado = await usuario.update(data, {transaction: transaccion.data})
+            const usuarioActualizado = await usuario.update(dataNueva, {transaction: transaccion.data})
 
             if (!usuarioActualizado) {
                 await t.rollback(transaccion.data)

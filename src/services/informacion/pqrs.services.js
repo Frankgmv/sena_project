@@ -51,7 +51,7 @@ export function getAllPqrsService() {
             resolve({
                 ok: true,
                 message: 'Lista de Pqrs',
-                pqrs: getAllPqrs
+                data: getAllPqrs
             })
         } catch (err) {
             reject(err)
@@ -96,8 +96,7 @@ export function putPqrsService(idPqrs) {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: 'Actualizado correctamente',
-                pqrs: updated
+                message: 'Actualizado correctamente'
             })
         } catch (err) {
             reject(err)
@@ -118,7 +117,7 @@ export function getPqrsService(idPqrs) {
                 resolve({
                     ok: true,
                     message: 'Datos de Pqrs',
-                    pqrs: getPqrs
+                    data: getPqrs
                 })
             }
         } catch (err) {
@@ -141,8 +140,7 @@ export function deletePqrsService(idPqrs) {
             await findPqrs.destroy()
             resolve({
                 ok: true,
-                message: 'pqrs eliminado correctamente',
-                pqrs: findPqrs
+                message: 'pqrs eliminado correctamente'
             })
         } catch (err) {
             reject(err)

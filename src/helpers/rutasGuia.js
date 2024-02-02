@@ -1,12 +1,13 @@
+const URL = 'http://localhost:9000/api/v1/'
 export default {
-    'URL': 'http://localhost:9000/api/v1/',
+    'URL': URL,
     'raiz': '/api/v1 + path + ruta',
     'URLRoutes': {
         'info': {
-            'path': '/informacion',
+            'path': `${URL}informacion/`,
             'rutas': {
                 '/historial': {
-
+                    'metodos': ['get', 'post', 'delete', ['historial-delete-all', 'borrar todos los pqrs leidos - true']]
                 },
                 '/notificaciones': {
                     'metodos': ['get', 'post', 'put', 'delete', ['notificaciones-delete-all', 'borrar todos los pqrs leidos - true']]
@@ -21,7 +22,7 @@ export default {
             }
         },
         'multimedia': {
-            'path': '/multimedia',
+            'path': `${URL}multimedia/`,
             'rutas': {
                 '/archivos': {
 
@@ -40,7 +41,7 @@ export default {
             }
         },
         'data': {
-            'path': '/data',
+            'path': `${URL}data/`,
             'rutas': {
                 '/anuncios': {
                     'metodos': ['get', 'post', 'put', 'delete'],
@@ -84,19 +85,22 @@ export default {
             }
         },
         'validacion': {
-            'path': '/validacion',
+            'path': `${URL}validacion/`,
             'rutas': {
                 '/login': {
-
+                    'metodos': ['post']
                 },
                 '/logout': {
-
-                },
-                '/verificacion': {
-
+                    'metodos': ['post']
                 },
                 '/registro': {
-
+                    'metodos': ['get']
+                },
+                '/verificar': {
+                    'metodos': ['get']
+                },
+                '/perfil': {
+                    'metodos': ['get']
                 }
             }
         }

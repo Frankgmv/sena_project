@@ -74,7 +74,7 @@ export const getAllNoticiasService = (estado, pagina, numNoticias = 12) => {
                 return resolve({
                     ok: false,
                     message: 'estado inválido',
-                    estados: ['activos', 'inactivas', 'todas']
+                    estados: ['activas', 'inactivas', 'todas']
                 })
             }
             if (estado !== 'todas') {

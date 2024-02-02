@@ -20,7 +20,9 @@ export const postVideo = async (req, res, next) => {
         let bufferComprimido
         let urlPath
         const validarSchemaResponse = validateSchemaInto(videoSchema, bodyBuild)
-        if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+        if (validarSchemaResponse.issues) {
+            return res.status(400).json(validarSchemaResponse)
+        }
 
         let image = req.file
         if (image) {
@@ -68,7 +70,10 @@ export const postVideo = async (req, res, next) => {
         res.json(guardarVideo)
         if (!guardarVideo.ok) return res.status(400)
 
-        fs.writeFileSync(urlPath, bufferComprimido)
+        if (datosVideo.imgPath) {
+            fs.writeFileSync(urlPath, bufferComprimido)
+        }
+
         res.status(201)
     } catch (error) {
         next(error)
@@ -111,7 +116,9 @@ export const putVideo = async (req, res, next) => {
         let datosVideo
 
         const validarSchemaResponse = validateSchemaInto(putVideoSchema, bodyBuild)
-        if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+        if (validarSchemaResponse.issues) {
+            return res.status(400).json(validarSchemaResponse)
+        }
 
         let image = req.file
         if (image) {
@@ -151,23 +158,24 @@ export const putVideo = async (req, res, next) => {
 
             const consultaVideo = await getVideoService(req.params.id)
             if (consultaVideo.ok) {
-                if (consultaVideo.video.imgPath) {
-                    if (deleteFile(consultaVideo.video.imgPath)) {
+                if (consultaVideo.data.imgPath) {
+                    if (deleteFile(consultaVideo.data.imgPath)) {
                         next('error al remplazar el archivo')
                     }
                 }
             }
         } else {
             datosVideo = {
-                ...bodyBuild,
-                imgPath: null
+                ...bodyBuild
             }
         }
         const actualizarVideo = await putVideoService(req.params.id, datosVideo)
         res.json(actualizarVideo)
         if (!actualizarVideo.ok) return res.status(400)
 
-        fs.writeFileSync(urlPath, bufferComprimido)
+        if (datosVideo.imgPath) {
+            fs.writeFileSync(urlPath, bufferComprimido)
+        }
         res.status(200)
     } catch (error) {
         next(error)

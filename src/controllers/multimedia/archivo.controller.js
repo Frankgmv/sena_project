@@ -23,7 +23,9 @@ export const postArchivo = async (req, res, next) => {
         }
 
         const validarBody = validateSchemaInto(archivoSchema, bodyBuild)
-        if (validarBody.issues) return res.status(400).json(validarBody)
+        if (validarBody.issues) {
+            return res.status(400).json(validarBody)
+        }
 
         let archivo = req.file
         if (archivo) {
@@ -60,7 +62,10 @@ export const postArchivo = async (req, res, next) => {
 
         res.json(guardarArchivo)
         if (!guardarArchivo.ok) return res.status(400)
-        fs.writeFileSync(urlPath, pdfBuffer)
+
+        if (datosArchivo.archivo) {
+            fs.writeFileSync(urlPath, pdfBuffer)
+        }
         res.status(201)
     } catch (error) {
         next(error)

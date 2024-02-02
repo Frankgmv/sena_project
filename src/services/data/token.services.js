@@ -3,6 +3,8 @@ import Token from '../../models/data/token.js'
 import Usuario from '../../models/data/usuario.js'
 import t from '../../helpers/transacciones.js'
 import { TransactionError } from '../../middlewares/fabricaErrores.js'
+import bcrypt from 'bcryptjs'
+const saltos = bcrypt.genSaltSync(10)
 
 export const postTokenService = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -29,6 +31,8 @@ export const postTokenService = (data) => {
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
             }
+            const tokenHast = bcrypt.hashSync(data.token, saltos)
+            data.token = tokenHast
 
             const existeUsuario = await Usuario.findByPk(data.UsuarioId)
 
@@ -80,9 +84,9 @@ export const getAllTokenService = () => {
 export const getTokenService = (idToken) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const tokens = await Token.findByPk(idToken)
+            const token = await Token.findByPk(idToken)
 
-            if (!tokens) {
+            if (!token) {
                 return resolve({
                     ok: false,
                     message: 'Token no encontrado'
@@ -92,7 +96,7 @@ export const getTokenService = (idToken) => {
             resolve({
                 ok: true,
                 message: 'Token obtenido',
-                data: tokens
+                data: token
             })
         } catch (error) {
             reject(error)
@@ -131,11 +135,20 @@ export const putTokenService = (idToken, data) => {
         try {
             const encontrarToken = await Token.findByPk(idToken)
 
+            if (data.id) {
+                delete data.id
+            }
+
             if (!encontrarToken) {
                 return resolve({
                     ok: false,
                     message: 'Token no encontrado'
                 })
+            }
+            let datosK = data
+            if (data.token) {
+                const tokenHast = bcrypt.hashSync(data.token, saltos)
+                datosK.token = tokenHast
             }
 
             // Transaccion
@@ -145,7 +158,9 @@ export const putTokenService = (idToken, data) => {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            const actualizarToken = await encontrarToken.update(data)
+            const actualizarToken = await encontrarToken.update(datosK, {
+                transaccion: transaccion.data
+            })
 
             if (!actualizarToken) {
                 await t.rollback(transaccion.data)

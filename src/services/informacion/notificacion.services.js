@@ -55,15 +55,8 @@ export const getAllNotificionesService = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const notis = await Notificaciones.findAll({
-                orderBy: ['id']
+                order: [['id', 'DESC']]
             })
-
-            if (notis.length === 0) {
-                return resolve({
-                    ok: false,
-                    message: 'No hay notificaciones'
-                })
-            }
 
             resolve({
                 ok: true,

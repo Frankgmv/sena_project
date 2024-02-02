@@ -24,7 +24,9 @@ export const postItem = async (req, res, next) => {
         }
 
         const validarBody = validateSchemaInto(itemSchema, bodyBuild)
-        if (validarBody.issues) return res.status(400).json(validarBody)
+        if (validarBody.issues) {
+            return res.status(400).json(validarBody)
+        }
 
         let image = req.file
         if (image) {
@@ -77,7 +79,9 @@ export const postItem = async (req, res, next) => {
         res.json(crearItem)
         if (!crearItem.ok) return res.status(400)
 
-        fs.writeFileSync(urlPath, bufferComprimido)
+        if (datosItem.imgPath) {
+            fs.writeFileSync(urlPath, bufferComprimido)
+        }
         res.status(201)
     } catch (error) {
         next(error)
@@ -122,7 +126,9 @@ export const putItem = async (req, res, next) => {
         let datosItem
 
         const validarSchemaResponse = validateSchemaInto(putItemSchema, bodyBuild)
-        if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+        if (validarSchemaResponse.issues) {
+            return res.status(400).json(validarSchemaResponse)
+        }
 
         let image = req.file
         if (image) {
@@ -163,21 +169,23 @@ export const putItem = async (req, res, next) => {
             const consultaItem = await getItemService(req.params.id)
 
             if (consultaItem.ok) {
-                if (deleteFile(consultaItem.item.imgPath)) {
+                if (deleteFile(consultaItem.data.imgPath)) {
                     next('error al remplazar el archivo')
                 }
             }
         } else {
             datosItem = {
-                ...bodyBuild,
-                imgPath: null
+                ...bodyBuild
             }
         }
         const actualizarItem = await putItemService(req.params.id, datosItem)
         res.json(actualizarItem)
         if (!actualizarItem.ok) return res.status(400)
 
-        fs.writeFileSync(urlPath, bufferComprimido)
+        if (datosItem.imgPath) {
+            fs.writeFileSync(urlPath, bufferComprimido)
+        }
+
         res.status(200)
     } catch (error) {
         next(error)

@@ -96,7 +96,7 @@ export const getAllAnunciosService = (seccionKey) => {
             resolve({
                 ok: true,
                 message: 'Lista de anuncios',
-                data: anuncios.dataValues
+                data: anuncios
             })
         } catch (error) {
             reject(error)

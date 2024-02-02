@@ -42,3 +42,10 @@ Archivo =>  📖 🔔
 Vistas 👁️
 Historial => 📖
 Notificaci => 🔔
+
+/////////////// Errores ///////////////
+
+validar al eliminar usuarios que no tengan cosas en otras pastes en el delete
+crear un validador en el usuario que sea diferente a id del rector o del wm, solo si es este mismo en el put y delete
+
+validar en el login que el usuario que quiere acceder su estado este en true

@@ -1,11 +1,18 @@
 import { postTokenService, getTokenService, getAllTokenService, deleteTokenService, putTokenService
 } from '../../services/data/token.services.js'
+import { postNotificacionService } from '../../services/informacion/notificacion.services.js'
 
 export const postToken = async (req, res, next) => {
     try {
        const crearToken = await postTokenService(req.body)
        res.json(crearToken)
        if (!crearToken.ok) return res.status(400)
+
+       await postNotificacionService({
+            titulo: `Se creo una nueva clave`,
+            descripcion: `Revisar las claves`
+        })
+
        res.status(201)
     } catch (error) {
         next(error)

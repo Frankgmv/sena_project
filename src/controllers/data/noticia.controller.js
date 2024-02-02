@@ -21,7 +21,9 @@ export const postNoticia = async (req, res, next) => {
         let urlPath
         // validar la schema para los datos
         const validarSchemaResponse = validateSchemaInto(noticiaShema, bodyBuild)
-        if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+        if (validarSchemaResponse.issues) {
+            return res.status(400).json(validarSchemaResponse)
+        }
 
         let image = req.file
         if (image) {
@@ -74,7 +76,10 @@ export const postNoticia = async (req, res, next) => {
         res.json(crearNoticia)
         if (!crearNoticia.ok) return res.status(400)
 
-        fs.writeFileSync(urlPath, bufferComprimido)
+        if (datosNoticia.imgPath) {
+            fs.writeFileSync(urlPath, bufferComprimido)
+        }
+
         res.status(201)
     } catch (error) {
         next(error)
@@ -129,7 +134,9 @@ export const putNoticia = async (req, res, next) => {
         let datosNoticia
 
         const validarSchemaResponse = validateSchemaInto(putNoticiaShema, bodyBuild)
-        if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+        if (validarSchemaResponse.issues) {
+            return res.status(400).json(validarSchemaResponse)
+        }
 
         let image = req.file
         if (image) {
@@ -170,21 +177,23 @@ export const putNoticia = async (req, res, next) => {
             const consultaNoticia = await getNoticiaService(req.params.id)
 
             if (consultaNoticia.ok) {
-                if (deleteFile(consultaNoticia.noticia.imgPath)) {
+                if (deleteFile(consultaNoticia.data.imgPath)) {
                     next('error al remplazar el archivo')
                 }
             }
         } else {
             datosNoticia = {
-                ...bodyBuild,
-                imgPath: null
+                ...bodyBuild
             }
         }
         const actualizarNoticia = await putNoticiaService(req.params.id, datosNoticia)
         res.json(actualizarNoticia)
         if (!actualizarNoticia.ok) return res.status(400)
 
-        fs.writeFileSync(urlPath, bufferComprimido)
+        if (datosNoticia.imgPath) {
+            fs.writeFileSync(urlPath, bufferComprimido)
+        }
+
         res.status(200)
     } catch (error) {
         next(error)

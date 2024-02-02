@@ -3,10 +3,11 @@ import sharp from 'sharp'
 import { crearNombreRecurso, deleteFile } from '../../helpers/includes.js'
 import { validateSchemaInto } from '../../middlewares/validarSchemas.js'
 import { anuncioSchema, putAnuncioSchema } from '../../schemas/dataSchemas.js'
-import {
-    deleteAnuncioService, getAllAnunciosService, getAnuncioService, postAnucioService, putAnuncioService
-} from '../../services/data/anuncio.services.js'
 import { maxBytes, tiposPermitidos } from '../../variables.js'
+import { postNotificacionService } from '../../services/informacion/notificacion.services.js'
+import { deleteAnuncioService, getAllAnunciosService, getAnuncioService,
+         postAnucioService, putAnuncioService
+} from '../../services/data/anuncio.services.js'
 
 export const postAnuncio = async (req, res, next) => {
     try {
@@ -25,7 +26,9 @@ export const postAnuncio = async (req, res, next) => {
         const validarSchemaResponse = validateSchemaInto(anuncioSchema, bodyBuild)
 
         // Retornar errores si hay en la validacion de la shema
-        if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+        if (validarSchemaResponse.issues) {
+            return res.status(400).json(validarSchemaResponse)
+        }
 
         let image = req.file
         if (image) {
@@ -73,13 +76,23 @@ export const postAnuncio = async (req, res, next) => {
                 imgPath: null
             }
         }
+
         // Guardar anuncio
         const guardar = await postAnucioService(datosAnuncio)
-        res.json(guardar)
-        if (!guardar.ok) return res.status(400)
 
-        fs.writeFileSync(urlPath, bufferComprimido)
-        res.status(201)
+        if (!guardar.ok) {
+            return res.status(400).json(guardar)
+        }
+        // Noficiar nuevo anuncio
+        if (datosAnuncio.imgPath) {
+            fs.writeFileSync(urlPath, bufferComprimido)
+        }
+
+        await postNotificacionService({
+            titulo: `Nuevos Anuncio`,
+            descripcion: `Revisa tu apartado de anuncios`
+        })
+        res.status(201).json(guardar)
     } catch (error) {
         next(error)
     }
@@ -131,7 +144,9 @@ export const putAnuncio = async (req, res, next) => {
         let datosAnuncio
 
         const validarSchemaResponse = validateSchemaInto(putAnuncioSchema, bodyBuild)
-        if (validarSchemaResponse.issues) return res.status(400).json(validarSchemaResponse)
+        if (validarSchemaResponse.issues) {
+            return res.status(400).json(validarSchemaResponse)
+        }
 
         let image = req.file
         if (image) {
@@ -170,21 +185,23 @@ export const putAnuncio = async (req, res, next) => {
 
             const consultaAnuncio = await getAnuncioService(req.params.id)
             if (consultaAnuncio.ok) {
-                if (deleteFile(consultaAnuncio.anuncio.imgPath)) {
+                if (deleteFile(consultaAnuncio.data.imgPath)) {
                     next('error al remplazar el archivo')
                 }
             }
         } else {
             datosAnuncio = {
-                ...bodyBuild,
-                imgPath: null
+                ...bodyBuild
             }
         }
         const actualizarAnuncio = await putAnuncioService(req.params.id, datosAnuncio)
         res.json(actualizarAnuncio)
         if (!actualizarAnuncio.ok) return res.status(400)
 
-        fs.writeFileSync(urlPath, bufferComprimido)
+        if (datosAnuncio.imgPath !== null) {
+            fs.writeFileSync(urlPath, bufferComprimido)
+        }
+
         res.status(200)
     } catch (error) {
         next(error)

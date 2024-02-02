@@ -50,8 +50,6 @@ export const postRegistro = async (req, res, next) => {
                 message: 'iniciar sesión en el sistema'
             })
         }
-        const accessToken = await createTokenAccess(consultarUsuario.data.dataValues)
-        res.cookie('accessToken', accessToken)
         res.status(201).json(guardarUsuario)
     } catch (error) {
         next(error)
@@ -61,9 +59,6 @@ export const postRegistro = async (req, res, next) => {
 export const logout = (req, res, next) => {
     try {
         res.cookie('accessToken', '', {
-            expires: new Date(0)
-        })
-        res.cookie('jwt', '', {
             expires: new Date(0)
         })
 
@@ -81,7 +76,14 @@ export const login = async (req, res, next) => {
         const consultarUsuario = await getUsuarioService(req.body.id)
 
         if (!consultarUsuario.ok) {
-            res.status(404).json(consultarUsuario)
+            return res.status(404).json(consultarUsuario)
+        }
+
+        if (!consultarUsuario.data.estado) {
+            return res.status(404).json({
+                ok: false,
+                message: 'Usuario inhabilitado'
+            })
         }
 
         const dataUsuario = consultarUsuario.data.dataValues
@@ -89,7 +91,7 @@ export const login = async (req, res, next) => {
         const isMatchPassword = await bcrypt.compare(req.body.password, dataUsuario.password)
 
         if (!isMatchPassword || (dataUsuario.RolId !== req.body.RolId)) {
-            res.status(404).json({
+            return res.status(404).json({
                 ok: false,
                 message: 'Credenciales inválidos'
             })

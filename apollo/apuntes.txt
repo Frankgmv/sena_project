@@ -11,10 +11,9 @@ TODO agregar lo de del historial y notificaciones en controladores importantes c
 
 TODO enlazar esto con el login de los usuarios activos que hacer acciones, obtener el id y así generer los historiales y notificaciones
 
-TODO crear un enpoint para limpiar o borrar imagenes que no esten asociadas en la base de datos
-
 TODO agregar enviar emails
 
+<<<<<<< HEAD
 - validar el estado en el login
 - validar que no modifiquen el rector
 - recuperacion de password
@@ -48,9 +47,15 @@ Vistas 👁️
 Historial => 📖
 Notificaci => 🔔
 
+=======
+>>>>>>> f7a32f777fa46834027a4887b54874398c4c3f43
 /////////////// Errores ///////////////
 
 validar al eliminar usuarios que no tengan cosas en otras pastes en el delete
 crear un validador en el usuario que sea diferente a id del rector o del wm, solo si es este mismo en el put y delete
 
 validar en el login que el usuario que quiere acceder su estado este en true
+
+Recuperacion de contraseñas de los usuarios
+
+validar la data del rector

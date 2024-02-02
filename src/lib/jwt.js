@@ -2,12 +2,12 @@ import jwt from 'jsonwebtoken'
 import { config } from 'dotenv'
 
 config()
-export function createTokenAccess(payLoad) {
+export function createTokenAccess(payLoad, time = '1d') {
     return new Promise((resolve, reject) => {
         jwt.sign(
             payLoad,
             process.env.SECRET_KEY_TOKEN, {
-                expiresIn: '1d'
+                expiresIn: time
             },
             (err, token) => {
                 if (err) {
@@ -26,7 +26,7 @@ export function validarToken(payLoad) {
                 payLoad,
                 process.env.SECRET_KEY_TOKEN,
                 (err, token) => {
-                    if (err) reject('credenciales vencidas o inválidas (JWT)')
+                    if (err) reject('Credenciales expiradas o inválidas')
                     resolve(token)
                 }
             )

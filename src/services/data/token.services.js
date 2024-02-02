@@ -4,6 +4,7 @@ import Usuario from '../../models/data/usuario.js'
 import t from '../../helpers/transacciones.js'
 import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import bcrypt from 'bcryptjs'
+
 const saltos = bcrypt.genSaltSync(10)
 
 export const postTokenService = (data) => {
@@ -81,10 +82,11 @@ export const getAllTokenService = () => {
         }
     })
 }
-export const getTokenService = (idToken) => {
+
+export const getTokenService = (documento) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const token = await Token.findByPk(idToken)
+            const token = await Token.findByPk(documento)
 
             if (!token) {
                 return resolve({
@@ -103,6 +105,34 @@ export const getTokenService = (idToken) => {
         }
     })
 }
+
+export const getTokenByKeyService = (tokenKey) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const token = await Token.findOne({
+                where: {
+                    tokenKey: tokenKey
+                }
+            })
+
+            if (!token) {
+                return resolve({
+                    ok: false,
+                    message: 'Token no encontrado'
+                })
+            }
+
+            resolve({
+                ok: true,
+                message: 'Token obtenido',
+                data: token
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 export const getTokenKeyService = (tokenKey) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -130,10 +160,10 @@ export const getTokenKeyService = (tokenKey) => {
     })
 }
 
-export const putTokenService = (idToken, data) => {
+export const putTokenService = (documento, data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const encontrarToken = await Token.findByPk(idToken)
+            const encontrarToken = await Token.findByPk(documento)
 
             if (data.id) {
                 delete data.id
@@ -180,15 +210,23 @@ export const putTokenService = (idToken, data) => {
         }
     })
 }
-export const deleteTokenService = (idToken) => {
+
+export const deleteTokenService = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const tokenEliminado = await Token.findByPk(idToken)
+            const tokenEliminado = await Token.findByPk(id)
 
             if (!tokenEliminado) {
                 return resolve({
                     ok: false,
                     message: 'Token no encontrado'
+                })
+            }
+
+            if (tokenEliminado.tokenKey === 'CL_ESPECIAL') {
+                return resolve({
+                    ok: false,
+                    message: 'Token inmutable'
                 })
             }
 

@@ -1,3 +1,4 @@
+import { deleteDetallePermisosByDocumentoService } from '../../services/data/detallePermiso.services.js'
 import { deleteUsuarioService, getAllUsuariosService, getUsuarioService, postUsuarioService, putUsuarioService
 } from '../../services/data/usuario.services.js'
 import { postNotificacionService } from '../../services/informacion/notificacion.services.js'
@@ -68,6 +69,7 @@ export const putUsuario = async (req, res, next) => {
 
 export const deleteUsuario = async (req, res, next) => {
     try {
+        await deleteDetallePermisosByDocumentoService(req.params.id)
         const usuarioEliminado = await deleteUsuarioService(req.params.id)
 
         res.json(usuarioEliminado)

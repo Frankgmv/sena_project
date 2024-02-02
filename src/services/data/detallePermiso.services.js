@@ -6,20 +6,20 @@ import Usuario from '../../models/data/usuario.js'
 export const postDetallePermisoDefaultService = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const consultarDetallePermiso = await DetallePermiso.findAll({
-                where: {
-                    PermisoId: data[0].PermisoId
-                }
-            })
-
-            if (consultarDetallePermiso.length !== 0) {
-                return resolve({
-                    ok: false,
-                    message: 'Permiso por defecto ya asignado'
+            for (const detalle of data) {
+                const consultarDetallePermiso = await DetallePermiso.findOne({
+                    where: {
+                        [Op.and]:{
+                            PermisoId: detalle.PermisoId,
+                            UsuarioId: detalle.UsuarioId
+                        }
+                    }
                 })
-            }
 
-            for (let detalle of data) {
+                if (consultarDetallePermiso) {
+                    continue
+                }
+
                 await DetallePermiso.create(detalle)
             }
 
@@ -107,6 +107,37 @@ export const getDetallePermisosByDocumentoService = (idUsuario) => {
     })
 }
 
+export const deleteDetallePermisosByDocumentoService = (documento) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const consultarDetallePermiso = await DetallePermiso.findAll({
+                where: {
+                    [Op.or]:{
+                        UsuarioId: documento || null
+                    }
+                }
+            })
+
+            if (consultarDetallePermiso.length === 0) {
+                return resolve({
+                    ok: false,
+                    message: 'Permisos de Usuario no encontrados'
+                })
+            }
+
+            for (const permiso of consultarDetallePermiso) {
+                await permiso.destroy()
+            }
+
+            resolve({
+                ok: true,
+                message: 'Permisos de usuario eliminados'
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 export const deleteDetallePermisosService = (idDetallePermiso) => {
     return new Promise(async (resolve, reject) => {
         try {

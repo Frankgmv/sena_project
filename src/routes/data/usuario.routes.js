@@ -11,6 +11,6 @@ usuarioRouter.get('/usuarios', authRutas, validarPermisos('P_USUARIOS'), getAllU
 usuarioRouter.get('/usuarios/:id', authRutas, validarPermisos('P_USUARIOS'), getUsuario)
 usuarioRouter.post('/usuarios', authRutas, validarPermisos('P_USUARIOS'), validateSchema(usuarioSchema), postUsuario)
 usuarioRouter.put('/usuarios/:id', authRutas, validarPermisos('P_USUARIOS'), validateSchema(usuarioPutSchema), putUsuario)
-usuarioRouter.delete('/usuarios/:id', authRutas, validarPermisos('P_USUARIOS'), deleteUsuario)
+usuarioRouter.delete('/usuarios/:id', authRutas, validarPermisos('P_ADMIN'), deleteUsuario)
 
 export default usuarioRouter

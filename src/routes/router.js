@@ -31,6 +31,7 @@ import credencialesRouter from './validacion/credenciales.routes.js'
 
 // TODO eliminar borrar DB
 import { deleteTables } from '../controllers/test.js'
+import recuperacionRouter from './validacion/recuperacion.routes.js'
 
 const router = Router()
 
@@ -67,6 +68,9 @@ router.use('/informacion',
 
 // Une todas las rutas de la carpeta validacion
 router.use('/validacion', credencialesRouter)
+
+// Recuperacion de contraseña
+router.use('/recuperacion', recuperacionRouter)
 
 // TODO eliminar ruta al terminar
 router.post('/reset-database', deleteTables)

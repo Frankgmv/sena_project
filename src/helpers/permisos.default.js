@@ -48,7 +48,6 @@ export const postDetallePermisoDefault = async (data) => {
         try {
             // id = Cedula usuario, RolId
             const detallesPermisosDefault = await organizarDetallePermisosDefault(data)
-
             if (!detallesPermisosDefault.ok) {
                 return resolve(detallesPermisosDefault)
             }

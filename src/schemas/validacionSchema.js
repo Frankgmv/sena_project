@@ -61,3 +61,35 @@ RolId: z.number({
     invalid_type_error: 'El id_rol es un número'
 })
 })
+
+export const crearRecuperacionSchema = z.object({
+    id: z.number({
+        required_error: 'El documento es requerido',
+        invalid_type_error: 'El documento es un número'
+    }).min(10000000, 'El documento debe contener 8 carácteres mínimo')
+    .max(10000000000, 'El documento debe contener 10 carácteres máximo'),
+    correo: z.string({
+        required_error: 'El Correo es requerido',
+        invalid_type_error: 'El Correo debe ser un texto'
+    }).max(100, 'El Correo debe tener máximo 50 carácteres')
+})
+
+export const validacionRecuperacionSchema = z.object({
+    id: z.number({
+        required_error: 'El documento es requerido',
+        invalid_type_error: 'El documento es un número'
+    }).min(10000000, 'El documento debe contener 8 carácteres mínimo')
+    .max(10000000000, 'El documento debe contener 10 carácteres máximo'),
+    token: z.string({
+        required_error: 'El token es obligatorio',
+        invalid_type_error: 'El tipo de dato es inválido'
+    })
+})
+
+export const cambiarPassword = z.object({
+    password: z.string({
+        required_error: 'La contraseña es requerida',
+        invalid_type_error: 'La contraseña debe ser un texto'
+    }).min(8, 'La contraseña debe tener mínimo 8 carácteres')
+    .max(50, 'La contraseña debe tener máximo 50 carácteres')
+})

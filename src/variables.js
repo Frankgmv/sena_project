@@ -48,7 +48,7 @@ const claveEspecial = {
     'nombre' : 'Clave Especial',
     'tokenKey' : 'CL_ESPECIAL',
     'tiempo' : 24,
-    'UsuarioId' : 1112131415
+    'UsuarioId' : process.env.ID_WM
 }
 
 const permisos = [{

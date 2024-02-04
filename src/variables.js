@@ -11,15 +11,15 @@ export const tiposPermitidos = ['image/png', 'image/jpeg', 'image/jpg']
 
 export const ArchivosPermitidos = ['application/pdf']
 
-const permisosKeyEstudianteEspecial = [ 'P_MENU', 'P_GALERIA', 'P_GOBIERNO', 'P_ESTUDIANTES', 'P_MAGAZINE', 'P_NOTICIAS' ]
+const permisosKeyEstudianteEspecial = [ 'P_MENU', 'P_GALERIA', 'P_MAGAZINE', 'P_ANUNCIOS', 'P_NOTICIAS' ]
 
-const permisosKeyDocente = [ ...permisosKeyEstudianteEspecial, 'P_BLOGS', 'P_ANUNCIOS', 'P_PLATFORMAS_ACADEMICAS', 'P_NOTIFICACIONES' ]
+const permisosKeyDocente = [ ...permisosKeyEstudianteEspecial, 'P_ANUNCIOS', 'P_NOTIFICACIONES' ]
 
-const permisosKeyPersonalAdministrador = [ 'P_MENU', 'P_SLIDER', 'P_VIDEOS', 'P_ANUNCIOS', 'P_GOBIERNO', 'P_ESTUDIANTES', 'P_NOTICIAS', 'P_NOTIFICACIONES', 'P_USUARIOS' ]
+const permisosKeyPersonalAdministrador = [ 'P_MENU', 'P_SLIDER', 'P_VIDEOS', 'P_ANUNCIOS', 'P_NOTICIAS', 'P_NOTIFICACIONES', 'P_USUARIOS' ]
 
-const permisosKeyCoordinador = [ ...permisosKeyPersonalAdministrador, 'P_GALERIA', 'P_BLOGS', 'P_MAGAZINE', 'P_HISTORIAL', 'P_PLATFORMAS_ACADEMICAS', 'P_NOTIFICACIONES' ]
+const permisosKeyCoordinador = [ ...permisosKeyPersonalAdministrador, 'P_GALERIA', 'P_MAGAZINE', 'P_HISTORIAL', 'P_NOTIFICACIONES' ]
 
-const permisosKeyWM = [ 'P_ADMIN', 'P_SLIDER', 'P_HISTORIAL', 'P_ANUNCIOS', 'P_MENU', 'P_GALERIA', 'P_VIDEOS', 'P_MAGAZINE', 'P_PQRS', 'P_BLOGS', 'P_GOBIERNO', 'P_ESTUDIANTES', 'P_PLATFORMAS_ACADEMICAS', 'P_NOTICIAS', 'P_LINKS', 'P_NOTIFICACIONES', 'P_CLAVE_ESPECIAL', 'P_USUARIOS' ]
+const permisosKeyWM = [ 'P_ADMIN', 'P_SLIDER', 'P_HISTORIAL', 'P_ANUNCIOS', 'P_MENU', 'P_GALERIA', 'P_VIDEOS', 'P_MAGAZINE', 'P_PQRS', 'P_NOTICIAS', 'P_LINKS', 'P_NOTIFICACIONES', 'P_CLAVE_ESPECIAL', 'P_USUARIOS' ]
 
 export const variablesPermisos = {
     EST_E: permisosKeyEstudianteEspecial,
@@ -80,27 +80,11 @@ const permisos = [{
     'permisoKey': 'P_MAGAZINE'
 },
 {
-    'permiso': 'Blogs',
-    'permisoKey': 'P_BLOGS'
-},
-{
-    'permiso': 'Gobierno Escolar',
-    'permisoKey': 'P_GOBIERNO'
-},
-{
-    'permiso': 'Estudiantes',
-    'permisoKey': 'P_ESTUDIANTES'
-},
-{
-    'permiso': 'Plataformas Acádemicas',
-    'permisoKey': 'P_PLATFORMAS_ACADEMICAS'
-},
-{
     'permiso': 'Noticias',
     'permisoKey': 'P_NOTICIAS'
 },
 {
-    'permiso': 'Link de Archivos y direcciones',
+    'permiso': 'Link de Archivos PDFs y Plataformas acádemicas',
     'permisoKey': 'P_LINKS'
 },
 {

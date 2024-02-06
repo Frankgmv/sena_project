@@ -18,7 +18,7 @@ export const upload = multer({
     storage: multer.memoryStorage()
 })
 
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?])[a-zA-Z0-9!@#$%^&*?]{8,}$/
 

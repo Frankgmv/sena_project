@@ -4,6 +4,7 @@ import { getUsuarioService, putUsuarioService } from '../../services/data/usuari
 import { deleteTokenService, getTokenByKeyService, postTokenService } from '../../services/data/token.services.js'
 import 'colors'
 import { createTokenAccess, validarToken } from '../../lib/jwt.js'
+import { enviarEmail } from '../../lib/nodemailer.js'
 
 export const postCrearCodigo = async (req, res, next) => {
     try {
@@ -11,7 +12,7 @@ export const postCrearCodigo = async (req, res, next) => {
         if (!validarEmail(correo)) {
             return res.status(400).json({
                 ok: false,
-                message: 'Correo inválido'
+                message: 'Correo inválido, solo recibe @gmail.com'
             })
         }
 
@@ -35,9 +36,12 @@ export const postCrearCodigo = async (req, res, next) => {
             tiempo: '1d',
             UsuarioId: consultarUsuario.data.id
         }
-        console.log(`${dataToken.token}`.yellow)
-        let eliminarToken
 
+        const messageEmail = `Recuperación de cuenta.\n \n \t \t Este es tu código de Recuperacion:  ${dataToken.token} \n \n Si tienes problemas con el código de recuperación puedes intentar nuevamente. \n Continua sin funcionar, puedes contactar con el administrador.`
+
+        await enviarEmail(messageEmail, consultarUsuario.data.correo, '[I. E. Centenario de Pereira] Recuperación de cuenta')
+
+        let eliminarToken
         const existeToken = await getTokenByKeyService(dataToken.tokenKey)
 
         if (existeToken.ok) {

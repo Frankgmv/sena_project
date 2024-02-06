@@ -1,10 +1,22 @@
 import Pqrs from '../../models/informacion/pqrs.js'
 import t from '../../helpers/transacciones.js'
 import { TransactionError } from '../../middlewares/fabricaErrores.js'
+import { enviarEmail } from '../../lib/nodemailer.js'
+import { config } from 'dotenv'
+import { validarEmail } from '../../helpers/includes.js'
+
+config()
 
 export function postPqrsService(pqrsData) {
     return new Promise(async (resolve, reject) => {
         try {
+            if (!validarEmail(pqrsData.correo)) {
+                return resolve({
+                    ok: false,
+                    message: `Correo ${pqrsData.correo} inválido, solo recibe @gmail.com`
+                })
+            }
+
             // Transaccion
             let transaccion = await t.create()
 
@@ -25,7 +37,11 @@ export function postPqrsService(pqrsData) {
                 })
             }
 
+            const messageEmail = `Nuevo PQRS en Bandeja.\n \n \t Te llego un/una ${pqrsData.tipo} de:  ${pqrsData.nombre} \n \n Mensaje. \n \n \t  ${pqrsData.mensaje}`
+
             await t.commit(transaccion.data)
+            await enviarEmail(messageEmail, process.env.EMAIL_USER, '[I. E. Centenario de Pereira] Nuevo PQRS en plataforma')
+
             resolve({
                 ok: true,
                 message: 'Pqrs registrado'
@@ -52,6 +68,28 @@ export function getAllPqrsService() {
                 ok: true,
                 message: 'Lista de Pqrs',
                 data: getAllPqrs
+            })
+        } catch (err) {
+            reject(err)
+        }
+    })
+}
+
+export function getPqrsService(idPqrs) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const getPqrs = await Pqrs.findByPk(idPqrs)
+
+            if (!getPqrs) {
+                return resolve({
+                    ok: false,
+                    message: 'No se encontró ningún dato'
+                })
+            }
+            resolve({
+                ok: true,
+                message: 'Datos de Pqrs',
+                data: getPqrs
             })
         } catch (err) {
             reject(err)
@@ -103,29 +141,6 @@ export function putPqrsService(idPqrs) {
         }
     })
 }
-
-export function getPqrsService(idPqrs) {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const getPqrs = await Pqrs.findByPk(idPqrs)
-            if (!getPqrs) {
-                return resolve({
-                    ok: false,
-                    message: 'No se encontró ningún dato'
-                })
-            } else {
-                resolve({
-                    ok: true,
-                    message: 'Datos de Pqrs',
-                    data: getPqrs
-                })
-            }
-        } catch (err) {
-            reject(err)
-        }
-    })
-}
-
 export function deletePqrsService(idPqrs) {
     return new Promise(async (resolve, reject) => {
         try {

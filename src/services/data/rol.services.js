@@ -49,6 +49,13 @@ export const putRolService = (idRol, data) => {
                 delete data.id
             }
 
+            if (ActualizarRol.rolKey === 'WM') {
+                return resolve({
+                    ok: false,
+                    mensage: 'Rol inmutable'
+                })
+            }
+
             if (!ActualizarRol) {
                 return resolve({
                     ok: false,

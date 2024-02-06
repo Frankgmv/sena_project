@@ -27,7 +27,7 @@ const Pqrs = sequelize.define('Pqrs', {
         allowNulls: false
     },
     mensaje: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNulls: false
     },
     estado: {

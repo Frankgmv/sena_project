@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 import { getTokenKeyService } from '../../services/data/token.services.js'
 import { getUsuarioService, postUsuarioService } from '../../services/data/usuario.services.js'
 import { createTokenAccess, validarToken } from '../../lib/jwt.js'
+import { getRolService } from '../../services/data/rol.services.js'
 
 export const postRegistro = async (req, res, next) => {
     try {
@@ -83,6 +84,15 @@ export const login = async (req, res, next) => {
             return res.status(404).json({
                 ok: false,
                 message: 'Usuario inhabilitado'
+            })
+        }
+
+        const consultarRol = await getRolService(consultarUsuario.data.RolId)
+
+        if (!consultarRol.data.estado) {
+            return res.status(404).json({
+                ok: false,
+                message: `De deshabilito temporalmente el rol ${consultarRol.data.rol}`
             })
         }
 

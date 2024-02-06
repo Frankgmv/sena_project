@@ -53,7 +53,7 @@ export const postUsuarioService = (data) => {
             if (!validarEmail(email)) {
                 return resolve({
                     ok: false,
-                    message: `Correo ${email} es inválido`
+                    message: `Correo ${email} es inválido, solo recibe @gmail.com`
                 })
             }
 
@@ -212,7 +212,7 @@ export const putUsuarioService = (idUser, data) => {
                 if (!validarEmail(data.correo)) {
                     return resolve({
                         ok: false,
-                        message: `Correo ${data.correo} es inválido`
+                        message: `Correo ${data.correo} es inválido, solo recibe @gmail.com`
                     })
                 }
             }

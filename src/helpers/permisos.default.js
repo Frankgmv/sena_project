@@ -4,7 +4,7 @@ import { getRolService } from '../services/data/rol.services.js'
 import { getUsuarioService } from '../services/data/usuario.services.js'
 import { variablesPermisos } from '../variables.js'
 
-const organizarDetallePermisosDefault = async (data) => {
+export const organizarDetallePermisosDefault = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             const { RolId, id: idUsuario } = data
@@ -28,7 +28,8 @@ const organizarDetallePermisosDefault = async (data) => {
                 if (variablesPermisos[rol.rolKey].includes(permiso.permisoKey)) {
                     permisoAsignados.push({
                         PermisoId: permiso.id,
-                        UsuarioId: idUsuario
+                        UsuarioId: idUsuario,
+                        permisoKey: permiso.permisoKey
                     })
                 }
             })

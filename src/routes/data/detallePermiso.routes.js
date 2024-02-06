@@ -10,6 +10,6 @@ const detallePermisoRouter = Router()
 
 detallePermisoRouter.get('/detalle-permisos/:idUsuario', authRutas, validarPermisos('P_ADMIN'), getDetallePermisosByDocumento)
 detallePermisoRouter.post('/detalle-permisos', authRutas, validarPermisos('P_ADMIN'), validateSchema(detallePermisoSchema), postDetallePermiso)
-detallePermisoRouter.delete('/detalle-permisos/:idDetallePermiso', authRutas, deleteDetallePermisos)
+detallePermisoRouter.delete('/detalle-permisos/:idDetallePermiso', authRutas, validarPermisos('P_ADMIN'), deleteDetallePermisos)
 
 export default detallePermisoRouter

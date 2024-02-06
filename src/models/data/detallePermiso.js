@@ -20,7 +20,7 @@ const DetallePermiso = sequelize.define('DetallePermiso', {
 })
 
 // Definir relaciones
-Usuario.belongsToMany(Permiso, { through: DetallePermiso, foreignKey: 'UsuarioId' })
+Usuario.belongsToMany(Permiso, { through: DetallePermiso, foreignKey: 'UsuarioId', as : 'permisos' })
 Permiso.belongsToMany(Usuario, { through: DetallePermiso, foreignKey: 'PermisoId',  as :'permisoEntity' })
 
 setTimeout(async () => {

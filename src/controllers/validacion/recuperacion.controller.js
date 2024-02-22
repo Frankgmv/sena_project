@@ -96,7 +96,12 @@ export const postValidarCodigo = async (req, res, next) => {
 
         // Crear Cookie
         const recuperar = await createTokenAccess({ token }, '1h')
-        res.cookie('recuperar', recuperar)
+        res.cookie('recuperar', recuperar, {
+            path:'/',
+            httpOnly: true,
+            sucure: true,
+            maxAge: 3600000
+        })
 
         res.status(200).json({
             ok: true,

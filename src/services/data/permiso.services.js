@@ -41,7 +41,7 @@ export const postPermisoService = async (data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                mensage: 'Permiso creado'
+                message: 'Permiso creado'
             })
         } catch (error) {
             reject(error)

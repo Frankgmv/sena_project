@@ -9,7 +9,7 @@ export const getAllRolesService = () => {
 
             resolve({
                 ok: true,
-                mensage: 'Lista de roles',
+                message: 'Lista de roles',
                 data: roles
             })
         } catch (error) {
@@ -25,13 +25,13 @@ export const getRolService = (idRol) => {
             if (!rol) {
                 return resolve({
                     ok: false,
-                    mensage: `Rol no encontrado`
+                    message: `Rol no encontrado`
                 })
             }
 
             resolve({
                 ok: true,
-                mensage: 'Rol obtenido',
+                message: 'Rol obtenido',
                 data: rol
             })
         } catch (error) {
@@ -52,14 +52,14 @@ export const putRolService = (idRol, data) => {
             if (ActualizarRol.rolKey === 'WM') {
                 return resolve({
                     ok: false,
-                    mensage: 'Rol inmutable'
+                    message: 'Rol inmutable'
                 })
             }
 
             if (!ActualizarRol) {
                 return resolve({
                     ok: false,
-                    mensage: 'Rol no encontrado'
+                    message: 'Rol no encontrado'
                 })
             }
 

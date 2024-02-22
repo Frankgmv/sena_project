@@ -31,7 +31,7 @@ export const postLinkService = (data) => {
             if (!existeUsuario || !existeCategoria || !existeSeccion) {
                 return resolve({
                     ok: false,
-                    mensage: 'Hubo un error con el Usuario, la Categoria o la Seccion',
+                    message: 'Hubo un error con el Usuario, la Categoria o la Seccion',
                     pathError: ['CategoriaId', 'UsuarioId', 'SeccionId']
                 })
             }

@@ -108,8 +108,12 @@ export const login = async (req, res, next) => {
         }
 
         const accessToken = await createTokenAccess(dataUsuario)
-        res.cookie('accessToken', accessToken)
-        res.status(200).json({
+        res.setHeader('Authentication', `Bearer ${accessToken}; Max-Age=${86000000}`)
+        .cookie('accessToken', accessToken, {
+            path:'/',
+            httpOnly: true,
+            maxAge: 3600000 * 24
+        }).status(200).json({
             ok: true,
             message: 'Bienvenido'
         })
@@ -119,9 +123,7 @@ export const login = async (req, res, next) => {
 }
 
 export const verificarToken = async (req, res, next) => {
-    const {
-        accessToken
-    } = req.cookies
+    const { accessToken } = req.cookies
 
     if (!accessToken) {
         return res.status(401).json({

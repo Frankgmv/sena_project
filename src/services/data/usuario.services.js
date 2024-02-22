@@ -37,7 +37,7 @@ export const postUsuarioService = (data) => {
             if (!existeRol) {
                 return resolve({
                     ok: false,
-                    mensage: 'Rol no encontrado'
+                    message: 'Rol no encontrado'
                 })
             }
 
@@ -69,7 +69,7 @@ export const postUsuarioService = (data) => {
             if (!esMayorDe15(fechaNacimiento)) {
                 return resolve({
                     ok: false,
-                    mensage: 'No eres mayor de 15 años'
+                    message: 'No eres mayor de 15 años'
                 })
             }
 
@@ -202,7 +202,7 @@ export const putUsuarioService = (idUser, data) => {
                 if (!existeRol) {
                     return resolve({
                         ok: false,
-                        mensage: 'Rol no encontrado'
+                        message: 'Rol no encontrado'
                     })
                 }
             }

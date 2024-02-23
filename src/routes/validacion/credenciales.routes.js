@@ -11,5 +11,13 @@ credencialesRouter.post('/registro', validateSchema(registroSchema), postRegistr
 credencialesRouter.post('/logout', logout)
 credencialesRouter.get('/verificar', verificarToken)
 credencialesRouter.get('/perfil', authRutas, perfil)
+credencialesRouter.get('/test', (req, res, next) => {
+    try {
+        res.cookie('test', 'valor cookie para token')
+        .status(200).json({ message: 'Creado' })
+    } catch (error) {
+        next(error)
+    }
+})
 
 export default credencialesRouter

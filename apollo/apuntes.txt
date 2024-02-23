@@ -2,10 +2,6 @@
 
 TODO Buscar la manera de como resetear los campos de las vistapordia y por mes cada tiempo
 
-TODO agregar enviar emails
-
-TODO validar al eliminar usuarios que no tengan cosas en otras pastes en el delete
-
 /////////////////////////////////////////////////////////
 
 

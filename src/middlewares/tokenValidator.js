@@ -4,7 +4,7 @@ import { config } from 'dotenv'
 config()
 
 export const authRutas = async (req, res, next) => {
-    const { accessToken } = req.cookies
+    const { accessToken } = req.cookies || req.query
 
     if (!accessToken) {
         return res.status(401).json({

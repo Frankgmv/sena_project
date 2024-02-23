@@ -99,13 +99,11 @@ export const postValidarCodigo = async (req, res, next) => {
         res.cookie('recuperar', recuperar, {
             path:'/',
             httpOnly: true,
-            sucure: true,
             maxAge: 3600000
-        })
-
-        res.status(200).json({
+        }).status(200).json({
             ok: true,
-            message: 'insertar nueva contraseña'
+            message: 'insertar nueva contraseña',
+            cookie:recuperar
         })
     } catch (error) {
         next(error)

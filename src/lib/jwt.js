@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { config } from 'dotenv'
 
 config()
-export function createTokenAccess(payLoad, time = '1d') {
+export function createTokenAccess(payLoad, time = '12h') {
     return new Promise((resolve, reject) => {
         jwt.sign(
             payLoad,

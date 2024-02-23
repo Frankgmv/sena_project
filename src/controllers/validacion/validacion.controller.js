@@ -1,8 +1,18 @@
 import bcrypt from 'bcryptjs'
-import { getTokenKeyService } from '../../services/data/token.services.js'
-import { getUsuarioService, postUsuarioService } from '../../services/data/usuario.services.js'
-import { createTokenAccess, validarToken } from '../../lib/jwt.js'
-import { getRolService } from '../../services/data/rol.services.js'
+import {
+    getTokenKeyService
+} from '../../services/data/token.services.js'
+import {
+    getUsuarioService,
+    postUsuarioService
+} from '../../services/data/usuario.services.js'
+import {
+    createTokenAccess,
+    validarToken
+} from '../../lib/jwt.js'
+import {
+    getRolService
+} from '../../services/data/rol.services.js'
 
 export const postRegistro = async (req, res, next) => {
     try {
@@ -108,22 +118,25 @@ export const login = async (req, res, next) => {
         }
 
         const accessToken = await createTokenAccess(dataUsuario)
-        res.setHeader('Authentication', `Bearer ${accessToken}; Max-Age=${86000000}`)
-        .cookie('accessToken', accessToken, {
-            path:'/',
-            httpOnly: true,
-            maxAge: 3600000 * 24
-        }).status(200).json({
-            ok: true,
-            message: 'Bienvenido'
-        })
+            res.cookie('accessToken', accessToken, {
+                path: '/',
+                httpOnly: true,
+                maxAge: 23 * 60 * 60 * 1000
+            })
+            .status(200).json({
+                ok: true,
+                message: 'Bienvenido',
+                cookie: accessToken
+            })
     } catch (error) {
         next(error)
     }
 }
 
 export const verificarToken = async (req, res, next) => {
-    const { accessToken } = req.cookies
+    const {
+        accessToken
+    } = req.cookies
 
     if (!accessToken) {
         return res.status(401).json({
@@ -158,6 +171,7 @@ export const perfil = async (req, res, next) => {
         if (!usuario) {
             return res.status(400).json(usuario)
         }
+
         if (usuario.data.password) {
             usuario.data.password = 'dato privado'
             delete usuario.data.password

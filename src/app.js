@@ -27,7 +27,6 @@ app.get('/', (req, res) => {
     res.json(rutas)
 })
 
-// TODO verificar que los errores se recogan bien cuando viene de zod y otras partes más ya que traen mucha más estructura
 app.use(manejadorErrores)
 
 export default app

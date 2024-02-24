@@ -1,18 +1,8 @@
 import bcrypt from 'bcryptjs'
-import {
-    getTokenKeyService
-} from '../../services/data/token.services.js'
-import {
-    getUsuarioService,
-    postUsuarioService
-} from '../../services/data/usuario.services.js'
-import {
-    createTokenAccess,
-    validarToken
-} from '../../lib/jwt.js'
-import {
-    getRolService
-} from '../../services/data/rol.services.js'
+import { getTokenKeyService } from '../../services/data/token.services.js'
+import { getUsuarioService, postUsuarioService } from '../../services/data/usuario.services.js'
+import { createTokenAccess, validarToken } from '../../lib/jwt.js'
+import { getRolService } from '../../services/data/rol.services.js'
 
 export const postRegistro = async (req, res, next) => {
     try {
@@ -84,6 +74,7 @@ export const logout = (req, res, next) => {
 
 export const login = async (req, res, next) => {
     try {
+        console.log(req.headers)
         const consultarUsuario = await getUsuarioService(req.body.id)
 
         if (!consultarUsuario.ok) {
@@ -102,7 +93,7 @@ export const login = async (req, res, next) => {
         if (!consultarRol.data.estado) {
             return res.status(404).json({
                 ok: false,
-                message: `De deshabilito temporalmente el rol ${consultarRol.data.rol}`
+                message: `Deshabilito temporalmente el rol ${consultarRol.data.rol}`
             })
         }
 
@@ -118,25 +109,23 @@ export const login = async (req, res, next) => {
         }
 
         const accessToken = await createTokenAccess(dataUsuario)
-            res.cookie('accessToken', accessToken, {
-                path: '/',
-                httpOnly: true,
-                maxAge: 23 * 60 * 60 * 1000
-            })
-            .status(200).json({
-                ok: true,
-                message: 'Bienvenido',
-                cookie: accessToken
-            })
+        res.cookie('accessToken', accessToken, {
+            path: '/',
+            httpOnly: true,
+            maxAge: 23 * 60 * 60 * 1000
+        })
+        .status(200).json({
+            ok: true,
+            message: 'Bienvenido',
+            token: accessToken
+        })
     } catch (error) {
         next(error)
     }
 }
 
 export const verificarToken = async (req, res, next) => {
-    const {
-        accessToken
-    } = req.cookies
+    let { accessToken } = req.headers['Authorization'] || req.cookies
 
     if (!accessToken) {
         return res.status(401).json({

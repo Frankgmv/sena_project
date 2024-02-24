@@ -8,7 +8,7 @@ export const validarPermisos = (permisoKey) => async (req, res, next) => {
         const consultarPermisos = await getPermisoKeyService(permisoKey)
 
         if (!constularDetallesPermisos.ok || !consultarPermisos.ok) {
-            res.status(404).json({
+            return res.status(404).json({
                 ok: false,
                 message: 'Error de credencial'
             })
@@ -19,7 +19,7 @@ export const validarPermisos = (permisoKey) => async (req, res, next) => {
         })
 
         if (!permisoEsta) {
-            return res.status(200).json({
+            return res.status(403).json({
                 ok: false,
                 message: 'Accion no autorizada'
             })

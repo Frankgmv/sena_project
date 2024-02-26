@@ -10,7 +10,7 @@ export const postVideoService = (data) => {
             const existeUsuario = await Usuario.findByPk(data.UsuarioId)
             if (!existeUsuario) {
                 return resolve({
-                    ok: true,
+                    ok: false,
                     message: 'Usuario no encontrado'
                 })
             }

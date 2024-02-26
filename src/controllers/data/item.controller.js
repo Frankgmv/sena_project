@@ -127,7 +127,7 @@ export const putItem = async (req, res, next) => {
 
         const validarSchemaResponse = validateSchemaInto(putItemSchema, bodyBuild)
         if (validarSchemaResponse.issues) {
-            return res.status(400).json(validarSchemaResponse)
+            return res.status(400).json({error:true, zodError:validarSchemaResponse})
         }
 
         let image = req.file

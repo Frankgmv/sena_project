@@ -55,6 +55,6 @@ export const historialSchema = z.object({
     }),
     UsuarioId:z.number({
         required_error:'UsuarioId es requerido',
-        invalid_type_error:'UsuarioId es un número'
+        invalid_type_error:'Usuario es un número'
     })
 })

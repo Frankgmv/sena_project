@@ -4,7 +4,7 @@
         "LICENSE":true,
         "package.json":true,
         ".gitignore":true,
-        "README.md":true,
+        "README.md":false,
         "package-lock.json":true,
         ".babelrc":true,
         ".esLintrc.json":false,

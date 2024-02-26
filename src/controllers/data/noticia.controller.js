@@ -22,7 +22,7 @@ export const postNoticia = async (req, res, next) => {
         // validar la schema para los datos
         const validarSchemaResponse = validateSchemaInto(noticiaShema, bodyBuild)
         if (validarSchemaResponse.issues) {
-            return res.status(400).json(validarSchemaResponse)
+            return res.status(400).json({error:true, zodError:validarSchemaResponse})
         }
 
         let image = req.file
@@ -135,7 +135,7 @@ export const putNoticia = async (req, res, next) => {
 
         const validarSchemaResponse = validateSchemaInto(putNoticiaShema, bodyBuild)
         if (validarSchemaResponse.issues) {
-            return res.status(400).json(validarSchemaResponse)
+            return res.status(400).json({error:true, zodError:validarSchemaResponse})
         }
 
         let image = req.file

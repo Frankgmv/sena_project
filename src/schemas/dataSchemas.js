@@ -175,7 +175,7 @@ export const putNoticiaShema = z.object({
     }).optional(),
     UsuarioId: z.number({
         required_error: 'El UsuarioId es requerido',
-        invalid_type_error: 'UsuarioId es un número'
+        invalid_type_error: 'Usuario es un número'
     }).min(1, 'El UsuarioId es requerido').optional()
 }).nullable()
 
@@ -199,7 +199,7 @@ export const linkSchema = z.object({
     }).max(6, 'Tipo muy largo (6 máx) '),
     UsuarioId: z.number({
         required_error: 'UsuarioId requerido',
-        invalid_type_error: 'UsuarioId es un número'
+        invalid_type_error: 'Usuario es un número'
     }),
     SeccionId: z.number({
         required_error: 'SeccionId requerido',
@@ -231,7 +231,7 @@ export const putLinkSchema = z.object({
     }).max(6, 'Tipo muy largo (6 máx) ').optional(),
     UsuarioId: z.number({
         required_error: 'UsuarioId requerido',
-        invalid_type_error: 'UsuarioId es un número'
+        invalid_type_error: 'Usuario es un número'
     }).optional(),
     SeccionId: z.number({
         required_error: 'SeccionId requerido',
@@ -279,7 +279,7 @@ export const putAnuncioSchema = z.object({
     }).max(1200).optional(),
     UsuarioId: z.number({
         required_error: 'UsuarioId requerido',
-        invalid_type_error: 'UsuarioId es un número'
+        invalid_type_error: 'Usuario es un número'
     }).optional(),
     SeccionId: z.string({
         required_error: 'SeccionId requerido',

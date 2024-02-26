@@ -74,7 +74,6 @@ export const logout = (req, res, next) => {
 
 export const login = async (req, res, next) => {
     try {
-        console.log(req.headers)
         const consultarUsuario = await getUsuarioService(req.body.id)
 
         if (!consultarUsuario.ok) {

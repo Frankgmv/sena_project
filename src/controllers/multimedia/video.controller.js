@@ -21,7 +21,7 @@ export const postVideo = async (req, res, next) => {
         let urlPath
         const validarSchemaResponse = validateSchemaInto(videoSchema, bodyBuild)
         if (validarSchemaResponse.issues) {
-            return res.status(400).json(validarSchemaResponse)
+            return res.status(400).json({error:true, zodError:validarSchemaResponse})
         }
 
         let image = req.file
@@ -117,7 +117,7 @@ export const putVideo = async (req, res, next) => {
 
         const validarSchemaResponse = validateSchemaInto(putVideoSchema, bodyBuild)
         if (validarSchemaResponse.issues) {
-            return res.status(400).json(validarSchemaResponse)
+            return res.status(400).json({error:true, zodError:validarSchemaResponse})
         }
 
         let image = req.file

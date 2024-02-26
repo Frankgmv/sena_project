@@ -27,7 +27,7 @@ export const postAnuncio = async (req, res, next) => {
 
         // Retornar errores si hay en la validacion de la shema
         if (validarSchemaResponse.issues) {
-            return res.status(400).json(validarSchemaResponse)
+            return res.status(400).json({error:true, zodError:validarSchemaResponse})
         }
 
         let image = req.file
@@ -145,7 +145,7 @@ export const putAnuncio = async (req, res, next) => {
 
         const validarSchemaResponse = validateSchemaInto(putAnuncioSchema, bodyBuild)
         if (validarSchemaResponse.issues) {
-            return res.status(400).json(validarSchemaResponse)
+            return res.status(400).json({error:true, zodError:validarSchemaResponse})
         }
 
         let image = req.file

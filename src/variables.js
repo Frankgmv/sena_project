@@ -51,6 +51,12 @@ const claveEspecial = {
     'UsuarioId' : process.env.ID_WM
 }
 
+const claveCorreoNodemailer = {
+    'correo' : process.env.EMAIL_USER,
+    'clave' : process.env.EMAIL_PASS,
+    'UsuarioId' : process.env.ID_WM
+}
+
 const permisos = [{
     'permiso': 'SUPER ADMIN',
     'permisoKey': 'P_ADMIN'
@@ -166,5 +172,6 @@ export const defaultVariables = {
     permisos,
     roles,
     secciones,
-    usuario
+    usuario,
+    claveCorreoNodemailer
 }

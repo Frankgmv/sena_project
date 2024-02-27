@@ -243,6 +243,18 @@ export const putLinkSchema = z.object({
     }).optional()
 }).nullable()
 
+export const credencialEmailSchema = z.object({
+    correo: z.string({
+        invalid_type_error: 'El correo es un texto que contiene @gmail.com'
+    }).optional(),
+    clave: z.string({
+        invalid_type_error: 'La clave de terceros es un texto'
+    }).optional(),
+    UsuarioId: z.number({
+        invalid_type_error: 'Usuario es un número'
+    }).optional()
+}).nullable()
+
 export const anuncioSchema  = z.object({
     titulo: z.string({
         required_error: 'titulo requerido',

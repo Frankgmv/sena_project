@@ -7,6 +7,14 @@ config()
 
 export const authRutas = async (req, res, next) => {
     const headers = req.headers['authorization']
+
+    if (!headers) {
+        return res.status(400).json({
+            ok: false,
+            message: 'No Token. Autorización Denegada'
+        })
+    }
+
     let token
     if (headers.startsWith('Bearer ')) {
         token = headers.split(' ')[1]
@@ -20,7 +28,7 @@ export const authRutas = async (req, res, next) => {
     if (!token) {
         return res.status(401).json({
             ok: false,
-            message: 'No Token. Autorization Denegada'
+            message: 'No Token. Autorización Denegada'
         })
     }
 

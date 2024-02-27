@@ -25,6 +25,7 @@ import tokenRouter from './data/token.routes.js'
 import usuarioRouter from './data/usuario.routes.js'
 import detallePermisoRouter from './data/detallePermiso.routes.js'
 import eventoRouter from './data/evento.routes.js'
+import credencialesEmail from './data/crendencialEmail.routes.js'
 
 // Rutas de validacion
 import credencialesRouter from './validacion/credenciales.routes.js'
@@ -56,6 +57,7 @@ router.use('/data',
     itemRouter,
     anuncioRouter,
     tokenRouter,
+    credencialesEmail
 )
 
 // Une todas las rutas de la carpeta informacion

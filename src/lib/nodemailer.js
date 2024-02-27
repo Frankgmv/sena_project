@@ -1,29 +1,42 @@
 import nodemailer from 'nodemailer'
-import {
-    config
-} from 'dotenv'
+import { config } from 'dotenv'
+import { getCredencialService } from '../services/data/credencial.services.js'
+import { CredencialError } from '../middlewares/fabricaErrores.js'
 
 config()
 
-export const configNodemailer = {
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    },
-    tls: {
-      rejectUnauthorized: false
+const getConfigNodemail = async () => {
+    const configNodemailer = {
+        host: 'smtp.gmail.com',
+        port: 587,
+        tls: {
+          rejectUnauthorized: false
+        }
     }
+
+    const dataEmails = await getCredencialService()
+
+    if (dataEmails.ok) {
+        let { correo, clave } = dataEmails.data
+        configNodemailer.auth = {
+            user: correo,
+            pass: clave
+        }
+    } else {
+        throw new CredencialError('Error al intentar obtener los credenciales')
+    }
+
+    return configNodemailer
 }
 
 export const enviarEmail = (text, email, subject = 'I. E. Centenario de Pereira') => {
     return new Promise(async (resolve, reject) => {
         try {
+            const configNodemailer = await getConfigNodemail()
             const transportData = nodemailer.createTransport(configNodemailer)
 
             const message = {
-                from: process.env.EMAIL_USER,
+                from: configNodemailer.auth.user,
                 to: email,
                 subject,
                 text

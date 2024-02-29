@@ -8,6 +8,7 @@ export const postVistas = async (req, res, next) => {
             'vistasMes':1,
             'vistasDia':1
         }
+
         const crearVista = await postVistasService(defaultVistas)
 
         if (crearVista.ok) {
@@ -16,7 +17,7 @@ export const postVistas = async (req, res, next) => {
             const updateVista = await putVistasService()
 
             res.json(updateVista)
-            if (!updateVista.ok) return res.status(500)
+            if (!updateVista.ok) return res.status(400)
             res.status(200)
         }
     } catch (err) {

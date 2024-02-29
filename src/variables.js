@@ -30,14 +30,14 @@ export const variablesPermisos = {
 }
 
 const categorias = [
-    {
-        'categoria':'Categoria Prueba',
-        'categoriaKey':'C_PRUEBA'
-    },
-    {
-        'categoria':'Categoria Prueba 2',
-        'categoriaKey':'C_PRUEBA2'
-    }
+    { 'categoria':'Preescolar', 'categoriaKey':'C_PREESCOLAR' },
+    { 'categoria':'Primaria', 'categoriaKey':'C_PRIMARIA' },
+    { 'categoria':'Bachillerato', 'categoriaKey':'C_BACHILLERATO' },
+    { 'categoria':'Orientación Escolar', 'categoriaKey':'C_ORIENTACION_ESCOLAR' },
+    { 'categoria':'Coordinación', 'categoriaKey':'C_COORDINACION' },
+    { 'categoria':'Rectoria', 'categoriaKey':'C_RECTORIA' },
+    { 'categoria':'Classroom', 'categoriaKey':'C_CLASSROOM' },
+    { 'categoria':'COLLAGE', 'categoriaKey':'C_COLLAGE' }
 ]
 
 const saltos = bcrypt.genSaltSync(10)
@@ -57,100 +57,46 @@ const claveCorreoNodemailer = {
     'UsuarioId' : process.env.ID_WM
 }
 
-const permisos = [{
-    'permiso': 'SUPER ADMIN',
-    'permisoKey': 'P_ADMIN'
-},
-{
-    'permiso': 'Slider de fotos',
-    'permisoKey': 'P_SLIDER'
-},
-{
-    'permiso': 'Anuncios',
-    'permisoKey': 'P_ANUNCIOS'
-},
-{
-    'permiso': 'Menú Innovación Educativa',
-    'permisoKey': 'P_MENU'
-},
-{
-    'permiso': 'Galeria y Eventos',
-    'permisoKey': 'P_GALERIA'
-},
-{
-    'permiso': 'Videos',
-    'permisoKey': 'P_VIDEOS'
-},
-{
-    'permiso': 'Magazine - Periodico Escolar',
-    'permisoKey': 'P_MAGAZINE'
-},
-{
-    'permiso': 'Noticias',
-    'permisoKey': 'P_NOTICIAS'
-},
-{
-    'permiso': 'Link de Archivos PDFs y Plataformas acádemicas',
-    'permisoKey': 'P_LINKS'
-},
-{
-    'permiso': 'Historial',
-    'permisoKey': 'P_HISTORIAL'
-},
-{
-    'permiso': 'PQRS',
-    'permisoKey': 'P_PQRS'
-},
-{
-    'permiso': 'Recibir Notificaciones',
-    'permisoKey': 'P_NOTIFICACIONES'
-},
-{
-    'permiso': 'Actualizar Clave Especial de registro',
-    'permisoKey': 'P_CLAVE_ESPECIAL'
-},
-{
-    'permiso': 'Editar informacion de usuarios',
-    'permisoKey': 'P_USUARIOS'
-}
+const permisos = [{ 'permiso': 'SUPER ADMIN', 'permisoKey': 'P_ADMIN' },
+{ 'permiso': 'Slider de fotos', 'permisoKey': 'P_SLIDER' },
+{ 'permiso': 'Anuncios', 'permisoKey': 'P_ANUNCIOS' },
+{ 'permiso': 'Menú Innovación Educativa', 'permisoKey': 'P_MENU' },
+{ 'permiso': 'Galeria y Eventos', 'permisoKey': 'P_GALERIA' },
+{ 'permiso': 'Videos', 'permisoKey': 'P_VIDEOS' },
+{ 'permiso': 'Magazine - Periodico Escolar', 'permisoKey': 'P_MAGAZINE' },
+{ 'permiso': 'Noticias', 'permisoKey': 'P_NOTICIAS' },
+{ 'permiso': 'Link de Archivos PDFs y Plataformas acádemicas', 'permisoKey': 'P_LINKS' },
+{ 'permiso': 'Historial', 'permisoKey': 'P_HISTORIAL' },
+{ 'permiso': 'PQRS', 'permisoKey': 'P_PQRS' },
+{ 'permiso': 'Recibir Notificaciones', 'permisoKey': 'P_NOTIFICACIONES' },
+{ 'permiso': 'Actualizar Clave Especial de registro', 'permisoKey': 'P_CLAVE_ESPECIAL' },
+{ 'permiso': 'Editar informacion de usuarios', 'permisoKey': 'P_USUARIOS' }
 ]
 
 const roles = [
-    {
-        'rol':'Estudiante Especial',
-        'rolKey':'EST_E'
-    },
-    {
-        'rol':'Docente',
-        'rolKey':'DOC'
-    },
-    {
-        'rol':'Personal Administrativo',
-        'rolKey':'P_ADM'
-    },
-    {
-        'rol':'Coordinador',
-        'rolKey':'COOR'
-    },
-    {
-        'rol':'Web Master',
-        'rolKey':'WM'
-    }
+    { 'rol':'Estudiante Especial', 'rolKey':'EST_E' },
+    { 'rol':'Docente', 'rolKey':'DOC' },
+    { 'rol':'Personal Administrativo', 'rolKey':'P_ADM' },
+    { 'rol':'Coordinador', 'rolKey':'COOR' },
+    { 'rol':'Web Master', 'rolKey':'WM' }
 ]
 
 const secciones = [
-    {
-        'seccion':'Prueba',
-        'seccionKey':'S_PRUEBA'
-    },
-    {
-        'seccion':'Prueba 2',
-        'seccionKey':'S_PRUEBA2'
-    },
-    {
-        'seccion':'Prueba 3',
-        'seccionKey':'S_PRUEBA3'
-    }
+    { 'seccion':'Rectoria', 'seccionKey':'S_RECTORIA' },
+    { 'seccion':'Consejo Directivo', 'seccionKey':'S_CON_DIRECTIVO' },
+    { 'seccion':'Consejo Acádemico', 'seccionKey':'S_CON_ACADEMICO' },
+    { 'seccion':'Consejo Estudiantil', 'seccionKey':'S_CON_ESTUDIANTIL' },
+    { 'seccion':'Consejo de Padres', 'seccionKey':'S_CON_PADRES' },
+    { 'seccion':'Consejo Profesores', 'seccionKey':'S_CON_PROFESORES' },
+    { 'seccion':'Personería', 'seccionKey':'S_PERSONERIA' },
+    { 'seccion':'Contraloria', 'seccionKey':'S_CONTRALORIA' },
+    { 'seccion':'Emisora', 'seccionKey':'S_EMISORA' },
+    { 'seccion':'Banda Musical', 'seccionKey':'S_BANDA_MUSICAL' },
+    { 'seccion':'Equipo Deportivo', 'seccionKey':'S_EQUIPO_DEPORTIVO' },
+    { 'seccion':'Esenarios Culturales', 'seccionKey':'S_ESENARIO_CULTURAL' },
+    { 'seccion':'Plataformas Acádemicas', 'seccionKey':'S_PLAT_ACADEMICAS' },
+    { 'seccion':'Estudiantes', 'seccionKey':'S_ESTUDIANTES' },
+    { 'seccion':'Gobierno Escolar', 'seccionKey':'S_GOB_ESCOLAR' }
 ]
 
 const passwordUsuario = bcrypt.hashSync(process.env.PASSWORD_WM, saltos)

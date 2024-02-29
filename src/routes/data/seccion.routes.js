@@ -3,8 +3,6 @@ import { getAllSecciones, getSeccion, getSeccionMenu } from '../../controllers/d
 
 const seccionRouter = Router()
 
-// TODO Agregar todas las secciones en las variables.js
-
 seccionRouter.get('/secciones', getAllSecciones)
 seccionRouter.get('/secciones/:id', getSeccion)
 seccionRouter.get('/secciones-menu', getSeccionMenu)

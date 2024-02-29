@@ -96,7 +96,9 @@ export const postValidarCodigo = async (req, res, next) => {
 
         // Crear Cookie
         const recuperar = await createTokenAccess({ token }, '1h')
-        res.cookie('recuperar', recuperar, {
+
+        res.setHeader('credential-reset', recuperar)
+        .cookie('recuperar', recuperar, {
             path:'/',
             httpOnly: true,
             maxAge: 3600000
@@ -111,20 +113,23 @@ export const postValidarCodigo = async (req, res, next) => {
 }
 
 export const updatePassword = async (req, res, next) => {
-    const { recuperar } = req.cookies
+    const { recuperar } =  req.cookies
+    const credential =  req.headers['credential-reset']
 
-    if (!recuperar) {
+    if (!recuperar || !credential) {
         return res.status(401).json({
             ok: false,
             message: 'Tiempo expirado, intenta de nuevo'
         })
     }
 
+    let valueToken = (credential) ? recuperar : credential
+
     try {
-        await validarToken(recuperar)
+        await validarToken(valueToken)
 
         const { body:{ password }, params: { id } } = req
-        const updateUser = await putUsuarioService(id, {password})
+        const updateUser = await putUsuarioService(id, { password })
 
         res.cookie('recuperar', '', {
             expires: new Date(0)

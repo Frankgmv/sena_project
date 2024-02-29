@@ -15,7 +15,7 @@ const Vistas = sequelize.define('Vistas', {
         allowNulls: false
     }
 }, {
-    timestamps:false
+    timestamps:true
 })
 
 export default Vistas

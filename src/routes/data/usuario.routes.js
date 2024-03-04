@@ -7,8 +7,8 @@ import { validarPermisos } from '../../middlewares/validarPermisos.js'
 
 const usuarioRouter = Router()
 
-usuarioRouter.get('/usuarios', authRutas, validarPermisos('P_USUARIOS'), getAllUsuarios)
-usuarioRouter.get('/usuarios/:id', authRutas, validarPermisos('P_USUARIOS'), getUsuario)
+usuarioRouter.get('/usuarios', getAllUsuarios)
+usuarioRouter.get('/usuarios/:id', getUsuario)
 usuarioRouter.post('/usuarios', authRutas, validarPermisos('P_USUARIOS'), validateSchema(usuarioSchema), postUsuario)
 usuarioRouter.put('/usuarios/:id', authRutas, validarPermisos('P_USUARIOS'), validateSchema(usuarioPutSchema), putUsuario)
 usuarioRouter.delete('/usuarios/:id', authRutas, validarPermisos('P_ADMIN'), deleteUsuario)

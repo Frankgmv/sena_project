@@ -37,34 +37,42 @@ export const postGaleria = async (req, res, next) => {
 
     let image = req.file
     if (image) {
+      // validar tipo de dato
       if (!tiposPermitidos.includes(image.mimetype)) {
         return res.status(400).json({
           ok: false,
-          message: `Formato ${image.mimetype.split('/')[1]} inválido. [pmg, jpg, jpeg]`
+          message: `Formato ${image.mimetype.split('/')[1]} inválido. [png, jpg, jpeg]`
         })
       }
 
+      // Peso de la imagen
       if (image.size > maxBytes) {
         return res.status(400).json({
           message: 'La imagen es muy grande. (Máx 10MB)'
         })
       }
 
+      // Asignar buffer o datos de la imagen
       const buffer = Buffer.from(image.buffer, 'binary')
 
       const nombreImagen = crearNombreRecurso(image)
+
+      // intanciar imagen para manipularla mejor
       let proccesImage = sharp(buffer)
 
       const ancho = proccesImage.width
       const alto = proccesImage.height
 
+      // redimencionar imagen
       if (ancho > 1024 || alto > 1024) {
         const escala = Math.min(1, 1024 / ancho, 1024 / alto)
         proccesImage = proccesImage.grayscale(escala)
       }
 
+      // Buffer con datos de imagen ya procesados.
       bufferComprimido = await proccesImage.toBuffer(nombreImagen.mimetype)
 
+      // url para guardar imagenes
       urlPath = `src/upload/${nombreImagen.nombre}`
       datosGaleria = {
         ...bodyBuild,
@@ -83,6 +91,7 @@ export const postGaleria = async (req, res, next) => {
     if (!crearGaleria.ok) return res.status(400)
 
     if (datosGaleria.imgPath) {
+      // Crear imagen en la carpeta.
       fs.writeFileSync(urlPath, bufferComprimido)
     }
     res.status(201)
@@ -178,8 +187,11 @@ export const putGaleria = async (req, res, next) => {
         imgPath: nombreArchivo.nombre
       }
 
+      // Consultar imagen antigua.
       const consultaAnuncio = await getGaleriaService(req.params.id)
+
       if (consultaAnuncio.ok) {
+        // eliminar archivo antiguo
         if (deleteFile(consultaAnuncio.data.imgPath)) {
           next('error al remplazar el archivo')
         }
@@ -189,11 +201,13 @@ export const putGaleria = async (req, res, next) => {
         ...bodyBuild
       }
     }
+    // Modificar archivo en base de datos
     const actualizarImagen = await putGaleriaService(req.params.id, datosImagen)
     res.json(actualizarImagen)
     if (!actualizarImagen.ok) return res.status(400)
 
     if (datosImagen.imgPath) {
+      // Crear imagen nuevamente en la carpeta
       fs.writeFileSync(urlPath, bufferComprimido)
     }
 

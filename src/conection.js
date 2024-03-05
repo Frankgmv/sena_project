@@ -32,8 +32,6 @@ export const sequelize = new Sequelize({
 
 // ? conección a la base de datos Postgres
 
-sequelize.DEBUG = true
-
 //* Conexión para la db cuando se despliegue en remoto
 // const sequelize = new Sequelize(process.env.DB_STRING_CONNECT_CLOUD, {
 export const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
@@ -46,6 +44,8 @@ export const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${D
         idle: 10000
     }
 })
+
+sequelize.DEBUG = true
 
 // ? función para verifica la conexión
 export const connect = async () => {

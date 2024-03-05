@@ -36,7 +36,7 @@ sequelize.DEBUG = true
 
 //* Conexión para la db cuando se despliegue en remoto
 // const sequelize = new Sequelize(process.env.DB_STRING_CONNECT_CLOUD, {
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+export const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     dialect: 'postgres',
     ssl: true,
     pool: {

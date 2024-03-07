@@ -73,7 +73,7 @@ export const postGaleria = async (req, res, next) => {
       bufferComprimido = await proccesImage.toBuffer(nombreImagen.mimetype)
 
       // url para guardar imagenes
-      urlPath = `src/upload/${nombreImagen.nombre}`
+      urlPath = `data/${nombreImagen.nombre}`
       datosGaleria = {
         ...bodyBuild,
         imgPath: nombreImagen.nombre
@@ -180,7 +180,7 @@ export const putGaleria = async (req, res, next) => {
       }
 
       bufferComprimido = await processImage.toBuffer(nombreArchivo.mimetype)
-      urlPath = `src/upload/${nombreArchivo.nombre}`
+      urlPath = `data/${nombreArchivo.nombre}`
 
       datosImagen = {
         ...bodyBuild,

@@ -1,20 +1,22 @@
 import 'colors'
-import {
-    config
-} from 'dotenv'
-import {
-    Sequelize
-} from 'sequelize'
-import {
-    ErrorConexion
-} from './middlewares/fabricaErrores.js'
+import { config } from 'dotenv'
+import { Sequelize } from 'sequelize'
+import { ErrorConexion } from './middlewares/fabricaErrores.js'
 
 config()
 
-const { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER } = process.env
+const { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, DB_PORT, ENV } = process.env
 
-/*
-export const sequelize = new Sequelize({
+export const sequelize = (ENV === 'produccion') ? new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+       dialect: 'postgres',
+       ssl: true,
+       pool: {
+           max: 10,
+           min: 0,
+           acquire: 30000,
+           idle: 10000
+       }
+   }) : new Sequelize({
     host: DB_HOST,
     database: DB_NAME,
     dialect: 'postgres',
@@ -24,22 +26,6 @@ export const sequelize = new Sequelize({
     pool: {
         max: 10,
         min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
-})
-*/
-
-// ? conección a la base de datos Postgres
-
-//* Conexión para la db cuando se despliegue en remoto
-// const sequelize = new Sequelize(process.env.DB_STRING_CONNECT_CLOUD, {
-export const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
-    dialect: 'postgres',
-    ssl: true,
-    pool: {
-        max: 10, // Número máximo de conexiones en el pool
-        min: 0, // Número mínimo de conexiones en el pool
         acquire: 30000,
         idle: 10000
     }

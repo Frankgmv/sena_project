@@ -20,7 +20,7 @@ app.use(cors({
 }))
 
 // Reclamar recursos a la API
-app.use('/api/v1/recursos', express.static('./data'))
+app.use('/api/v1/recursos', express.static('./src/upload'))
 
 app.use('/api/v1', routesGeneral)
 

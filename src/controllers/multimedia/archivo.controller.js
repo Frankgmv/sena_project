@@ -44,7 +44,7 @@ export const postArchivo = async (req, res, next) => {
 
             nombreArchivo = crearNombreRecurso(archivo)
 
-            urlPath = `data/${nombreArchivo.nombre}`
+            urlPath = `src/upload/${nombreArchivo.nombre}`
 
             pdfBuffer = await Buffer.from(archivo.buffer)
 

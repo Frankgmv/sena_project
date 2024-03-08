@@ -58,7 +58,7 @@ export const postNoticia = async (req, res, next) => {
 
             // Guardamos la imagen comprimida
             bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
-            urlPath = `data/${nombreArchivo.nombre}`
+            urlPath = `src/upload/${nombreArchivo.nombre}`
 
             datosNoticia = {
                 ...bodyBuild,
@@ -167,7 +167,7 @@ export const putNoticia = async (req, res, next) => {
             }
 
             bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
-            urlPath = `data/${nombreArchivo.nombre}`
+            urlPath = `src/upload/${nombreArchivo.nombre}`
 
             datosNoticia = {
                 ...bodyBuild,

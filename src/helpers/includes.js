@@ -47,7 +47,7 @@ export const verificarHttpUrlOIframe = (url) => {
 }
 
 export const deleteFile = (pathFile) => {
-    let path = `data/${pathFile}`
+    let path = `src/upload/${pathFile}`
     const existe = fs.existsSync(path)
 
     if (path && existe) {

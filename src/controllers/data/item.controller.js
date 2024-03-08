@@ -61,7 +61,7 @@ export const postItem = async (req, res, next) => {
             // Guardamos la imagen comprimida
             bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
 
-            urlPath = `data/${nombreArchivo.nombre}`
+            urlPath = `src/upload/${nombreArchivo.nombre}`
             datosItem = {
                 ...bodyBuild,
                 imgPath: nombreArchivo.nombre
@@ -159,7 +159,7 @@ export const putItem = async (req, res, next) => {
             }
 
             bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
-            urlPath = `data/${nombreArchivo.nombre}`
+            urlPath = `src/upload/${nombreArchivo.nombre}`
 
             datosItem = {
                 ...bodyBuild,

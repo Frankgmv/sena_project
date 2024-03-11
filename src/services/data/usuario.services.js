@@ -171,7 +171,7 @@ export const getUsuarioService = (idUser) => {
 
             resolve({
                 ok: true,
-                messge: 'usuario obtenido',
+                message: 'usuario obtenido',
                 data: usuario
             })
         } catch (error) {
@@ -205,6 +205,13 @@ export const putUsuarioService = (idUser, data) => {
                         message: 'Rol no encontrado'
                     })
                 }
+
+                if (existeRol.rolKey === 'WM') {
+                    return  resolve({
+                        ok: false,
+                        message: 'Usuario Web master no se puede modificar el rol'
+                    })
+                }
             }
 
             if (data.correo) {
@@ -232,12 +239,24 @@ export const putUsuarioService = (idUser, data) => {
             }
 
             if (data.estado === true) {
-                const respPermisos = await postDetallePermisoDefault({id: idUser, RolId: usuario.RolId})
+                const respPermisos = await postDetallePermisoDefault({id: idUser,
+                     RolId: usuario.RolId})
 
                 if (!respPermisos.ok) {
                     return resolve({
                         ok: false,
                         message: 'No se pudo asignar permisos por defecto'
+                    })
+                }
+            } else {
+                const rol = await Rol.findOne({
+                    where:{rolKey: 'WM'}
+                })
+
+                if (usuario.RolId === rol.id) {
+                    return  resolve({
+                        ok: false,
+                        message: 'Usuario Web master siempre activo'
                     })
                 }
             }
@@ -280,11 +299,21 @@ export const deleteUsuarioService = (idUser) => {
                     message: 'usuario no encontrado'
                 })
             }
+
+            const rol = await Rol.findOne({where:{rolKey: 'WM'}})
+
+            if (usuario.RolId === rol.id) {
+                return resolve({
+                    ok: false,
+                    message: 'Usuario Web master no se puede borrar'
+                })
+            }
+
             await usuario.destroy()
 
             resolve({
                 ok: true,
-                message: ' Usuario Eliminado'
+                message: 'Usuario Eliminado'
             })
         } catch (error) {
             reject(error)

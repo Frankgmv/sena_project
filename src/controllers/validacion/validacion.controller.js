@@ -3,7 +3,7 @@ import { getTokenKeyService } from '../../services/data/token.services.js'
 import { getUsuarioService, postUsuarioService } from '../../services/data/usuario.services.js'
 import { createTokenAccess, validarToken } from '../../lib/jwt.js'
 import { getRolService } from '../../services/data/rol.services.js'
-import { usuario } from '../../variables.js'
+import { defaultVariables } from '../../variables.js'
 import { enviarEmail } from '../../lib/nodemailer.js'
 export const postRegistro = async (req, res, next) => {
     try {
@@ -53,7 +53,7 @@ export const postRegistro = async (req, res, next) => {
             })
         }
 
-        const webMaster = await getUsuarioService(usuario.id)
+        const webMaster = await getUsuarioService(defaultVariables.usuario.id)
 
         if (webMaster) {
             const messageEmail = `Hay un usuario nuevo en plataforma.\n \n \t \t Verifica lo más pronto posible \n \n No responser.`

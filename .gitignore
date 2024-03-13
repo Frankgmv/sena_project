@@ -1,7 +1,9 @@
 
 
 package-lock.json
-var/data/**
+*.png
+*.jpeg
+*.jpg
 # Logs
 logs
 *.log

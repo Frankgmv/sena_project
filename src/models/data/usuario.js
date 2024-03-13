@@ -1,4 +1,4 @@
-import { DataTypes, Op } from 'sequelize'
+import { DataTypes } from 'sequelize'
 import { sequelize } from '../../conection.js'
 import Rol from './rol.js'
 import t from '../../helpers/transacciones.js'

@@ -53,7 +53,7 @@ export const postVideo = async (req, res, next) => {
             }
 
             bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
-            urlPath = `src/upload/${nombreArchivo.nombre}`
+            urlPath = `var/data/${nombreArchivo.nombre}`
 
             datosVideo = {
                 ...bodyBuild,
@@ -149,7 +149,7 @@ export const putVideo = async (req, res, next) => {
             }
 
             bufferComprimido = await proccesImage.toBuffer(nombreArchivo.mimetype)
-            urlPath = `src/upload/${nombreArchivo.nombre}`
+            urlPath = `var/data/${nombreArchivo.nombre}`
 
             datosVideo = {
                 ...bodyBuild,

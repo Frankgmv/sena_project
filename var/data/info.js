@@ -1,1 +1,0 @@
-'Esta carpeta es para almacenamiento de imagenes y pdfs'

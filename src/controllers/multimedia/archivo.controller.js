@@ -24,7 +24,7 @@ export const postArchivo = async (req, res, next) => {
 
         const validarBody = validateSchemaInto(archivoSchema, bodyBuild)
         if (validarBody.issues) {
-            return res.status(400).json(validarBody)
+            return res.status(400).json({error:true, zodError:validarBody})
         }
 
         let archivo = req.file
@@ -53,10 +53,9 @@ export const postArchivo = async (req, res, next) => {
                 archivo: nombreArchivo.nombre
             }
         } else {
-            datosArchivo = {
-                ...bodyBuild,
-                archivo: null
-            }
+            return res.status(400).json({
+                message: 'El archivo requerido'
+            })
         }
         const guardarArchivo = await postArchivoService(datosArchivo)
 

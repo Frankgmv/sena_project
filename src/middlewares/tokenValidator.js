@@ -36,7 +36,7 @@ export const authRutas = async (req, res, next) => {
         if (err) {
             return res.status(403).json({
                 ok: false,
-                message: 'Token Inválido'
+                message: 'Inicia Sesión de nuevo'
             })
         }
 

@@ -66,7 +66,7 @@ export const getAllSliderService = () => {
 
             resolve({
                 ok: true,
-                message: 'Lista de imágenes de Slider',
+                message: 'Lista de imagenes de Slider',
                 data: slidersRegistro
             })
         } catch (error) {

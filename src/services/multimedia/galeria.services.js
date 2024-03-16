@@ -67,7 +67,7 @@ export const getAllGaleriaService = () => {
 
             resolve({
                 ok: true,
-                message: 'Lista de imágenes',
+                message: 'Lista de imagenes',
                 data: imagenes
             })
         } catch (error) {
@@ -84,13 +84,13 @@ export const getGaleriaService = (idImagen) => {
             if (!imagen) {
                 return resolve({
                     ok: false,
-                    message: 'Imágen no encontrada'
+                    message: 'imagen no encontrada'
                 })
             }
 
             resolve({
                 ok: true,
-                message: 'Imágen encontrada',
+                message: 'imagen encontrada',
                 data : imagen.dataValues
             })
         } catch (error) {
@@ -170,7 +170,7 @@ export const deleteGaleriaService = (idImagen) => {
             if (!imagen) {
                 return resolve({
                     ok: true,
-                    message: 'Imágen no encontrada'
+                    message: 'imagen no encontrada'
                 })
             }
 
@@ -178,7 +178,7 @@ export const deleteGaleriaService = (idImagen) => {
 
             resolve({
                 ok: true,
-                message: `Imágen borrada`
+                message: `imagen borrada`
             })
         } catch (error) {
             reject(error)

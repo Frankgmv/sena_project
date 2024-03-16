@@ -1,10 +1,26 @@
 import fs from 'fs'
 import sharp from 'sharp'
-import { crearNombreRecurso, deleteFile } from '../../helpers/includes.js'
-import { validateSchemaInto } from '../../middlewares/validarSchemas.js'
-import { putVideoSchema, videoSchema } from '../../schemas/MultimediaSchemas.js'
-import { maxBytes, tiposPermitidos } from '../../variables.js'
-import { deleteVideoService, getAllVideoService, getVideoService, postVideoService, putVideoService
+import {
+    crearNombreRecurso,
+    deleteFile
+} from '../../helpers/includes.js'
+import {
+    validateSchemaInto
+} from '../../middlewares/validarSchemas.js'
+import {
+    putVideoSchema,
+    videoSchema
+} from '../../schemas/MultimediaSchemas.js'
+import {
+    maxBytes,
+    tiposPermitidos
+} from '../../variables.js'
+import {
+    deleteVideoService,
+    getAllVideoService,
+    getVideoService,
+    postVideoService,
+    putVideoService
 } from '../../services/multimedia/video.services.js'
 
 export const postVideo = async (req, res, next) => {
@@ -21,7 +37,10 @@ export const postVideo = async (req, res, next) => {
         let urlPath
         const validarSchemaResponse = validateSchemaInto(videoSchema, bodyBuild)
         if (validarSchemaResponse.issues) {
-            return res.status(400).json({error:true, zodError:validarSchemaResponse})
+            return res.status(400).json({
+                error: true,
+                zodError: validarSchemaResponse
+            })
         }
 
         let image = req.file
@@ -60,10 +79,10 @@ export const postVideo = async (req, res, next) => {
                 imgPath: nombreArchivo.nombre
             }
         } else {
-            datosVideo = {
-                ...bodyBuild,
-                imgPath: null
-            }
+            return res.status(400).json({
+                ok: false,
+                message: 'la imagen es requerida'
+            })
         }
 
         const guardarVideo = await postVideoService(datosVideo)
@@ -117,7 +136,10 @@ export const putVideo = async (req, res, next) => {
 
         const validarSchemaResponse = validateSchemaInto(putVideoSchema, bodyBuild)
         if (validarSchemaResponse.issues) {
-            return res.status(400).json({error:true, zodError:validarSchemaResponse})
+            return res.status(400).json({
+                error: true,
+                zodError: validarSchemaResponse
+            })
         }
 
         let image = req.file

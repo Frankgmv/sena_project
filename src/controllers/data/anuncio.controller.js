@@ -47,7 +47,7 @@ export const postAnuncio = async (req, res, next) => {
                 })
             }
 
-            // Utilizamos un formato de compresión de imágenes sin pérdidas
+            // Utilizamos un formato de compresión de imagenes sin pérdidas
             const buffer = Buffer.from(image.buffer, 'binary')
 
             const nombreArchivo = crearNombreRecurso(image)

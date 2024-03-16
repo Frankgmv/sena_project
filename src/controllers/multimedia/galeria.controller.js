@@ -32,7 +32,7 @@ export const postGaleria = async (req, res, next) => {
 
     const validarBody = validateSchemaInto(galeriaSchema, bodyBuild)
     if (validarBody.issues) {
-      return res.status(400).json(validarBody)
+      return res.status(400).json({error:true, zodError: validarBody})
     }
 
     let image = req.file

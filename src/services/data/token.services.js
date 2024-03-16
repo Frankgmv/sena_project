@@ -165,6 +165,13 @@ export const putTokenService = (documento, data) => {
         try {
             const encontrarToken = await Token.findByPk(documento)
 
+            if (data.tokenKey !== 'CL_ESPECIAL' && encontrarToken.tokenKey === 'CL_ESPECIAL') {
+                return resolve({
+                    ok: false,
+                    message: 'Nombre Inmutable'
+                })
+            }
+
             if (data.id) {
                 delete data.id
             }

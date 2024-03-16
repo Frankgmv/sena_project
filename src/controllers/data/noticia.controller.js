@@ -95,7 +95,7 @@ export const getAllNoticias = async (req, res, next) => {
         } = req.query
         const estadoNoticia = estado || 'todas'
         const numPagina = parseInt(pagina || 1)
-        const limiteNoticia = parseInt(limite || 12)
+        const limiteNoticia = parseInt(limite || 1000)
 
         const noticias = await getAllNoticiasService(estadoNoticia, numPagina, limiteNoticia)
         res.json(noticias)

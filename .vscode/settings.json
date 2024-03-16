@@ -1,14 +1,14 @@
 {
     "files.exclude": {
-        "node_modules": true,
-        "LICENSE":true,
-        "package.json":true,
+        "node_modules": false,
+        "LICENSE":false,
+        "package.json":false,
         ".gitignore":false,
         "README.md":false,
-        "package-lock.json":true,
-        ".babelrc":true,
+        "package-lock.json":false,
+        ".babelrc":false,
         ".esLintrc.json":false,
-        "./launch.json":true,
+        "./launch.json":false,
     },
     "mos.port": ""
 }

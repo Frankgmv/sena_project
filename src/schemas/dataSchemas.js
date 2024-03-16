@@ -259,43 +259,33 @@ export const anuncioSchema  = z.object({
     titulo: z.string({
         required_error: 'titulo requerido',
         invalid_type_error: 'Titulo debe ser texto'
-    }).max(200, 'Titulo muy largo (200 máximo)').min(2, 'Titulo muy corto (2 mín)'),
-    imgPath: z.string({
-        required_error: 'Imagen Requerida',
-        invalid_type_error: 'La imagen debe ser formato jpg y maximo 2mb'
-    }).optional(),
+    }).max(200, 'Titulo muy largo (200 máximo)').min(4, 'Titulo es de 10 caracteres'),
     descripcion: z.string({
+        required_error: 'La descripción es requerida',
         invalid_type_error: 'la descripcion debe ser un texto'
-    }).max(1200),
+    }).max(1200).min(5, 'Descripción es requerida'),
     UsuarioId: z.number({
-        required_error: 'UsuarioId requerido',
-        invalid_type_error: 'UsuarioId es un texto'
+        required_error: 'Usuario requerido',
+        invalid_type_error: 'Usuario es un texto'
     }),
     SeccionId: z.number({
-        required_error: 'SeccionId requerido',
-        invalid_type_error: 'SeccionId es un número'
+        required_error: 'Seccion requerida',
+        invalid_type_error: 'Seccion requerida'
     })
 })
 
-export const putAnuncioSchema = z.object({
+export const putAnuncioSchema  = z.object({
     titulo: z.string({
         required_error: 'titulo requerido',
         invalid_type_error: 'Titulo debe ser texto'
-    }).max(100, 'Titulo muy largo (100 máximo)').min(5, 'Titulo muy corto (5 mín)').optional(),
-    imgPath: z.string({
-        required_error: 'Link requerido',
-        invalid_type_error: 'Link debe ser URL - Link'
-    }).optional(),
+    }).max(200, 'Titulo muy largo (200 máximo)').min(4, 'Titulo es de 10 caracteres').optional(),
     descripcion: z.string({
+        required_error: 'La descripción es requerida',
         invalid_type_error: 'la descripcion debe ser un texto'
-    }).max(1200).optional(),
+    }).max(1200).min(5, 'Descripción es requerida').optional(),
     UsuarioId: z.number({
-        required_error: 'UsuarioId requerido',
-        invalid_type_error: 'Usuario es un número'
-    }).optional(),
-    SeccionId: z.string({
-        required_error: 'SeccionId requerido',
-        invalid_type_error: 'SeccionId es un número'
+        required_error: 'Usuario requerido',
+        invalid_type_error: 'Usuario es un texto'
     }).optional()
 }).nullable()
 
@@ -384,9 +374,9 @@ export const itemSchema = z.object({
     }).refine(verificarHttpUrl, {
         message: 'La url debe contener http:// o https://'
     }),
-    estado: z.boolean({
+    estado: z.string({
         required_error: 'El estado es requerido',
-        invalid_type_error: 'El estado debe ser un booleano'
+        invalid_type_error: 'El estado es requerido'
     }).optional(),
     UsuarioId: z.number({
         required_error: 'El id del usuario es obligatorio',
@@ -405,9 +395,8 @@ export const putItemSchema = z.object({
     }).refine(verificarHttpUrl, {
         message: 'La url debe contener http:// o https://'
     }).optional(),
-    estado: z.boolean({
-        required_error: 'El estado es requerido',
-        invalid_type_error: 'El estado debe ser un booleano'
+    estado: z.string({
+        required_error: 'El estado es requerido'
     }).optional(),
     UsuarioId: z.number({
         required_error: 'El id del usuario es obligatorio',

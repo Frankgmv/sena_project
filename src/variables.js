@@ -37,7 +37,8 @@ const categorias = [
     { 'categoria':'Coordinación', 'categoriaKey':'C_COORDINACION' },
     { 'categoria':'Rectoria', 'categoriaKey':'C_RECTORIA' },
     { 'categoria':'Classroom', 'categoriaKey':'C_CLASSROOM' },
-    { 'categoria':'Collage', 'categoriaKey':'C_COLLAGE' }
+    { 'categoria':'Collage', 'categoriaKey':'C_COLLAGE' },
+    { 'categoria':'ARCHIVO_PDF', 'categoriaKey':'ARCHIVO_PDF' }
 ]
 
 const saltos = bcrypt.genSaltSync(10)
@@ -94,9 +95,10 @@ const secciones = [
     { 'seccion':'Banda Musical', 'seccionKey':'S_BANDA_MUSICAL' },
     { 'seccion':'Equipo Deportivo', 'seccionKey':'S_EQUIPO_DEPORTIVO' },
     { 'seccion':'Esenarios Culturales', 'seccionKey':'S_ESENARIO_CULTURAL' },
-    { 'seccion':'Plataformas Acádemicas', 'seccionKey':'S_PLAT_ACADEMICAS' },
     { 'seccion':'Estudiantes', 'seccionKey':'S_ESTUDIANTES' },
-    { 'seccion':'Gobierno Escolar', 'seccionKey':'S_GOB_ESCOLAR' }
+    { 'seccion':'Gobierno Escolar', 'seccionKey':'S_GOB_ESCOLAR' },
+    { 'seccion':'Plataformas Acádemicas', 'seccionKey':'S_PLAT_ACADEMICAS' },
+    { 'seccion':'Archivos PDF', 'seccionKey':'ARCHIVO_PDF' }
 ]
 
 const passwordUsuario = bcrypt.hashSync(process.env.PASSWORD_WM, saltos)

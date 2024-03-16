@@ -85,7 +85,7 @@ export const putRolService = (idRol, data) => {
             await t.commit(transaccion.data)
             return resolve({
                 ok: true,
-                mensaje: 'Rol actualizado'
+                message: 'Rol actualizado'
             })
         } catch (error) {
             reject(error)

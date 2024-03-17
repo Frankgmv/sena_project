@@ -68,10 +68,10 @@ export const postItem = async (req, res, next) => {
             }
         } else {
             // Montar anuncio sin imagen
-            datosItem = {
-                ...bodyBuild,
-                imgPath: null
-            }
+           return res.status(400).json({
+                ok:false,
+                message: 'La imagen es requerida'
+           })
         }
 
         const crearItem = await postItemService(datosItem)

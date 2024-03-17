@@ -103,3 +103,20 @@ export const deleteHistorialService = (idHistorial) => {
         }
     })
 }
+
+export const deleteAllHistorialService = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const eliminarHistorial = await Historial.findAll()
+            for (const historia of eliminarHistorial) {
+                await historia.destroy()
+            }
+            resolve({
+                ok: true,
+                message: 'Registros eliminados'
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}

@@ -207,10 +207,7 @@ export const putUsuarioService = (idUser, data) => {
                 }
 
                 if (existeRol.rolKey === 'WM') {
-                    return  resolve({
-                        ok: false,
-                        message: 'Usuario Web master no se puede modificar el rol'
-                    })
+                    delete data.RolId
                 }
             }
 

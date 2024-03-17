@@ -57,13 +57,6 @@ export function getAllPqrsService() {
         try {
             const getAllPqrs = await Pqrs.findAll()
 
-            if (getAllPqrs.length === 0) {
-                return resolve({
-                    ok: false,
-                    message: 'No hay Pqrs'
-                })
-            }
-
             resolve({
                 ok: true,
                 message: 'Lista de Pqrs',

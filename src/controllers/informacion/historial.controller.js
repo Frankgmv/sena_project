@@ -1,4 +1,4 @@
-import { postHistorialService, getHistorialService, getAllHistorialService, deleteHistorialService
+import { postHistorialService, getHistorialService, getAllHistorialService, deleteHistorialService, deleteAllHistorialService
 } from '../../services/informacion/historial.services.js'
 
 export const postHistorial = async (req, res, next) => {
@@ -35,9 +35,20 @@ export const getHistorial = async (req, res, next) => {
 export const deleteHistorial = async (req, res, next) => {
     try {
         const eliminarRegistro = await deleteHistorialService(req.params.id)
-    res.json(eliminarRegistro)
-    if (!eliminarRegistro.ok) return res.status(404)
-    res.status(200)
+        res.json(eliminarRegistro)
+        if (!eliminarRegistro.ok) return res.status(404)
+        res.status(200)
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const deleteAllHistorial = async (req, res, next) => {
+    try {
+        const eliminarRegistro = await deleteAllHistorialService()
+        res.json(eliminarRegistro)
+        if (!eliminarRegistro.ok) return res.status(404)
+        res.status(200)
     } catch (error) {
         next(error)
     }

@@ -8,7 +8,7 @@ import { validarPermisos } from '../../middlewares/validarPermisos.js'
 const rolRouter = Router()
 
 rolRouter.get('/roles', getRoles)
-rolRouter.get('/roles/:id', authRutas, validarPermisos('P_ADMIN'), getRol)
+rolRouter.get('/roles/:id', getRol)
 rolRouter.put('/roles/:id', authRutas, validarPermisos('P_ADMIN'), validateSchema(rolSchema), putRol)
 
 export default rolRouter

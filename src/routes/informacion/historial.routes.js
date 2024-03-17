@@ -7,8 +7,8 @@ import { validarPermisos } from '../../middlewares/validarPermisos.js'
 
 const historialRouter = Router()
 
-historialRouter.get('/historial', authRutas, validarPermisos('P_HISTORIAL'), getAllHistorial)
-historialRouter.get('/historial/:id', authRutas, validarPermisos('P_HISTORIAL'), getHistorial)
+historialRouter.get('/historial', getAllHistorial)
+historialRouter.get('/historial/:id', getHistorial)
 historialRouter.post('/historial', validateSchema(historialSchema), postHistorial)
 historialRouter.delete('/historial/:id', authRutas, validarPermisos('P_ADMIN'), deleteHistorial)
 historialRouter.delete('/historial-all', authRutas, validarPermisos('P_ADMIN'), deleteAllHistorial)

@@ -7,9 +7,9 @@ import { validarPermisos } from '../../middlewares/validarPermisos.js'
 
 const pqrsRouter = Router()
 
-pqrsRouter.get('/pqrs', authRutas, validarPermisos('P_PQRS'), getAllPqrs)
+pqrsRouter.get('/pqrs', getAllPqrs)
 
-pqrsRouter.get('/pqrs/:id', authRutas, validarPermisos('P_PQRS'), getPqrs)
+pqrsRouter.get('/pqrs/:id', getPqrs)
 
 pqrsRouter.post('/pqrs', validateSchema(pqrsSchema), postPqrs)
 

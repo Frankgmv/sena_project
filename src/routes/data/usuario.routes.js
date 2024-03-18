@@ -10,6 +10,7 @@ const usuarioRouter = Router()
 usuarioRouter.get('/usuarios', getAllUsuarios)
 usuarioRouter.get('/usuarios/:id', getUsuario)
 usuarioRouter.post('/usuarios', authRutas, validarPermisos('P_USUARIOS'), validateSchema(usuarioSchema), postUsuario)
+usuarioRouter.put('/usuarios/:id', authRutas, validarPermisos('P_USUARIOS'), validateSchema(usuarioPutSchema), putUsuario)
 usuarioRouter.put('/usuarios-perfil/:id', authRutas, validateSchema(usuarioPutSchema), putUsuario)
 usuarioRouter.delete('/usuarios/:id', authRutas, validarPermisos('P_ADMIN'), deleteUsuario)
 

@@ -251,10 +251,7 @@ export const putUsuarioService = (idUser, data) => {
                 })
 
                 if (usuario.RolId === rol.id) {
-                    return  resolve({
-                        ok: false,
-                        message: 'Usuario Web master siempre activo'
-                    })
+                    delete data.RolId
                 }
             }
 

@@ -133,17 +133,19 @@ export const login = async (req, res, next) => {
 }
 
 export const verificarToken = async (req, res, next) => {
-    let { accessToken } = req.headers['Authorization'] || req.cookies
+    let accessToken = req.headers['authorization']
 
     if (!accessToken) {
         return res.status(401).json({
             ok: false,
-            message: 'NO Autorizado'
+            message: 'NO Autorizado, inicia sesión'
         })
     }
 
+    const token = accessToken.split(' ')[1]
+
     try {
-        const dataToken = await validarToken(accessToken)
+        const dataToken = await validarToken(token)
 
         res.status(200).json({
             ok: true,

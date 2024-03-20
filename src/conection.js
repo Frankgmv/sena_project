@@ -8,15 +8,15 @@ config()
 const { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, DB_PORT, ENV } = process.env
 
 export const sequelize = (ENV === 'produccion') ? new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
-       dialect: 'postgres',
-       ssl: true,
-       pool: {
-           max: 10,
-           min: 0,
-           acquire: 30000,
-           idle: 10000
-       }
-   }) : new Sequelize({
+    dialect: 'postgres',
+    ssl: true,
+    pool: {
+        max: 10,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    }
+}) : new Sequelize({
     host: DB_HOST,
     database: DB_NAME,
     dialect: 'postgres',

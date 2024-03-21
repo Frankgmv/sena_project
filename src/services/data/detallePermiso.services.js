@@ -172,3 +172,34 @@ export const deleteDetallePermisosService = (idDetallePermiso) => {
         }
     })
 }
+
+export const deleteDetalleParamsPermisosService = ({UsuarioId, PermisoId}) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const consultarDetallePermiso = await DetallePermiso.findOne({
+                where: {
+                    [Op.and]: {
+                        UsuarioId: UsuarioId,
+                        PermisoId: PermisoId
+                    }
+                }
+            })
+
+            if (!consultarDetallePermiso) {
+                return resolve({
+                    ok: false,
+                    message: 'Detalle permiso no encontrado'
+                })
+            }
+
+            await consultarDetallePermiso.destroy()
+
+            resolve({
+                ok: true,
+                message: 'Detalle permiso eliminado'
+            })
+        } catch (error) {
+            reject(error)
+        }
+    })
+}

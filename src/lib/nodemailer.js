@@ -17,7 +17,7 @@ const getConfigNodemail = async () => {
     const dataEmails = await getCredencialService()
 
     if (dataEmails.ok) {
-        let { correo, clave } = dataEmails.data
+        let { correo, clave } = dataEmails.data[0]
         configNodemailer.auth = {
             user: correo,
             pass: clave

@@ -3,7 +3,7 @@ import t from '../../helpers/transacciones.js'
 import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import { validarEmail } from '../../helpers/includes.js'
 
-export const getCredencialService = (idCredencial) => {
+export const getCredencialService = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const credencial = await Credencial.findAll()
@@ -18,7 +18,7 @@ export const getCredencialService = (idCredencial) => {
             resolve({
                 ok:true,
                 message: 'Credenciales de correos obtenidos  correctamente',
-                data: credencial[0]
+                data: credencial
             })
         } catch (error) {
             reject(error)

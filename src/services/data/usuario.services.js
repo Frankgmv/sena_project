@@ -275,7 +275,7 @@ export const putUsuarioService = (idUser, data) => {
             await t.commit(transaccion.data)
             resolve({
                 ok: true,
-                message: ' Usuario Actualizado'
+                message: 'Contraseña Actualizada'
             })
         } catch (error) {
             reject(error)

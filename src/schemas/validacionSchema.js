@@ -65,12 +65,12 @@ RolId: z.number({
 export const crearRecuperacionSchema = z.object({
     id: z.number({
         required_error: 'El documento es requerido',
-        invalid_type_error: 'El documento es un número'
+        invalid_type_error: 'El documento es requerido'
     }).min(10000000, 'El documento debe contener 8 carácteres mínimo')
     .max(10000000000, 'El documento debe contener 10 carácteres máximo'),
     correo: z.string({
         required_error: 'El Correo es requerido',
-        invalid_type_error: 'El Correo debe ser un texto'
+        invalid_type_error: 'El Correo es requerido'
     }).max(100, 'El Correo debe tener máximo 50 carácteres')
 })
 

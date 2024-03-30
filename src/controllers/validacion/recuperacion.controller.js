@@ -105,7 +105,7 @@ export const postValidarCodigo = async (req, res, next) => {
         }).status(200).json({
             ok: true,
             message: 'insertar nueva contraseña',
-            cookie:recuperar
+            credential:recuperar
         })
     } catch (error) {
         next(error)
@@ -113,30 +113,22 @@ export const postValidarCodigo = async (req, res, next) => {
 }
 
 export const updatePassword = async (req, res, next) => {
-    const { recuperar } =  req.cookies
-    const credential =  req.headers['credential-reset']
+    const valueToken =  req.headers['credential-reset']
 
-    if (!recuperar || !credential) {
+    if (!valueToken) {
         return res.status(401).json({
             ok: false,
-            message: 'Tiempo expirado, intenta de nuevo'
+            message: 'Intento expirado, intenta de nuevo'
         })
     }
-
-    let valueToken = (credential) ? recuperar : credential
 
     try {
         await validarToken(valueToken)
 
         const { body:{ password }, params: { id } } = req
         const updateUser = await putUsuarioService(id, { password })
-
-        res.cookie('recuperar', '', {
-            expires: new Date(0)
-        })
-
         res.json(updateUser)
-        if (updateUser) return res.status(400)
+        if (!updateUser.ok) return res.status(400)
         res.status(200)
     } catch (error) {
         next(error)

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js --exec babel-node",
-    "test": "jest --detectOpenHandles"
+    "test": "jest"
 
   },
   "type": "module",

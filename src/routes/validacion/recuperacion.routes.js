@@ -9,4 +9,4 @@ recuperacionRouter.post('/crear-codigo', validateSchema(crearRecuperacionSchema)
 recuperacionRouter.post('/validar-codigo', validateSchema(validacionRecuperacionSchema), postValidarCodigo)
 recuperacionRouter.put('/nuevo-password/:id', validateSchema(cambiarPassword), updatePassword)
 
-export default recuperacionRouter
+export default (app) => app.use('/recuperacion', recuperacionRouter)

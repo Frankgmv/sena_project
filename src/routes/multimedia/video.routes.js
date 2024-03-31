@@ -11,4 +11,4 @@ videoRouter.post('/videos', authRutas, validarPermisos('P_VIDEOS'), upload.singl
 videoRouter.put('/videos/:id', authRutas, validarPermisos('P_VIDEOS'), upload.single('imagen'), putVideo)
 videoRouter.delete('/videos/:id', authRutas, validarPermisos('P_VIDEOS'), deleteVideo)
 
-export default videoRouter
+export default (app) => app.use('/multimedia', videoRouter)

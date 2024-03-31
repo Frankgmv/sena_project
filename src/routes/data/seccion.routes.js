@@ -7,4 +7,4 @@ seccionRouter.get('/secciones', getAllSecciones)
 seccionRouter.get('/secciones/:id', getSeccion)
 seccionRouter.get('/secciones-menu', getSeccionMenu)
 
-export default seccionRouter
+export default (app) => app.use('/data', seccionRouter)

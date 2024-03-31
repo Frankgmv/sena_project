@@ -12,4 +12,4 @@ galeriaRouter.post('/galeria', authRutas, validarPermisos('P_GALERIA'), upload.s
 galeriaRouter.put('/galeria/:id', authRutas, validarPermisos('P_GALERIA'), upload.single('imagen'), putGaleria)
 galeriaRouter.delete('/galeria/:id', authRutas, validarPermisos('P_GALERIA'), deleteGaleria)
 
-export default galeriaRouter
+export default (app) => app.use('/multimedia', galeriaRouter)

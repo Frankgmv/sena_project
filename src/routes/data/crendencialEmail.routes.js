@@ -10,4 +10,4 @@ const credencialRouter = Router()
 credencialRouter.get('/credenciales', authRutas, validarPermisos('P_ADMIN'), getCredencial)
 credencialRouter.put('/credenciales/:id', authRutas, validarPermisos('P_ADMIN'), validateSchema(credencialEmailSchema), putCredencial)
 
-export default credencialRouter
+export default (app) => app.use('/data', credencialRouter)

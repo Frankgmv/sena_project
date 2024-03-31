@@ -12,4 +12,4 @@ sliderRouter.get('/slider/:id', getSlider)
 sliderRouter.post('/slider', authRutas, validarPermisos('P_SLIDER'), validateSchema(sliderSchema), postSlider)
 sliderRouter.delete('/slider/:id', authRutas, validarPermisos('P_SLIDER'), deleteSlider)
 
-export default sliderRouter
+export default (app) => app.use('/multimedia', sliderRouter)

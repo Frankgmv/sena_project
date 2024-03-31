@@ -11,4 +11,4 @@ rolRouter.get('/roles', getRoles)
 rolRouter.get('/roles/:id', getRol)
 rolRouter.put('/roles/:id', authRutas, validarPermisos('P_ADMIN'), validateSchema(rolSchema), putRol)
 
-export default rolRouter
+export default (app) => app.use('/data', rolRouter)

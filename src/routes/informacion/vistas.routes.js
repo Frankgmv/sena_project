@@ -9,4 +9,4 @@ vistasRouter.get('/vistas', getVistas)
 vistasRouter.post('/vistas', postVistas)
 vistasRouter.delete('/vistas', authRutas, validarPermisos('P_ADMIN'), deleteVistas)
 
-export default vistasRouter
+export default (app) => app.use('/informacion', vistasRouter)

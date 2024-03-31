@@ -10,4 +10,4 @@ archivoRouter.get('/archivos', getArchivo)
 archivoRouter.post('/archivos', authRutas, validarPermisos('P_MAGAZINE'), upload.single('archivo'), postArchivo)
 archivoRouter.delete('/archivos', authRutas, validarPermisos('P_MAGAZINE'), deleteArchivo)
 
-export default archivoRouter
+export default (app) => app.use('/multimedia', archivoRouter)

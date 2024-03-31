@@ -41,6 +41,6 @@ async function insertDefaultData(dataCategorias) {
     }
 }
 
-insertDefaultData(defaultVariables.categorias)
+// insertDefaultData(defaultVariables.categorias)
 
 export default Categoria

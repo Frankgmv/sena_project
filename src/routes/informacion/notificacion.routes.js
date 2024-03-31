@@ -26,4 +26,4 @@ notificacionRouter.delete('/notificaciones/:id', authRutas, validarPermisos('P_N
 // ? Eliminar todas las notificaciones leídas
 notificacionRouter.delete('/notificaciones-delete-all', authRutas, validarPermisos('P_NOTIFICACIONES'), deleteAllNotificaciones)
 
-export default notificacionRouter
+export default (app) => app.use('/informacion', notificacionRouter)

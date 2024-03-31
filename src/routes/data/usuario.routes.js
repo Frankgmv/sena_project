@@ -14,4 +14,4 @@ usuarioRouter.put('/usuarios/:id', authRutas, validarPermisos('P_USUARIOS'), val
 usuarioRouter.put('/usuarios-perfil/:id', authRutas, validateSchema(usuarioPutSchema), putUsuario)
 usuarioRouter.delete('/usuarios/:id', authRutas, validarPermisos('P_ADMIN'), deleteUsuario)
 
-export default usuarioRouter
+export default (app) => app.use('/data', usuarioRouter)

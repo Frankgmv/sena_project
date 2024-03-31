@@ -14,4 +14,4 @@ tokenRouter.post('/tokens', authRutas, validarPermisos('P_CLAVE_ESPECIAL'), vali
 tokenRouter.put('/tokens/:id', authRutas, validarPermisos('P_CLAVE_ESPECIAL'), validateSchema(putTokenSchema), putToken)
 tokenRouter.delete('/tokens/:id', authRutas, validarPermisos('P_CLAVE_ESPECIAL'), deleteToken)
 
-export default tokenRouter
+export default (app) => app.use('/data', tokenRouter)

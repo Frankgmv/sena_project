@@ -13,4 +13,4 @@ eventoRouter.post('/eventos', authRutas, validarPermisos('P_GALERIA'), validateS
 eventoRouter.put('/eventos/:id', authRutas, validarPermisos('P_GALERIA'), validateSchema(putEventoSchema), putEvento)
 eventoRouter.delete('/eventos/:id', authRutas, validarPermisos('P_GALERIA'), deleteEvento)
 
-export default eventoRouter
+export default (app) => app.use('/data', eventoRouter)

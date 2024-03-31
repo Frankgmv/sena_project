@@ -13,4 +13,4 @@ detallePermisoRouter.post('/detalle-permisos', authRutas, validarPermisos('P_ADM
 detallePermisoRouter.delete('/detalle-permisos/:idDetallePermiso', authRutas, validarPermisos('P_ADMIN'), deleteDetallePermisos)
 detallePermisoRouter.delete('/detalle-permisos', authRutas, validarPermisos('P_ADMIN'), deleteDetallePermisosParams)
 
-export default detallePermisoRouter
+export default (app) => app.use('/data', detallePermisoRouter)

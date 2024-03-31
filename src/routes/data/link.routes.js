@@ -13,4 +13,4 @@ linkRouter.post('/links', authRutas, validarPermisos('P_LINKS'),  validateSchema
 linkRouter.put('/links/:id', authRutas, validarPermisos('P_LINKS'),  validateSchema(putLinkSchema), putLink)
 linkRouter.delete('/links/:id', authRutas, validarPermisos('P_LINKS'),  deleteLink)
 
-export default linkRouter
+export default (app) => app.use('/data', linkRouter)

@@ -12,4 +12,4 @@ itemRouter.post('/items', authRutas, validarPermisos('P_MENU'), upload.single('i
 itemRouter.put('/items/:id', authRutas, validarPermisos('P_MENU'), upload.single('imagen'), putItem)
 itemRouter.delete('/items/:id', authRutas, validarPermisos('P_MENU'), deleteItem)
 
-export default itemRouter
+export default (app) => app.use('/data', itemRouter)

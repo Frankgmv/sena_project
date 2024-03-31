@@ -20,4 +20,4 @@ pqrsRouter.delete('/pqrs/:id', authRutas, validarPermisos('P_PQRS'), deletePqrs)
 // ? Eliminar todos los pqrs leídos
 pqrsRouter.delete('/pqrs-delete-all', authRutas, validarPermisos('P_PQRS'), deleteAllPqrs)
 
-export default pqrsRouter
+export default (app) => app.use('/informacion', pqrsRouter)

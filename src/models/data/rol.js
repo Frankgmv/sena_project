@@ -42,7 +42,7 @@ async function insertDefaultData(dataRoles) {
 }
 
 setTimeout(() => {
-    insertDefaultData(defaultVariables.roles)
+     insertDefaultData(defaultVariables.roles)
 }, 1800)
 
 export default Rol

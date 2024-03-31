@@ -12,4 +12,4 @@ credencialesRouter.post('/logout', logout)
 credencialesRouter.get('/verificar', verificarToken)
 credencialesRouter.get('/perfil', authRutas, perfil)
 
-export default credencialesRouter
+export default (app) => app.use('/validacion', credencialesRouter)

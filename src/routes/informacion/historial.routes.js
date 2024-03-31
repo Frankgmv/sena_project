@@ -13,4 +13,4 @@ historialRouter.post('/historial', validateSchema(historialSchema), postHistoria
 historialRouter.delete('/historial/:id', authRutas, validarPermisos('P_ADMIN'), deleteHistorial)
 historialRouter.delete('/historial-all', authRutas, validarPermisos('P_ADMIN'), deleteAllHistorial)
 
-export default historialRouter
+export default (app) => app.use('/informacion', historialRouter)

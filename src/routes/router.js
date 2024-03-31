@@ -1,4 +1,6 @@
-import { Router } from 'express'
+import {
+    Router
+} from 'express'
 
 // Rutas de informacion
 import historialRouter from './informacion/historial.routes.js'
@@ -31,50 +33,46 @@ import credencialesEmail from './data/crendencialEmail.routes.js'
 import credencialesRouter from './validacion/credenciales.routes.js'
 
 // TODO eliminar borrar DB
-import { deleteTables } from '../controllers/test.js'
+import { deleteTables } from '../controllers/pruebas.js'
+// Recuperación de passwords
 import recuperacionRouter from './validacion/recuperacion.routes.js'
 
 const router = Router()
 
 // Une todas las rutas de la carpeta multimedia
-router.use('/multimedia', archivoRouter,
-    galeriaRouter,
-    sliderRouter,
-    videoRouter,
-)
+archivoRouter(router)
+galeriaRouter(router)
+sliderRouter(router)
+videoRouter(router)
 
 // Une todas las rutas de la carpeta data
-router.use('/data',
-    permisoRouter,
-    seccionRouter,
-    categoriaRouter,
-    rolRouter,
-    usuarioRouter,
-    detallePermisoRouter,
-    noticiaRouter,
-    linkRouter,
-    eventoRouter,
-    itemRouter,
-    anuncioRouter,
-    tokenRouter,
-    credencialesEmail
-)
+permisoRouter(router)
+seccionRouter(router)
+categoriaRouter(router)
+rolRouter(router)
+usuarioRouter(router)
+detallePermisoRouter(router)
+noticiaRouter(router)
+linkRouter(router)
+eventoRouter(router)
+itemRouter(router)
+anuncioRouter(router)
+tokenRouter(router)
+credencialesEmail(router)
 
 // Une todas las rutas de la carpeta informacion
-router.use('/informacion',
-    pqrsRouter,
-    notificacionRouter,
-    vistasRouter,
-    historialRouter
-)
+pqrsRouter(router)
+notificacionRouter(router)
+vistasRouter(router)
+historialRouter(router)
 
 // Une todas las rutas de la carpeta validacion
-router.use('/validacion', credencialesRouter)
+credencialesRouter(router)
 
 // Recuperacion de contraseña
-router.use('/recuperacion', recuperacionRouter)
+recuperacionRouter(router)
 
 // TODO eliminar ruta al terminar
 router.post('/reset-database', deleteTables)
 
-export default router
+export default (app) => app.use('/api/v1', router)

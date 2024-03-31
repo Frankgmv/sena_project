@@ -23,4 +23,4 @@ permisoRouter.put('/permisos/:id', authRutas, validarPermisos('P_ADMIN'), valida
 // Eliminar un permiso que no sea por defecto
 permisoRouter.delete('/permisos/:id', authRutas, validarPermisos('P_ADMIN'), validarPermisosKey, deletePermiso)
 
-export default permisoRouter
+export default (app) => app.use('/data', permisoRouter)

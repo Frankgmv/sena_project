@@ -23,7 +23,7 @@ const DetallePermiso = sequelize.define('DetallePermiso', {
 Usuario.belongsToMany(Permiso, { through: DetallePermiso, foreignKey: 'UsuarioId', as : 'permisos' })
 Permiso.belongsToMany(Usuario, { through: DetallePermiso, foreignKey: 'PermisoId',  as :'permisoEntity' })
 
-setTimeout(async () => {
+const insertDefaultData = async () => {
     try {
         const hay = await DetallePermiso.findAll()
         if (hay.length === 0) {
@@ -35,6 +35,10 @@ setTimeout(async () => {
     } catch (error) {
         throw new DetalleError(error)
     }
+}
+
+setTimeout(async () => {
+    insertDefaultData()
 }, 5000)
 
 export default DetallePermiso

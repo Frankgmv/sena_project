@@ -12,4 +12,4 @@ anuncioRouter.post('/anuncios', authRutas, validarPermisos('P_ANUNCIOS'), upload
 anuncioRouter.put('/anuncios/:id', authRutas, validarPermisos('P_ANUNCIOS'), upload.single('imagen'), putAnuncio)
 anuncioRouter.delete('/anuncios/:id', authRutas, validarPermisos('P_ANUNCIOS'), deleteAnuncio)
 
-export default anuncioRouter
+export default (app) => app.use('/data', anuncioRouter)

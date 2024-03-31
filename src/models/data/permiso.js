@@ -40,6 +40,6 @@ async function insertDefaultData(dataPermisos) {
     }
 }
 
-insertDefaultData(defaultVariables.permisos)
+// insertDefaultData(defaultVariables.permisos)
 
 export default Permiso

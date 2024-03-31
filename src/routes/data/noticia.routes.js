@@ -13,4 +13,4 @@ noticiaRouter.post('/noticias', authRutas, validarPermisos('P_NOTICIAS'), upload
 noticiaRouter.put('/noticias/:id', authRutas, validarPermisos('P_NOTICIAS'), upload.single('imagen'), putNoticia)
 noticiaRouter.delete('/noticias/:id', authRutas, validarPermisos('P_NOTICIAS'), deleteNoticia)
 
-export default noticiaRouter
+export default (app) => app.use('/data', noticiaRouter)

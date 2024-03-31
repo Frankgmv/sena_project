@@ -40,6 +40,6 @@ async function insertDefaultData(dataSecciones) {
     }
 }
 
-insertDefaultData(defaultVariables.secciones)
+// insertDefaultData(defaultVariables.secciones)
 
 export default Seccion

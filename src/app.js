@@ -22,7 +22,8 @@ app.use(cors({
 // Reclamar recursos a la API
 app.use('/api/v1/recursos', express.static('./var/data'))
 
-app.use('/api/v1', routesGeneral)
+// app.use('/api/v1', routesGeneral)
+routesGeneral(app)
 
 app.get('/', (req, res) => {
     res.json(rutas)

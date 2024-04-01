@@ -102,7 +102,8 @@ export const postGaleria = async (req, res, next) => {
 
 export const getAllGaleria = async (req, res, next) => {
   try {
-    const imagenes = await getAllGaleriaService()
+    const { EventoId } = req.query
+    const imagenes = await getAllGaleriaService(EventoId)
     res.json(imagenes)
     if (!imagenes.ok) return res.status(400)
     res.status(200)

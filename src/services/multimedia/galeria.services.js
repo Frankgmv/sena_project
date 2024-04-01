@@ -60,11 +60,20 @@ export const postGaleriaService = (data) => {
     })
 }
 
-export const getAllGaleriaService = () => {
+export const getAllGaleriaService = (EventoId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const imagenes = await Galeria.findAll()
-
+            let imagenes
+            if (EventoId) {
+                imagenes = await Galeria.findAll({
+                    where: {
+                        EventoId
+                    }
+                })
+            } else {
+                imagenes = await Galeria.findAll()
+            }
+            console.log(EventoId)
             resolve({
                 ok: true,
                 message: 'Lista de imagenes',

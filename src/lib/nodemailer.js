@@ -42,9 +42,8 @@ export const enviarEmail = (text, email, subject = 'I. E. Centenario de Pereira'
                 text
             }
 
-            const infoRespose = await transportData.sendMail(message)
-
-            resolve(infoRespose)
+            const infoResponse = await transportData.sendMail(message)
+            resolve(infoResponse)
         } catch (error) {
             reject(error)
         }

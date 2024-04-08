@@ -4,6 +4,7 @@ import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import { enviarEmail } from '../../lib/nodemailer.js'
 import { config } from 'dotenv'
 import { validarEmail } from '../../helpers/includes.js'
+import Usuario from '../../models/data/usuario.js'
 
 config()
 
@@ -40,7 +41,9 @@ export function postPqrsService(pqrsData) {
             const messageEmail = `Nuevo PQRS en Bandeja.\n \n \t Te llego un/una ${pqrsData.tipo} de:  ${pqrsData.nombre} \n \n Mensaje. \n \n \t  ${pqrsData.mensaje}`
 
             await t.commit(transaccion.data)
-            await enviarEmail(messageEmail, process.env.EMAIL_USER, '[I. E. Centenario de Pereira] Nuevo PQRS en plataforma')
+            let queryCorreo = await Usuario.findByPk(process.env.ID_WM)
+            let correoRector = queryCorreo.correo
+            await enviarEmail(messageEmail, correoRector, '[I. E. Centenario de Pereira] Nuevo PQRS en plataforma')
 
             resolve({
                 ok: true,

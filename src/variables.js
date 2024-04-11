@@ -38,7 +38,7 @@ const categorias = [
     { 'categoria':'Rectoria', 'categoriaKey':'C_RECTORIA' },
     { 'categoria':'Classroom', 'categoriaKey':'C_CLASSROOM' },
     { 'categoria':'Collage', 'categoriaKey':'C_COLLAGE' },
-    { 'categoria':'ARCHIVO_PDF', 'categoriaKey':'ARCHIVO_PDF' }
+    { 'categoria':'Archivos PDF', 'categoriaKey':'ARCHIVO_PDF' }
 ]
 
 const saltos = bcrypt.genSaltSync(10)

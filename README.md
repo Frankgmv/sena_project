@@ -49,6 +49,11 @@ Proyecto para comunicar una comunidad del colegio Centenario de Pereira, el cual
 
 `EMAIL_USER`
 `EMAIL_PASS`
+#### Variables de configuracion
+`ENV`
+`LOGGING`
+
+
 ## Estrucutra del proyecto
 
 El proyecto consta de dos faces:

@@ -79,10 +79,10 @@ export const postVideo = async (req, res, next) => {
                 imgPath: nombreArchivo.nombre
             }
         } else {
-            return res.status(400).json({
-                ok: false,
-                message: 'la imagen es requerida'
-            })
+            datosVideo = {
+                ...bodyBuild,
+                imgPath: null
+            }
         }
 
         const guardarVideo = await postVideoService(datosVideo)

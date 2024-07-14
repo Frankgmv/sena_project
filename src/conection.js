@@ -9,8 +9,9 @@ const { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, DB_PORT, ENV, LOGGING } = proces
 
 let LOGGING_SEQUELIZE = LOGGING === 'true'
 
-export const sequelize = (ENV === 'produccion') ? new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
-    dialect: 'postgres',
+export const sequelize = (ENV === 'produccion') ? new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+    host: DB_HOST,
+    dialect: 'mysql',
     ssl: true,
     logging: LOGGING_SEQUELIZE,
     pool: {
@@ -19,13 +20,10 @@ export const sequelize = (ENV === 'produccion') ? new Sequelize(`postgres://${DB
         acquire: 30000,
         idle: 10000
     }
-}) : new Sequelize({
+}) : new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
     host: DB_HOST,
-    database: DB_NAME,
-    dialect: 'postgres',
-    password: DB_PASSWORD,
     port: DB_PORT,
-    username: DB_USER,
+    dialect: 'mysql',
     logging: LOGGING_SEQUELIZE,
     pool: {
         max: 10,
@@ -39,9 +37,7 @@ export const sequelize = (ENV === 'produccion') ? new Sequelize(`postgres://${DB
 export const connect = async () => {
     try {
         await sequelize.authenticate()
-        await sequelize.sync({
-            alter: true
-        })
+        await sequelize.sync({ alter: true })
         console.log(`  <<  Conexión exitosa a la base de datos >> `.blue)
     } catch (err) {
         throw new ErrorConexion(err)

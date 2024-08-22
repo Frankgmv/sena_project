@@ -2,10 +2,15 @@
   "name": "sena_project_api",
   "description": "Proyecto final",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.mjs",
+  "watch": [
+    "src"
+  ],
+  "ext": "js,mjs,json",
+  "exec": "babel-node src/index.mjs",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js --exec babel-node",
+    "start": "node src/index.mjs",
+    "dev": "nodemon src/index.mjs --exec babel-node",
     "test": "jest"
   },
   "type": "module",
@@ -39,6 +44,7 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.10.2",
     "nodemailer": "^6.9.9",
+    "sena_project_api": "file:",
     "sequelize": "^6.35.2",
     "sharp": "^0.33.2",
     "supertest": "^6.3.4",

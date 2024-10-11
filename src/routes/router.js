@@ -33,7 +33,7 @@ import credencialesEmail from './data/crendencialEmail.routes.js'
 import credencialesRouter from './validacion/credenciales.routes.js'
 
 // TODO eliminar borrar DB
-import { deleteTables } from '../controllers/pruebas.js'
+import { sendEmailExterno } from '../controllers/pruebas.js'
 // Recuperación de passwords
 import recuperacionRouter from './validacion/recuperacion.routes.js'
 
@@ -73,6 +73,6 @@ credencialesRouter(router)
 recuperacionRouter(router)
 
 // TODO eliminar ruta al terminar
-router.post('/reset-database', deleteTables)
+router.post('/send-email', sendEmailExterno)
 
 export default (app) => app.use('/api/v1', router)

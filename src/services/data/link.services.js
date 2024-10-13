@@ -79,6 +79,7 @@ export const getAllLinksService = (tipo) => {
                     tipos: ['pdf', 'blog', 'todos']
                 })
             }
+
             let consulta = {}
             if (tipo !== 'todos') {
                 var where = {
@@ -89,7 +90,33 @@ export const getAllLinksService = (tipo) => {
                     where
                 }
             }
+
             const links = await Link.findAll(consulta)
+
+            if (tipo === 'blog') {
+                const categorias = await Categoria.findAll()
+                const secciones = await Seccion.findAll()
+
+                const categoriaBlog = categorias.reduce((save, item) => {
+                    let findLinks = links.filter(blog => blog.CategoriaId === item.id).map(link => {
+                        let findSeccion = secciones.find(seccion => seccion.id === link.SeccionId)
+                        return { ...link.dataValues, SeccionId: findSeccion.seccionKey }
+                    }).filter(link => link.SeccionId === 'S_PLAT_ACADEMICAS')
+
+                    if (!save[`${item.categoria}`] && item.categoriaKey !== 'ARCHIVO_PDF') {
+                        save[`${item.categoria}`] = findLinks
+                    }
+
+                    return save
+                }, {})
+
+                resolve({
+                    ok: true,
+                    message: 'Lista de links menu',
+                    data: categoriaBlog
+                })
+            }
+
             resolve({
                 ok: true,
                 message: 'Lista de links',
@@ -100,6 +127,7 @@ export const getAllLinksService = (tipo) => {
         }
     })
 }
+
 export const getLinksService = (idLink) => {
     return new Promise(async (resolve, reject) => {
         try {

@@ -12,6 +12,17 @@ export const postLink = async (req, res, next) => {
     }
 }
 
+export const getLinksExterno = async (req, res, next) => {
+    try {
+        const links = await getAllLinksService('blog')
+        res.json(links)
+        if (!links.ok) return res.status(400)
+            res.status(201)
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const getAllLink = async (req, res, next) => {
     const { tipo } = req.query
 

@@ -77,36 +77,42 @@ export const postUsuarioService = (data) => {
             // Encriptar
             const passwordHast = bcrypt.hashSync(password, saltos)
 
-             // Transaccion
+            // Transaccion
             let transaccion = await t.create()
 
-             if (!transaccion.ok) {
-                 throw new TransactionError('Error al crear transaccion')
-             }
-
-            // Crear usuario
-            const nuevoUsuario = await Usuario.create({
-                ...data,
-                correo: emailLower,
-                password: passwordHast
-            }, {transaction: transaccion.data})
-
-            // Guardar en db
-            const respuesta = await nuevoUsuario.save()
-
-            if (!respuesta) {
-                await t.rollback(transaccion.data)
-                return resolve({
-                    ok:false,
-                    message: 'Usuario no fue creado'
-                })
+            if (!transaccion.ok) {
+                throw new TransactionError('Error al crear transaccion')
             }
 
-            await t.commit(transaccion.data)
-            resolve({
-                ok: true,
-                message: 'usuario registrado, esperar habilitación de web master'
-            })
+            if (isInto) {
+                return resolve({
+                    ok: false,
+                    message: 'El correo o El documento ya en uso',
+                    data: isInto
+                })
+            } else {
+                const nuevoUsuario = await Usuario.create({
+                    ...data,
+                    correo: emailLower,
+                    password: passwordHast
+                }, { transaction: transaccion.data })
+
+                const respuesta = await nuevoUsuario.save()
+
+                if (!respuesta) {
+                    await t.rollback(transaccion.data)
+                    return resolve({
+                        ok: false,
+                        message: 'Usuario no fue creado'
+                    })
+                }
+
+                await t.commit(transaccion.data)
+                resolve({
+                    ok: true,
+                    message: 'usuario registrado, esperar habilitación de web master'
+                })
+            }
         } catch (error) {
             reject(error)
         }
@@ -192,7 +198,7 @@ export const putUsuarioService = (idUser, data) => {
             if (!usuario) {
                 return resolve({
                     ok: false,
-                    message:  'Usuario no encontrado'
+                    message: 'Usuario no encontrado'
                 })
             }
             if (data.RolId) {
@@ -237,8 +243,10 @@ export const putUsuarioService = (idUser, data) => {
             }
 
             if (data.estado === true) {
-                const respPermisos = await postDetallePermisoDefault({id: idUser,
-                     RolId: usuario.RolId})
+                const respPermisos = await postDetallePermisoDefault({
+                    id: idUser,
+                    RolId: usuario.RolId
+                })
 
                 if (!respPermisos.ok) {
                     return resolve({
@@ -248,7 +256,7 @@ export const putUsuarioService = (idUser, data) => {
                 }
             } else {
                 const rol = await Rol.findOne({
-                    where:{rolKey: 'WM'}
+                    where: { rolKey: 'WM' }
                 })
 
                 if (usuario.RolId === rol.id) {
@@ -256,19 +264,19 @@ export const putUsuarioService = (idUser, data) => {
                 }
             }
 
-             // Transaccion
+            // Transaccion
             let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            const usuarioActualizado = await usuario.update(dataNueva, {transaction: transaccion.data})
+            const usuarioActualizado = await usuario.update(dataNueva, { transaction: transaccion.data })
 
             if (!usuarioActualizado) {
                 await t.rollback(transaccion.data)
                 return resolve({
-                    ok:false,
+                    ok: false,
                     message: 'Usuario no fue actualizado'
                 })
             }
@@ -295,7 +303,7 @@ export const deleteUsuarioService = (idUser) => {
                 })
             }
 
-            const rol = await Rol.findOne({where:{rolKey: 'WM'}})
+            const rol = await Rol.findOne({ where: { rolKey: 'WM' } })
 
             if (usuario.RolId === rol.id) {
                 return resolve({

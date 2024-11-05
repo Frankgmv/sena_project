@@ -5,12 +5,14 @@ import { esMayorDe15, validarEmail, validarPassword } from '../../helpers/includ
 import t from '../../helpers/transacciones.js'
 import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import { postDetallePermisoDefault } from '../../helpers/permisos.default.js'
+import { Op } from 'sequelize'
 
 const saltos = bcrypt.genSaltSync(10)
 
 export const postUsuarioService = (data) => {
     return new Promise(async (resolve, reject) => {
         const {
+            id: documento,
             fechaNacimiento,
             correo: email,
             password,
@@ -18,6 +20,15 @@ export const postUsuarioService = (data) => {
         } = data
         const emailLower = email.toLowerCase()
         try {
+            const isInto = await Usuario.findOne({
+                where: {
+                    [Op.or]: {
+                        id: documento,
+                        correo: email
+                    }
+                }
+            })
+
             //  consultar roles
             const existeRol = await Rol.findByPk(RolId)
 
@@ -26,6 +37,13 @@ export const postUsuarioService = (data) => {
                 return resolve({
                     ok: false,
                     message: 'Rol no encontrado'
+                })
+            }
+
+            if (isInto) {
+                return resolve({
+                    ok: false,
+                    message: 'Documento o correo en eso'
                 })
             }
 
@@ -63,7 +81,7 @@ export const postUsuarioService = (data) => {
             //     throw new TransactionError('Error al crear transaccion')
             // }
 
-            const nuevoUsuario = await Usuario.save({
+            const nuevoUsuario = await Usuario.create({
                 ...data,
                 correo: emailLower,
                 password: passwordHast

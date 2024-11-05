@@ -5,7 +5,6 @@ import { esMayorDe15, validarEmail, validarPassword } from '../../helpers/includ
 import t from '../../helpers/transacciones.js'
 import { TransactionError } from '../../middlewares/fabricaErrores.js'
 import { postDetallePermisoDefault } from '../../helpers/permisos.default.js'
-import { Op } from 'sequelize'
 
 const saltos = bcrypt.genSaltSync(10)
 
@@ -22,10 +21,7 @@ export const postUsuarioService = (data) => {
         try {
             const isInto = await Usuario.findOne({
                 where: {
-                    [Op.or]: {
-                        id: documento,
-                        correo: email
-                    }
+                        id: documento
                 }
             })
 
@@ -37,13 +33,6 @@ export const postUsuarioService = (data) => {
                 return resolve({
                     ok: false,
                     message: 'Rol no encontrado'
-                })
-            }
-
-            if (isInto) {
-                return resolve({
-                    ok: false,
-                    message: 'Documento o correo en eso'
                 })
             }
 
@@ -74,40 +63,30 @@ export const postUsuarioService = (data) => {
             // Encriptar
             const passwordHast = bcrypt.hashSync(password, saltos)
 
-            // Transaccion
-            // let transaccion = await t.create()
-
-            // if (!transaccion.ok) {
-            //     throw new TransactionError('Error al crear transaccion')
-            // }
-
-            const nuevoUsuario = await Usuario.create({
-                ...data,
-                correo: emailLower,
-                password: passwordHast
-            })
-
-            // const respuesta = await nuevoUsuario.save()
-
-            if (!nuevoUsuario) {
+            if (isInto) {
                 return resolve({
                     ok: false,
-                    message: 'Usuario no fue creado'
+                    message: 'Documento ya en plataforma'
+                })
+            } else {
+                const nuevoUsuario = await Usuario.create({
+                    ...data,
+                    correo: emailLower,
+                    password: passwordHast
+                })
+
+                if (!nuevoUsuario) {
+                    return resolve({
+                        ok: false,
+                        message: 'Usuario no fue creado'
+                    })
+                }
+
+                resolve({
+                    ok: true,
+                    message: 'usuario registrado, esperar habilitación de web master'
                 })
             }
-            // if (!respuesta) {
-            //     await t.rollback(transaccion.data)
-            //     return resolve({
-            //         ok: false,
-            //         message: 'Usuario no fue creado'
-            //     })
-            // }
-
-            // await t.commit(transaccion.data)
-            resolve({
-                ok: true,
-                message: 'usuario registrado, esperar habilitación de web master'
-            })
         } catch (error) {
             reject(error)
         }

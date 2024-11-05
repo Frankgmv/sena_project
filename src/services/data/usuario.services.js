@@ -11,7 +11,6 @@ const saltos = bcrypt.genSaltSync(10)
 export const postUsuarioService = (data) => {
     return new Promise(async (resolve, reject) => {
         const {
-            id: documento,
             fechaNacimiento,
             correo: email,
             password,
@@ -58,29 +57,35 @@ export const postUsuarioService = (data) => {
             const passwordHast = bcrypt.hashSync(password, saltos)
 
             // Transaccion
-            let transaccion = await t.create()
+            // let transaccion = await t.create()
 
-            if (!transaccion.ok) {
-                throw new TransactionError('Error al crear transaccion')
-            }
+            // if (!transaccion.ok) {
+            //     throw new TransactionError('Error al crear transaccion')
+            // }
 
-            const nuevoUsuario = await Usuario.create({
+            const nuevoUsuario = await Usuario.save({
                 ...data,
                 correo: emailLower,
                 password: passwordHast
-            }, { transaction: transaccion.data })
+            })
 
-            const respuesta = await nuevoUsuario.save()
+            // const respuesta = await nuevoUsuario.save()
 
-            if (!respuesta) {
-                await t.rollback(transaccion.data)
+            if (!nuevoUsuario) {
                 return resolve({
                     ok: false,
                     message: 'Usuario no fue creado'
                 })
             }
+            // if (!respuesta) {
+            //     await t.rollback(transaccion.data)
+            //     return resolve({
+            //         ok: false,
+            //         message: 'Usuario no fue creado'
+            //     })
+            // }
 
-            await t.commit(transaccion.data)
+            // await t.commit(transaccion.data)
             resolve({
                 ok: true,
                 message: 'usuario registrado, esperar habilitación de web master'

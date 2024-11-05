@@ -19,14 +19,6 @@ export const postUsuarioService = (data) => {
         } = data
         const emailLower = email.toLowerCase()
         try {
-            // constular usuarios
-
-            const isInto = await Usuario.findOne({
-                where: {
-                    id: documento
-                }
-            })
-
             //  consultar roles
             const existeRol = await Rol.findByPk(RolId)
 
@@ -72,35 +64,27 @@ export const postUsuarioService = (data) => {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            if (isInto !== null) {
+            const nuevoUsuario = await Usuario.create({
+                ...data,
+                correo: emailLower,
+                password: passwordHast
+            }, { transaction: transaccion.data })
+
+            const respuesta = await nuevoUsuario.save()
+
+            if (!respuesta) {
+                await t.rollback(transaccion.data)
                 return resolve({
                     ok: false,
-                    message: 'El correo o El documento están en uso',
-                    data: isInto
-                })
-            } else {
-                const nuevoUsuario = await Usuario.create({
-                    ...data,
-                    correo: emailLower,
-                    password: passwordHast
-                }, { transaction: transaccion.data })
-
-                const respuesta = await nuevoUsuario.save()
-
-                if (!respuesta) {
-                    await t.rollback(transaccion.data)
-                    return resolve({
-                        ok: false,
-                        message: 'Usuario no fue creado'
-                    })
-                }
-
-                await t.commit(transaccion.data)
-                resolve({
-                    ok: true,
-                    message: 'usuario registrado, esperar habilitación de web master'
+                    message: 'Usuario no fue creado'
                 })
             }
+
+            await t.commit(transaccion.data)
+            resolve({
+                ok: true,
+                message: 'usuario registrado, esperar habilitación de web master'
+            })
         } catch (error) {
             reject(error)
         }

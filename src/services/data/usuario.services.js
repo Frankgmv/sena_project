@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs'
-import { Op } from 'sequelize'
 import Usuario from '../../models/data/usuario.js'
 import Rol from '../../models/data/rol.js'
 import { esMayorDe15, validarEmail, validarPassword } from '../../helpers/includes.js'
@@ -24,10 +23,7 @@ export const postUsuarioService = (data) => {
 
             const isInto = await Usuario.findOne({
                 where: {
-                    [Op.or]: {
-                        id: documento,
-                        correo: emailLower
-                    }
+                    id: documento
                 }
             })
 

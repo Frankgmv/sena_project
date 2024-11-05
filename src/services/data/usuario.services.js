@@ -21,7 +21,8 @@ export const postUsuarioService = (data) => {
         const emailLower = email.toLowerCase()
         try {
             // constular usuarios
-            const isInto = await Usuario.findOne({
+            let isInto = {}
+            isInto = await Usuario.findOne({
                 where: {
                     [Op.or]: {
                         id: documento,
@@ -75,7 +76,7 @@ export const postUsuarioService = (data) => {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            if (isInto.id) {
+            if (Object.keys(isInto).length === 0) {
                 return resolve({
                     ok: false,
                     message: 'El correo o El documento están en uso',

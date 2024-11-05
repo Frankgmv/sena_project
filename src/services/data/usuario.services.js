@@ -42,10 +42,11 @@ export const postUsuarioService = (data) => {
             }
 
             // validar que no existan correo o id en uso
-            if (isInto) {
+            if (isInto.dataValues.correo) {
                 return resolve({
                     ok: false,
-                    message: 'Correo o Documento ya en uso'
+                    message: 'El correo o El documento ya en uso',
+                    data: isInto
                 })
             }
 

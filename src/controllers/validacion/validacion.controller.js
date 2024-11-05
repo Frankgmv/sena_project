@@ -44,6 +44,7 @@ export const postRegistro = async (req, res, next) => {
         if (!guardarUsuario.ok) {
             return res.status(400).json(guardarUsuario)
         }
+
         const consultarUsuario = await getUsuarioService(req.body.id)
 
         if (consultarUsuario.ok) {

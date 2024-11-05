@@ -46,21 +46,18 @@ export const postRegistro = async (req, res, next) => {
         }
         const consultarUsuario = await getUsuarioService(req.body.id)
 
-        if (!consultarUsuario.ok) {
-            return res.status(400).json({
-                ok: false,
-                message: 'iniciar sesión en el sistema'
+        if (consultarUsuario.ok) {
+            const webMaster = await getUsuarioService(defaultVariables.usuario.id)
+
+            if (webMaster) {
+                const messageEmail = `Hay un usuario nuevo en plataforma.\n \n \t \t Verifica lo más pronto posible \n \n No responser.`
+                await enviarEmail(messageEmail, webMaster.data.correo, '[I. E. Centenario de Pereira] Nuevo Usuario')
+            }
+            return res.status(201).json({
+                ok: true,
+                message: 'Registro exitoso!!'
             })
         }
-
-        const webMaster = await getUsuarioService(defaultVariables.usuario.id)
-
-        if (webMaster) {
-            const messageEmail = `Hay un usuario nuevo en plataforma.\n \n \t \t Verifica lo más pronto posible \n \n No responser.`
-            await enviarEmail(messageEmail, webMaster.data.correo, '[I. E. Centenario de Pereira] Nuevo Usuario')
-        }
-
-        res.status(201).json(guardarUsuario)
     } catch (error) {
         next(error)
     }

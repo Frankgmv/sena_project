@@ -41,15 +41,6 @@ export const postUsuarioService = (data) => {
                 })
             }
 
-            // validar que no existan correo o id en uso
-            if (isInto) {
-                return resolve({
-                    ok: false,
-                    message: 'El correo o El documento ya en uso',
-                    data: isInto
-                })
-            }
-
             // validar email
             if (!validarEmail(email)) {
                 return resolve({
@@ -84,10 +75,10 @@ export const postUsuarioService = (data) => {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            if (isInto) {
+            if (isInto.id) {
                 return resolve({
                     ok: false,
-                    message: 'El correo o El documento ya en uso',
+                    message: 'El correo o El documento están en uso',
                     data: isInto
                 })
             } else {

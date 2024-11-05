@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs'
+import { Op } from 'sequelize'
 import Usuario from '../../models/data/usuario.js'
 import Rol from '../../models/data/rol.js'
 import { esMayorDe15, validarEmail, validarPassword } from '../../helpers/includes.js'
@@ -19,9 +20,13 @@ export const postUsuarioService = (data) => {
         } = data
         const emailLower = email.toLowerCase()
         try {
+            // constular usuarios
             const isInto = await Usuario.findOne({
                 where: {
-                        id: documento
+                    [Op.or]: {
+                        id: documento,
+                        correo: emailLower
+                    }
                 }
             })
 
@@ -33,6 +38,15 @@ export const postUsuarioService = (data) => {
                 return resolve({
                     ok: false,
                     message: 'Rol no encontrado'
+                })
+            }
+
+            // validar que no existan correo o id en uso
+            if (isInto) {
+                // ! por error en el servidor se coloca este mensaje acá.
+                return resolve({
+                    ok: true,
+                    message: 'usuario registrado, esperar habilitación de web master'
                 })
             }
 
@@ -63,30 +77,36 @@ export const postUsuarioService = (data) => {
             // Encriptar
             const passwordHast = bcrypt.hashSync(password, saltos)
 
-            if (isInto) {
+             // Transaccion
+            let transaccion = await t.create()
+
+             if (!transaccion.ok) {
+                 throw new TransactionError('Error al crear transaccion')
+             }
+
+            // Crear usuario
+            const nuevoUsuario = await Usuario.create({
+                ...data,
+                correo: emailLower,
+                password: passwordHast
+            }, {transaction: transaccion.data})
+
+            // Guardar en db
+            const respuesta = await nuevoUsuario.save()
+
+            if (!respuesta) {
+                await t.rollback(transaccion.data)
                 return resolve({
-                    ok: false,
-                    message: 'Documento ya en plataforma'
-                })
-            } else {
-                const nuevoUsuario = await Usuario.create({
-                    ...data,
-                    correo: emailLower,
-                    password: passwordHast
-                })
-
-                if (!nuevoUsuario) {
-                    return resolve({
-                        ok: false,
-                        message: 'Usuario no fue creado'
-                    })
-                }
-
-                resolve({
-                    ok: true,
-                    message: 'usuario registrado, esperar habilitación de web master'
+                    ok:false,
+                    message: 'Usuario no fue creado'
                 })
             }
+
+            await t.commit(transaccion.data)
+            resolve({
+                ok: true,
+                message: 'usuario registrado, esperar habilitación de web master'
+            })
         } catch (error) {
             reject(error)
         }
@@ -172,7 +192,7 @@ export const putUsuarioService = (idUser, data) => {
             if (!usuario) {
                 return resolve({
                     ok: false,
-                    message: 'Usuario no encontrado'
+                    message:  'Usuario no encontrado'
                 })
             }
             if (data.RolId) {
@@ -217,10 +237,8 @@ export const putUsuarioService = (idUser, data) => {
             }
 
             if (data.estado === true) {
-                const respPermisos = await postDetallePermisoDefault({
-                    id: idUser,
-                    RolId: usuario.RolId
-                })
+                const respPermisos = await postDetallePermisoDefault({id: idUser,
+                     RolId: usuario.RolId})
 
                 if (!respPermisos.ok) {
                     return resolve({
@@ -230,7 +248,7 @@ export const putUsuarioService = (idUser, data) => {
                 }
             } else {
                 const rol = await Rol.findOne({
-                    where: { rolKey: 'WM' }
+                    where:{rolKey: 'WM'}
                 })
 
                 if (usuario.RolId === rol.id) {
@@ -238,19 +256,19 @@ export const putUsuarioService = (idUser, data) => {
                 }
             }
 
-            // Transaccion
+             // Transaccion
             let transaccion = await t.create()
 
             if (!transaccion.ok) {
                 throw new TransactionError('Error al crear transaccion')
             }
 
-            const usuarioActualizado = await usuario.update(dataNueva, { transaction: transaccion.data })
+            const usuarioActualizado = await usuario.update(dataNueva, {transaction: transaccion.data})
 
             if (!usuarioActualizado) {
                 await t.rollback(transaccion.data)
                 return resolve({
-                    ok: false,
+                    ok:false,
                     message: 'Usuario no fue actualizado'
                 })
             }
@@ -277,7 +295,7 @@ export const deleteUsuarioService = (idUser) => {
                 })
             }
 
-            const rol = await Rol.findOne({ where: { rolKey: 'WM' } })
+            const rol = await Rol.findOne({where:{rolKey: 'WM'}})
 
             if (usuario.RolId === rol.id) {
                 return resolve({

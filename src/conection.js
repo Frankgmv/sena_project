@@ -37,7 +37,7 @@ export const sequelize = (ENV === 'produccion') ? new Sequelize(DB_NAME, DB_USER
 export const connect = async () => {
     try {
         await sequelize.authenticate()
-        await sequelize.sync({ alter: true })
+        await sequelize.sync({ alter: false })
         console.log(`  <<  Conexión exitosa a la base de datos >> `.blue)
     } catch (err) {
         throw new ErrorConexion(err)

@@ -1,8 +1,7 @@
-import { postDetallePermisoDefaultService } from '../services/data/detallePermiso.services.js'
+import { getDetallePermisosByDocumentoService, postDetallePermisoDefaultService } from '../services/data/detallePermiso.services.js'
 import { getAllPermisosService } from '../services/data/permiso.services.js'
 import { getRolService } from '../services/data/rol.services.js'
 import { getUsuarioService } from '../services/data/usuario.services.js'
-import { variablesPermisos } from '../variables.js'
 
 export const organizarDetallePermisosDefault = async (data) => {
     return new Promise(async (resolve, reject) => {
@@ -20,12 +19,16 @@ export const organizarDetallePermisosDefault = async (data) => {
                 })
             }
 
-            const rol = queryRol.data
             const queryPermisos = await getAllPermisosService()
-            const permisosDB = queryPermisos.data
+            const permisosValidos = await getDetallePermisosByDocumentoService(idUsuario)
+            let permisosDB = queryPermisos.data
+
+            let permisosConsultados = permisosValidos.data.map(permiso => {
+                return permiso.PermisoId
+            })
 
             permisosDB.forEach(permiso => {
-                if (variablesPermisos[rol.rolKey].includes(permiso.permisoKey)) {
+                if (permisosConsultados.includes(permiso.id)) {
                     permisoAsignados.push({
                         PermisoId: permiso.id,
                         UsuarioId: idUsuario,
@@ -35,8 +38,9 @@ export const organizarDetallePermisosDefault = async (data) => {
             })
 
             resolve({
-                ok:true,
-                data: permisoAsignados
+                ok: true,
+                data: permisoAsignados,
+                data_menu: permisosDB
             })
         } catch (error) {
             reject(error)
@@ -47,7 +51,6 @@ export const organizarDetallePermisosDefault = async (data) => {
 export const postDetallePermisoDefault = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            // id = Cedula usuario, RolId
             const detallesPermisosDefault = await organizarDetallePermisosDefault(data)
             if (!detallesPermisosDefault.ok) {
                 return resolve(detallesPermisosDefault)

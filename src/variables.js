@@ -36,7 +36,7 @@ const categorias = [
     { 'categoria':'Orientación Escolar', 'categoriaKey':'C_ORIENTACION_ESCOLAR' },
     { 'categoria':'Coordinación', 'categoriaKey':'C_COORDINACION' },
     { 'categoria':'Rectoria', 'categoriaKey':'C_RECTORIA' },
-    { 'categoria':'Classroom', 'categoriaKey':'C_CLASSROOM' },
+    { 'categoria':'Contrataciones', 'categoriaKey':'C_CLASSROOM' },
     { 'categoria':'Collage', 'categoriaKey':'C_COLLAGE' },
     { 'categoria':'Archivos PDF', 'categoriaKey':'ARCHIVO_PDF' }
 ]
